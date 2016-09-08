@@ -2596,3 +2596,177 @@ a {
 		margin-left: 99.9996%;
 	}
 }
+select, textarea, input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="date"], input[type="time"] {
+  background: transparent;
+  width: 100%;
+  border: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.23); }
+
+  
+label {
+  display: block;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 8px; }
+  label.inline {
+    display: inline;
+    margin-right: 12px; }
+  label:not(.switch) span {
+    cursor: text;
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    top: 28px;
+    font-size: 16px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    label:not(.switch) span.top {
+      top: 0;
+      font-size: 12px; }
+  label input[type="checkbox"], label input[type="radio"] {
+    display: none; }
+  label:not(.switch) input[type="checkbox"] + span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    top: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.54);
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -ms-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out; }
+    label:not(.switch) input[type="checkbox"] + span i.material-icons {
+      font-size: 18px !important;
+      position: relative;
+      top: -3px;
+      left: -2px;
+      margin: 0;
+      background: #FFBB12;
+      color: white;
+      display: none; }
+  label:not(.switch) input[type="checkbox"]:checked + span {
+    border: 2px solid #FFBB12;
+    background-color: #FFBB12; }
+    label:not(.switch) input[type="checkbox"]:checked + span i.material-icons {
+      display: block; }
+  label.switch {
+    margin: 5px;
+    display: inline-block; }
+    label.switch input[type="checkbox"] + span {
+      display: inline-block;
+      width: 38px;
+      height: 16px;
+      margin: 0px 16px 0px 0px;
+      vertical-align: middle;
+      cursor: pointer;
+      float: left;
+      border-radius: 9px;
+      background-color: rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      position: relative; }
+      label.switch input[type="checkbox"] + span i {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+        border-radius: 100%;
+        position: absolute;
+        left: -5px;
+        top: -2px;
+        width: 21px;
+        height: 21px;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out; }
+    label.switch input[type="checkbox"]:checked + span {
+      background-color: #FFD56C; }
+    label.switch input[type="checkbox"]:checked + span i {
+      background-color: #FFBB12;
+      left: 20px; }
+  label:not(.switch) input[type="radio"] + .material-icons {
+    font-size: 22px !important;
+    margin: 0;
+    margin-right: 12px;
+    color: #000;
+    opacity: .54; }
+    label:not(.switch) input[type="radio"] + .material-icons:before {
+      content: "radio_button_unchecked"; }
+  label:not(.switch) input[type="radio"]:checked + i.material-icons {
+    opacity: 1;
+    color: #FFBB12; }
+    label:not(.switch) input[type="radio"]:checked + i.material-icons:before {
+      content: "radio_button_checked"; }
+
+input {
+  font-family: 'Roboto';
+  font-size: 16px; }
+  input:active {
+    outline: none; }
+  input:focus {
+    outline: none; }
+
+select {
+  font-family: 'Roboto';
+  font-size: 16px; }
+  select:active {
+    outline: none;
+    border-bottom: 1px solid #005cb9; }
+  select:focus {
+    outline: none;
+    border-bottom: 1px solid #005cb9; }
+
+textarea {
+  font-family: 'Roboto';
+  font-size: 16px;
+  max-height: 300px;
+  resize: vertical; }
+  textarea:active {
+    outline: none;
+    border-bottom: 1px solid #005cb9; }
+  textarea:focus {
+    outline: none;
+    border-bottom: 1px solid #005cb9; }
+
+input[type="text"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="text"]:active {
+  border-bottom: 1px solid #005cb9; }
+
+input[type="password"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="password"]:active {
+  border-bottom: 1px solid #005cb9; }
+
+input[type="date"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="date"]:active {
+  border-bottom: 1px solid #005cb9; }
+
+input[type="time"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="time"]:active {
+  border-bottom: 1px solid #005cb9; }
+
+input[type="email"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="email"]:active {
+  border-bottom: 1px solid #005cb9; }
+
+input[type="number"]:focus {
+  border-bottom: 1px solid #005cb9; }
+input[type="number"]:active {
+  border-bottom: 1px solid #005cb9; }

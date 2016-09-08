@@ -50,9 +50,10 @@ var App = {
 		$("[data-page]").click(function() {
 			if(!$(this).is(".selected")) {
 				App.loadController($(this).attr("data-page"));
-				App.slider("hide");
 			}
 		});
+
+		Input.ready();
 	},
 	slider: function(action) {
 		if(action == "show") {
@@ -100,6 +101,7 @@ var App = {
 						((ss.sm.wb != "") ? '<a href="'+ss.sm.wb+'" target="_blank" class="sm"><img src="includes/images/wb.png"></a>' : ''));
 	},
 	loadController: function(controller) {
+		App.slider("hide");
 		App.currentPage = controller;
 		$(".loading").css("top", "80px");
 		$("ul.nav a").removeClass("selected");
@@ -139,6 +141,7 @@ var App = {
 						$(".loading").css("top", "-80px");
 					});
 				}, 750);
+
 			},
 			error: function(xhrtemp, ajaxOptions, thrownError) {
 				if(xhrtemp.status == 404) {

@@ -1,10 +1,99 @@
 <div id="header">
 	<img src="includes/images/logo.png"><br>
-	<span>Coming soon</span>
+	<span>October 2, 2016</span>
 	<p>The biggest Google tech conference in the Philippines. All about Android, Web and Cloud</p>
 	<a href="https://www.youtube.com/watch?v=p4ovFDLE9qk" target="_blank"><i class="material-icons">play_circle_filled</i>See what happened in 2015</a><br><br><br>
-	<a class="raised_button">Register</a>
+	<a onclick="App.loadController('register')" href="#register" class="raised_button">Register</a>
 </div>
 <div id="view">
+	<div class="content color">
+		<div class="wrapper">
+			<div class="columns center">
+				<div class="col-4 m-col-12">
+					<span class="bignum">700</span>
+					Attendees
+				</div>
+				<div class="col-4 m-col-12">
+					<span class="bignum">?</span>
+					Sessions
+				</div>
+				<div class="col-4 m-col-12">
+					<span class="bignum">?</span>
+					Parallel tracks
+				</div>
+			</div>
+			<div class="columns center">
+				<div class="col-10 offset-1"><br>
+					<p>GDG DevFest Philippines 2016 - Bringing you the latest Google technologies with the world experts, hands-on activities that will challenge your skills, and fun and exciting games!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content color-2">
+		<div class="wrapper">
+			<h1 class="center">2015</h1>
+			<div class="columns">
+				<div class="col-6 t-col-12">
+					<div class="wrapper">
+						<iframe width="100%" height="315" src="https://www.youtube.com/embed/p4ovFDLE9qk" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+				<div class="col-6 t-col-12">
+					<div class="wrapper">
+						<p>GDG DevFest Philippines 2015 was held at PLDT Innolab, Mandulayong City on October 16-17, 2015.<br><br>On the first day which was focused on Android & VR, there were hands-on workshops on Android 6.0 Marshmallow, Android Basics, Firebase, Material Design, and Google Cardboard.<br><br>The second day was focused on Web and a bit of Gemma Kit. Participants joined hands-on workshops on Polymer, Firebase, Material Design Lite, HTML5 Game Development.</p>
+						<a href="https://www.youtube.com/watch?v=xGdoST7IsQI&list=PLwmhCrOF65MEqyPnbPzgDioU1HFS6iZQ4" target="_blank" class="raised_button white">View Playlist</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content speakers">
+		<div class="wrapper">
+			<h1 class="center">Speakers</h1>
+			<div class="columns center" id="speakerRender">
+			</div>
+			<div class="columns center">
+				<div class="col-12">
+					<a onclick="App.loadController('speakers')" href="#speakers" class="raised_button">View All</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="columns">
+			<div class="col-6 m-col-12">
+				<a href="#" style="background-image: url(includes/images/p1.jpg)" class="photo">
+					<span>Click here to view more photos <i class="material-icons">launch</i></span>
+				</a>
+			</div>
+			<div class="col-6 m-col-12">
+				<a href="#" style="background-image: url(includes/images/p2.jpg)" class="photo">
+					<span>Click here to view more photos <i class="material-icons">launch</i></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="content sponsors">
+		<div class="wrapper">
+			<center>
+			<h1>Sponsors</h1>
+			<h4>Platinum Year Long Sponsor</h4>
+			<img src="includes/images/sponsors/accenture.png">
+			<h4>Minor Year Long Sponsor</h4>
+			<img src="includes/images/sponsors/klab.png">
 
+			<br><br>
+			<a href="http://www.gdgph.org/#/be-a-sponsor" target="_blank" class="raised_button">Become a Sponsor</a>
+			</center>
+		</div>
+	</div>
+	<script>
+		$.each(App.getRandom(Data.speakerInfo, (Data.speakerInfo.length < 4) ? Data.speakerInfo.length : 4), function(index, speaker) {
+			$("#speakerRender").append('<div class="col-3 t-col-6 m-col-12">'+
+					'<img src="includes/images/speakers/'+speaker.img+'.jpg">'+
+					'<span>'+speaker.name+'</span>'+
+					'<small>'+speaker.company+'</small>'+
+				'</div>');
+		})
+	</script>
 </div>
