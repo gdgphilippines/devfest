@@ -110,7 +110,17 @@
 	</div>
 	<script>
 		$.each(App.getRandom(Data.speakerInfo, (Data.speakerInfo.length < 4) ? Data.speakerInfo.length : 4), function(index, speaker) {
-			$("#speakerRender").append('<div class="col-3 t-col-6 m-col-12">'+
+			$cw = "col-3 t-col-6 m-col-12";
+			if(Data.speakerInfo.length == 1)
+				$cw = "col-12";
+			else if(Data.speakerInfo.length == 2) 
+				$cw = "col-6 m-col-12";
+			else if(Data.speakerInfo.length == 3) {
+				$cw = "col-6 m-col-12";
+				if(index == 2) 
+					$cw = "col-12";
+			}
+			$("#speakerRender").append('<div class="'+$cw+'">'+
 					'<img src="includes/images/speakers/'+speaker.img+'.jpg">'+
 					'<span>'+speaker.name+'</span>'+
 					'<small>'+speaker.company+'</small>'+
