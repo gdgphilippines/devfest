@@ -163,6 +163,17 @@ a.raised_button {
   a.raised_button[href] {
     background: #009688; }
 
+a.flat_button {
+  background: transparent;
+  display: inline-block;
+  padding: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  color: #bbb; }
+  a.flat_button[id], a.flat_button[href], a.flat_button[onclick] {
+    color: #009688; }
+
 .black-trans {
   background: rgba(0, 0, 0, 0.7);
   top: 0px;
@@ -192,6 +203,12 @@ a.raised_button {
     .slider .cover span {
       color: white;
       font-size: 13px; }
+    .slider .cover > img {
+      vertical-align: middle; }
+  .slider a.back {
+    vertical-align: middle;
+    color: white;
+    margin-right: 12px; }
   .slider ul.nav {
     width: 100%;
     overflow: hidden;
@@ -205,6 +222,19 @@ a.raised_button {
       font-size: 14px; }
       .slider ul.nav li a:not(:first-child) {
         border-top: 1px solid rgba(0, 0, 0, 0.4); }
+  .slider .user {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    display: none; }
+    .slider .user small {
+      display: block;
+      font-weight: 400; }
+    .slider .user img {
+      width: 48px;
+      margin-bottom: 12px;
+      display: block;
+      border-radius: 100%; }
 
 .slider::-webkit-scrollbar {
   width: 0px; }
@@ -233,7 +263,7 @@ a.raised_button {
     width: 48px;
     height: 48px;
     margin: 6px;
-    display: none;
+    display: table;
     cursor: pointer; }
     .action-bar a.menu i {
       display: table-cell;
@@ -247,8 +277,9 @@ a.raised_button {
     margin: 0;
     margin-right: 24px; }
     .action-bar ul.nav li {
-      float: left; }
-      .action-bar ul.nav li a {
+      float: left;
+      position: relative; }
+      .action-bar ul.nav li > a {
         color: white;
         text-transform: uppercase;
         font-weight: 500;
@@ -258,10 +289,47 @@ a.raised_button {
         height: 60px;
         vertical-align: middle;
         border-bottom: 3px solid transparent; }
-        .action-bar ul.nav li a:hover {
+        .action-bar ul.nav li > a:not(.user):hover {
           border-bottom: 2px solid white; }
-        .action-bar ul.nav li a.selected {
+        .action-bar ul.nav li > a:not(.user).selected {
           border-bottom: 2px solid white; }
+  .action-bar a.user {
+    position: relative; }
+    .action-bar a.user img {
+      width: 36px;
+      vertical-align: middle;
+      border-radius: 100%; }
+  .action-bar .more-options {
+    display: none;
+    opacity: 0;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #333; }
+    .action-bar .more-options .wrapper {
+      width: 260px;
+      margin: 18px auto;
+      overflow: hidden; }
+      .action-bar .more-options .wrapper span {
+        font-size: 14px;
+        display: block;
+        width: 175px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 12px 0px; }
+      .action-bar .more-options .wrapper a {
+        padding: 0px; }
+        .action-bar .more-options .wrapper a:hover {
+          text-decoration: underline; }
+      .action-bar .more-options .wrapper img {
+        width: 64px;
+        margin-right: 18px;
+        border-radius: 100%;
+        float: left; }
 
 .view {
   position: relative;

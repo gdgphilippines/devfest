@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="GDG DevFest Philippines 2016" />
+	<meta property="og:url" content="http://devfest.gdgph.org/" />
+	<meta property="og:site_name" content="GDG DevFest Philippines 2016" />
+	<meta property="og:image" content="includes/images/og.jpg" />
+	<meta name="twitter:site" content="@gdgphilippines" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="theme-color" content="#4DD0E1">
+	<link rel="stylesheet" href="includes/styles/m.css">
+	<link rel="stylesheet" href="includes/styles/style.css">
+	<script src="includes/scripts/autosize.js"></script>
+	<script src="includes/scripts/validate.js"></script>
+	<title>GDG DevFest Philippines 2016</title>
+</head>
+<body>
+	<div class="container" style="padding-top: 60px">
+		<div class="view">
+		</div>
+		<div class="content footer">
+			<div class="wrapper">
+				<div class="columns">
+					<div class="col-6 t-col-12 t-center">&copy; 2016 GDG DevFest Philippines 2016</div>
+					<div class="col-6 t-col-12 right t-center"><a href="http://gdgph.org/" target="_blank"><img src="includes/images/gdgph.png" height="20px"></a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="action-bar color">
+		<a class="menu"><i class="material-icons">menu</i></a>
+		<a href="#" data-page="home"><img src="includes/images/logowhite.png" class="logo"></a>
+		<ul class="nav">
+			<li style="display: none"><a onclick="App.showUserOptions()" class="user"><img src="" alt="">
+				</a>
+				<div class="more-options">
+					<div class="wrapper">
+						<img src=""><span></span><a href class="signout flat_button">Sign out</a>
+					</div>
+				</div>
+					</li>
+			<li><a class="signin">Sign in with Google</a></li>
+		</ul>
+	</div>
+	<div class="black-trans"></div>
+	<div class="loading load_template"><svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="6" stroke-miterlimit="10"/></svg></div>
+	<div class="speaker-container">
+		<div class="cover">
+			<div class="name"></div>
+			<div class="shadow"></div>
+		</div>
+		<div class="wrapper">
+			<small></small><br><br>
+			<div class="chips">
+				
+			</div>
+			<p></p>
+			<div class="sm">
+
+			</div>
+		</div>
+	</div>
+	<div class="slider">
+		<div class="cover">
+			<a class="back"><i class="material-icons">arrow_back</i></a><img src="includes/images/logo.png" width="150px"><br><br><br><a class="flat_button signin white-text">Sign in with Google</a>
+			<div class="user"><img src=""><span></span><small>juvar.abrera2@gmail.com</small></div></span>
+		</div>
+	</div>
+	<script src="includes/scripts/autosize.js"></script>
+	<script src="includes/scripts/Input.js"></script>
+	<script src="includes/scripts/Data.js"></script>
+	<script src="includes/scripts/App.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCeYsuRNmqoAtDa3k8oDohy8hflzCsc_IY",
+	    authDomain: "gdg-devfest-philippines-2016.firebaseapp.com",
+	    databaseURL: "https://gdg-devfest-philippines-2016.firebaseio.com",
+	    storageBucket: "",
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	    
+	<script>
+		App.ready(window.location.hash.substring(1));
+	</script>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78413383-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
