@@ -359,14 +359,13 @@ var App = {
 		codelab: "",
 		loggedIn: 0,
 		register: function(user) {
-			App.Firebase.ref("users").child(user.uid).on("value", function(data) {
-				var exist = (data.val() !== null);
-				if(data.val() === null) {
-					userRef.child(user.uid).set({
+			App.Firebase.ref("users/"+user.uid).on("value", function(data) {
+				if(!data.exists()) {
+					App.Firebase.ref("users/"+user.uid).set({
 						displayName: user.displayName,
 						photoURL: user.photoURL,
 						score: 0
-					});
+					});	
 				}
 			});
 		}
