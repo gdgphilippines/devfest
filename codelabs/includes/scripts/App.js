@@ -215,6 +215,10 @@ var App = {
 		return "includes/images/codelabs/"+((key.split('-'))[0])+".png";
 	},
 	Process: {
+		onError: function(xhrtemp, ajaxOptions, thrownError) {
+			App.DialogBox.el.find(".wrapper").html('<h4>Error</h4><p>Cannot find content</p>');
+			App.DialogBox.enable();
+		},
 		step1: function() {
 			App.DialogBox.show();
 			App.DialogBox.disable();
@@ -227,6 +231,9 @@ var App = {
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
 					App.DialogBox.el.find(".wrapper p").html("You have <b>" + App.Codelabs.getTimeRemaining(App.Codelabs.list[App.User.codelab].time) + "</b> to finish the codelab and to unlock the quiz.");
 					App.DialogBox.enable();
+				},
+				error: function(xhrtemp, ajaxOptions, thrownError) {
+					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
 			})
 
@@ -243,6 +250,9 @@ var App = {
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
 					App.DialogBox.el.find(".wrapper a").attr("href", App.Codelabs.list[App.User.codelab].url);
 					App.DialogBox.enable();
+				},
+				error: function(xhrtemp, ajaxOptions, thrownError) {
+					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
 			})
 			$("a.codelab-list[data-codelab-id="+App.User.codelab+"] div:last-child").html('<span class="countdown"></span>');
@@ -259,6 +269,9 @@ var App = {
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
 					App.DialogBox.enable();
+				},
+				error: function(xhrtemp, ajaxOptions, thrownError) {
+					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
 			})
 		},
@@ -273,6 +286,9 @@ var App = {
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
 					App.DialogBox.enable();
+				},
+				error: function(xhrtemp, ajaxOptions, thrownError) {
+					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
 			})
 		}
