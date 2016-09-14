@@ -94,19 +94,14 @@ var App = {
 			App.User.codelab = key;
 			App.Firebase.ref("users").child(App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 				if(data.child("finish").exists()) {
-					alert("5");
 					App.Process.step5();
 				} else if(data.child("start_quiz").exists()) {
-					alert("4");
 					App.Process.step4();
 				} else if(data.child("end_time").exists()) {
-					alert("3");
 					App.Process.step3();
 				} else if (data.child("start_time").exists()) {
-					alert("2");
 					App.Process.step2();
 				} else if(!data.hasChildren()) {
-					alert("1");
 					App.Process.step1();
 				}
 			});
