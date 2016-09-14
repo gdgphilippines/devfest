@@ -161,7 +161,7 @@ a.raised_button {
   a.raised_button.white {
     background: white;
     color: #009688; }
-  a.raised_button[href] {
+  a.raised_button[href], a.raised_button[id], a.raised_button[onclick] {
     background: #009688; }
 
 a.flat_button {
@@ -348,6 +348,8 @@ a.flat_button {
   color: #666;
   padding: 48px 0px;
   font-weight: 300; }
+  .content.dense {
+    padding: 12px 0px; }
   .content.nopad {
     padding: 0px; }
   .content.color {
@@ -416,10 +418,11 @@ a.flat_button {
       margin-left: 12px; }
   .content.footer {
     background: #efefef;
-    padding: 24px;
     font-size: 14px;
     z-index: 9;
     border-top: 1px solid rgba(0, 0, 0, 0.1); }
+    .content.footer .wrapper {
+      padding: 0px 24px; }
 
 .speaker-container {
   position: fixed;
@@ -527,9 +530,7 @@ span.bignum {
   width: 150px; }
 
 .codelab-list {
-  font-size: 14px;
-  overflow: hidden;
-  position: relative; }
+  font-size: 14px; }
   .codelab-list img {
     width: 48px;
     margin: 18px; }
@@ -537,43 +538,70 @@ span.bignum {
     display: block;
     margin: 18px 0px; }
   .codelab-list i {
-    margin: 18px; }
+    margin: 18px;
+    color: #009688; }
   .codelab-list.done i:after {
-    color: green;
     content: "done"; }
   .codelab-list.code i:after {
-    color: blue;
     content: "code"; }
+  .codelab-list.quiz i:after {
+    content: "edit"; }
 
 .dialog-box {
+  -webkit-transition: 0s top, 0s left;
+  -moz-transition: 0s top, 0s left;
+  -ms-transition: 0s top, 0s left;
+  -o-transition: 0s top, 0s left;
+  transition: 0s top, 0s left;
   position: fixed;
   width: 500px;
-  top: 10%;
   left: 0px;
-  bottom: 10%;
+  max-height: 80%;
   background: white;
   z-index: 500;
   overflow: hidden;
   overflow-y: scroll;
   display: none;
+  color: #666;
+  line-height: 150%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8); }
   .dialog-box .blur {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.8);
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
-    bottom: 0px;
-    width: 100%;
-    height: 100%;
-    display: table; }
+    bottom: 0px; }
+    .dialog-box .blur .table {
+      width: 100%;
+      height: 100%; }
     .dialog-box .blur .loading {
       vertical-align: middle;
       text-align: center;
       display: table-cell; }
+  .dialog-box i.material-icons {
+    color: #bbb; }
+  .dialog-box .wrapper {
+    padding: 24px; }
+    .dialog-box .wrapper img {
+      display: block;
+      margin-bottom: 24px;
+      width: 64px; }
+    .dialog-box .wrapper span.title {
+      display: block;
+      margin-bottom: 12px; }
+    .dialog-box .wrapper span.title, .dialog-box .wrapper span.countdown {
+      font-weight: bold; }
+
+span.countdown {
+  padding: 0px 12px; }
 
 .dialog-box::-webkit-scrollbar {
   width: 0; }
+
+.ripple {
+  overflow: hidden;
+  position: relative; }
 
 .ink {
   display: block;
@@ -592,6 +620,9 @@ span.bignum {
   background: rgba(0, 0, 0, 0.15); }
   .ink.animate {
     animation: ripple 0.65s linear; }
+
+.signin {
+  display: none; }
 
 @keyframes ripple {
   100% {

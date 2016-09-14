@@ -1,76 +1,21 @@
 <div id="view">
-	<div class="content">
+	<div class="content dense">
 		<div class="wrapper">
 			<div class="columns">
-				<div class="col-6 offset-3 t-col-8 t-offset-2 m-col-12 m-offset-0">
+				<div class="col-6 offset-3 t-col-8 t-offset-2 m-col-12 m-offset-0 codelabs">
 					<div class="table">
-						<div class="cell"><b>My Points:</b> 1231</div>
-						<div class="cell right"><b>Ranking:</b> 1</div>
+						<div class="cell"><b>My Points:</b> <span id="mypoints"></span></div>
+						<div class="cell right"><b>Ranking:</b> <span id="myranking"></span></div>
 					</div>
-					<a onclick="App.DialogBox.show()" class="card table middle codelab-list code ripple">
+					<a class="card table middle codelab-list ripple" data-codelab-id="">
 						<div class="cell fit">
-							<img src="includes/images/codelabs/android.png">
+							<img src="">
 						</div>
 						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
+							<span class="title"></span>
 						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
-						</div>
-					</a>
-					<a class="card table middle codelab-list code ripple">
-						<div class="cell fit">
-							<img src="includes/images/codelabs/firebase.png">
-						</div>
-						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
-						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
-						</div>
-					</a>
-					<a class="card table middle codelab-list code ripple">
-						<div class="cell fit">
-							<img src="includes/images/codelabs/cardboard.png">
-						</div>
-						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
-						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
-						</div>
-					</a>
-					<a class="card table middle codelab-list code ripple">
-						<div class="cell fit">
-							<img src="includes/images/codelabs/cloud.png">
-						</div>
-						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
-						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
-						</div>
-					</a>
-					<a class="card table middle codelab-list code ripple">
-						<div class="cell fit">
-							<img src="includes/images/codelabs/pwa.png">
-						</div>
-						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
-						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
-						</div>
-					</a>
-					<a class="card table middle codelab-list code ripple">
-						<div class="cell fit">
-							<img src="includes/images/codelabs/polymer.png">
-						</div>
-						<div class="cell">
-							<span>Lorem ipsum dolor sit amet.</span>
-						</div>
-						<div class="cell fit">
-							<i class="material-icons"></i>
+						<div class="cell fit nowrap">
+							
 						</div>
 					</a>
 				</div>
@@ -79,6 +24,38 @@
 	</div>
 	<script>
 	$(document).ready(function() {
+		var i = 1;
+		$parent = $(".codelabs");
+		$template = $parent.children(".codelab-list");
+		$.each(App.Codelabs.list, function(key, data) {
+			if($(".codelabs .codelab-list").length != i)
+				$parent.append($template.clone());
+			$last = $(".codelabs .codelab-list:last-child");
+			$last.find("img").attr("src", App.getCodelabImage(key));
+			$last.find("span.title").html(data.desc);
+			$last.attr("data-codelab-id", key);
+			alert("users/"+App.User.loggedIn.uid+"/codelabs/"+key);
+			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
+				$codelab = $parent.find("[data-codelab-id="+key+"]");
+				if(data.child("finish").exists()) {
+
+				} else if(data.child("start_quiz").exists()) {
+					$codelab.removeClass("code").addClass("quiz");
+					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+				} else if(data.child("end_time").exists()) {
+					$codelab.removeClass("code").addClass("quiz");
+					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+				} else if (data.child("start_time").exists()) {
+					$codelab.find("div:last-child").html('<span class="countdown"></span>');
+					App.Codelabs.readyCountdown(key);
+				} else if(!data.hasChildren()) {
+					$codelab.addClass("code");
+					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+				}
+			})
+
+			i++;
+		});
 		App.afterLoad();
 	})
 	</script>
