@@ -411,7 +411,7 @@ var App = {
 				$(".action-bar .more-options span").html("");
 				$(".action-bar .user").parents("li").hide();
 				$(".slider ul.nav").hide();
-				App.DialogBox.el.html('');
+				App.DialogBox.el.html('<div class="wrapper"></div>');
 				App.DialogBox.hide();
 			}
 			App.User.loggedIn = user;
