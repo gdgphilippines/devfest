@@ -346,7 +346,7 @@ var App = {
 			var seconds = seconds -(minutes*60);
 			if(minutes == 0 && seconds == 0)
 				return (short) ? "0s" : "0 second";
-			return ((minutes != 0) ? minutes + ((short) ? " m" : ((minutes == 1) ? " minute" : " minutes")) : "") + " " + ((seconds != 0) ? seconds + (((short) ? " s" : ((seconds == 1 || seconds == 0) ? " second" : " seconds"))) : "")
+			return ((minutes != 0) ? minutes + ((short) ? "m" : ((minutes == 1) ? " minute" : " minutes")) : "") + " " + ((seconds != 0) ? seconds + (((short) ? "s" : ((seconds == 1 || seconds == 0) ? " second" : " seconds"))) : "")
 		}
 	},
 	User: {
