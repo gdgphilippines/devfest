@@ -34,7 +34,6 @@
 			$last.find("img").attr("src", App.getCodelabImage(key));
 			$last.find("span.title").html(data.desc);
 			$last.attr("data-codelab-id", key);
-			alert("users/"+App.User.loggedIn.uid+"/codelabs/"+key);
 			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 				$codelab = $parent.find("[data-codelab-id="+key+"]");
 				if(data.child("finish").exists()) {
