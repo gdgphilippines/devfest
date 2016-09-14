@@ -545,7 +545,7 @@ span.bignum {
   .codelab-list.code i:after {
     content: "code"; }
   .codelab-list.quiz i:after {
-    content: "edit"; }
+    content: "assessment"; }
 
 .dialog-box {
   -webkit-transition: 0s top, 0s left;

@@ -94,14 +94,19 @@ var App = {
 			App.User.codelab = key;
 			App.Firebase.ref("users").child(App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 				if(data.child("finish").exists()) {
+					alert("5");
 					App.Process.step5();
 				} else if(data.child("start_quiz").exists()) {
+					alert("4");
 					App.Process.step4();
 				} else if(data.child("end_time").exists()) {
+					alert("3");
 					App.Process.step3();
 				} else if (data.child("start_time").exists()) {
+					alert("2");
 					App.Process.step2();
 				} else if(!data.hasChildren()) {
+					alert("1");
 					App.Process.step1();
 				}
 			});
@@ -226,7 +231,6 @@ var App = {
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
 					App.DialogBox.el.find(".wrapper p").html("You have <b>" + App.Codelabs.getTimeRemaining(App.Codelabs.list[App.User.codelab].time) + "</b> to finish the codelab and to unlock the quiz.");
-					App.DialogBox.el.find(".wrapper a").attr("data-codelab-id", App.User.codelab);
 					App.DialogBox.enable();
 				}
 			})
@@ -242,8 +246,7 @@ var App = {
 					App.DialogBox.el.find(".wrapper").html(html);
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
-					App.DialogBox.el.find(".wrapper a").attr("data-codelab-id", App.User.codelab)
-						.attr("href", App.Codelabs.list[App.User.codelab].url);
+					App.DialogBox.el.find(".wrapper a").attr("href", App.Codelabs.list[App.User.codelab].url);
 					App.DialogBox.enable();
 				}
 			})
@@ -260,8 +263,6 @@ var App = {
 					App.DialogBox.el.find(".wrapper").html(html);
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
-					App.DialogBox.el.find(".wrapper a").attr("data-codelab-id", App.User.codelab)
-						.attr("href", App.Codelabs.list[App.User.codelab].url);
 					App.DialogBox.enable();
 				}
 			})
@@ -276,8 +277,6 @@ var App = {
 					App.DialogBox.el.find(".wrapper").html(html);
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
-					App.DialogBox.el.find(".wrapper a").attr("data-codelab-id", App.User.codelab)
-						.attr("href", App.Codelabs.list[App.User.codelab].url);
 					App.DialogBox.enable();
 				}
 			})
@@ -351,7 +350,7 @@ var App = {
 			var minutes = Math.floor(seconds / 60);
 			var seconds = seconds -(minutes*60);
 			if(minutes == 0 && seconds == 0)
-				return "0s";
+				return (short) ? "0s" : "0 second";
 			return ((minutes != 0) ? minutes + ((short) ? " m" : ((minutes == 1) ? " minute" : " minutes")) : "") + " " + ((seconds != 0) ? seconds + (((short) ? " s" : ((seconds == 1 || seconds == 0) ? " second" : " seconds"))) : "")
 		}
 	},
@@ -417,7 +416,7 @@ var App = {
 				$(".action-bar .more-options span").html("");
 				$(".action-bar .user").parents("li").hide();
 				$(".slider ul.nav").hide();
-				App.DialogBox.el.html("");
+				App.DialogBox.el.html('<div class="wrapper"></div>');
 				App.DialogBox.hide();
 			}
 			App.User.loggedIn = user;
