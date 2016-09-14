@@ -73,7 +73,7 @@ h1,h2,h3,h4,h5,h6 {
 	text-transform: uppercase;
 	color: #333;
 }
-.loading {
+body > .loading {
 	position: absolute;
 	left: 50%;
 	margin-left: -26px;
@@ -84,20 +84,20 @@ h1,h2,h3,h4,h5,h6 {
 	border-radius: 100%;
 	box-shadow: 0px 3px 3px rgba(0,0,0,.1);
 	z-index: 100;
-	&.load_template {
-		.circular {
-			animation: rotate 2s linear infinite;
-			transform-origin: center center;
-			width: 36px;
-			height: 36px;
-			margin: 8px;
-		}
-		.path {
-			stroke-dasharray: 1,200;
-			stroke-dashoffset: 0;
-			animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-			stroke-linecap: round;
-		}
+}
+.loading {
+	.circular {
+		animation: rotate 2s linear infinite;
+		transform-origin: center center;
+		width: 36px;
+		height: 36px;
+		margin: 8px;
+	}
+	.path {
+		stroke-dasharray: 1,200;
+		stroke-dashoffset: 0;
+		animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+		stroke-linecap: round;
 	}
 }
 @-webkit-keyframes rotate {
@@ -237,6 +237,11 @@ a.flat_button {
 		padding: 0;
 		li {
 			a {
+				color: rgba(0,0,0,.6);
+				i {
+					vertical-align: middle;
+					margin-right: 12px;
+				}
 				display: block;
 				width: 100%;
 				padding: 14px 18px;
@@ -613,4 +618,89 @@ span.bignum {
 }
 .sponsors img {
 	width: 150px;
+}
+.codelab-list {
+	font-size: 14px;
+	overflow: hidden;
+	position: relative;
+	img {
+		width: 48px;
+		margin: 18px;
+	}
+	span:not(.ink) {
+		display: block;
+		margin: 18px 0px;
+	}
+	i {
+		margin: 18px;
+	}
+	&.done i:after {
+		color: green;
+		content: "done";
+	}
+	&.code i:after {
+		color: blue;
+		content: "code";
+	}
+}
+.dialog-box {
+	position: fixed;
+	width: 500px;
+	top: 10%;
+	left: 0px;
+	bottom: 10%;
+	background: white;
+	z-index: 500;
+	overflow: hidden;
+	overflow-y: scroll;
+	display: none;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	.blur {
+		background: rgba(255,255,255,.5);
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		width: 100%;
+		height: 100%;
+		display: table;
+		.loading {
+			vertical-align: middle;
+			text-align: center;
+			display: table-cell;
+		}
+	}
+}
+.dialog-box::-webkit-scrollbar {
+	width: 0;
+}
+.ink {
+	display: block;
+	position: absolute;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	-ms-border-radius: 100%;
+	-o-border-radius: 100%;
+	border-radius: 100%;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+	z-index: 97;
+  	background: rgba(0, 0, 0, 0.15); 
+  	&.animate {
+  		animation: ripple 0.65s linear;
+  	}
+}
+@keyframes ripple {
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+		-moz-transform: scale(2.5);
+		-ms-transform: scale(2.5);
+		-o-transform: scale(2.5);
+		transform: scale(2.5);
+	}
 }

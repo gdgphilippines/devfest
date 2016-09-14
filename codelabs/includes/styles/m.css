@@ -17,6 +17,25 @@
 	-o-transition: all 0s ease-in-out !important; 
 	transition: all 0s ease-in-out !important;
 }
+.table {
+	display: table;
+	width: 100%;
+}
+.row {
+	display: table-row;
+}
+.cell {
+	display: table-cell;
+}
+.cell.fit {
+	width: 1px;
+}
+.cell.right {
+	text-align: right;
+}
+.cell.middle, .table.middle .cell, .row.middle .cell {
+	vertical-align: middle;
+}
 a {
 	color: inherit;
 	cursor: pointer;
@@ -2341,6 +2360,9 @@ a {
 	overflow: hidden;
 	border-radius: 2px;
 	box-shadow: 0px 3px 4px rgba(0,0,0,.2);
+	width: 100%;
+	position: relative;
+	margin-top: 24px;
 }
 .columns {
 	overflow: hidden;
@@ -2348,6 +2370,7 @@ a {
 }
 [class^="col-"] {
 	float: left;
+	padding: 12px;
 }
 .center {
 	text-align: center;
