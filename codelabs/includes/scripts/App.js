@@ -331,7 +331,7 @@ var App = {
 					$("a.codelab-list[data-codelab-id="+key+"] span.countdown").html(App.Codelabs.getTimeRemaining(remaining, true));
 					$(".dialog-box span.countdown").html(App.Codelabs.getTimeRemaining(remaining));
 					remaining--;
-					if(remaining <= 0)
+					if(remaining < 0)
 						App.Codelabs.finishCodelab(key);
 				}, 1000);
 		},
