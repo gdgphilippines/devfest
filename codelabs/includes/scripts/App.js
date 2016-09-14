@@ -440,6 +440,7 @@ var App = {
 		hide: function() {
 			$(".black-trans").hide();
 			$("body").css("overflow", "auto");
+			this.el.find(".wrapper").html("");
 			this.el.hide();
 		},
 		disable: function() {
@@ -449,11 +450,16 @@ var App = {
 				this.el.find(".blur").show();
 			else
 				this.el.append(this.loading);
+			if(this.el.find(".wrapper").html() == "")
+				this.el.css("height", "200px");
+			this.reposition();
 		},
 		enable: function() {
 			this.reposition();
 			this.el.find(".blur").hide();
 			this.el.css("overflow-y", "scroll");
+			this.el.css("height", "auto");
+			this.reposition();
 		},
 		isEnabled: function() {
 			return (this.el.find(".blur").is(":visible"))
