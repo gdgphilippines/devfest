@@ -7,6 +7,54 @@ var Data = {
 		{
 			name: "Google Cloud Platform",
 			color: "indigo white-text"
+		},
+		{
+			name: "Firebase",
+			color: "amber"
+		},
+		{
+			name: "Internet of Things",
+			color: "brown white-text"
+		},
+		{
+			name: "Analytics",
+			color: "amber"
+		},
+		{
+			name: "AngularJS",
+			color: "red white-text"
+		},
+		{
+			name: "Google Cardboard",
+			color: "brown white-text"
+		},
+		{
+			name: "Google Chrome",
+			color: "blue white-text" 
+		},
+		{
+			name: "Dart",
+			color: "cyan"
+		},
+		{
+			name: "Daydream",
+			color: "cyan"
+		},
+		{
+			name: "Google Maps",
+			color: "red white-text"
+		},
+		{
+			name: "Polymer",
+			color: "pink white-text"
+		},
+		{
+			name: "Progressive Web Apps",
+			color: "blue white-text"
+		},
+		{
+			name: "Tensor Flow",
+			color: "orange white-text"
 		}
 	],
 	speakerInfo: [
@@ -38,6 +86,66 @@ var Data = {
 				gp: "https://plus.google.com/+SamiKizilbash",
 				li: "https://www.linkedin.com/in/samikiz",
 				wb: "",
+			}
+		},
+		{
+			name: "Albert Padin",
+			title: "Co-founder and CTO of Symph",
+			img: "albert-padin",
+			bio: "Albert is a developer and entrepreneur who's worked on consumer, enterprise, and government software products. He is the co-founder and CTO of Symph, a design, development, and startup studio. At Symph, he has architected and developed solutions for 500 Startups, Office of the President of the Philippines, and the World Bank.<br><br>Albert leads a diverse team of developers in creating software solutions. He ensures that the team's output is high quality and performs well at scale. Albert is also passionate about empowering startups and has been involved in the Philippine Startup Ecosystem, by facilitating and mentoring at Startup Weekends and other events.<br><br>Prior to that, Albert started SpellDial, directed plays, and mentored street children. He studied Information Technology at the Centre for International Education Global Colleges. He lives in Cebu City, Philippines with his wife. His interests include theatre, performing arts, and the non-trivial act of eradicating poverty.",
+			skills: [1,2],
+			company: "Symph",
+			sm: {
+				fb: "https://www.facebook.com/albertpadin",
+				tw: "https://twitter.com/albertpadin",
+				gp: "https://plus.google.com/105208952882093749203",
+				li: "https://ph.linkedin.com/in/jpadin",
+				wb: "http://albertpadin.com/"
+			}
+		}, 
+		{
+			name: "Elymar Apao",
+			title: "Founder, JumpSparc Inc.",
+			img: "elymar-apao",
+			bio: "Ely is a User Experience & User Centered Design Coach. He is the founder of UsabilityPhilippines.com (which is now called UX Philippines ). He worked as UX manager in a US Nasdaq-listed Top-100 E-Commerce Site (US Auto Parts) and in a Global Classified-Ads Site (OLX). He now focuses on JumpSparc, an educational community and hardware marketplace for the Internet of Things and the maker culture.",
+			skills: [2,3],
+			company: "JumpSparc",
+			sm: {
+				fb: "https://www.facebook.com/jozzua",
+				tw: "",
+				gp: "https://plus.google.com/+ElymarApao",
+				li: "https://www.linkedin.com/in/jozzua",
+				wb: "http://www.jozzua.com/"
+			}
+		},
+		{
+			name: "Ralph Regalado",
+			title: "Community Manager, Google Developer Group Philippines",
+			img: "ralph-regalado",
+			bio: "Ralph Vincent Regalado is one of the Community Managers of GDG Philippines. He is also the CEO and Founder of SENTi, a tech startup that analyzes sentiments and conversations in social media. He is a professor, and a Natural Language Processing researcher at De La Salle University, Manila. His research works were presented not only in local but also in international conferences hosted in China, Japan, Vietnam, Indonesia and the United States. When he is not at work, he spends his time travelling and hiking mountains.",
+			skills: [13],
+			company: "GDG Philippines",
+			sm: {
+				fb: "https://www.facebook.com/regalandroid",
+				tw: "https://twitter.com/regalandroid",
+				gp: "https://plus.google.com/+RalphVincentRegalado/",
+				li: "https://ph.linkedin.com/in/rvregalado",
+				wb: "http://ralphregalado.com/"
+			}
+		},
+		{
+			name: "Jomar Tigcal",
+			title: "Android Developer, Trainer, and Consultant",
+			img: "jomar-tigcal",
+			bio: "Jomar Tigcal is an Android Developer, Trainer, and Consultant. As one of the community Managers of GDG Philippines, he is giving talks and facilitating Android Workshops. He has also conducted Android trainings to schools and other developers.<br><br>On his free time, he is developing personal applications using Android and other technologies, like Sweldong Pinoy. He has published Android Apps on Google Play Store.",
+			skills: [0],
+			company: "GDG Philippines",
+			sm: {
+				fb: "https://www.facebook.com/jomartigcal",
+				tw: "https://twitter.com/jomartigcal",
+				gp: "https://plus.google.com/+JomarTigcal",
+				li: "https://ph.linkedin.com/in/jomartigcal",
+				wb: "http://www.tigcal.com/"
 			}
 		}
 	],
