@@ -541,11 +541,19 @@ span.bignum {
     margin: 18px;
     color: #009688; }
   .codelab-list.done i:after {
-    content: "done"; }
+    content: "star";
+    color: #FFEB3B; }
+  .codelab-list.fail i:after {
+    content: "sentiment_dissatisfied";
+    color: #F44336; }
   .codelab-list.code i:after {
     content: "code"; }
-  .codelab-list.quiz i:after {
-    content: "assessment"; }
+  .codelab-list.quiz {
+    background-color: #ef5350;
+    color: white; }
+    .codelab-list.quiz i:after {
+      color: white;
+      content: "assessment"; }
 
 .dialog-box {
   -webkit-transition: 0s top, 0s left;
@@ -592,6 +600,9 @@ span.bignum {
       margin-bottom: 12px; }
     .dialog-box .wrapper span.title, .dialog-box .wrapper span.countdown {
       font-weight: bold; }
+    .dialog-box .wrapper span.message {
+      display: block;
+      font-size: 12px; }
 
 span.countdown {
   padding: 0px 12px; }
@@ -623,6 +634,19 @@ span.countdown {
 
 .signin {
   display: none; }
+
+.quiz i {
+  color: white; }
+.quiz .question-number {
+  color: white;
+  background: #bbb;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 100%; }
+.quiz hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05); }
 
 @keyframes ripple {
   100% {

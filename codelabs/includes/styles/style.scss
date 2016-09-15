@@ -639,13 +639,23 @@ span.bignum {
 		color: $BASE_COLOR;
 	}
 	&.done i:after {
-		content: "done";
+		content: "star";
+		color: #FFEB3B;
+	}
+	&.fail i:after {
+		content: "sentiment_dissatisfied";
+		color: #F44336;
 	}
 	&.code i:after {
 		content: "code";
 	}
-	&.quiz i:after {
-		content: "assessment";
+	&.quiz {
+		background-color: #ef5350;
+		color: white;
+		i:after {
+			color: white;
+			content: "assessment";
+		}
 	}
 }
 .dialog-box {
@@ -700,6 +710,10 @@ span.bignum {
 		span.title, span.countdown {
 			font-weight: bold;
 		}
+		span.message {
+			display: block;
+			font-size: 12px;
+		}
 	}
 }
 span.countdown {
@@ -733,6 +747,23 @@ span.countdown {
 }
 .signin {
 	display: none;
+}
+.quiz {
+	i {
+		color: white;
+	}
+	.question-number {
+		color: white;
+		background: #bbb;
+		padding: 3px 7px;
+		font-size: 12px;
+		font-weight: bold;
+		border-radius: 100%;
+	}
+	hr {
+		border: 0;
+		border-top: 1px solid rgba(0,0,0,.05);
+	}
 }
 @keyframes ripple {
 	100% {

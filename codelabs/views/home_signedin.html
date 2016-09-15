@@ -27,6 +27,7 @@
 		var i = 1;
 		$parent = $(".codelabs");
 		$template = $parent.children(".codelab-list");
+		$disabled = false;
 		$.each(App.Codelabs.list, function(key, data) {
 			if($(".codelabs .codelab-list").length != i)
 				$parent.append($template.clone());
@@ -34,27 +35,52 @@
 			$last.find("img").attr("src", App.getCodelabImage(key));
 			$last.find("span.title").html(data.desc);
 			$last.attr("data-codelab-id", key);
+			App.User.updatePoints();
 			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 				$codelab = $parent.find(".codelab-list[data-codelab-id="+key+"]");
-				if(data.child("finish").exists()) {
+				function disableCodelab(key) {
+					$(".codelabs a.codelab-list:not([data-codelab-id="+key+"])").attr("data-codelab-status", "disabled");
+					$(".codelabs a.codelab-list[data-codelab-id="+key+"]").attr("data-codelab-status", "enabled");
+				}
+				if(data.child("end_quiz").exists()) {
+					$codelab.removeClass("code quiz")
+					if(data.val()["cA"] > 3)
+						$codelab.addClass("done");
+					else
+						$codelab.addClass("fail");
+					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+					var status = "enabled";
+					if($disabled)
+						status = "disabled";
+					$codelab.attr("data-codelab-status", status);
 				} else if(data.child("start_quiz").exists()) {
 					$codelab.removeClass("code").addClass("quiz");
-					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+					$codelab.find("div:last-child").html('<span class="countdown"></span>');
+					App.Codelabs.Quiz.init(key);
+					$disabled = true;
+					disableCodelab(key);
 				} else if(data.child("end_time").exists()) {
 					$codelab.removeClass("code").addClass("quiz");
 					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+					$disabled = true;
+					disableCodelab(key);
 				} else if (data.child("start_time").exists()) {
 					$codelab.find("div:last-child").html('<span class="countdown"></span>');
+					$disabled = true;
+					disableCodelab(key);
 					App.Codelabs.readyCountdown(key);
 				} else if(!data.hasChildren()) {
 					$codelab.addClass("code").removeClass("quiz");
 					$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+					var status = "enabled";
+					if($disabled)
+						status = "disabled";
+					$codelab.attr("data-codelab-status", status);
 				}
 			})
 
 			i++;
 		});
-		App.afterLoad();
 	})
 	</script>
 </div>

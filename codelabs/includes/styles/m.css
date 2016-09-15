@@ -2650,7 +2650,7 @@ label {
   label.inline {
     display: inline;
     margin-right: 12px; }
-  label:not(.switch) span {
+  label:not(.switch) span:not(.desc) {
     cursor: text;
     color: rgba(0, 0, 0, 0.6);
     position: relative;
@@ -2739,6 +2739,7 @@ label {
     font-size: 22px !important;
     margin: 0;
     margin-right: 12px;
+    vertical-align: middle;
     color: #000;
     opacity: .54; }
     label:not(.switch) input[type="radio"] + .material-icons:before {
