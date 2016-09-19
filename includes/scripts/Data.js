@@ -59,6 +59,21 @@ var Data = {
 	],
 	speakerInfo: [
 		{
+			name: "Brian Tan Seng",
+			title: "CEO of 98Labs, Inc.",
+			img: "brian-tan-seng",
+			bio: "Brian Tan Seng, is a technology entrepreneur and is the co-founder of 1.) 98Labs Inc., a software development company, and 2.) AllServe, the first local prepaid card provider that consolidated gaming and mobile prepaid cards, and 3.) CleverHeat, a hardware startup aiming to harness solar thermal energy to provide refrigeration.<br><br>Aside from technology, Brian is also interested in psychology, startups, ultra running, mountaineering and the arts.",
+			skills: [],
+			company: "98Labs, Inc.",
+			sm: {
+				fb: "https://www.facebook.com/brian.tanseng",
+				tw: "https://twitter.com/briantanseng",
+				gp: "https://plus.google.com/u/1/112174234288825901111",
+				li: "https://www.linkedin.com/in/briantanseng",
+				wb: "",
+			}
+		},
+		{
 			name: "Mete Atamel",
 			title: "Developer Advocate for Google Cloud Platform",
 			img: "mete-atamel",
