@@ -1,0 +1,31 @@
+<div id="view">
+	<div class="content">
+		<div class="wrapper">
+			<div class="columns">
+				<h1 class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0" style="margin-top: 0px; margin-bottom: 0">Leaderboard</h1>
+				<div class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0" id="leaderboardMsg">
+					<div class="card">
+						<div class="wrapper">
+							There are no users with points.
+						</div>
+					</div>
+				</div>
+				<div class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0 ranking">
+					<div class="card rank-list">
+						<div class="table middle">
+							<div class="cell fit"></div>
+							<div class="cell fit"><img src=""></div>
+							<div class="cell"></div>
+							<div class="cell fit right"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			App.Leaderboard.load();
+		})
+	</script>
+</div>

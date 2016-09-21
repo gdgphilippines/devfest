@@ -52,17 +52,19 @@ var App = {
 			App.DialogBox.el.attr("data-codelab-status", $status);
 			App.User.codelab = key;
 			App.Firebase.ref("users").child(App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
-				if(data.child("end_quiz").exists()) {
-					App.Process.step5();
-				} else if(data.child("start_quiz").exists()) {
-					App.Process.step4();
-				} else if(data.child("end_time").exists()) {
-					App.Process.step3();
-				} else if (data.child("start_time").exists()) {
-					App.Process.step2();
-				} else if(!data.hasChildren()) {
-					App.Process.step1();
-				}
+				setTimeout(function() {
+					if(data.child("end_quiz").exists()) {
+						App.Process.step5();
+					} else if(data.child("start_quiz").exists()) {
+						App.Process.step4();
+					} else if(data.child("end_time").exists()) {
+						App.Process.step3();
+					} else if (data.child("start_time").exists()) {
+						App.Process.step2();
+					} else if(!data.hasChildren()) {
+						App.Process.step1();
+					}
+				}, 500)
 			});
 		});
 		var ink, d, x, y;
@@ -188,8 +190,6 @@ var App = {
 		App.slider("hide");
 		App.currentPage = controller;
 		$(".loading").css("top", "80px");
-		$("ul.nav a").removeClass("selected");
-		$("ul.nav a[data-page='"+controller+"']").addClass("selected");
 		if(App.fl)
 			App.fl = false;
 		else
@@ -197,11 +197,13 @@ var App = {
 		$("body").animate({
 			scrollTop: 0
 		}, 500, 'swing');
+		$("ul.nav a").removeClass("selected");
+		$("ul.nav a[data-page='"+controller+"']").addClass("selected");
 		if(controller == "home_signedin" && !(this.User.loggedIn))
 			controller = "home";
 		else if(controller == "home" && (this.User.loggedIn))
 			controller = "home_signedin";
-		else if(controller != "home" && (this.User.loggedIn))
+		else if(controller != "home" && !(this.User.loggedIn))
 			controller = "home";
 		App.xhr = $.ajax({
 			url: "views/"+controller+".html",
@@ -694,7 +696,73 @@ var App = {
 		},
 		updatePoints: function() {
 			App.Firebase.ref("users/"+this.loggedIn.uid).on("value", function(data) {
+				$("#pointMsg").hide();
+				if(data.val().score == 0) {
+					$("#pointMsg").show();
+				}
 				$("#mypoints").html(data.val().score);
+			})
+		},
+		getRanking: function() {
+			var rank = 0;
+			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+				console.log("WOO");
+				console.log(data.key);
+				console.log(data.val());
+				if(data.key == App.User.loggedIn.uid)
+					App.User.loadRanking(rank);
+				rank++;
+			})
+		},
+		loadRanking(rank) {
+			App.Firebase.ref("users").once("value", function(data) {
+				var count = 0;
+				for(var v in data.val())
+					count++;
+				$("#myranking").html(count-rank);
+			})
+		}
+	},
+	Leaderboard: {
+		load: function() {
+			this.getCount();
+		},
+		getCount: function() {
+			App.Firebase.ref("users").on("value", function(data) {
+				var count = 0;
+				for(var v in data.val())
+					count++;
+				App.Leaderboard.render(count);
+			});
+		},
+		render: function(count) {
+			var rank = 0;
+			$parent = $(".ranking");
+			$template = $parent.children(".rank-list");
+			$clone = false;
+			var n = 0;
+			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+				if(count-rank <= 10 && data.val().score > 0) {
+					if(!$clone)
+						$clone = true;
+					else
+						$parent.prepend($template.clone());
+					$el = $(".ranking .rank-list:first-child");
+					$el.find(".table .cell:first-child").html(count-rank);
+					if(count-rank == 1)
+						$el.addClass("first-place").removeClass("second-place third-place");
+					else if(count-rank == 2)
+						$el.addClass("second-place").removeClass("third-place");
+					else if(count-rank == 3) 
+						$el.addClass("third-place");
+					$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
+					$el.find(".table .cell:last-child").html(data.val().score + "pts");
+					$el.find("img").attr("src", data.val().photoURL);
+					n = 1;
+				}
+				if(n == 1)
+					$("#leaderboardMsg").hide();
+				rank++;
 			})
 		}
 	},

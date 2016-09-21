@@ -3,6 +3,11 @@
 		<div class="wrapper">
 			<div class="columns">
 				<div class="col-6 offset-3 t-col-8 t-offset-2 m-col-12 m-offset-0 codelabs">
+						<div id="pointMsg" class="card amber white-text" style="margin: 0px 0px 24px 0px; display: none">
+							<div class="wrapper">
+								Earn points by finishing a codelab!
+							</div>
+						</div>
 					<div class="table">
 						<div class="cell"><b>My Points:</b> <span id="mypoints"></span></div>
 						<div class="cell right"><b>Ranking:</b> <span id="myranking"></span></div>
@@ -28,6 +33,8 @@
 		$parent = $(".codelabs");
 		$template = $parent.children(".codelab-list");
 		$disabled = false;
+		App.User.updatePoints();
+		App.User.getRanking();
 		$.each(App.Codelabs.list, function(key, data) {
 			if($(".codelabs .codelab-list").length != i)
 				$parent.append($template.clone());
@@ -35,7 +42,6 @@
 			$last.find("img").attr("src", App.getCodelabImage(key));
 			$last.find("span.title").html(data.desc);
 			$last.attr("data-codelab-id", key);
-			App.User.updatePoints();
 			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 				$codelab = $parent.find(".codelab-list[data-codelab-id="+key+"]");
 				function disableCodelab(key) {
