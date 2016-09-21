@@ -453,4 +453,16 @@ span.bignum {
 .sponsors img {
   width: 150px; }
 
+#map {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1; }
+
+#map + .wrapper {
+  z-index: 2;
+  position: relative; }
+
 /*# sourceMappingURL=style.css.map */

@@ -22,6 +22,40 @@ a {
 	cursor: pointer;
 	text-decoration: none;
 }
+.table {
+	display: table;
+	width: 100%;
+}
+.row {
+	display: table-row;
+}
+.cell {
+	display: table-cell;
+}
+.cell.fit {
+	width: 1px;
+}
+.cell.right {
+	text-align: right;
+}
+.cell.middle, .table.middle .cell, .row.middle .cell {
+	vertical-align: middle;
+}
+.cell.nowrap {
+	white-space: nowrap;
+}
+.cell.left, .table.left .cell, .row.left .cell {
+	text-align: left;
+}
+.cell.center, .table.center .cell, .row.center .cell {
+	text-align: center;
+}
+.cell.right, .table.right .cell, .row.right .cell {
+	text-align: right;
+}
+.cell.padding, .table.padding .cell, .row.padding .cell {
+	padding: 12px;
+}
 .red.lighten-5 {
 	background-color: #ffebee !important;
 }

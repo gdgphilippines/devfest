@@ -64,7 +64,7 @@ var App = {
 					} else if(!data.hasChildren()) {
 						App.Process.step1();
 					}
-				}, 500)
+				}, 500);
 			});
 		});
 		var ink, d, x, y;
@@ -701,6 +701,7 @@ var App = {
 					$("#pointMsg").show();
 				}
 				$("#mypoints").html(data.val().score);
+				App.User.getRanking();
 			})
 		},
 		getRanking: function() {
@@ -717,8 +718,10 @@ var App = {
 		loadRanking(rank) {
 			App.Firebase.ref("users").once("value", function(data) {
 				var count = 0;
-				for(var v in data.val())
+				for(var v in data.val()) {
 					count++;
+					console.log(v);
+				}
 				$("#myranking").html(count-rank);
 			})
 		}

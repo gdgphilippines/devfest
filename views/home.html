@@ -29,11 +29,6 @@
 			</div>
 		</div>	
 	</div> -->
-	<div class="content red white-text">
-		<div class="wrapper">
-			<p class="center">Venue, schedule, and more speakers to be announce soon. Stay tuned!</p>
-		</div>
-	</div>
 	<div class="content">
 		<div class="wrapper">
 			<h1 class="center">What is GDG DevFest?</h1>
@@ -72,6 +67,34 @@
 			<div class="columns center">
 				<div class="col-12">
 					<a onclick="App.loadController('speakers')" href="#speakers" class="raised_button">View All</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content red">
+		<div id="map">
+			
+		</div>
+		<div class="wrapper">
+			<div class="columns">
+				<div class="col-6 t-col-12" style="padding: 24px;">
+					<div class="card">
+						<img src="includes/images/venue.jpg" width="100%">
+						<div class="wrapper">
+							<div class="table middle padding">
+								<div class="row">
+									<div class="cell fit"><i class="material-icons">place</i></div>
+									<div class="cell">Samsung Hall, SM Aura, Taguig</div>
+								</div>
+								<a target="_blank" href="https://www.google.com.ph/maps/dir//SM+Aura+Premier,+McKinley+Pkwy,+Taguig,+1634+Kalakhang+Maynila/@14.54679,121.0418699,16z/data=!4m16!1m7!3m6!1s0x3397c8ed01089ddb:0x879f21e647658cbf!2sSM+Aura+Premier!3b1!8m2!3d14.546044!4d121.05414!4m7!1m0!1m5!1m1!1s0x3397c8ed01089ddb:0x879f21e647658cbf!2m2!1d121.05414!2d14.546044?hl=en" class="row">
+									<div class="cell"><i class="material-icons">exit_to_app</i></div>
+									<div class="cell">
+										Get directions
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -126,5 +149,30 @@
 					'<small>'+speaker.company+'</small>'+
 				'</div>');
 		})
+		var map;
+		function initMap() {
+			map = new google.maps.Map(document.getElementById("map"), {
+				center: {lat: 14.54679, lng: 121.0418699},
+				zoom: 15,
+				panControl:true,
+				zoomControl:true,
+				mapTypeControl:true,
+				scaleControl:true,
+				streetViewControl:true,
+				overviewMapControl:true,
+				rotateControl:true,
+				scrollwheel: false,
+				navigationControl: false,
+				draggable: true,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: 14.5460396, lng: 121.0541461},
+				animation: google.maps.Animation.BOUNCE
+			})
+			marker.setMap(map);
+		}
 	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfJwp5z6XbU6tYFHKY-J55Vc89jJCBJ2A&callback=initMap"
+    async defer></script>
 </div>
