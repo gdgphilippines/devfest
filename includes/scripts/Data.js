@@ -59,6 +59,21 @@ var Data = {
 	],
 	speakerInfo: [
 		{
+			name: "Brian Tan Seng",
+			title: "CEO of 98Labs, Inc.",
+			img: "brian-tan-seng",
+			bio: "Brian Tan Seng, is a technology entrepreneur and is the co-founder of 1.) 98Labs Inc., a software development company, and 2.) AllServe, the first local prepaid card provider that consolidated gaming and mobile prepaid cards, and 3.) CleverHeat, a hardware startup aiming to harness solar thermal energy to provide refrigeration.<br><br>Aside from technology, Brian is also interested in psychology, startups, ultra running, mountaineering and the arts.",
+			skills: [],
+			company: "98Labs, Inc.",
+			sm: {
+				fb: "https://www.facebook.com/brian.tanseng",
+				tw: "https://twitter.com/briantanseng",
+				gp: "https://plus.google.com/u/1/112174234288825901111",
+				li: "https://www.linkedin.com/in/briantanseng",
+				wb: "",
+			}
+		},
+		{
 			name: "Mete Atamel",
 			title: "Developer Advocate for Google Cloud Platform",
 			img: "mete-atamel",
@@ -102,20 +117,20 @@ var Data = {
 				li: "https://ph.linkedin.com/in/jpadin",
 				wb: "http://albertpadin.com/"
 			}
-		}, 
+		},
 		{
-			name: "Elymar Apao",
-			title: "Founder, JumpSparc Inc.",
-			img: "elymar-apao",
-			bio: "Ely is a User Experience & User Centered Design Coach. He is the founder of UsabilityPhilippines.com (which is now called UX Philippines ). He worked as UX manager in a US Nasdaq-listed Top-100 E-Commerce Site (US Auto Parts) and in a Global Classified-Ads Site (OLX). He now focuses on JumpSparc, an educational community and hardware marketplace for the Internet of Things and the maker culture.",
-			skills: [2,3],
-			company: "JumpSparc",
+			name: "Reymart Canuel",
+			title: "Community Manager, Google Developer Group Baguio",
+			img: "reymart-canuel",
+			bio: "Reymart \"Canu\" Canuel is the current community manager for Google Developer Group Baguio. His passion towards IT and environmental preservation made him travel places like Germany, Japan, and Korea. He strongly believes in the potential of getting things done, inspiring others, and sharing ideas in effective learning most especially in IT. ",
+			skills: [2,5],
+			company: "GDG Baguio",
 			sm: {
-				fb: "https://www.facebook.com/jozzua",
-				tw: "",
-				gp: "https://plus.google.com/+ElymarApao",
-				li: "https://www.linkedin.com/in/jozzua",
-				wb: "http://www.jozzua.com/"
+				fb: "https://www.facebook.com/rcanu",
+				tw: "https://twitter.com/rcanu",
+				gp: "https://plus.google.com/+ReymartCanuel/",
+				li: "https://ph.linkedin.com/in/rcanu",
+				ws: "http://www.rcanu.com/"
 			}
 		},
 		{
