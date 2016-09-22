@@ -707,20 +707,18 @@ var App = {
 		getRanking: function() {
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
-				console.log("WOO");
-				console.log(data.key);
-				console.log(data.val());
 				if(data.key == App.User.loggedIn.uid)
 					App.User.loadRanking(rank);
-				rank++;
+				if(data.val().score != 0)
+					rank++;
 			})
 		},
 		loadRanking(rank) {
 			App.Firebase.ref("users").once("value", function(data) {
 				var count = 0;
 				for(var v in data.val()) {
-					count++;
-					console.log(v);
+					if(data.val()[v].score != 0)
+						count++;
 				}
 				$("#myranking").html(count-rank);
 			})
@@ -733,23 +731,28 @@ var App = {
 		getCount: function() {
 			App.Firebase.ref("users").on("value", function(data) {
 				var count = 0;
+				$(".ranking").html("");
 				for(var v in data.val())
 					count++;
 				App.Leaderboard.render(count);
 			});
 		},
+		TEMPLATE: 	'<div class="card rank-list">' +
+					'	<div class="table middle">' +
+					'		<div class="cell fit"></div>' +
+					'		<div class="cell fit"><img src=""></div>' +
+					'		<div class="cell"></div>' +
+					'		<div class="cell fit right"></div>' +
+					'	</div>' +
+					'</div>',
 		render: function(count) {
 			var rank = 0;
 			$parent = $(".ranking");
-			$template = $parent.children(".rank-list");
 			$clone = false;
 			var n = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
 				if(count-rank <= 10 && data.val().score > 0) {
-					if(!$clone)
-						$clone = true;
-					else
-						$parent.prepend($template.clone());
+					$parent.prepend(App.Leaderboard.TEMPLATE);
 					$el = $(".ranking .rank-list:first-child");
 					$el.find(".table .cell:first-child").html(count-rank);
 					if(count-rank == 1)
