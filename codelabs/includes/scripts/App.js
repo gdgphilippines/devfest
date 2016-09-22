@@ -707,21 +707,28 @@ var App = {
 		getRanking: function() {
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
-				if(data.key == App.User.loggedIn.uid)
-					App.User.loadRanking(rank);
+				if(data.key == App.User.loggedIn.uid) {
+					if(data.val().score == 0) 
+						App.User.loadRanking(0);
+					else
+						App.User.loadRanking(rank);
+				}
 				if(data.val().score != 0)
 					rank++;
 			})
 		},
 		loadRanking(rank) {
-			App.Firebase.ref("users").once("value", function(data) {
-				var count = 0;
-				for(var v in data.val()) {
-					if(data.val()[v].score != 0)
-						count++;
-				}
-				$("#myranking").html(count-rank);
-			})
+			if(rank == 0)
+				$("#myranking").html("-");
+			else 
+				App.Firebase.ref("users").once("value", function(data) {
+					var count = 0;
+					for(var v in data.val()) {
+						if(data.val()[v].score != 0)
+							count++;
+					}
+					$("#myranking").html(count-rank);
+				})
 		}
 	},
 	Leaderboard: {
@@ -768,6 +775,8 @@ var App = {
 				}
 				if(n == 1)
 					$("#leaderboardMsg").hide();
+				else
+					$("#leaderboardMsg").show();
 				rank++;
 			})
 		}
