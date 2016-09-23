@@ -268,5 +268,35 @@ var Data = {
 				wb: ""
 			}
 		},
+		{
+			name: "Adrian Vincent Tayag",
+			title: "VR Enthusiast",
+			img: "adrian-vincent-tayag",
+			bio: "Adrian Tayag is a VR enthusiast that is currently a 3rd year BS Electrical Engineering student at University of the Philippines Los Baños. He is one of the core organizers of VR Philippines and is also leading a VR student organization in UPLB namely VISIV-UPLB, which aims to spread awareness about VR’s relevance in every field that UPLB is currently offering.",
+			skills: [6],
+			company: "VR Enthusiast",
+			sm: {
+				fb: "https://www.facebook.com/AdrianTayag",
+				tw: "",
+				gp: "",
+				li: "",
+				ws: ""
+			}
+		},
+		{
+			name: "Cristopher David",
+			title: "VR Evangelist and Developer",
+			img: "cristopher-david",
+			bio: "Toph is a VR Evangelist and Developer. He works as an R&D Engineer at Nokia by day but leads a double life in the metaverse. He co-founded VR Philippines to boost the local VR community and possibly help put the Philippines in the forefront of this exciting technological revolution. He is currently setting up his own VR startup, Veer, which aims to bring virtual reality to everyone. He also serves as the Board Member for VR at ACM SIGGRAPH Manila.",
+			skills: [6],
+			company: "VR Enthusiast",
+			sm: {
+				fb: "https://www.facebook.com/tophoftheworld",
+				tw: "",
+				gp: "",
+				li: "https://www.linkedin.com/in/davidcristopher",
+				ws: ""
+			}
+		},
 	]
 }
