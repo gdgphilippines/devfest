@@ -1,58 +1,58 @@
 var Data = {
 	skills: [
-		{
+		{ //0
 			name: "Android",
 			color: "light-green darken-2"
 		},
-		{
+		{ //1
 			name: "Google Cloud Platform",
 			color: "indigo white-text"
 		},
-		{
+		{ //2
 			name: "Firebase",
 			color: "amber"
 		},
-		{
+		{ //3
 			name: "Internet of Things",
 			color: "brown white-text"
 		},
-		{
+		{ //4
 			name: "Analytics",
 			color: "amber"
 		},
-		{
+		{ //5
 			name: "AngularJS",
 			color: "red white-text"
 		},
-		{
+		{ //6
 			name: "Google Cardboard",
 			color: "brown white-text"
 		},
-		{
+		{ //7
 			name: "Google Chrome",
 			color: "blue white-text" 
 		},
-		{
+		{ //8
 			name: "Dart",
 			color: "cyan"
 		},
-		{
+		{ //9
 			name: "Daydream",
 			color: "cyan"
 		},
-		{
+		{ //10
 			name: "Google Maps",
 			color: "red white-text"
 		},
-		{
+		{ //11
 			name: "Polymer",
 			color: "pink white-text"
 		},
-		{
+		{ //12
 			name: "Progressive Web Apps",
 			color: "blue white-text"
 		},
-		{
+		{ //13
 			name: "Tensor Flow",
 			color: "orange white-text"
 		}
@@ -119,6 +119,21 @@ var Data = {
 			}
 		},
 		{
+			name: "Ben Adrian Sarmiento",
+			title: "Technical Lead, Cloud Sherpas",
+			img: "ben-adrian-sarmiento",
+			bio: "Ben spends most of his time creating apps for Google Cloud Platform. Internet is oxygen to him.",
+			skills: [1],
+			company: "Cloud Sherpas",
+			sm: {
+				fb: "https://www.facebook.com/bensarmiento",
+				tw: "https://twitter.com/bensarmiento",
+				gp: "https://plus.google.com/+BenAdrianSarmientoDev",
+				li: "https://ph.linkedin.com/in/bensarmiento",
+				wb: "https://bensarmiento.com/"
+			}
+		},
+		{
 			name: "Reymart Canuel",
 			title: "Community Manager, Google Developer Group Baguio",
 			img: "reymart-canuel",
@@ -130,7 +145,7 @@ var Data = {
 				tw: "https://twitter.com/rcanu",
 				gp: "https://plus.google.com/+ReymartCanuel/",
 				li: "https://ph.linkedin.com/in/rcanu",
-				ws: "http://www.rcanu.com/"
+				wb: "http://www.rcanu.com/"
 			}
 		},
 		{
@@ -162,6 +177,96 @@ var Data = {
 				li: "https://ph.linkedin.com/in/jomartigcal",
 				wb: "http://www.tigcal.com/"
 			}
-		}
-	],
+		},
+		{
+			name: "Benj Tupas",
+			title: "Founder & CEO of FunBuddies",
+			img: "benj-tupas",
+			bio: "Benj is the Founder/CEO of FunBuddies. He loves technology, business, books, and travel/adventure.",
+			skills: [0,1,2],
+			company: "FunBuddies",
+			sm: {
+				fb: "https://www.facebook.com/profile.php?id=100000195150265",
+				tw: "https://twitter.com/benj_tupas",
+				gp: "https://plus.google.com/+BenjTupas0420",
+				li: "https://ph.linkedin.com/in/benjtupas",
+				wb: "http://www.benjtupas.com/"
+			}
+		},
+		{
+			name: "Mac Valmores",
+			title: "Freelance Developer",
+			img: "mac-valmores",
+			bio: "Conducts free android tutorials for the Philippine Android Developers Community. Worked with Project Noah for Moses Tablet. Worked on customizing tablets. ",
+			skills: [0],
+			company: "Philippine Android Developers Community",
+			sm: {
+				fb: "https://www.facebook.com/mac.valmores",
+				tw: "",
+				gp: "",
+				li: "",
+				wb: ""
+			}
+		},
+		{
+			name: "Joyce Guiao",
+			title: "Freelancer",
+			img: "joyce-guiao",
+			bio: "She graduated BS Computer Science at De La Salle University and is currently working as a freelancer. She won various hackathons and developer contests which includes Microsoft Image Cup - Innovation World Finalist (2014), Kabantay ng Bayan Champion (2014), DOST-FNRI Less Sugar Champion (2014) and DOST Mobile App Competition on Disaster Communication 2nd Runnerup (2014). Oh wait download her Android App <a href=\"https://play.google.com/store/apps/details?id=com.matchagames.setmania\" target=\"_blank\">here</a>",
+			skills: [0,2],
+			company: "Android Freelancer",
+			sm: {
+				fb: "https://www.facebook.com/2sleepy2online",
+				tw: "https://twitter.com/juicecow",
+				gp: "https://plus.google.com/112701448726137386362",
+				li: "",
+				wb: ""
+			}
+		},
+		{
+			name: "Jielynn Diroy",
+			title: "Software Engineer",
+			img: "jielynn-diroy",
+			bio: "Jielynn Diroy is a graduate of BS Information Technology from De La Salle University - Dasmariñas. She became fond of Google technologies after she participated in Google Student Leaders Summit 2.0. She became actively part of different GDG PH events and co-organized Cavite events last February and April 2016.<br><br>Also, she simply does not like bacon.",
+			skills: [2],
+			company: "PointWest",
+			sm: {
+				fb: "https://www.facebook.com/jielynnd",
+				tw: "https://twitter.com/jielynnd",
+				gp: "",
+				li: "https://www.linkedin.com/in/jielynn-diroy-319448105",
+				wb: ""
+			}
+		},
+		{
+			name: "Toni-Jan Keith Monserrat",
+			title: "Front-end Web Developer",
+			img: "toni-jan-keith-monserrat",
+			bio: "Tatay, teacher, student, HCI researcher and Front-end web developer. His goal is to promote that we can make creative and effective interventions by thinking in-the-shoes of your users... creating good design...",
+			skills: [11,12],
+			company: "HCI Researcher",
+			sm: {
+				fb: "https://www.facebook.com/tjmonsi",
+				tw: "",
+				gp: "",
+				li: "https://ph.linkedin.com/in/toni-jan-keith-monserrat-42975341",
+				wb: ""
+			}
+		},
+		{
+			name: "Wayne Manuel",
+			title: "UP Manila & Rappler",
+			img: "wayne-manuel",
+			bio: "",
+			skills: [11,12],
+			company: "UP Manila & Rappler",
+			sm: {
+				fb: "",
+				tw: "",
+				gp: "",
+				li: "",
+				wb: ""
+			}
+		},
+	]
 }
