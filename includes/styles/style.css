@@ -451,7 +451,8 @@ span.bignum {
   .photo {
     height: 200px; } }
 .sponsors img {
-  width: 150px; }
+  margin: 24px;
+  vertical-align: middle; }
 
 #map {
   position: absolute;
