@@ -399,7 +399,7 @@ var Data = {
 			bg: "includes/images/schedule/closing.jpg",
 			start: "1700",
 			desc: "Closing",
-			speaker: [],
+			speaker: ["chelle-obligacion-gray"],
 			duration: 30
 		}
 	],
