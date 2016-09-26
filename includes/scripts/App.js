@@ -17,6 +17,86 @@ var App = {
 		}
 		return result;
 	},
+	Survey: {
+		popup: function() {
+			if(!localStorage.popupSurvey) {
+				App.DialogBox.show();
+				App.DialogBox.disable();
+				$.ajax({
+					url: "views/survey.html",
+					cache: true,
+					success: function(html) {
+						App.DialogBox.el.find(".wrapper").html(html);
+						App.DialogBox.enable();
+					}
+				})
+			} 
+		},
+		dontask: function() {
+			localStorage.popupSurvey = true;
+			App.DialogBox.hide();
+		}
+	},
+
+	DialogBox: {
+		el: $(".dialog-box"),
+		loading: '<div class="blur"><div class="table"><div class="loading">'+$(".loading").html()+'</div></div></div>',
+		show: function() {
+			$(".black-trans").show();
+			$("body").css("overflow", "hidden");
+			this.reposition();
+			this.el.css({
+				"opacity": "0",
+				"display": "block"
+			}).animate({
+				"opacity": "1"
+			}, 250);
+		},
+		hide: function() {
+			$(".black-trans").hide();
+			$("body").css("overflow", "auto");
+			this.el.find(".wrapper").html("");
+			this.el.hide();
+		},
+		disable: function() {
+			this.el.css("overflow-y", "hidden");
+			this.el.scrollTop(0);
+			if(this.el.find(".blur").length == 1)
+				this.el.find(".blur").show();
+			else
+				this.el.append(this.loading);
+			if(this.el.find(".wrapper").html() == "")
+				this.el.css("height", "200px");
+			this.reposition();
+		},
+		enable: function() {
+			this.reposition();
+			this.el.find(".blur").hide();
+			this.el.css("overflow-y", "scroll");
+			this.el.css("height", "auto");
+			this.reposition();
+		},
+		isEnabled: function() {
+			return (this.el.find(".blur").is(":visible"))
+		},
+		reposition: function() {
+			this.el.css({
+				"left": (($(window).outerWidth()-this.el.outerWidth())/2) + "px",
+				"top": (($(window).outerHeight()-this.el.outerHeight())/2)+"px"
+			});
+		},
+		responsive: function() {
+			if($(window).outerWidth() < 500)
+				this.el.css({
+					"width": $(window).outerWidth()+"px",
+					"left": "0px"
+				});
+			else {
+				this.el.css("width", "500px");
+				this.reposition();
+			}
+		}
+	},
 	ready: function(page) {
 		if(page == "")
 			page = "home";
@@ -39,10 +119,13 @@ var App = {
 			}
 		}).resize(function() {
 			App.responsive();
+			App.DialogBox.responsive();
 		})
 		$(".black-trans, .back").click(function() {
-			App.slider("hide");
-			$(".speaker-container").css("bottom", "-80%");
+			if(!App.DialogBox.el.is(":visible")) {
+				App.slider("hide");
+				$(".speaker-container").css("bottom", "-80%");
+			}
 		})
 		$(".menu").click(function() {
 			App.slider("show");

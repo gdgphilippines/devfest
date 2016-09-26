@@ -73,7 +73,7 @@ h1,h2,h3,h4,h5,h6 {
 	text-transform: uppercase;
 	color: #333;
 }
-.loading {
+body > .loading {
 	position: absolute;
 	left: 50%;
 	margin-left: -26px;
@@ -84,20 +84,20 @@ h1,h2,h3,h4,h5,h6 {
 	border-radius: 100%;
 	box-shadow: 0px 3px 3px rgba(0,0,0,.1);
 	z-index: 100;
-	&.load_template {
-		.circular {
-			animation: rotate 2s linear infinite;
-			transform-origin: center center;
-			width: 36px;
-			height: 36px;
-			margin: 8px;
-		}
-		.path {
-			stroke-dasharray: 1,200;
-			stroke-dashoffset: 0;
-			animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-			stroke-linecap: round;
-		}
+}
+.loading {
+	.circular {
+		animation: rotate 2s linear infinite;
+		transform-origin: center center;
+		width: 36px;
+		height: 36px;
+		margin: 8px;
+	}
+	.path {
+		stroke-dasharray: 1,200;
+		stroke-dashoffset: 0;
+		animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+		stroke-linecap: round;
 	}
 }
 @-webkit-keyframes rotate {
@@ -176,6 +176,18 @@ a.raised_button {
 	}
 	&[href] {
 		background: $BASE_COLOR;
+	}
+}
+a.flat_button {
+	background: transparent;
+	display: inline-block;
+	padding: 12px;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 14px;
+	color: #bbb;
+	&[id], &[href], &[onclick] {
+		color: $BASE_COLOR;
 	}
 }
 .black-trans {
@@ -643,4 +655,65 @@ span.bignum {
 			padding: 16px;
 		}
 	}
+}
+.dialog-box {
+	-webkit-transition: 0s top, 0s left;
+	-moz-transition: 0s top, 0s left;
+	-ms-transition: 0s top, 0s left;
+	-o-transition: 0s top, 0s left;
+	transition: 0s top, 0s left;
+	position: fixed;
+	width: 500px;
+	left: 0px;
+	max-height: 80%;
+	background: white;
+	z-index: 500;
+	overflow: hidden;
+	overflow-y: scroll;
+	display: none;
+	color: #666;
+	line-height: 150%;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+	.blur {
+		background: rgba(255,255,255,.8);
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		.table {
+			width: 100%;
+			height: 100%;
+		}
+		.loading {
+			vertical-align: middle;
+			text-align: center;
+			display: table-cell;
+		}
+	}
+	i.material-icons {
+		color: #bbb;
+	}
+	.wrapper {
+		padding: 24px;
+		img {
+			display: block;
+			margin-bottom: 24px;
+			width: 64px;
+		}
+		span.title {
+			display: block;
+			margin-bottom: 12px;
+		}
+		span.title, span.countdown {
+			font-weight: bold;
+		}
+		span.message {
+			display: block;
+			font-size: 12px;
+		}
+	}
+}
+.dialog-box::-webkit-scrollbar {
+	width: 0;
 }
