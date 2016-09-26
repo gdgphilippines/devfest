@@ -402,7 +402,7 @@ var Data = {
 			mentors: {
 				firebase: ["joyce-guiao", "jielynn-diroy"],
 				pwa: ["toni-jan-keith-monserrat", "wayne-manuel"],
-				vr: ["cristopher-david"],
+				vr: ["cristopher-david", "adrian-vincent-tayag"],
 				android: ["benj-tupas", "mac-valmores"],
 				cloud: ["albert-padin", "ben-adrian-sarmiento"]
 			},
