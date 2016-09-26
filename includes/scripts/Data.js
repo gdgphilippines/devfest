@@ -120,11 +120,11 @@ var Data = {
 		},
 		{
 			name: "Ben Adrian Sarmiento",
-			title: "Technical Lead, Cloud Sherpas",
+			title: "Associate Manager in Accenture",
 			img: "ben-adrian-sarmiento",
 			bio: "Ben spends most of his time creating apps for Google Cloud Platform. Internet is oxygen to him.",
 			skills: [1],
-			company: "Cloud Sherpas",
+			company: "Accenture",
 			sm: {
 				fb: "https://www.facebook.com/bensarmiento",
 				tw: "https://twitter.com/bensarmiento",
