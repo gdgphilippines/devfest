@@ -324,6 +324,9 @@ a.raised_button {
 		min-width: 320px;
 		max-width: 960px;
 		margin: 0px auto;
+		&.padding {
+			padding: 0px 24px;
+		}
 	}
 	.columns .wrapper {
 		padding: 12px;
@@ -464,23 +467,52 @@ a.raised_button {
 }
 .chip {
 	background: #e7e7e7;
-	color: rgba(0, 0, 0, 0.54);
+	color: rgba(0,0,0,.54);
 	min-height: 32px;
-	font-weight: 400;
 	display: inline-table;
 	margin-bottom: 12px;
 	margin-right: 8px;
 	font-size: 12px;
 	padding: 0px 12px;
-	color: #333;
-	&[class*="darken-"] {
-		color: white;
-	}
 	border-radius: 32px;
-	span {
+	&.hasIcon {
+		padding-left: 0px;
+	}
+	&.hasButton {
+		padding-right: 4px;
+	}
+	&:hover {
+		background: #767577;
+		color: white;
+		a i.md-icon {
+			background: white;
+			color: #767577;
+		}
+	}
+	span.icon {
+		width: 32px;
+		height: 32px;
+		display: table-cell;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		border-radius: 100%;
+		vertical-align: middle;
+		text-align: center;
+		font-size: 16px;
+		color: white;
+		text-transform: uppercase;
+	}
+	span:not(.icon) {
 		display: table-cell;
 		vertical-align: middle;
-	}	
+		&.hasIcon {
+			padding-left: 8px;
+		}
+		&.hasButton {
+			padding-right: 4px;
+		}
+	}
 }
 span.bignum {
 	font-size: 48px;
@@ -549,4 +581,66 @@ span.bignum {
 #map + .wrapper {
 	z-index: 2;
 	position: relative;
+}
+.schedule {
+	span.time {
+		font-size: 56px;
+	}
+	small {
+		font-size: 18px;
+		margin-left: 12px;
+	}
+	span.duration {
+		font-size: 14px;
+	}
+	.row .cell:last-child {
+		padding-left: 24px;
+	}
+	.card {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+		margin-bottom: 24px;
+		position: relative;
+		.wrapper {
+			padding: 24px;
+			position: relative;
+			line-height: 200%;
+		}
+		.filter {
+			background: rgba(0,0,0,.5);
+			display: none;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 0px;
+			right: 0px;
+		}
+	}
+	.speaker {
+		position: relative;
+		padding: 24px;
+		color: white;
+		padding-bottom: 16px;
+		background: $BASE_COLOR;
+	}
+}
+@media screen and (max-width: 425px) {
+	.schedule {
+		span.time {
+			font-size: 36px;
+			small {
+				font-size: 14px;
+				margin-left: 8px;
+			}
+		}
+		.card {
+			.wrapper {
+				padding: 16px;
+			}
+		}
+		.speaker {
+			padding: 16px;
+		}
+	}
 }

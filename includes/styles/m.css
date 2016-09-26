@@ -41,6 +41,9 @@ a {
 .cell.middle, .table.middle .cell, .row.middle .cell {
 	vertical-align: middle;
 }
+.cell.top, .table.top .cell, .row.top .cell {
+	vertical-align: top;
+}
 .cell.nowrap {
 	white-space: nowrap;
 }

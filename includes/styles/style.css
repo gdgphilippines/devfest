@@ -289,6 +289,8 @@ a.raised_button {
     min-width: 320px;
     max-width: 960px;
     margin: 0px auto; }
+    .content > .wrapper.padding {
+      padding: 0px 24px; }
   .content .columns .wrapper {
     padding: 12px; }
   .content p {
@@ -400,19 +402,42 @@ a.raised_button {
   background: #e7e7e7;
   color: rgba(0, 0, 0, 0.54);
   min-height: 32px;
-  font-weight: 400;
   display: inline-table;
   margin-bottom: 12px;
   margin-right: 8px;
   font-size: 12px;
   padding: 0px 12px;
-  color: #333;
   border-radius: 32px; }
-  .chip[class*="darken-"] {
+  .chip.hasIcon {
+    padding-left: 0px; }
+  .chip.hasButton {
+    padding-right: 4px; }
+  .chip:hover {
+    background: #767577;
     color: white; }
-  .chip span {
+    .chip:hover a i.md-icon {
+      background: white;
+      color: #767577; }
+  .chip span.icon {
+    width: 32px;
+    height: 32px;
+    display: table-cell;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 100%;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    text-transform: uppercase; }
+  .chip span:not(.icon) {
     display: table-cell;
     vertical-align: middle; }
+    .chip span:not(.icon).hasIcon {
+      padding-left: 8px; }
+    .chip span:not(.icon).hasButton {
+      padding-right: 4px; }
 
 span.bignum {
   font-size: 48px;
@@ -467,5 +492,50 @@ span.bignum {
 #map + .wrapper {
   z-index: 2;
   position: relative; }
+
+.schedule span.time {
+  font-size: 56px; }
+.schedule small {
+  font-size: 18px;
+  margin-left: 12px; }
+.schedule span.duration {
+  font-size: 14px; }
+.schedule .row .cell:last-child {
+  padding-left: 24px; }
+.schedule .card {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 24px;
+  position: relative; }
+  .schedule .card .wrapper {
+    padding: 24px;
+    position: relative;
+    line-height: 200%; }
+  .schedule .card .filter {
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px; }
+.schedule .speaker {
+  position: relative;
+  padding: 24px;
+  color: white;
+  padding-bottom: 16px;
+  background: #009688; }
+
+@media screen and (max-width: 425px) {
+  .schedule span.time {
+    font-size: 36px; }
+    .schedule span.time small {
+      font-size: 14px;
+      margin-left: 8px; }
+  .schedule .card .wrapper {
+    padding: 16px; }
+  .schedule .speaker {
+    padding: 16px; } }
 
 /*# sourceMappingURL=style.css.map */

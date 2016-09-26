@@ -2,7 +2,7 @@ var Data = {
 	skills: [
 		{ //0
 			name: "Android",
-			color: "light-green darken-2"
+			color: "light-green darken-2 white-text"
 		},
 		{ //1
 			name: "Google Cloud Platform",
@@ -298,5 +298,115 @@ var Data = {
 				ws: ""
 			}
 		},
+	],
+	schedule: [
+		{
+			bg: "includes/images/schedule/registration.jpg",
+			start: "0700",
+			desc: "Registration",
+			speaker: [],
+			duration: 120
+		},
+		{
+			bg: "includes/images/schedule/games.jpg",
+			start: "0900",
+			desc: "Games/ Ice Breaker",
+			speaker: [],
+			duration: 20
+		},
+		{
+			start: "0920",
+			desc: "Introduction to GDG Philippines",
+			speaker: ["jomar-tigcal"],
+			duration: 10
+		},
+		{
+			start: "0930",
+			desc: "House Rules, DevFest Agenda",
+			speaker: ["ralph-regalado"],
+			duration: 15
+		},
+		{
+			start: "0945",
+			desc: "Keynote",
+			speaker: ["sami-kizilbash"],
+			duration: 45
+		},
+		{
+			start: "1030",
+			desc: "Google Cloud Platform",
+			speaker: ["mete-atamel"],
+			duration: 45
+		},
+		{
+			start: "1115",
+			desc: "Show & Tell",
+			speaker: ["benj-tupas"],
+			duration: 45
+		},
+		{
+			bg: "includes/images/schedule/lunch.jpg",
+			start: "1200",
+			desc: "Lunch",
+			speaker: [],
+			duration: 60
+		},
+		{
+			start: "1300",
+			desc: "Sponsors Talk",
+			speaker: [],
+			duration: 30
+		},
+		{
+			start: "1330",
+			desc: "Beacon - Physical Web",
+			speaker: ["brian-tan-seng"],
+			duration: 45
+		},
+		{
+			start: "1415",
+			desc: "IoT Firebase",
+			speaker: [],
+			duration: 45
+		},
+		{
+			start: "1500",
+			desc: "Machine Learning",
+			speaker: ["albert-padin"],
+			duration: 45
+		},
+		{
+			start: "1545",
+			desc: "Hackathon Presentation & Judging",
+			speaker: [],
+			duration: 75
+		},
+		{
+			bg: "includes/images/schedule/closing.jpg",
+			start: "1700",
+			desc: "Closing",
+			speaker: [],
+			duration: 30
+		}
+	],
+	"parallel-activities": [
+		{
+			start: "0800",
+			desc: "Code Blaze Challenge",
+			judges: ["sami-kizilbash", "mete-atamel", "albert-padin", "Accenture"],
+			duration: 480
+		},
+		{
+			start: "0900",
+			desc: "Code your own: Codelabs (BYOD)",
+			mentors: {
+				firebase: ["joyce-guiao", "jielynn-diroy"],
+				pwa: ["toni-jan-keith-monserrat", "wayne-manuel"],
+				vr: ["cristopher-david"],
+				android: ["benj-tupas", "mac-valmores"],
+				cloud: ["albert-padin", "ben-adrian-sarmiento"]
+			},
+			duration: 480
+		}
 	]
 }
