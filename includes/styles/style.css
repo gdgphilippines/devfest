@@ -450,6 +450,8 @@ span.bignum {
 @media screen and (max-width: 425px) {
   .photo {
     height: 200px; } }
+.sponsors h4 {
+  margin-top: 36p; }
 .sponsors img {
   margin: 24px;
   vertical-align: middle; }

@@ -529,9 +529,14 @@ span.bignum {
 		height: 200px;
 	}
 }
-.sponsors img {
-	margin: 24px;
-	vertical-align: middle;
+.sponsors {
+	h4 {
+		margin-top: 36p;
+	}
+	img {
+		margin: 24px;
+		vertical-align: middle;
+	}
 }
 #map {
 	position: absolute;
