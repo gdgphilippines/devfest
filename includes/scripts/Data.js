@@ -255,11 +255,11 @@ var Data = {
 		},
 		{
 			name: "Wayne Manuel",
-			title: "UP Manila & Rappler",
+			title: "Software Developer, National Telehealth Center UP Manila",
 			img: "wayne-manuel",
-			bio: "",
+			bio: "Wayne Manuel is a software developer at the National Telehealth Center of the University of the Philippines Manila.",
 			skills: [11,12],
-			company: "UP Manila & Rappler",
+			company: "National Telehealth Center UP Manila",
 			sm: {
 				fb: "",
 				tw: "",
