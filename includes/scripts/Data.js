@@ -119,6 +119,20 @@ var Data = {
 			}
 		},
 		{
+			name: "Chelle Obligacion Gray",
+			title: "Community Manager, Google APAC",
+			img: "chelle-obligacion-gray",
+			bio: "",
+			company: "Google",
+			sm: {
+				fb: "",
+				tw: "",
+				gp: "",
+				li: "",
+				ws: ""
+			}
+		},
+		{
 			name: "Ben Adrian Sarmiento",
 			title: "Associate Manager in Accenture",
 			img: "ben-adrian-sarmiento",
@@ -297,7 +311,7 @@ var Data = {
 				li: "https://www.linkedin.com/in/davidcristopher",
 				ws: ""
 			}
-		},
+		}
 	],
 	schedule: [
 		{
@@ -316,15 +330,15 @@ var Data = {
 		},
 		{
 			start: "0920",
+			desc: "Welcome Remarks",
+			speaker: ["ralph-regalado"],
+			duration: 15
+		},
+		{
+			start: "0935",
 			desc: "Introduction to GDG Philippines",
 			speaker: ["jomar-tigcal"],
 			duration: 10
-		},
-		{
-			start: "0930",
-			desc: "House Rules, DevFest Agenda",
-			speaker: ["ralph-regalado"],
-			duration: 15
 		},
 		{
 			start: "0945",
