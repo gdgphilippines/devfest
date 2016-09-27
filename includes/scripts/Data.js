@@ -25,7 +25,7 @@ var Data = {
 			color: "red white-text"
 		},
 		{ //6
-			name: "Google Cardboard",
+			name: "Google VR",
 			color: "brown white-text"
 		},
 		{ //7
