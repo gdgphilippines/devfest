@@ -356,15 +356,40 @@ var App = {
 					App.DialogBox.el.find(".wrapper").html(html);
 					App.DialogBox.el.find(".wrapper img").attr("src", App.getCodelabImage(App.User.codelab));
 					App.DialogBox.el.find(".wrapper span.title").html(App.Codelabs.list[App.User.codelab].desc);
-					App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab).once("value", function(data) {
-						if(data.val().cA > 3) {
-							App.DialogBox.el.find(".wrapper p").html("Congratulations! You earned <b>"+data.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(data.val().end_quiz - data.val().start_quiz));
-						} else {
-							App.DialogBox.el.find(".wrapper p").html("Sorry! You failed the quiz but you earned <b>"+data.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(data.val().end_quiz - data.val().start_quiz));
-							App.DialogBox.el.find("#restartCodelab, span.message").show();
-						}
+					App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab).once("value", function(ucdata) {
+						App.DialogBox.el.find(".wrapper p").html("Congratulations! You earned <b>"+ucdata.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(ucdata.val().end_quiz - ucdata.val().start_quiz));
+						App.Firebase.ref("questions/"+App.User.codelab).once("value", function(cQ) {
+							App.Firebase.ref("s").once("value", function(s) {
+								var i = 0;
+								$parent = $(".dialog-box .quiz");
+								$template = $parent.children(".row:first-child");
+								$parent.html("");
+								for(var q in ucdata.val().questions) {
+									$parent.append($template.clone());
+									$last = $(".dialog-box .quiz .row:last-child");
+									$last.find(".question-number").html(i+1);
+									$last.find(".question").html(cQ.val()[ucdata.val().questions[q].question].question);
+									var correctanswer = CryptoJS.AES.decrypt(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0], s.val()).toString(CryptoJS.enc.Utf8);
+									var useranswer = ucdata.val().questions[q].answer;
+									if(ucdata.val().cA > 3 || correctanswer == useranswer) {
+										$last.find(".correct-answer").html("<b>Correct Answer:</b> "+ correctanswer)
+									}
+									$last.find(".your-answer").html("<b>Your Answer:</b> "+ useranswer);
+									if(correctanswer == useranswer) {
+										$last.find("i").html("done").addClass("green-text");
+									} else {
+										$last.find("i").html("close").addClass("red-text");
+									}
+									i++;
+								}
+								if(ucdata.val().cA < 4) {
+									App.DialogBox.el.find(".wrapper p").html("Sorry! You failed the quiz but you earned <b>"+ucdata.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(ucdata.val().end_quiz - ucdata.val().start_quiz));
+									App.DialogBox.el.find("#restartCodelab, span.message").show();
+								}
+								App.DialogBox.enable();
+							})
+						})
 					})
-					App.DialogBox.enable();
 				},
 				error: function(xhrtemp, ajaxOptions, thrownError) {
 					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
@@ -374,10 +399,86 @@ var App = {
 	},
 	Codelabs: {
 		list: {
-			"android-1": {
-				url: "https://codelabs.developers.google.com/codelabs/android-doze-standby/index.html?index=..%2F..%2Findex#0",
-				desc: "Get your app ready for Doze and App Standby",
-				time: 5,
+			"pwa-1": {
+				url: "https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0",
+				desc: "Your First Progressive Web App",
+				time: 30,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"polymer-1": {
+				url: "https://codelabs.developers.google.com/codelabs/polymer-maps/index.html#0",
+				desc: "Build Google Maps Using Web Components & No Code!",
+				time: 20,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"polymer-2": {
+				url: "https://codelabs.developers.google.com/codelabs/polymer-first-elements/index.html#0",
+				desc: "Build your first Polymer element",
+				time: 40,
 				questions: [
 					{
 						question: "Question 1",
@@ -413,9 +514,9 @@ var App = {
 				]
 			},
 			"firebase-1": {
-				url: "",
-				desc: "Lorem ipsum dolor sit amet1.",
-				time: 5,
+				url: "https://codelabs.developers.google.com/codelabs/firebase-web/index.html#0",
+				desc: "Firebase: Build a Real Time Web Chat App",
+				time: 60,
 				questions: [
 					{
 						question: "Question 1",
@@ -451,9 +552,275 @@ var App = {
 				]
 			},
 			"firebase-2": {
-				url: "",
-				desc: "Lorem ipsum dolor sit amet2.",
-				time: 5,
+				url: "https://codelabs.developers.google.com/codelabs/firebase-android/index.html#0",
+				desc: "Firebase Android Codelab",
+				time: 40,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"android-1": {
+				url: "https://codelabs.developers.google.com/codelabs/getting-ready-for-android-n/index.html#0",
+				desc: "Getting your app ready for Android Nougat",
+				time: 45,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"android-2": {
+				url: "https://codelabs.developers.google.com/codelabs/constraint-layout/index.html#0",
+				desc: "Using ConstraintLayout to design your views",
+				time: 45,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"cardboard-1": {
+				url: "https://codelabs.developers.google.com/codelabs/vr_view_101/index.html#0",
+				desc: "Getting started with VR view for HTML",
+				time: 40,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"cardboard-2": {
+				url: "https://codelabs.developers.google.com/codelabs/vr_view_app_101/index.html#0",
+				desc: "Getting started with VR View for Android",
+				time: 40,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"cloud-1": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-speech-intro/index.html#0",
+				desc: "Speech to Text Transcription with the Cloud Speech API",
+				time: 20,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"cloud-2": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-vision-nodejs/index.html#0",
+				desc: "Using Cloud Vision with Node.js",
+				time: 50,
+				questions: [
+					{
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}, {
+						question: "Question 1",
+						choices: ["choice1", "choice2", "choice3", "choice4"]
+					}
+				]
+			},
+			"cloud-3": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-app-engine-python/index.html#0",
+				desc: "Getting Started with App Engine (Python)",
+				time: 20,
 				questions: [
 					{
 						question: "Question 1",
