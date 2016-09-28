@@ -380,7 +380,7 @@ var Data = {
 		{
 			start: "1415",
 			desc: "IoT Firebase",
-			speaker: [],
+			speaker: ["reymart-canuel"],
 			duration: 45
 		},
 		{
