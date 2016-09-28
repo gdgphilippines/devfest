@@ -237,21 +237,21 @@ var Data = {
 				wb: ""
 			}
 		},
-		{
-			name: "Jielynn Diroy",
-			title: "Software Engineer",
-			img: "jielynn-diroy",
-			bio: "Jielynn Diroy is a graduate of BS Information Technology from De La Salle University - Dasmariñas. She became fond of Google technologies after she participated in Google Student Leaders Summit 2.0. She became actively part of different GDG PH events and co-organized Cavite events last February and April 2016.<br><br>Also, she simply does not like bacon.",
-			skills: [2],
-			company: "PointWest",
-			sm: {
-				fb: "https://www.facebook.com/jielynnd",
-				tw: "https://twitter.com/jielynnd",
-				gp: "",
-				li: "https://www.linkedin.com/in/jielynn-diroy-319448105",
-				wb: ""
-			}
-		},
+		// {
+		// 	name: "Jielynn Diroy",
+		// 	title: "Software Engineer",
+		// 	img: "jielynn-diroy",
+		// 	bio: "Jielynn Diroy is a graduate of BS Information Technology from De La Salle University - Dasmariñas. She became fond of Google technologies after she participated in Google Student Leaders Summit 2.0. She became actively part of different GDG PH events and co-organized Cavite events last February and April 2016.<br><br>Also, she simply does not like bacon.",
+		// 	skills: [2],
+		// 	company: "PointWest",
+		// 	sm: {
+		// 		fb: "https://www.facebook.com/jielynnd",
+		// 		tw: "https://twitter.com/jielynnd",
+		// 		gp: "",
+		// 		li: "https://www.linkedin.com/in/jielynn-diroy-319448105",
+		// 		wb: ""
+		// 	}
+		// },
 		{
 			name: "Toni-Jan Keith Monserrat",
 			title: "Front-end Web Developer",
@@ -414,7 +414,7 @@ var Data = {
 			start: "0900",
 			desc: "Code your own: Codelabs (BYOD)",
 			mentors: {
-				firebase: ["joyce-guiao", "jielynn-diroy"],
+				firebase: ["joyce-guiao", "reymart-canuel"],
 				pwa: ["toni-jan-keith-monserrat", "wayne-manuel"],
 				vr: ["cristopher-david", "adrian-vincent-tayag"],
 				android: ["benj-tupas", "mac-valmores"],
