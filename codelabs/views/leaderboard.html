@@ -3,6 +3,23 @@
 		<div class="wrapper">
 			<div class="columns">
 				<h1 class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0" style="margin-top: 0px; margin-bottom: 0">Leaderboard</h1>
+				<div class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0">
+					<label><span>Codelabs</span><select name="codelab">
+						<option value="all">Overall</option>
+						<option value="pwa-1">Your First Progressive Web App</option>
+						<option value="polymer-1">Build Google Maps Using Web Components & No Code!</option>
+						<option value="polymer-2">Build your first Polymer element</option>
+						<option value="firebase-1">Firebase: Build a Real Time Web Chat App</option>
+						<option value="firebase-2">Firebase Android Codelab</option>
+						<option value="android-1">Getting your app ready for Android Nougat</option>
+						<option value="android-2">Using ConstraintLayout to design your views</option>
+						<option value="cardboard-1">Getting started with VR view for HTML</option>
+						<option value="cardboard-2">Getting started with VR View for Android</option>
+						<option value="cloud-1">Speech to Text Transcription with the Cloud Speech API</option>
+						<option value="cloud-2">Using Cloud Vision with Node.js</option>
+						<option value="cloud-3">Getting Started with App Engine (Python)</option>
+					</select></label>
+				</div>
 				<div class="col-8 offset-2 t-col-10 t-offset-1 m-col-12 m-offset-0" id="leaderboardMsg">
 					<div class="card">
 						<div class="wrapper">
@@ -17,7 +34,11 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			App.Leaderboard.load();
+			App.Leaderboard.load($("select[name=codelab]").val());
+			$("select[name=codelab]").change(function() {
+				App.Leaderboard.load($(this).val());
+			})
+			Input.ready();
 		})
 	</script>
 </div>
