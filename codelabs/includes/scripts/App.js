@@ -960,6 +960,7 @@ var App = {
 								var choices = cQ.val()[qid].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR);
 								for(var i = 4; i >= 1; i--) {
 									var rand = Math.floor(Math.random() * i);
+									console.log(rand);
 									var decrypt = CryptoJS.AES.decrypt(choices[rand], s.val()).toString(CryptoJS.enc.Utf8);
 									$last.find(".options label:nth-child("+(5-i)+") input").attr("value", decrypt).attr("name", "q"+(index+1));
 									if(answerList[index] == decrypt) {
@@ -969,8 +970,10 @@ var App = {
 										$last.find(".options label:nth-child("+(5-i)+") input").removeAttr("checked");
 										$last.find(".options label:nth-child("+(5-i)+") input").prop("checked", false);
 									}
-									$last.find(".options label:nth-child("+(5-i)+") span.desc").html(decrypt);
+									console.log(decrypt);
+									$last.find(".options label:nth-child("+(5-i)+") span.desc").html(decrypt + " " + i);
 									choices.splice(rand,1);
+									console.log(choices)
 								}
 							})
 							$(".dialog-box input").change(function() {
@@ -1024,7 +1027,7 @@ var App = {
 							var time_spent = end_quiz - start_quiz;
 							var score = Math.ceil((((300 - time_spent)/300)*100)-((5-cA)*20));
 							userRef.update({
-								"score": udata.val().score + score
+								"score": udata.val().score + ((score >= 0) ? score : 0)
 							}, function() {
 								userRef.child("codelabs/"+key).update({
 									"end_quiz": end_quiz,
@@ -1038,6 +1041,8 @@ var App = {
 									else
 										$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
 									$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+									$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
+									App.User.listCodelabs();
 									App.Process.step5();
 								});	
 							})
@@ -1096,6 +1101,65 @@ var App = {
 					}
 					$("#myranking").html(count-rank);
 				})
+		},
+		listCodelabs() {
+			var i = 1;
+			$parent = $(".codelabs");
+			$template = $parent.children(".codelab-list");
+			$disabled = false;
+			$.each(App.Codelabs.list, function(key, data) {
+				if($(".codelabs .codelab-list").length != i)
+					$parent.append($template.clone());
+				$last = $(".codelabs .codelab-list:last-child");
+				$last.find("img").attr("src", App.getCodelabImage(key));
+				$last.find("span.title").html(data.desc);
+				$last.attr("data-codelab-id", key);
+				App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
+					$codelab = $parent.find(".codelab-list[data-codelab-id="+key+"]");
+					function disableCodelab(key) {
+						console.log("enable" + key);
+						$(".codelabs a.codelab-list:not([data-codelab-id="+key+"])").attr("data-codelab-status", "disabled");
+						$(".codelabs a.codelab-list[data-codelab-id="+key+"]").attr("data-codelab-status", "enabled");
+					}
+					if(data.child("end_quiz").exists()) {
+						$codelab.removeClass("code quiz")
+						if(data.val()["cA"] > 3)
+							$codelab.addClass("done");
+						else
+							$codelab.addClass("fail");
+						$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+						var status = "enabled";
+						if($disabled)
+							status = "disabled";
+						$codelab.attr("data-codelab-status", status);
+					} else if(data.child("start_quiz").exists()) {
+						$codelab.removeClass("code").addClass("quiz");
+						$codelab.find("div:last-child").html('<span class="countdown"></span>');
+						App.Codelabs.Quiz.init(key);
+						$disabled = true;
+						disableCodelab(key);
+					} else if(data.child("end_time").exists()) {
+						$codelab.removeClass("code").addClass("quiz");
+						$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+						$disabled = true;
+						disableCodelab(key);
+					} else if (data.child("start_time").exists()) {
+						$codelab.find("div:last-child").html('<span class="countdown"></span>');
+						$disabled = true;
+						disableCodelab(key);
+						App.Codelabs.readyCountdown(key);
+					} else if(!data.hasChildren()) {
+						$codelab.addClass("code").removeClass("quiz");
+						$codelab.find("div:last-child").html('<i class="material-icons"></i>');
+						var status = "enabled";
+						if($disabled)
+							status = "disabled";
+						$codelab.attr("data-codelab-status", status);
+					}
+				})
+
+				i++;
+			});
 		}
 	},
 	Leaderboard: {
