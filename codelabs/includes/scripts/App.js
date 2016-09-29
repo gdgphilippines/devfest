@@ -961,6 +961,8 @@ var App = {
 								for(var i = 4; i >= 1; i--) {
 									var rand = Math.floor(Math.random() * i);
 									console.log(rand);
+									console.log(choices[rand]);
+									console.log(s.val());
 									var decrypt = CryptoJS.AES.decrypt(choices[rand], s.val()).toString(CryptoJS.enc.Utf8);
 									$last.find(".options label:nth-child("+(5-i)+") input").attr("value", decrypt).attr("name", "q"+(index+1));
 									if(answerList[index] == decrypt) {
@@ -1102,14 +1104,23 @@ var App = {
 					$("#myranking").html(count-rank);
 				})
 		},
+		CODELAB_TEMPLATE: '<a class="card table middle codelab-list ripple" data-codelab-id="">' +
+						'<div class="cell fit">' +
+							'<img src="">' +
+						'</div>' +
+						'<div class="cell">' +
+							'<span class="title"></span>' +
+						'</div>' +
+						'<div class="cell fit nowrap">' +
+						'</div>' +
+					'</a>',
 		listCodelabs() {
 			var i = 1;
 			$parent = $(".codelabs");
-			$template = $parent.children(".codelab-list");
 			$disabled = false;
+			$parent.html("");
 			$.each(App.Codelabs.list, function(key, data) {
-				if($(".codelabs .codelab-list").length != i)
-					$parent.append($template.clone());
+				$parent.append(App.User.CODELAB_TEMPLATE);
 				$last = $(".codelabs .codelab-list:last-child");
 				$last.find("img").attr("src", App.getCodelabImage(key));
 				$last.find("span.title").html(data.desc);
