@@ -369,11 +369,8 @@ var App = {
 									$last = $(".dialog-box .quiz .row:last-child");
 									$last.find(".question-number").html(i+1);
 									$last.find(".question").html(cQ.val()[ucdata.val().questions[q].question].question);
-									var correctanswer = CryptoJS.AES.decrypt(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0], s.val()).toString(CryptoJS.enc.Utf8);
+									var correctanswer = cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0];
 									var useranswer = ucdata.val().questions[q].answer;
-									if(ucdata.val().cA > 3 || correctanswer == useranswer) {
-										$last.find(".correct-answer").html("<b>Correct Answer:</b> "+ correctanswer)
-									}
 									$last.find(".your-answer").html("<b>Your Answer:</b> "+ useranswer);
 									if(correctanswer == useranswer) {
 										$last.find("i").html("done").addClass("green-text");
@@ -405,35 +402,35 @@ var App = {
 				time: 30,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a property of a PWA which allows user to “keep” apps they find most useful on their home screen without the hassle of an app store.",
+						choices: ["Installable", "App-Like", "Linkable", "Discoverable"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a property of a PWA which makes it work for every user, regardless of browser choice because it's built with progressive enhancement as a core tenet.",
+						choices: ["Progressive", "Safe", "Fresh", "Connectivity independent"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is the minimal HTML, CSS, and JavaScript that is required to power the user interface of a progressive web app and is one of the components that ensures reliably good performance.",
+						choices: ["App Shell", "App UI", "App Menu", "App Options"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It means that the shell files are loaded once over the network and then saved to the local device.",
+						choices: ["Cached", "Saved", "Stored", "Downloaded"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "A caching strategy where it gets data on screen as quickly as possible, then updates that once the network has returned the latest data.",
+						choices: ["Cache-then-network", "Network-then-cache", "Cache-only", "Network-only"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a simple JSON file that gives you, the developer, the ability to control how your app appears to the user in the areas that they would expect to see apps, direct what the user can launch and more importantly how they can launch it.",
+						choices: ["web app manifest / manifest.json", "web app control / control.json", "web app config / config.json", "web app settings / settings.json"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a script that is run by your browser in the background, separate from a web page, opening the door to features which don’t need a web page or user interaction. It can be used to pre-cache the app shell.",
+						choices: ["Service Worker", "Service Cacher", "Service Loader", "Service Saver"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "A caching strategy where it gets the latest data first, but offline users get an older cached version.",
+						choices: ["Network-then-cache", "Cache-only", "Network-only", "Cache-then-network"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a property of a PWA which make it identifiable as an \"application\" thanks to W3C manifest and service worker registration scope, allowing search engines to find it. ",
+						choices: ["Discoverable", "App-like", "Installable", "Linkable"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "How many asynchronous requests does the service worker perform?",
+						choices: ["Two", "Three", "One", "Four and above"]
 					}
 				]
 			},
@@ -443,35 +440,35 @@ var App = {
 				time: 20,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a client-side package management tool that can be used with any web app.",
+						choices: ["Bower", "Bowler", "Power", "Dower"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "What is the complete command to install the &lt;google-map> element using the command line?",
+						choices: ["bower install GoogleWebComponents/google-map –save", "bower download GoogleWebComponents/google-map –save", "bower install googlemap –save", "bower install GoogleWebComponents/map –save"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "In which file can we find the project dependencies where we would add the google-map dependency?",
+						choices: ["bower.json", "dependency.json", "google-map.json", "derulo.json"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This disable the map’s controls.",
+						choices: ["disable-default-ui", "disable-map-controls", "disable-controls", "disable-map-ui"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This element adds a marker on the map.",
+						choices: ["&lt;google-map-marker>", "&lt;map-marker>", "&lt;google-marker>", "&lt;marker>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It provides driving direction information using the Google Maps API. ",
+						choices: ["&lt;google-map-directions>", "&lt;google-driving-directions>", "&lt;google-directions>", "&lt;google-directions-map>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "An element of Polymer which provides a text field.",
+						choices: ["&lt;paper-input>", "&lt;polymer-field>", "&lt;text-field>", "&lt;paper-text>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is an element of Polymer useful for displaying an icon.",
+						choices: ["&lt;iron-icon>", "&lt;paper-icon>", "&lt;icon>", "&lt;polymer-icon>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a type-extension version of the &lt;template>. It allows you to use Polymer sugaring features outside of Polymer.",
+						choices: ["dom-bind", "template-bind", "polymer-sugar", "bind-dom"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "Symbols used in data-bindings for Polymer.",
+						choices: ["{ { } }", "[ [ ] ]", "&lt; >", "( ( ) )"]
 					}
 				]
 			},
@@ -481,35 +478,35 @@ var App = {
 				time: 40,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a client-side package management tool that can be used with any web app. ",
+						choices: ["Bower", "Dower", "Power", "Bowler"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It lets you add a scoped DOM tree inside an element, with local styles and markup that are decoupled from the rest of the web page.",
+						choices: ["Local DOM", "Tree DOM", "Element DOM", "Local Tree"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is the element containing the Local DOM.",
+						choices: ["Host element", "Child element", "Parent element", "Sibling element"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It defines the element's internal DOM structure, or local DOM as well as the element's local styling.",
+						choices: ["&lt;dom-module>", "&lt;internal-dom>", "&lt;local-dom>", "&lt;dom-structure>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It defines the element's local DOM structure. This is where you'll add markup for your custom element. ",
+						choices: ["&lt;template>", "&lt;body>", "&lt;pattern>", "&lt;structure>"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This property tells Polymer to generate property change events when the property value changes. This lets the change be observed by other nodes.",
+						choices: ["notify", "valueChanged", "upgrade", "update"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This property tells Polymer to update the corresponding attribute when the property changes. This lets you style the element using an attribute selector.",
+						choices: ["reflectToAttribute", "polymerUpdate", "propertyChanged", "updateAttribute"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a property you'll define on the toggle button element.",
+						choices: ["toggleIcon", "buttonIcon", "elementIcon", "tapIcon"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This object maps event names to handler names.",
+						choices: ["listeners", "event maps", "action event", "action handlers"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This event is generated by Polymer's gesture system when the user clicks or taps on a target with a mouse or finger.",
+						choices: ["tap", "onrelease", "ondown", "click"]
 					}
 				]
 			},
@@ -519,35 +516,35 @@ var App = {
 				time: 60,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This will allow you to serve your web apps locally and deploy your web app to Firebase hosting.",
+						choices: ["Firebase CLI", "Firebase Server", "Firebase Host", "Firebase Deployer"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "What is the complete command to install the Firebase CLI?",
+						choices: ["npm -g install firebase-tools", "npm -g install firebase-cli", "npm -g install firebase", "pm -g download firebase-tools"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This function in our project initializes the Firebase of your app where we can set some shortcuts and initiate the authentication.",
+						choices: ["initFirebase", "startFirebase", "configFirebase", "loadFirebase"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This method allows you to sign in with your Google account. ",
+						choices: ["GoogleAuthProvider()", "GoogleAccountLogin()", "GoogleLogin()", "GoogleAccountProvider()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This function removes all previous listeners.",
+						choices: ["off()", "dispose()", "remove()", "clear()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This rule variable is a special variable containing information about the user if authenticated.",
+						choices: ["auth", "permit", "allow", "valid"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This function adds a new entry to the Firebase Database.",
+						choices: ["push()", "pull()", "new()", "add()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a file/blob database service of Firebase.",
+						choices: ["Firebase Storage", "Firebase Data Store", "Firebase Blob", "Firebase File Server"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This function saves the file to the Firebase Storage.",
+						choices: ["put()", "pload()", "copyTo()", "save()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This command deploys or uploads your app to the Firebase hosting service.",
+						choices: ["firebase deploy", "firebase server", "firebase host", "firebase upload"]
 					}
 				]
 			},
@@ -557,35 +554,35 @@ var App = {
 				time: 40,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a configuration file that contains all the necessary Firebase metadata for your app.",
+						choices: ["google-services.json", "firebase.json", "firebase-services.json", "metadata.json"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This method gets the current instance of Firebase Authentication.",
+						choices: ["FirebaseAuth.getInstance();", "FirebaseAuthInstance.get();", "FirebaseAuth.instance();", "FirebaseAuth.currentInstance();"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This method returns the logged in user of the Firebase Auth.",
+						choices: ["getCurrentUser();", "getUser();", "getAuthUser();", "getLoggedInUser();"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "Which line adds the Firebase Database dependency to your app?",
+						choices: ["compile 'com.google.firebase:firebase-database:9.2.1'", "compile 'com.google.firebase:firebase-data:9.2.1'", "compile 'com.google.firebase:firebase-db:9.2.1'", "compile 'com.google.firebase:database:9.2.1'"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It can be used to send notifications to users of your app. It provides the ability to send and receive FCM messages.",
+						choices: ["firebase-messaging / Firebase Cloud Messaging", "firebase-broadcasts", "firebase-reports", "firebase-notifications"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This dependency provides the ability to remotely configure applications without having to deploy and new code.",
+						choices: ["firebase-config / Firebase Remote Config", "firebase-app-update", "firebase-remote", "firebase-code"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This dependency provides a simple way for your users to share your application with their friends through Email or SMS.",
+						choices: ["firebase-appinvites / Firebase App Invites", "firebase-appfriends", "firebase-appshare", "firebase-messaging"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It provides a way for you to understand the way users move through your application, where they succeed and where they get stuck. It can also be used to understand the most used parts of your application.",
+						choices: ["firebase-analytics / Firebase Analytics", "firebase-appstats", "firebase-usage-data", "firebase-statistics"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It gives you a way to easily monetize your application, you simply add the AdView placeholder and Google handles the ad delivery for you.",
+						choices: ["play-services-ads / AdMob", "firebase-services-ads", "play-services-adwords", "google-firebase-commercials"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It allows your application to report when crashes occur and log the events leading up to the crash.",
+						choices: ["firebase-crash / Firebase Crash", "firebase-logger", "firebase-exception", "firebase-error"]
 					}
 				]
 			},
@@ -595,35 +592,35 @@ var App = {
 				time: 45,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is the official IDE for Android development.",
+						choices: ["Android Studio", "Eclipse", "IntelliJ Idea", "Visual Studio"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "Visual StudioThis attribute sets the activity / app to be resizable for multi-window feature or not.",
+						choices: ["resizeableActivity", "resizeable", "multiWindowable", "resizeableApp"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This feature of Android N adds support for displaying more than one app at the same time.",
+						choices: ["multi-window", "split-screen", "dual-window", "multi-display"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "The windowBackground property can be overridden by this property.",
+						choices: ["windowBackgroundFallback", "windowBackgroundPriority", "windowOriginalBackground", "windowBackgroundOverride"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This is flag tells the app to open the new activity in an adjacent window, when the user is in split-window mode.",
+						choices: ["FLAG_ACTIVITY_LAUNCH_ADJACENT", "FLAG_ACTIVITY_SPLIT_SCREEN", "FLAG_ACTIVITY_SIDE_BY_SIDE", "FLAG_ACTIVITY_LAUNCH_DOCUMENT"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "A system mode that defers apps' CPU and network activities when the device is idle, such as when it's sitting on a table or in a drawer.",
+						choices: ["Doze", "Sleep", "Greenify", "Idle"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "Which method ensures that jobs are scheduled after a restart?",
+						choices: ["setPersisted()", "setActive()", "startOnBoot()", "reschedcule()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a wrapper around JobScheduler that provides backwards compatibility for devices older than API 21.",
+						choices: ["GcmNetworkManager", "GcmJobScheduler", "SchedulerCompat", "JobSchedulerWrapper"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This method of the NotificationCompat.Builder class groups notifications with similar keys.",
+						choices: ["setGroup()", "group()", "ddToGroup()", "groupNotifs()"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This class enables support the for text input responses directly from notifications.",
+						choices: ["RemoteInput", "InstantReply", "InstantResponse", "QuickReply"]
 					}
 				]
 			},
@@ -633,35 +630,44 @@ var App = {
 				time: 45,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a new type of layout available in the Android Support repository built on top of a flexible constraint system.",
+						choices: ["ConstraintLayout", "AdvancedRelativeLayout", "FlexiLayout", "NewRelativeLayout"]
+					},
+					{
+						question: "It keeps widgets aligned using anchors or handles.",
+						choices: ["Constraints", "Anchors", "Aligners", "Handles"]
+					},
+					{
+						question: "This handle allows you to resize the widgets, represented by squares on the corners.",
+						choices: ["Resize Handle", "Size Handle", "Height Handle", "Width Handle"]
+					},
+					{
+						question: "This handle specifies the location of the widget, represented by circles on the sides.",
+						choices: ["Side Constraint Handle", "Circular Handle", "Location Handle", "Proximity Handle"]
+					},
+					{
+						question: "This handle aligns text fields of any two or more widgets, irrespective of widget sizes.",
+						choices: ["Baseline Constraint Handle", "Text Align Handle", "Text Handle", "Level Handle"]
+					},
+					{
+						question: "Until what version constraint-layout is backwards compatible?",
+						choices: ["Android 2.3 Gingerbread", "Android 2.2 Froyo", "Android 3.0 Honeycomb", "Android 2.0 Eclair"]
+					},
+					{
+						question: "How do you manually create a constraint?",
+						choices: ["Click, Hold and Drag the handle.", "Right-click and drag the handle.", "Double-click the handle.", "You cannot create a constraint manually."]
+					},
+					{
+						question: "The goal of this tool is to let you edit all properties and constraints without leaving the UI Builder.",
+						choices: ["Inspector", "Constraint Editor", "Blueprint", "UI Manager"]
+					},
+					{
+						question: "This option lets you automatically create constraints between widgets and their neighbors.",
+						choices: ["Autoconnect", "Autoconstraint", "Autocreate", "AutoConstraintCreate"]
+					},
+					{
+						question: "It aids developers by creating constraints among elements added in the layout. The constraints created through this depend on the types of elements added to the layout and their sizes.",
+						choices: ["Inference Engine", "Constraint Creator", "Layout Manager", "UI Builder"]
 					}
 				]
 			},
@@ -671,35 +677,44 @@ var App = {
 				time: 40,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It allows you to embed 360 degree VR media into websites on desktop and mobile.",
+						choices: ["VR View", "Daydream", "VR Embedder", "Cardboard"]
+					},
+					{
+						question: "VR View is available to all of the following except one. ",
+						choices: ["Windows Phone", "Web pages", "Android", "iOS"]
+					},
+					{
+						question: "Default location where Cardboard Camera images are stored.",
+						choices: ["DCIM/CardboardCamera", "DCIM/Cardboard", "Google/CardboardCamera", "Google/CardboardPhotos"]
+					},
+					{
+						question: "HTML element where the VR image or video is loaded or rendered.",
+						choices: ["<iframe>", "<div>", "<img>", "<video>"]
+					},
+					{
+						question: "The attribute and its value of iframe which removes the scrollbars, and allows moving around your POV allowing 360 degree viewing.",
+						choices: ["scrolling=\"no\"", "scrollbars=\"none\"", "fullscreen", "scrollable=\"false\""]
+					},
+					{
+						question: "A required control parameter specifies the image or video to load.",
+						choices: ["image / video", "media", "content", "src"]
+					},
+					{
+						question: "An optional control parameter that sets the initial yaw of the viewer, in degrees.",
+						choices: ["start_yaw", "initial_yaw", "yaw_degrees", "yaw_view"]
+					},
+					{
+						question: "An optional control parameter that identifies if content is in stacked stereo format or not.",
+						choices: ["is_stereo", "is_stacked_stereo", "is_content_stereo", "is_format_stereo"]
+					},
+					{
+						question: "Another optional parameter that sets the sneak peek of the content. ",
+						choices: ["preview", "sneakpeek", "thumbnail", "imageicon"]
+					},
+					{
+						question: "An optional control parameter that identifies if motion is restricted to yaw only or not.",
+						choices: ["is_yaw_only", "is_motion_restricted", "is_moveable", "is_yaw_or_not"]
 					}
 				]
 			},
@@ -709,35 +724,44 @@ var App = {
 				time: 40,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It allows you to embed 360 degree VR media into websites on desktop and mobile.",
+						choices: ["VR View","Daydream","VR Embedder","Cardboard"]
+					},
+					{
+						question: "VR View is available to all of the following except one.",
+						choices: ["Windows Phone","Web pages","Android","iOS"]
+					},
+					{
+						question: "Default location where Cardboard Camera images are stored.",
+						choices: ["DCIM/CardboardCamera","DCIM/Cardboard","Google/CardboardCamera","Google/CardboardPhotos"]
+					},
+					{
+						question: "The software development kit (SDK) required to fully use the VR View for Android.",
+						choices: ["Google VR SDK","Android SDK","Daydream SDK","Java SDK"]
+					},
+					{
+						question: "Widget from the Google VR SDK that renders the panoramic and stereo images on the application.",
+						choices: ["VrPanoramaView","StereoView","PanoramicView","VrImageView"]
+					},
+					{
+						question: "What is the import statement for you to be able to use the VrPanoramaView class?",
+						choices: ["import com.google.vr.sdk.widgets.pano.VrPanoramaView;","import com.google.vr.sdk.widgets.VrPanoramaView;","import com.google.vr.sdk.pano.widgets.VrPanoramaView;","import com.google.vr.sdk.VrPanoramaView;"]
+					},
+					{
+						question: "What is the purpose of our ImageLoaderTask that extends the AsyncTask class?",
+						choices: ["To load the image in a background thread.","To load the image on a later time","To load selected images from the gallery","To download the image currently shown"]
+					},
+					{
+						question: "Widget from the Google VR SDK that renders the panoramic and stereo videos on the application.",
+						choices: ["VrVideoView","VrVideoLoader","VrVideoWidget","VrViewerVideo"]
+					},
+					{
+						question: "What is the import statement for you to be able to use the VrVideoView class?",
+						choices: ["import com.google.vr.sdk.widgets.video.VrVideoView;","import com.google.vr.sdk.widgets.VrVideoView;","import com.google.vr.sdk.video.widgets.VrVideoView;","import com.google.vr.sdk.VrVideoView;"]
+					},
+					{
+						question: "It handles the events performed or occurred on the VrVideoView.",
+						choices: ["VrVideoEventListener","VrVideoEventHandler","VrVideoEventPerformed","VrVideoEventOccured"]
 					}
 				]
 			},
@@ -747,35 +771,44 @@ var App = {
 				time: 20,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is the prior step before using APIs such as Google Cloud Speech API.",
+						choices: ["Enable API via API Manager","Download API Manager","Download Google Cloud","Enable Google Cloud API"]
+					},
+					{
+						question: "It is a command line environment running in the Cloud.",
+						choices: ["Google Cloud Shell","Google Cloud Bash","Google Cloud CLI","Google Cloud CMD"]
+					},
+					{
+						question: "What do we need on our requests to use the Speech API?",
+						choices: ["API Key","License Key","Serial Key","Speech Key"]
+					},
+					{
+						question: "Command used to create the JSON file that will be used for the request.",
+						choices: ["touch request.json","create request.json","request request.json","create request -json"]
+					},
+					{
+						question: "In this part of the request body, we tell the Speech APi how to process the request.",
+						choices: ["config","process","options","settings"]
+					},
+					{
+						question: "In this part of the request body, we pass the uri of our audio file.",
+						choices: ["audio","uri","audioUri","file"]
+					},
+					{
+						question: "This part of the result shows the transcription of the audio file.",
+						choices: ["transcript","text","message","textResult"]
+					},
+					{
+						question: "This value indicates how sure the API of its transcription.",
+						choices: ["confidence","sureness","accuracy","percentSure"]
+					},
+					{
+						question: "This method can be used to transcribe text while the user is still speaking.",
+						choices: ["syncrecognize","livetranscribe","realtimerecognize","liverecognize"]
+					},
+					{
+						question: " A parameter of the config where we specify the language spoken in the audio.",
+						choices: ["language_code","language_used","language_config","language_spoken"]
 					}
 				]
 			},
@@ -785,35 +818,44 @@ var App = {
 				time: 50,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
-					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a command line environment running in the Cloud.",
+						choices: ["Google Cloud Shell","Google Cloud Bash","Google Cloud CLI","Google Cloud CMD"]
+					},
+					{
+						question: "It is a powerful and unified command-line tool for Google Cloud Platform.",
+						choices: ["gcloud","gcp","gcli","gtool"]
+					},
+					{
+						question: "This command lists the authenticated accounts.",
+						choices: ["gcloud auth list","gcloud acc list","gcloud list","gcloud list accounts"]
+					},
+					{
+						question: "This node package is Google's officially supported node.js client library for using Google APIs.",
+						choices: ["googleapis","googleapipackage","googleapipack","googleapilib"]
+					},
+					{
+						question: "It is a node.js middleware for providing signed cookie-based sessions.",
+						choices: ["cookie-session","cookiejs","jscookie","session-cookies"]
+					},
+					{
+						question: "Cookies are signed with the value of this object to protect against forgery.",
+						choices: ["config.secret","cookie.secret","cookie.security","cookie.code"]
+					},
+					{
+						question: "It is the middleware that makes the user's credentials available in the request as ``req.oauth2client``.",
+						choices: ["oauth2.aware","oauth2.template","oauth2.account","oauth2.router"]
+					},
+					{
+						question: "The command to create buckets which hold your data in the Google Cloud Storage.",
+						choices: ["gsutil mb gs://<your-bucket-name>.appspot.com","gsutil defacl set public-read gs://<your-project-id>.appspot.com","gsutil create bucket <your-bucket-name>","gsutil bucket new <your-bucket-name>"]
+					},
+					{
+						question: "This function is needed in lib/routes.js to upload the image to Cloud Storage and return a publicly accessible URL to display image and URI used for the Cloud Vision API.",
+						choices: ["post()","upload()","put()","addToBucket()"]
+					},
+					{
+						question: "This client exposes the different feature types available in the API, run detection on images and adds the call to the API to send the Google Cloud Storage URI.",
+						choices: ["Cloud Vision Client","Cloud Storage Client","Google Cloud Client","Google Images Client"]
 					}
 				]
 			},
@@ -823,35 +865,35 @@ var App = {
 				time: 20,
 				questions: [
 					{
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "They are easy to create, easy to maintain, and easy to scale as your traffic and data storage needs change.",
+						choices: ["Google App Engine applications", "Firebase Applications", "Google Cloud Applications", "Python applications"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "On what are App Engine applications based for automatically scaling?",
+						choices: ["incoming traffic", "none of the above", "both incoming and outgoing traffic", "outgoing traffic"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "The two App Engine’s environments that support a host of programming languages, including Java, Python, PHP, NodeJS, Go, etc..",
+						choices: ["Standard Environment and Flexible Environment", "Simple Environment and Complex Environment", "Easy Environment and Hard Environment", "Normal Environment and Advanced Environment"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a command line environment running in the Cloud.",
+						choices: ["Google Cloud Shell", "Google Cloud CMD", "Google Cloud CLI", "Google Cloud Bash"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "It is a powerful and unified command-line tool for Google Cloud Platform. gcloud",
+						choices: ["gcloud", "gcp", "gcli", "gtool"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "What is the purpose of the helloworld.py that we created?",
+						choices: ["Simple Request Handler", "Response and Request Handler", "Complex Request Handler", "Simple Response Handler"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This attribute or characteristic means that the same instance of the application can handle several simultaneous requests.",
+						choices: ["threadsafe", "runnable", "concurrent", "real-time"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "This configuration file, among other things, describes which handler scripts should be used for which URLs.",
+						choices: ["app.yaml", "manifest.json", "yaml.app", "app.xml"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "The command to start a deployment instance of the application server so we can test the application.",
+						choices: ["dev_appserver.py ./ ", "host_appserver.py ./", "upload_appserver.py ./", "deploy_app.py ./"]
 					}, {
-						question: "Question 1",
-						choices: ["choice1", "choice2", "choice3", "choice4"]
+						question: "The complete command to deploy or upload the Hello World server to the App Engine environment.",
+						choices: ["gcloud app deploy app.yaml", "gcloud host app helloworld", "dev_appserver.py ./ --upload", "gcloud app upload helloworld.py"]
 					}
 				]
 			}
@@ -929,7 +971,7 @@ var App = {
 			return ((minutes != 0) ? minutes + ((short) ? "m" : ((minutes == 1) ? " minute" : " minutes")) : "") + " " + ((seconds != 0) ? seconds + (((short) ? "s" : ((seconds == 1 || seconds == 0) ? " second" : " seconds"))) : "")
 		},
 		Quiz: {
-			"CHOICES_SEPARATOR": "//",
+			"CHOICES_SEPARATOR": "@#@",
 			"TIME_PER_QUIZ": 300,
 			init: function(key) {
 				this.getStartTime(key);
@@ -960,22 +1002,16 @@ var App = {
 								var choices = cQ.val()[qid].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR);
 								for(var i = 4; i >= 1; i--) {
 									var rand = Math.floor(Math.random() * i);
-									console.log(rand);
-									console.log(choices[rand]);
-									console.log(s.val());
-									var decrypt = CryptoJS.AES.decrypt(choices[rand], s.val()).toString(CryptoJS.enc.Utf8);
-									$last.find(".options label:nth-child("+(5-i)+") input").attr("value", decrypt).attr("name", "q"+(index+1));
-									if(answerList[index] == decrypt) {
+									$last.find(".options label:nth-child("+(5-i)+") input").attr("value", choices[rand]).attr("name", "q"+(index+1));
+									if(answerList[index] == choices[rand]) {
 										$last.find(".options label:nth-child("+(5-i)+") input").attr("checked", "checked");
 										$last.find(".options label:nth-child("+(5-i)+") input").prop("checked", true);
 									} else {
 										$last.find(".options label:nth-child("+(5-i)+") input").removeAttr("checked");
 										$last.find(".options label:nth-child("+(5-i)+") input").prop("checked", false);
 									}
-									console.log(decrypt);
-									$last.find(".options label:nth-child("+(5-i)+") span.desc").html(decrypt + " " + i);
+									$last.find(".options label:nth-child("+(5-i)+") span.desc").html(choices[rand]);
 									choices.splice(rand,1);
-									console.log(choices)
 								}
 							})
 							$(".dialog-box input").change(function() {
@@ -1021,7 +1057,7 @@ var App = {
 						App.Firebase.ref("s").once("value", function(s) {
 							var cA = 0;
 							for(var q in ucdata.val().questions) {
-								if(CryptoJS.AES.decrypt(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0], s.val()).toString(CryptoJS.enc.Utf8) == ucdata.val().questions[q].answer)
+								if(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0] == ucdata.val().questions[q].answer)
 									cA++;
 							}
 							var start_quiz = ucdata.val()["start_quiz"];
@@ -1128,7 +1164,6 @@ var App = {
 				App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
 					$codelab = $parent.find(".codelab-list[data-codelab-id="+key+"]");
 					function disableCodelab(key) {
-						console.log("enable" + key);
 						$(".codelabs a.codelab-list:not([data-codelab-id="+key+"])").attr("data-codelab-status", "disabled");
 						$(".codelabs a.codelab-list[data-codelab-id="+key+"]").attr("data-codelab-status", "enabled");
 					}
@@ -1253,13 +1288,9 @@ var App = {
 					if(!snapshot.exists()) {
 						App.Firebase.ref("s").once("value", function(s) {
 							App.Codelabs.list[key].questions.forEach(function(ival, i) {
-								var choices = [];
-								ival.choices.forEach(function(jval, j) {
-									choices.push(CryptoJS.AES.encrypt(jval, s.val()));
-								});
 								qRef.child(key).push({
 									question: ival.question,
-									choices: choices.join(App.Codelabs.Quiz.CHOICES_SEPARATOR)
+									choices: ival.choices.join(App.Codelabs.Quiz.CHOICES_SEPARATOR)
 								})
 							}) 
 						})
