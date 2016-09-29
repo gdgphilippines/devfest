@@ -1232,6 +1232,7 @@ var App = {
 		render: function(count,codelab) {
 			var rank = 0;
 			$parent = $(".ranking");
+			$parent.html("")
 			var n = 0;
 			if(codelab == "all") {
 				App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
