@@ -1128,17 +1128,17 @@ var App = {
 			})
 		},
 		loadRanking(rank) {
-			if(rank == 0)
-				$("#myranking").html("-");
-			else 
-				App.Firebase.ref("users").once("value", function(data) {
-					var count = 0;
-					for(var v in data.val()) {
-						if(data.val()[v].score != 0)
-							count++;
-					}
+			App.Firebase.ref("users").once("value", function(data) {
+				var count = 0;
+				for(var v in data.val()) {
+					if(data.val()[v].score != 0)
+						count++;
+				}
+				if(count - rank == 0) 
+					$("#myranking").html("-");
+				else
 					$("#myranking").html(count-rank);
-				})
+			})
 		},
 		CODELAB_TEMPLATE: '<a class="card table middle codelab-list ripple" data-codelab-id="">' +
 						'<div class="cell fit">' +
