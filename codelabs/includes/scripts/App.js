@@ -1270,7 +1270,7 @@ var App = {
 						else if(count-rank == 3) 
 							$el.addClass("third-place");
 						$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
-						$el.find(".table .cell:last-child").html(data.val().score + "pts");
+						$el.find(".table .cell:last-child").html(data.val().codelabs[codelab].score + "pts");
 						$el.find("img").attr("src", data.val().photoURL);
 						n = 1;
 					}
