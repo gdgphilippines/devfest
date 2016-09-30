@@ -43,9 +43,6 @@ var App = {
 		   event.stopPropagation();
 		});
 		Input.ready();
-
-
-
 		$(document).on("click", "a[data-codelab-id][data-codelab-status]", function() {
 			var key = $(this).attr("data-codelab-id");
 			$status = $(this).attr("data-codelab-status");
@@ -121,7 +118,6 @@ var App = {
 				}
 			})
 		})
-
 		$(document).on("click", "#submitQuiz", function() {
 			App.DialogBox.disable();
 			$.ajax({
@@ -135,7 +131,6 @@ var App = {
 				}
 			})
 		});
-
 		$(document).on("click", "#restartCodelab", function() {
 			App.DialogBox.disable();
 			var userRef = App.Firebase.ref("users/"+App.User.loggedIn.uid);
@@ -159,15 +154,6 @@ var App = {
 				});
 			})
 		})
-
-
-
-
-
-
-
-
-
 	},
 	slider: function(action) {
 		if(action == "show") {
@@ -230,7 +216,6 @@ var App = {
 						$(".loading").css("top", "-80px");
 					}).css("height", "auto");
 				}, 750);
-
 			},
 			error: function(xhrtemp, ajaxOptions, thrownError) {
 				if(xhrtemp.status == 404) {
@@ -291,7 +276,6 @@ var App = {
 					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
 			})
-
 		},
 		step2: function() {
 			App.DialogBox.show();
@@ -1231,7 +1215,6 @@ var App = {
 						$codelab.attr("data-codelab-status", status);
 					}
 				})
-
 				i++;
 			});
 		}
@@ -1284,10 +1267,7 @@ var App = {
 			this.auth = firebase.auth();
 			this.database = firebase.database();
 			this.storage = firebase.storage();
-
 			this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
-
-
 			$(".signin").click(function() {
 				var provider = new firebase.auth.GoogleAuthProvider();
 				App.Firebase.auth.signInWithPopup(provider);
@@ -1296,7 +1276,6 @@ var App = {
 				App.Firebase.auth.signOut();
 				delete App.User.loggedIn;
 			});
-			//
 			this.addQuestions();
 		},
 		ref: function(path) {
@@ -1327,7 +1306,6 @@ var App = {
 				$(".slider .user small").html(user.email);
 				$(".slider .user").show();
 				$(".slider ul.nav").show();
-
 				$(".action-bar .user img").attr("src", user.photoURL);
 				$(".action-bar .more-options img").attr("src", user.photoURL);
 				$(".action-bar .more-options span").html(user.email);
@@ -1339,7 +1317,6 @@ var App = {
 				$(".slider .user span").html("");
 				$(".slider .user small").html("");
 				$(".slider .user").hide();
-
 				$(".action-bar .user img").attr("src", "");
 				$(".action-bar .more-options img").attr("src", "");
 				$(".action-bar .more-options span").html("");
