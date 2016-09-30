@@ -142,14 +142,18 @@ var App = {
 			userRef.once("value", function(userdata) {
 				var clS = userdata.val().codelabs[App.User.codelab].score;
 				var uS = userdata.val().score;
+				var gtech = App.Codelabs.list[App.User.codelab].tech;
+				var gscore = userdata.val()[gtech];
 				userRef.update({
 					"score": uS - clS
 				}, function() {
-					userRef.child("codelabs/"+App.User.codelab).remove(function() {
-						$("a.codelab-list[data-codelab-id="+App.User.codelab+"]")
-							.removeClass("done fail").addClass("code");
-						App.Process.step1();
-					});
+					userRef.child(gtech).update(gscore - clS, function() {
+						userRef.child("codelabs/"+App.User.codelab).remove(function() {
+							$("a.codelab-list[data-codelab-id="+App.User.codelab+"]")
+								.removeClass("done fail").addClass("code");
+							App.Process.step1();
+						});
+					})
 				});
 			})
 		})
@@ -400,6 +404,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0",
 				desc: "Your First Progressive Web App",
 				time: 30,
+				tech: "web",
 				questions: [
 					{
 						question: "It is a property of a PWA which allows user to “keep” apps they find most useful on their home screen without the hassle of an app store.",
@@ -438,6 +443,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/polymer-maps/index.html#0",
 				desc: "Build Google Maps Using Web Components & No Code!",
 				time: 20,
+				tech: "web",
 				questions: [
 					{
 						question: "It is a client-side package management tool that can be used with any web app.",
@@ -476,6 +482,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/polymer-first-elements/index.html#0",
 				desc: "Build your first Polymer element",
 				time: 40,
+				tech: "web",
 				questions: [
 					{
 						question: "It is a client-side package management tool that can be used with any web app. ",
@@ -514,6 +521,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/firebase-web/index.html#0",
 				desc: "Firebase: Build a Real Time Web Chat App",
 				time: 60,
+				tech: "firebase",
 				questions: [
 					{
 						question: "This will allow you to serve your web apps locally and deploy your web app to Firebase hosting.",
@@ -552,6 +560,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/firebase-android/index.html#0",
 				desc: "Firebase Android Codelab",
 				time: 40,
+				tech: "firebase",
 				questions: [
 					{
 						question: "It is a configuration file that contains all the necessary Firebase metadata for your app.",
@@ -590,6 +599,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/getting-ready-for-android-n/index.html#0",
 				desc: "Getting your app ready for Android Nougat",
 				time: 45,
+				tech: "android",
 				questions: [
 					{
 						question: "It is the official IDE for Android development.",
@@ -628,6 +638,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/constraint-layout/index.html#0",
 				desc: "Using ConstraintLayout to design your views",
 				time: 45,
+				tech: "android",
 				questions: [
 					{
 						question: "It is a new type of layout available in the Android Support repository built on top of a flexible constraint system.",
@@ -675,6 +686,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/vr_view_101/index.html#0",
 				desc: "Getting started with VR view for HTML",
 				time: 40,
+				tech: "vr",
 				questions: [
 					{
 						question: "It allows you to embed 360 degree VR media into websites on desktop and mobile.",
@@ -722,6 +734,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/vr_view_app_101/index.html#0",
 				desc: "Getting started with VR View for Android",
 				time: 40,
+				tech: "vr",
 				questions: [
 					{
 						question: "It allows you to embed 360 degree VR media into websites on desktop and mobile.",
@@ -769,6 +782,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-speech-intro/index.html#0",
 				desc: "Speech to Text Transcription with the Cloud Speech API",
 				time: 20,
+				tech: "cloud",
 				questions: [
 					{
 						question: "It is the prior step before using APIs such as Google Cloud Speech API.",
@@ -816,6 +830,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-vision-nodejs/index.html#0",
 				desc: "Using Cloud Vision with Node.js",
 				time: 50,
+				tech: "cloud",
 				questions: [
 					{
 						question: "It is a command line environment running in the Cloud.",
@@ -863,6 +878,7 @@ var App = {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-app-engine-python/index.html#0",
 				desc: "Getting Started with App Engine (Python)",
 				time: 20,
+				tech: "cloud",
 				questions: [
 					{
 						question: "They are easy to create, easy to maintain, and easy to scale as your traffic and data storage needs change.",
@@ -1064,6 +1080,7 @@ var App = {
 							end_quiz = ((end_quiz !== false) ? end_quiz : App.Codelabs.list[key].end_quiz);
 							var time_spent = end_quiz - start_quiz;
 							var score = Math.ceil((((300 - time_spent)/300)*100)-((5-cA)*20));
+							var gtech = App.Codelabs.list[key].tech;
 							userRef.update({
 								"score": udata.val().score + ((score >= 0) ? score : 0)
 							}, function() {
@@ -1072,16 +1089,18 @@ var App = {
 									"cA": cA,
 									"score": ((score >= 0) ? score : 0)
 								}, function() {
-									App.User.codelab = key;
-									$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
-									if(cA > 3)
-										$(".codelabs [data-codelab-id="+key+"]").addClass("done");
-									else
-										$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
-									$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
-									$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
-									App.User.listCodelabs();
-									App.Process.step5();
+									userRef.child(gtech).update(udata.val()[gtech] + ((score >= 0) ? score : 0), function() {
+										App.User.codelab = key;
+										$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
+										if(cA > 3)
+											$(".codelabs [data-codelab-id="+key+"]").addClass("done");
+										else
+											$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
+										$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+										$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
+										App.User.listCodelabs();
+										App.Process.step5();
+									})
 								});	
 							})
 						})
@@ -1099,7 +1118,12 @@ var App = {
 					App.Firebase.ref("users/"+user.uid).set({
 						displayName: user.displayName,
 						photoURL: user.photoURL,
-						score: 0
+						score: 0,
+						web: 0,
+						firebase: 0,
+						vr: 0,
+						android: 0,
+						cloud: 0
 					});	
 				}
 			});
@@ -1229,58 +1253,37 @@ var App = {
 					'		<div class="cell fit right"></div>' +
 					'	</div>' +
 					'</div>',
+		renderRef: 0,
 		render: function(count,codelab) {
 			var rank = 0;
 			$parent = $(".ranking");
 			$parent.html("")
 			var n = 0;
-			if(codelab == "all") {
-				App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
-					if(count-rank <= 10 && data.val().score > 0) {
-						$parent.prepend(App.Leaderboard.TEMPLATE);
-						$el = $(".ranking .rank-list:first-child");
-						$el.find(".table .cell:first-child").html(count-rank);
-						if(count-rank == 1)
-							$el.addClass("first-place").removeClass("second-place third-place");
-						else if(count-rank == 2)
-							$el.addClass("second-place").removeClass("third-place");
-						else if(count-rank == 3) 
-							$el.addClass("third-place");
-						$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
-						$el.find(".table .cell:last-child").html(data.val().score + "pts");
-						$el.find("img").attr("src", data.val().photoURL);
-						n = 1;
-					}
-					if(n == 1)
-						$("#leaderboardMsg").hide();
-					else
-						$("#leaderboardMsg").show();
-					rank++;
-				})
-			} else {
-				App.Firebase.ref("users").orderByChild("codelabs/"+codelab+"/score").on("child_added", function(data) {
-					if(count-rank <= 10 && data.val().codelabs[codelab].score > 0) {
-						$parent.prepend(App.Leaderboard.TEMPLATE);
-						$el = $(".ranking .rank-list:first-child");
-						$el.find(".table .cell:first-child").html(count-rank);
-						if(count-rank == 1)
-							$el.addClass("first-place").removeClass("second-place third-place");
-						else if(count-rank == 2)
-							$el.addClass("second-place").removeClass("third-place");
-						else if(count-rank == 3) 
-							$el.addClass("third-place");
-						$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
-						$el.find(".table .cell:last-child").html(data.val().codelabs[codelab].score + "pts");
-						$el.find("img").attr("src", data.val().photoURL);
-						n = 1;
-					}
-					if(n == 1)
-						$("#leaderboardMsg").hide();
-					else
-						$("#leaderboardMsg").show();
-					rank++;
-				})
-			}
+
+			var callback = function(data) {
+				if(count-rank <= 10 && data.val()[codelab] > 0) {
+					$parent.prepend(App.Leaderboard.TEMPLATE);
+					$el = $(".ranking .rank-list:first-child");
+					$el.find(".table .cell:first-child").html(count-rank);
+					if(count-rank == 1)
+						$el.addClass("first-place").removeClass("second-place third-place");
+					else if(count-rank == 2)
+						$el.addClass("second-place").removeClass("third-place");
+					else if(count-rank == 3) 
+						$el.addClass("third-place");
+					$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
+					$el.find(".table .cell:last-child").html(data.val()[codelab] + "pts");
+					$el.find("img").attr("src", data.val().photoURL);
+					n = 1;
+				}
+				if(n == 1)
+					$("#leaderboardMsg").hide();
+				else
+					$("#leaderboardMsg").show();
+				rank++;
+			};
+			App.Firebase.ref("users").orderByChild(codelab).on("child_added", callback);
+			//App.Firebase.ref("users").orderByChild(codelab).off("child_added", callback);
 		}
 	},
 	Firebase: {
