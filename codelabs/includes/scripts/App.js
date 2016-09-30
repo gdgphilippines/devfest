@@ -1234,16 +1234,7 @@ var App = {
 	},
 	Leaderboard: {
 		load: function(codelab) {
-			this.getCount(codelab);
-		},
-		getCount: function(codelab) {
-			App.Firebase.ref("users").on("value", function(data) {
-				var count = 0;
-				$(".ranking").html("");
-				for(var v in data.val())
-					count++;
-				App.Leaderboard.render(count,codelab);
-			});
+			this.render(codelab);
 		},
 		TEMPLATE: 	'<div class="card rank-list">' +
 					'	<div class="table middle">' +
@@ -1253,37 +1244,35 @@ var App = {
 					'		<div class="cell fit right"></div>' +
 					'	</div>' +
 					'</div>',
-		renderRef: 0,
-		render: function(count,codelab) {
-			var rank = 0;
+		render: function(codelab) {
 			$parent = $(".ranking");
-			$parent.html("")
 			var n = 0;
-
-			var callback = function(data) {
-				if(count-rank <= 10 && data.val()[codelab] > 0) {
-					$parent.prepend(App.Leaderboard.TEMPLATE);
-					$el = $(".ranking .rank-list:first-child");
-					$el.find(".table .cell:first-child").html(count-rank);
-					if(count-rank == 1)
-						$el.addClass("first-place").removeClass("second-place third-place");
-					else if(count-rank == 2)
-						$el.addClass("second-place").removeClass("third-place");
-					else if(count-rank == 3) 
-						$el.addClass("third-place");
-					$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
-					$el.find(".table .cell:last-child").html(data.val()[codelab] + "pts");
-					$el.find("img").attr("src", data.val().photoURL);
-					n = 1;
+			App.Firebase.ref("users").orderByChild(codelab).on("value", function(data) {
+				var rank = 1;
+				$parent.html("")
+				for(var user in data.val()) {
+					if(rank <= 10 && data.val()[user][codelab] > 0) {
+						$parent.prepend(App.Leaderboard.TEMPLATE);
+						$el = $(".ranking .rank-list:first-child");
+						$el.find(".table .cell:first-child").html(rank);
+						if(rank == 1)
+							$el.addClass("first-place").removeClass("second-place third-place");
+						else if(rank == 2)
+							$el.addClass("second-place").removeClass("third-place");
+						else if(rank == 3) 
+							$el.addClass("third-place");
+						$el.find(".table .cell:nth-child(3)").html(data.val()[user].displayName);
+						$el.find(".table .cell:last-child").html(data.val()[user][codelab] + "pts");
+						$el.find("img").attr("src", data.val().photoURL);
+						n = 1;
+						rank++;
+					}
+					if(n == 1)
+						$("#leaderboardMsg").hide();
+					else
+						$("#leaderboardMsg").show();
 				}
-				if(n == 1)
-					$("#leaderboardMsg").hide();
-				else
-					$("#leaderboardMsg").show();
-				rank++;
-			};
-			App.Firebase.ref("users").orderByChild(codelab).on("child_added", callback);
-			//App.Firebase.ref("users").orderByChild(codelab).off("child_added", callback);
+			});
 		}
 	},
 	Firebase: {
