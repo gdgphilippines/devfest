@@ -147,7 +147,9 @@ var App = {
 				userRef.update({
 					"score": uS - clS
 				}, function() {
-					userRef.child(gtech).update(gscore - clS, function() {
+					var updates = {};
+					updates[gtech] = gscore - clS;
+					userRef.update(updates, function() {
 						userRef.child("codelabs/"+App.User.codelab).remove(function() {
 							$("a.codelab-list[data-codelab-id="+App.User.codelab+"]")
 								.removeClass("done fail").addClass("code");
@@ -1089,7 +1091,9 @@ var App = {
 									"cA": cA,
 									"score": ((score >= 0) ? score : 0)
 								}, function() {
-									userRef.child(gtech).update(udata.val()[gtech] + ((score >= 0) ? score : 0), function() {
+									var updates = {};
+									updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
+									userRef.update(updates, function() {
 										App.User.codelab = key;
 										$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
 										if(cA > 3)
