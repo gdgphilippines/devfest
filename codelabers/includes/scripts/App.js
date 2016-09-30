@@ -688,7 +688,7 @@ var App = {
 					},
 					{
 						question: "HTML element where the VR image or video is loaded or rendered.",
-						choices: ["<iframe>", "<div>", "<img>", "<video>"]
+						choices: ["&lt;iframe>", "&lt;div>", "&lt;img>", "&lt;video>"]
 					},
 					{
 						question: "The attribute and its value of iframe which removes the scrollbars, and allows moving around your POV allowing 360 degree viewing.",
@@ -848,7 +848,7 @@ var App = {
 					},
 					{
 						question: "The command to create buckets which hold your data in the Google Cloud Storage.",
-						choices: ["gsutil mb gs://<your-bucket-name>.appspot.com","gsutil defacl set public-read gs://<your-project-id>.appspot.com","gsutil create bucket <your-bucket-name>","gsutil bucket new <your-bucket-name>"]
+						choices: ["gsutil mb gs://&lt;your-bucket-name>.appspot.com","gsutil defacl set public-read gs://&lt;your-project-id>.appspot.com","gsutil create bucket &lt;your-bucket-name>","gsutil bucket new &lt;your-bucket-name>"]
 					},
 					{
 						question: "This function is needed in lib/routes.js to upload the image to Cloud Storage and return a publicly accessible URL to display image and URI used for the Cloud Vision API.",
