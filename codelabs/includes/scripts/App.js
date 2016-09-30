@@ -81,7 +81,7 @@ var App = {
 		        ink.css({top: y+"px", left: x+"px"}).addClass("animate");
 		        setTimeout(function() {
 		            ink.remove();
-		        }, 650)
+		        }, 650);
 		    }
 		});
 		$(document).on("click", ".dialog-box[data-codelab-status=enabled] #startCodelab", function() {
@@ -99,8 +99,8 @@ var App = {
 						App.Process.step2();
 					});
 				}
-			})
-		})
+			});
+		});
 		$(document).on("click", "#startQuiz", function() {
 			App.DialogBox.disable();
 			$.ajax({
@@ -116,8 +116,8 @@ var App = {
 						App.Process.step4();
 					});
 				}
-			})
-		})
+			});
+		});
 		$(document).on("click", "#submitQuiz", function() {
 			App.DialogBox.disable();
 			$.ajax({
@@ -129,7 +129,7 @@ var App = {
 					var utc = new Date(date.getTime() + date.getTimezoneOffset());
 					App.Codelabs.Quiz.finish(App.User.codelab, Math.round(utc.getTime()/1000));
 				}
-			})
+			});
 		});
 		$(document).on("click", "#restartCodelab", function() {
 			App.DialogBox.disable();
@@ -150,10 +150,10 @@ var App = {
 								.removeClass("done fail").addClass("code");
 							App.Process.step1();
 						});
-					})
+					});
 				});
-			})
-		})
+			});
+		});
 	},
 	slider: function(action) {
 		if(action == "show") {
@@ -222,7 +222,7 @@ var App = {
 					App.loadController("home");
 				}
 			}
-		})
+		});
 	},
 	showUserOptions: function(show = true) {
 		if(show)
@@ -234,7 +234,7 @@ var App = {
 				"opacity": "0"
 			}, 250, function() {
 				$(this).hide();
-			})
+			});
 	},
 	getParameter: function(name) {
 		var url = window.location.href;
@@ -275,7 +275,7 @@ var App = {
 				error: function(xhrtemp, ajaxOptions, thrownError) {
 					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
-			})
+			});
 		},
 		step2: function() {
 			App.DialogBox.show();
@@ -296,7 +296,7 @@ var App = {
 				error: function(xhrtemp, ajaxOptions, thrownError) {
 					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
-			})
+			});
 			$("a.codelab-list[data-codelab-id="+App.User.codelab+"] div:last-child").html('<span class="countdown"></span>');
 		},
 		step3: function() {
@@ -314,7 +314,7 @@ var App = {
 				error: function(xhrtemp, ajaxOptions, thrownError) {
 					App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 				}
-			})
+			});
 		},
 		step4: function() {
 			App.DialogBox.show();
