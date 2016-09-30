@@ -1239,8 +1239,8 @@ var App = {
 				$parent.html("")
 				for(var user in data.val()) {
 					if(rank <= 10 && data.val()[user][codelab] > 0) {
-						$parent.prepend(App.Leaderboard.TEMPLATE);
-						$el = $(".ranking .rank-list:first-child");
+						$parent.append(App.Leaderboard.TEMPLATE);
+						$el = $(".ranking .rank-list:last-child");
 						$el.find(".table .cell:first-child").html(rank);
 						if(rank == 1)
 							$el.addClass("first-place").removeClass("second-place third-place");
