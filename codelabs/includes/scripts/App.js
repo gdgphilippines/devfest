@@ -1068,15 +1068,15 @@ var App = {
 							var score = Math.ceil((((300 - time_spent)/300)*100)-((5-cA)*20));
 							var gtech = App.Codelabs.list[key].tech;
 							userRef.update({
-								"score": udata.val().score + ((cA > 3) ? score : 0)
+								"score": udata.val().score + ((score >= 0) ? score : 0)
 							}, function() {
 								userRef.child("codelabs/"+key).update({
 									"end_quiz": end_quiz,
 									"cA": cA,
-									"score": ((cA > 3) ? score : 0)
+									"score": ((score >= 0) ? score : 0)
 								}, function() {
 									var updates = {};
-									updates[gtech] = udata.val()[gtech] + ((cA > 3) ? score : 0);
+									updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
 									userRef.update(updates, function() {
 										App.User.codelab = key;
 										$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
