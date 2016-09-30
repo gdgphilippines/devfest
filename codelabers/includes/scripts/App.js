@@ -1102,10 +1102,11 @@ var App = {
 		loggedIn: 0,
 		register: function(user) {
 			App.Firebase.ref("users/"+user.uid).once("value", function(data) {
-				if(!data.exists()) {
+				if(!data.child("displayName").exists()) {
 					App.Firebase.ref("users/"+user.uid).set({
 						displayName: user.displayName,
 						photoURL: user.photoURL,
+						codelabs: 0,
 						score: 0,
 						web: 0,
 						firebase: 0,
@@ -1146,7 +1147,7 @@ var App = {
 					if(data.val()[v].score != 0)
 						count++;
 				}
-				if(count - rank == 0) 
+				if(count - rank == 0)
 					$("#myranking").html("-");
 				else
 					$("#myranking").html(count-rank);
