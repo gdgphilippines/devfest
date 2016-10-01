@@ -389,73 +389,73 @@ var App = {
 			"pwa-1": {
 				url: "https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0",
 				desc: "Your First Progressive Web App",
-				time: 30,
+				time: 1800,
 				tech: "web"
 			},
 			"polymer-1": {
 				url: "https://codelabs.developers.google.com/codelabs/polymer-maps/index.html#0",
 				desc: "Build Google Maps Using Web Components & No Code!",
-				time: 20,
+				time: 1200,
 				tech: "web"
 			},
 			"polymer-2": {
 				url: "https://codelabs.developers.google.com/codelabs/polymer-first-elements/index.html#0",
 				desc: "Build your first Polymer element",
-				time: 40,
+				time: 2400,
 				tech: "web"
 			},
 			"firebase-1": {
 				url: "https://codelabs.developers.google.com/codelabs/firebase-web/index.html#0",
 				desc: "Firebase: Build a Real Time Web Chat App",
-				time: 60,
+				time: 3600,
 				tech: "firebase"
 			},
 			"firebase-2": {
 				url: "https://codelabs.developers.google.com/codelabs/firebase-android/index.html#0",
 				desc: "Firebase Android Codelab",
-				time: 40,
+				time: 2400,
 				tech: "firebase"
 			},
 			"android-1": {
 				url: "https://codelabs.developers.google.com/codelabs/getting-ready-for-android-n/index.html#0",
 				desc: "Getting your app ready for Android Nougat",
-				time: 45,
+				time: 2700,
 				tech: "android"
 			},
 			"android-2": {
 				url: "https://codelabs.developers.google.com/codelabs/constraint-layout/index.html#0",
 				desc: "Using ConstraintLayout to design your views",
-				time: 45,
+				time: 2700,
 				tech: "android"
 			},
 			"cardboard-1": {
 				url: "https://codelabs.developers.google.com/codelabs/vr_view_101/index.html#0",
 				desc: "Getting started with VR view for HTML",
-				time: 40,
+				time: 2400,
 				tech: "vr"
 			},
 			"cardboard-2": {
 				url: "https://codelabs.developers.google.com/codelabs/vr_view_app_101/index.html#0",
 				desc: "Getting started with VR View for Android",
-				time: 40,
+				time: 2400,
 				tech: "vr"
 			},
 			"cloud-1": {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-speech-intro/index.html#0",
 				desc: "Speech to Text Transcription with the Cloud Speech API",
-				time: 20,
+				time: 1200,
 				tech: "cloud"
 			},
 			"cloud-2": {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-vision-nodejs/index.html#0",
 				desc: "Using Cloud Vision with Node.js",
-				time: 50,
+				time: 3000,
 				tech: "cloud"
 			},
 			"cloud-3": {
 				url: "https://codelabs.developers.google.com/codelabs/cloud-app-engine-python/index.html#0",
 				desc: "Getting Started with App Engine (Python)",
-				time: 20,
+				time: 1200,
 				tech: "cloud"
 			}
 		},
@@ -805,34 +805,6 @@ var App = {
 			$parent = $(".ranking");
 			$parent.html("");
 			var n = 0;
-			// App.Firebase.ref("users").orderByChild(codelab).once("value", function(data) {
-			// 	var rank = 1;
-			// 	$parent.html("");
-			// 	console.log(data.val());
-			// 	for(var user in data.val()) {
-			// 		if(rank <= 10 && data.val()[user][codelab] > 0) {
-			// 			$parent.append(App.Leaderboard.TEMPLATE);
-			// 			$el = $(".ranking .rank-list:last-child");
-			// 			$el.find(".table .cell:first-child").html(rank);
-			// 			if(rank == 1)
-			// 				$el.addClass("first-place").removeClass("second-place third-place");
-			// 			else if(rank == 2)
-			// 				$el.addClass("second-place").removeClass("third-place");
-			// 			else if(rank == 3) 
-			// 				$el.addClass("third-place");
-			// 			$el.find(".table .cell:nth-child(3)").html(data.val()[user].displayName);
-			// 			$el.find(".table .cell:last-child").html(data.val()[user][codelab] + "pts");
-			// 			$el.find("img").attr("src", data.val()[user].photoURL);
-			// 			n = 1;
-			// 			rank++;
-			// 		}
-			// 		if(n == 1)
-			// 			$("#leaderboardMsg").hide();
-			// 		else
-			// 			$("#leaderboardMsg").show();
-			// 	}
-			// });
-
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild(codelab).on("child_added", function(data) {
 				console.log((count-rank) + " <= 10 && " + data.val()[codelab] + " > 0")
@@ -1025,34 +997,6 @@ var App = {
 			$(".ranking").html("");
 			$(".ranking-2").html("");
 			var n = 0;
-			// App.Firebase.ref("users").orderByChild(codelab).once("value", function(data) {
-			// 	var rank = 1;
-			// 	$parent.html("");
-			// 	console.log(data.val());
-			// 	for(var user in data.val()) {
-			// 		if(rank <= 10 && data.val()[user][codelab] > 0) {
-			// 			$parent.append(App.Leaderboard.TEMPLATE);
-			// 			$el = $(".ranking .rank-list:last-child");
-			// 			$el.find(".table .cell:first-child").html(rank);
-			// 			if(rank == 1)
-			// 				$el.addClass("first-place").removeClass("second-place third-place");
-			// 			else if(rank == 2)
-			// 				$el.addClass("second-place").removeClass("third-place");
-			// 			else if(rank == 3) 
-			// 				$el.addClass("third-place");
-			// 			$el.find(".table .cell:nth-child(3)").html(data.val()[user].displayName);
-			// 			$el.find(".table .cell:last-child").html(data.val()[user][codelab] + "pts");
-			// 			$el.find("img").attr("src", data.val()[user].photoURL);
-			// 			n = 1;
-			// 			rank++;
-			// 		}
-			// 		if(n == 1)
-			// 			$("#leaderboardMsg").hide();
-			// 		else
-			// 			$("#leaderboardMsg").show();
-			// 	}
-			// });
-
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
 				console.log((count-rank) + " <= 10 && " + data.val()["score"] + " > 0")
