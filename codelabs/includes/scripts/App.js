@@ -624,7 +624,7 @@ var App = {
 							var start_quiz = ucdata.val()["start_quiz"];
 							end_quiz = ((end_quiz !== false) ? end_quiz : App.Codelabs.list[key].end_quiz);
 							var time_spent = end_quiz - start_quiz;
-							var score = Math.ceil((((300 - time_spent)/300)*100)-((5-cA)*20));
+							var score = Math.ceil((((600 - time_spent)/300)*100)-((5-cA)*20));
 							var gtech = App.Codelabs.list[key].tech;
 							userRef.update({
 								"score": udata.val().score + ((score >= 0) ? score : 0)
