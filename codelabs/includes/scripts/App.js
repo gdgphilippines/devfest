@@ -807,7 +807,6 @@ var App = {
 			var n = 0;
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild(codelab).on("child_added", function(data) {
-				console.log((count-rank) + " <= 10 && " + data.val()[codelab] + " > 0")
 				if(count-rank <= 10 && data.val()[codelab] > 0) {
 					$parent.prepend(App.Leaderboard.TEMPLATE);
 					$el = $(".ranking .rank-list:first-child");
@@ -999,8 +998,62 @@ var App = {
 			var n = 0;
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
-				console.log((count-rank) + " <= 10 && " + data.val()["score"] + " > 0")
 				if(count-rank <= 20 && data.val()["score"] > 0) {
+					if(count-rank <= 10)
+						$parent = $(".ranking");
+					else
+						$parent = $(".ranking-2");
+					$parent.prepend(App.Leaderboard.TEMPLATE);
+					$el = $parent.find(".rank-list:first-child");
+					$el.find(".table .cell:first-child").html(count-rank);
+					if(count-rank == 1)
+						$el.addClass("first-place").removeClass("second-place third-place");
+					else if(count-rank == 2)
+						$el.addClass("second-place").removeClass("third-place");
+					else if(count-rank == 3) 
+						$el.addClass("third-place");
+					$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
+					$el.find(".table .cell:last-child").html(data.val()["score"] + "pts");
+					$el.find("img").attr("src", data.val().photoURL);
+					n = 1;
+				}
+				if(n == 1)
+					$("#leaderboardMsg").hide();
+				else
+					$("#leaderboardMsg").show();
+					rank++;
+			});
+		}
+	},
+	All: {
+		load: function() {
+			this.getCount();
+		},
+		TEMPLATE: 	'<div class="card rank-list">' +
+					'	<div class="table middle">' +
+					'		<div class="cell fit"></div>' +
+					'		<div class="cell fit"><img src=""></div>' +
+					'		<div class="cell"></div>' +
+					'		<div class="cell fit right"></div>' +
+					'	</div>' +
+					'</div>',
+		getCount: function() {
+			var callback = function(data) {
+				var count = 0;
+				for(var u in data.val())
+					count++;
+				App.All.render(count);
+			};
+
+			App.Firebase.ref("users").on("value", callback);
+		},
+		render: function(count) {
+			$(".ranking").html("");
+			$(".ranking-2").html("");
+			var n = 0;
+			var rank = 0;
+			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+				if(data.val()["score"] > 0) {
 					if(count-rank <= 10)
 						$parent = $(".ranking");
 					else
