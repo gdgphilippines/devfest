@@ -108,12 +108,35 @@ var App = {
 				cache: true,
 				dataType: 'jsonp',
 				success: function(json) {
-					var date = new Date(json.dateString);
-					var utc = new Date(date.getTime() + date.getTimezoneOffset());
-					App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab).update({
-						"start_quiz": Math.round(utc.getTime()/1000)
-					}, function() {
-						App.Process.step4();
+					var userQuestionsRef = App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab+"/questions");
+					var codelabQuestionsRef = App.Firebase.ref("questions/"+App.User.codelab);
+					codelabQuestionsRef.once("value", function(value) {
+						var questionList = [];
+						for(var v in value.val())
+							questionList.push(v);
+						var done = 0;
+						for(var i = 10; i >= 6; i--) {
+							var rand = Math.floor(Math.random() * i);
+							userQuestionsRef.push({
+								question: questionList[rand],
+								answer: ""
+							}, function() {
+								done++;
+							});
+							questionList.splice(rand, 1);
+						}
+						var checkifdone = setInterval(function() {
+							if(done == 5) {
+								clearInterval(checkifdone);
+								var date = new Date(json.dateString);
+								var utc = new Date(date.getTime() + date.getTimezoneOffset());
+								App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab).update({
+									"start_quiz": Math.round(utc.getTime()/1000)
+								}, function() {
+									App.Process.step4();
+								});
+							}
+						}, 1000)
 					});
 				}
 			});
@@ -389,13 +412,13 @@ var App = {
 			"pwa-1": {
 				url: "https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0",
 				desc: "Your First Progressive Web App",
-				time: 1800,
+				time: 1200, //1200,
 				tech: "web"
 			},
 			"polymer-1": {
 				url: "https://codelabs.developers.google.com/codelabs/polymer-maps/index.html#0",
 				desc: "Build Google Maps Using Web Components & No Code!",
-				time: 1200,
+				time: 1200, //1200,
 				tech: "web"
 			},
 			"polymer-2": {
@@ -502,21 +525,6 @@ var App = {
 			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key).update({
 				"end_time": App.Codelabs.list[key].end_time
 			}, function() {
-				var userQuestionsRef = App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+key+"/questions");
-				var codelabQuestionsRef = App.Firebase.ref("questions/"+key);
-				codelabQuestionsRef.once("value", function(value) {
-					var questionList = [];
-					for(var v in value.val())
-						questionList.push(v);
-					for(var i = 10; i >= 6; i--) {
-						var rand = Math.floor(Math.random() * i);
-						userQuestionsRef.push({
-							question: questionList[rand],
-							answer: ""
-						});
-						questionList.splice(rand, 1);
-					}
-				});
 				App.User.codelab = key;
 				$(".codelabs [data-codelab-id="+key+"]").removeClass("code")
 					.addClass("quiz");

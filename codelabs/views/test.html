@@ -1,0 +1,45 @@
+<div id="view">
+	<script>
+		App.pwa1 = 0;
+		App.polymer1 = 0;
+		App.polymer2 = 0;
+		App.firebase1 = 0;
+		App.firebase2 = 0;
+		App.android1 = 0;
+		App.android2 = 0;
+		App.cardboard1 = 0;
+		App.cardboard2 = 0;
+		App.cloud1 = 0;
+		App.cloud2 = 0;
+		App.cloud3 = 0;
+		App.total = 0;
+		App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+			console.log(data.val());
+			if(data.child("codelabs/pwa-1").exists())
+				App.pwa1++;
+			if(data.child("codelabs/polymer-1").exists())
+				App.polymer1++;
+			if(data.child("codelabs/polymer-2").exists())
+				App.polymer2++;
+			if(data.child("codelabs/firebase-1").exists())
+				App.firebase1++;
+			if(data.child("codelabs/firebase-2").exists())
+				App.firebase2++;
+			if(data.child("codelabs/android-1").exists())
+				App.android1++;
+			if(data.child("codelabs/android-2").exists())
+				App.android2++;
+			if(data.child("codelabs/cardboard-1").exists())
+				App.cardboard1++;
+			if(data.child("codelabs/cardboard-2").exists())
+				App.cardboard2++;
+			if(data.child("codelabs/cloud-1").exists())
+				App.cloud1++;
+			if(data.child("codelabs/cloud-2").exists())
+				App.cloud2++;
+			if(data.child("codelabs/cloud-3").exists())
+				App.cloud3++;
+			App.total++;
+		}) 
+	</script>
+</div>

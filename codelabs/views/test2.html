@@ -1,0 +1,63 @@
+<div id="view">
+<style>.box {display: inline-block; width: 48px;height:48px;}</style>
+	<table id="pixel">
+	</table>
+	<script>
+	var PIXEL_TEMPLATE = '<tr><td></td><td></td></tr>';
+		$(document).ready(function() {
+			$parent = $("table#pixel");
+			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+				console.log(data.val());
+				$parent.prepend(PIXEL_TEMPLATE);
+				$el = $parent.find("tr:first-child");
+				$el.find("td:first-child").html(data.val().displayName)
+				var keys = ["pwa-1", "polymer-1", "polymer-2", "firebase-1", "firebase-2", "android-1", "android-2", "cardboard-1", "cardboard-2", "cloud-1", "cloud-2", "cloud-3"];
+				var colors = ["e91e62", "f06292", "f8bbd0", "ffc107", "ffd54f", "82bc01", "a6dd2a", "ff5722", "ff8a65", "2196f3", "64b5f6", "bbdefb"];
+				for(var i = 0; i < keys.length; i++) {
+					if(data.child("codelabs/"+keys[i]).exists() && data.child("codelabs/"+keys[i]+"/score").exists()) {
+						if(data.val().codelabs[keys[i]].score > 0)
+							$el.find("td:last-child").append('<div class="box" style="background: #'+colors[i]+'"></div>');
+					}
+				}
+				// if(data.child("codelabs/pwa-1").exists() && data.child("codelabs/pwa-1/score").exists()) {
+				// 	if(data.val().codelabs["pwa-1"].score > 0)
+				// 		$el.find("td:last-child").append('<div class="box" style="background: #e91e62"></div>');
+				// }
+				// if(data.child("codelabs/polymer-1").exists && data.child("codelabs/polymer-1/score").exists()){
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #f06292"></div>');
+				// }
+				// if(data.child("codelabs/polymer-2").exists() && data.child("codelabs/polymer-2/score").exists()){
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #f8bbd0"></div>');
+				// }
+				// if(data.child("codelabs/firebase-1").exists() && data.child("codelabs/firebase-1/score").exists()){
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #ffc107"></div>');
+				// }
+				// if(data.child("codelabs/firebase-2").exists() && data.child("codelabs/firebase-2/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #ffd54f"></div>');
+				// }
+				// if(data.child("codelabs/android-1").exists() && data.child("codelabs/android-1/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #82bc01"></div>');
+				// }
+				// if(data.child("codelabs/android-2").exists() && data.child("codelabs/android-2/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #a6dd2a"></div>');
+				// }
+				// if(data.child("codelabs/cardboard-1").exists() && data.child("codelabs/cardboard-1/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #ff5722"></div>');
+				// }
+				// if(data.child("codelabs/cardboard-2").exists() && data.child("codelabs/codelab-2/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #ff8a65"></div>');
+				// }
+				// if(data.child("codelabs/cloud-1").exists() && data.child("codelabs/cloud-1/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #2196f3"></div>');
+				// }
+				// if(data.child("codelabs/cloud-2").exists() && data.child("codelabs/cloud-2/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #64b5f6"></div>');
+				// }
+				// if(data.child("codelabs/cloud-3").exists() && data.child("codelabs/cloud-3/score").exists()) {
+				// 	$el.find("td:last-child").append('<div class="box" style="background: #bbdefb"></div>');
+				// }
+				App.total++;
+			}) 
+		})
+	</script>
+</div>
