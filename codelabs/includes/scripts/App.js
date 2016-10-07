@@ -49,19 +49,16 @@ var App = {
 			App.DialogBox.el.attr("data-codelab-status", $status);
 			App.User.codelab = key;
 			App.Firebase.ref("users").child(App.User.loggedIn.uid+"/codelabs/"+key).once("value", function(data) {
-				setTimeout(function() {
-					if(data.child("end_quiz").exists()) {
-						App.Process.step5();
-					} else if(data.child("start_quiz").exists()) {
-						App.Process.step4();
-					} else if(data.child("end_time").exists()) {
-						App.Process.step3();
-					} else if (data.child("start_time").exists()) {
-						App.Process.step2();
-					} else if(!data.hasChildren()) {
-						App.Process.step1();
-					}
-				}, 500);
+				if(data.child("end_quiz").exists())
+					App.Process.step5();
+				else if(data.child("start_quiz").exists())
+					App.Process.step4();
+				else if(data.child("end_time").exists())
+					App.Process.step3();
+				else if (data.child("start_time").exists())
+					App.Process.step2();
+				else if(!data.hasChildren())
+					App.Process.step1();
 			});
 		});
 		var ink, d, x, y;
