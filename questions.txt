@@ -1,3 +1,80 @@
+
+		list: {
+			"pwa-1": {
+				url: "https://codelabs.developers.google.com/codelabs/your-first-pwapp/index.html#0",
+				desc: "Your First Progressive Web App",
+				time: 5, /*1200*/
+				tech: "web"
+			},
+			"polymer-1": {
+				url: "https://codelabs.developers.google.com/codelabs/polymer-maps/index.html#0",
+				desc: "Build Google Maps Using Web Components & No Code!",
+				time: 5, /*1200*/
+				tech: "web"
+			},
+			"polymer-2": {
+				url: "https://codelabs.developers.google.com/codelabs/polymer-first-elements/index.html#0",
+				desc: "Build your first Polymer element",
+				time: 5,  /*2400*/
+				tech: "web"
+			},
+			"firebase-1": {
+				url: "https://codelabs.developers.google.com/codelabs/firebase-web/index.html#0",
+				desc: "Firebase: Build a Real Time Web Chat App",
+				time: 5, /*3600*/
+				tech: "firebase"
+			},
+			"firebase-2": {
+				url: "https://codelabs.developers.google.com/codelabs/firebase-android/index.html#0",
+				desc: "Firebase Android Codelab",
+				time: 5, /*2400*/
+				tech: "firebase"
+			},
+			"android-1": {
+				url: "https://codelabs.developers.google.com/codelabs/getting-ready-for-android-n/index.html#0",
+				desc: "Getting your app ready for Android Nougat",
+				time: 5, /*2700*/
+				tech: "android"
+			},
+			"android-2": {
+				url: "https://codelabs.developers.google.com/codelabs/constraint-layout/index.html#0",
+				desc: "Using ConstraintLayout to design your views",
+				time: 2700,
+				tech: "android"
+			},
+			"cardboard-1": {
+				url: "https://codelabs.developers.google.com/codelabs/vr_view_101/index.html#0",
+				desc: "Getting started with VR view for HTML",
+				time: 2400,
+				tech: "vr"
+			},
+			"cardboard-2": {
+				url: "https://codelabs.developers.google.com/codelabs/vr_view_app_101/index.html#0",
+				desc: "Getting started with VR View for Android",
+				time: 2400,
+				tech: "vr"
+			},
+			"cloud-1": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-speech-intro/index.html#0",
+				desc: "Speech to Text Transcription with the Cloud Speech API",
+				time: 1200,
+				tech: "cloud"
+			},
+			"cloud-2": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-vision-nodejs/index.html#0",
+				desc: "Using Cloud Vision with Node.js",
+				time: 3000,
+				tech: "cloud"
+			},
+			"cloud-3": {
+				url: "https://codelabs.developers.google.com/codelabs/cloud-app-engine-python/index.html#0",
+				desc: "Getting Started with App Engine (Python)",
+				time: 1200,
+				tech: "cloud"
+			}
+		},
+
+
 Codelabs: {
 		list: {
 			"pwa-1": {
