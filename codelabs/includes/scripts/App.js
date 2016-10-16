@@ -167,17 +167,15 @@ var App = {
 					var uS = userdata.val().score;
 					var gtech = data.val().tech;
 					var gscore = userdata.val()[gtech];
-					userRef.update({
+					var updates = {
 						"score": uS - clS
-					}, function() {
-						var updates = {};
-						updates[gtech] = gscore - clS;
-						userRef.update(updates, function() {
-							userRef.child("codelabs/"+App.User.codelab).remove(function() {
-								$("a.codelab-list[data-codelab-id="+App.User.codelab+"]")
-									.removeClass("done fail").addClass("code");
-								App.Process.step1();
-							});
+					};
+					updates[gtech] = gscore - clS;
+					userRef.update(updates, function() {
+						userRef.child("codelabs/"+App.User.codelab).remove(function() {
+							$("a.codelab-list[data-codelab-id="+App.User.codelab+"]")
+								.removeClass("done fail").addClass("code");
+							App.Process.step1();
 						});
 					});
 				});
