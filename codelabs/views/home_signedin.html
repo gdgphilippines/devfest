@@ -13,14 +13,13 @@
 						<div class="cell right"><b>Ranking:</b> <span id="myranking"></span></div>
 					</div>
 				</div>
-				<div class="col-6 offset-3 t-col-8 t-offset-2 m-col-12 m-offset-0 codelabs">
+				<div class="col-6 offset-3 t-col-8 t-offset-2 m-col-12 m-offset-0 codelabs" id="listCodelabs">
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
 	$(document).ready(function() {
-		$(".loading").css("top", "80px");
 		App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
 			$(".loading").css("top", "80px");
 			if(!data.child("chapter").exists()) {

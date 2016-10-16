@@ -1,32 +1,33 @@
 var App = {
-	xhr: null,
-	fl: true,
-	viewLoad: false,
-	headLoad: false,
-	currentPage: "",
+	xhr: null, 
+	fl: true, 
+	viewLoad: false, 
+	headLoad: false, 
+	currentPage: "", 
 	ready: function(page) {
 		this.Firebase.init(); 
 		if(page == "") 
-			page = "home";
+			page = "home"; 
 		this.currentPage = page; 
 		App.responsive(); 
-		App.DialogBox.responsive();
+		App.DialogBox.responsive(); 
 		$(".action-bar img.logo").css("opacity", "1"); 
-		$(window).resize(function() { 
+		$(window).resize(function() {
 			App.responsive(); 
 			App.DialogBox.responsive(); 
-		});
+		}); 
 		$(".black-trans, .back").click(function() {
 			if($(".slider").css("left") == "0px") {
-				App.slider("hide");
+				App.slider("hide"); 
 			} else if(!App.DialogBox.isEnabled()) {
-				if (typeof App.DialogBox.el.attr("data-can-close") !== typeof undefined && App.DialogBox.el.attr("data-can-close") !== false) {
-					if(App.DialogBox.el.attr("data-can-close") == "true")
-						App.DialogBox.hide();
-				} else
-					App.DialogBox.hide();
-			}
-		});
+				if (typeof App.DialogBox.el.attr("data-can-close") !== typeof undefined && 
+						   App.DialogBox.el.attr("data-can-close") !== false) {
+					if(App.DialogBox.el.attr("data-can-close") == "true") 
+						App.DialogBox.hide(); 
+				} else 
+					App.DialogBox.hide(); 
+				} 
+			});
 		$(".menu").click(function() {
 			App.slider("show");
 		});
@@ -123,11 +124,9 @@ var App = {
 				success: function(json) {
 					var userQuestionsRef = App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab+"/questions");
 					App.Firebase.ref("codelabs/"+App.User.codelab+"/questions").once("value", function(value) {
-						console.log(value.val());
 						var questionList = [];
 						for(var v in value.val())
 							questionList.push(v);
-						console.log(questionList);
 						var done = 0;
 						for(var i = 10; i >= 6; i--) {
 							var rand = Math.floor(Math.random() * i);
@@ -137,7 +136,6 @@ var App = {
 							}, function() {
 								done++;
 							});
-							console.log(questionList[rand]);
 							questionList.splice(rand, 1);
 						}
 						var checkifdone = setInterval(function() {
@@ -243,9 +241,7 @@ var App = {
 					$(".view").html($(html).filter("#view")).animate({
 						"top": "0px",
 						"opacity": "1"
-					}, 1500, function() {
-						$(".loading").css("top", "-80px");
-					}).css("height", "auto");
+					}, 1500).css("height", "auto");
 				}, 750);
 			},
 			error: function(xhrtemp, ajaxOptions, thrownError) {
@@ -313,8 +309,8 @@ var App = {
 		step2: function() {
 			App.DialogBox.show();
 			App.DialogBox.disable();
-			$(".codelabs a.codelab-list:not([data-codelab-id="+App.User.codelab+"])").attr("data-codelab-status", "disabled");
-			$(".codelabs a.codelab-list[data-codelab-id="+App.User.codelab+"]").attr("data-codelab-status", "enabled");
+			$("#listCodelabs a.codelab-list:not([data-codelab-id="+App.User.codelab+"])").attr("data-codelab-status", "disabled");
+			$("#listCodelabs a.codelab-list[data-codelab-id="+App.User.codelab+"]").attr("data-codelab-status", "enabled");
 			$.ajax({
 				url: "views/codelab_2.html",
 				cache: true,
@@ -377,7 +373,7 @@ var App = {
 		step5: function() {
 			App.DialogBox.show();
 			App.DialogBox.disable();
-			$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
+			$("#listCodelabs a.codelab-list").attr("data-codelab-status", "enabled");
 			$.ajax({
 				url: "views/codelab_5.html",
 				cache: true,
@@ -469,8 +465,8 @@ var App = {
 				"end_time": App.Codelabs.end_time
 			}, function() {
 				App.User.codelab = key;
-				$(".codelabs [data-codelab-id="+key+"]").removeClass("code").addClass("quiz");
-				$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+				$("#listCodelabs [data-codelab-id="+key+"]").removeClass("code").addClass("quiz");
+				$("#listCodelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
 				App.Process.step3();
 			});
 		},
@@ -499,7 +495,6 @@ var App = {
 						answerList.push(snapshot.val()[v].answer);
 					}
 					App.Firebase.ref("codelabs/"+key+"/questions").once("value", function(cQ) {
-						console.log(cQ);
 						$parent = $(".dialog-box .quiz");
 						$template = $parent.children(".row:first-child");
 						$parent.html("");
@@ -509,7 +504,6 @@ var App = {
 							$last.attr("data-question-id", qIDList[index]);
 							$last.find(".question-number").html(index+1);
 							$last.find(".question").html(cQ.val()[qid].question);
-							console.log(cQ.val()[qid].question);
 							var choices = cQ.val()[qid].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR);
 							for(var i = 4; i >= 1; i--) {
 								var rand = Math.floor(Math.random() * i);
@@ -573,7 +567,7 @@ var App = {
 						var start_quiz = ucdata.val()["start_quiz"];
 						end_quiz = ((end_quiz != false) ? App.Codelabs.end_quiz-App.Codelabs.remaining : App.Codelabs.end_quiz);
 						var time_spent = end_quiz - start_quiz;
-						var score = Math.ceil((((300 - time_spent)/300)*50)+((cA*20)/100)*50);
+						var score = Math.ceil((((300 - time_spent)/300)*((50)*(cA/5)))+(((cA*20)/100)*50));
 						var gtech = data.val().tech;
 						userRef.update({
 							"score": udata.val().score + ((score >= 0) ? score : 0)
@@ -587,13 +581,13 @@ var App = {
 								updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
 								userRef.update(updates, function() {
 									App.User.codelab = key;
-									$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
+									$("#listCodelabs [data-codelab-id="+key+"]").removeClass("quiz code")
 									if(cA > 3)
-										$(".codelabs [data-codelab-id="+key+"]").addClass("done");
+										$("#listCodelabs [data-codelab-id="+key+"]").addClass("done");
 									else
-										$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
-									$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
-									$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
+										$("#listCodelabs [data-codelab-id="+key+"]").addClass("fail");
+									$("#listCodelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+									$("#listCodelabs a.codelab-list").attr("data-codelab-status", "enabled");
 									App.User.listCodelabs();
 									App.Process.step5();
 								});
@@ -607,6 +601,36 @@ var App = {
 	User: {
 		codelab: "",
 		loggedIn: 0,
+		checkScore: function() {
+			App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(user) {
+				var local = {
+					score: 0,
+					firebase: 0,
+					web: 0,
+					android: 0,
+					cloud: 0,
+					vr: 0
+				}
+				var techs = ["android", "cloud", "firebase", "vr", "web"];
+				App.Firebase.ref("codelabs").once("value", function(codelab) {
+					$.each(user.val().codelabs, function(key, data) {
+						if(data.hasOwnProperty("score")) {
+							local[codelab.val()[key].tech] += data.score;
+							local.score += data.score;
+						}
+					});
+					var update = false;
+					$.each(techs, function(key, data) {
+						if(user.val()[data] != local[data])
+							update = true;
+					})
+					if(user.val().score != local.score)
+						update = true;
+					if(update) 
+						App.Firebase.ref("users/"+App.User.loggedIn.uid).update(local);
+				})
+			})
+		},
 		register: function(user) {
 			App.Firebase.ref("users/"+user.uid).once("value", function(data) {
 				if(!data.child("displayName").exists()) {
@@ -625,6 +649,8 @@ var App = {
 			});
 		},
 		updatePoints: function() {
+			this.checkScore();
+			$(".loading").css("top", "80px");
 			App.Firebase.ref("users/"+this.loggedIn.uid).on("value", function(data) {
 				$("#pointMsg").hide();
 				if(data.val().score == 0)
@@ -679,24 +705,24 @@ var App = {
 					'</a>',
 		listCodelabs: function() {
 			var i = 1;
-			$parent = $(".codelabs");
+			var parent = $("#listCodelabs");
 			$disabled = false;
-			$parent.html("");
+			parent.html("");
 			App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
 				App.Firebase.ref("codelabs/").once("value", function(codelabs) {
 					var list = [];
 					for(var codelab in codelabs.val())
 						list.push(codelab);
 					$.each(list, function(key, datax) {
-						$parent.append(App.User.CODELAB_TEMPLATE);
-						$last = $(".codelabs .codelab-list:last-child");
+						parent.append(App.User.CODELAB_TEMPLATE);
+						$last = $("#listCodelabs .codelab-list:last-child");
 						$last.find("img").attr("src", App.getCodelabImage(datax));
 						$last.find("span.title").html(codelabs.val()[datax].desc);
 						$last.attr("data-codelab-id", datax);
-						$codelab = $parent.find(".codelab-list[data-codelab-id="+datax+"]");
+						$codelab = parent.find(".codelab-list[data-codelab-id="+datax+"]");
 						function disableCodelab(datax) {
-							$(".codelabs a.codelab-list:not([data-codelab-id="+datax+"])").attr("data-codelab-status", "disabled");
-							$(".codelabs a.codelab-list[data-codelab-id="+datax+"]").attr("data-codelab-status", "enabled");
+							$("#listCodelabs a.codelab-list:not([data-codelab-id="+datax+"])").attr("data-codelab-status", "disabled");
+							$("#listCodelabs a.codelab-list[data-codelab-id="+datax+"]").attr("data-codelab-status", "enabled");
 						}
 						if(data.child("codelabs/"+datax+"/end_quiz").exists()) {
 							$codelab.removeClass("code quiz");
@@ -796,6 +822,7 @@ var App = {
 							rank++;
 					}
 				});
+				$(".loading").css("top", "-80px");
 			});
 		}
 	},
@@ -973,6 +1000,7 @@ var App = {
 				else
 					$("#leaderboardMsg").show();
 					rank++;
+				$(".loading").css("top", "-80px");
 			});
 		}
 	},
@@ -1028,6 +1056,7 @@ var App = {
 				else
 					$("#leaderboardMsg").show();
 					rank++;
+				$(".loading").css("top", "-80px");
 			});
 		}
 	}
