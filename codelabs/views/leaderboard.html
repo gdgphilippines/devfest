@@ -27,7 +27,7 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			App.Leaderboard.load($("select[name=codelab]").val());
+			App.checkChapter();
 			$("select[name=codelab]").change(function() {
 				App.Leaderboard.load($(this).val());
 			})

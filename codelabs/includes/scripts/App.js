@@ -4,7 +4,7 @@ var App = {
 	viewLoad: false,
 	headLoad: false,
 	currentPage: "",
-	checkChapter: function() {
+	checkChapter: function(callback) {
 		App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
 			$(".loading").css("top", "80px");
 			if(!data.child("chapter").exists()) {
@@ -22,14 +22,16 @@ var App = {
 						App.Process.onError(xhrtemp, ajaxOptions, thrownError);
 					}
 				});
-			} else
+			} else {
 				App.User.updatePoints();
+				App.Leaderboard.load("score");
+			}
 		});
 	},
 	ready: function(page) {
 		this.Firebase.init(); 
 		if(page == "") 
-			page = "home"; 
+			page = "home";
 		this.currentPage = page; 
 		App.responsive(); 
 		App.DialogBox.responsive();
@@ -652,6 +654,7 @@ var App = {
 					$("#pointMsg").show();
 				$("#mypoints").html(data.val().score);
 			});
+			$(".loading").css("top", "80px");
 			this.getRanking();
 		},
 		getRanking: function() {
@@ -703,7 +706,6 @@ var App = {
 			$parent = $(".codelabs");
 			$disabled = false;
 			$parent.html("");
-			$(".loading").css("top", "-80px");
 			App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
 				App.Firebase.ref("codelabs/").once("value", function(codelabs) {
 					var list = [];
@@ -757,12 +759,15 @@ var App = {
 						}
 						i++;
 					});
+					$(".loading").css("top", "-80px");
 				});
 			});
 		}
 	},
 	Leaderboard: {
 		load: function(codelab) {
+			if(!codelab)
+				codelab = "score";
 			this.getCount(codelab);
 		},
 		TEMPLATE: 	'<div class="card rank-list">' +
