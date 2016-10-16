@@ -27,7 +27,27 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-			App.checkChapter();
+			App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
+				$(".loading").css("top", "80px");
+				if(!data.child("chapter").exists()) {
+					App.DialogBox.show();
+					App.DialogBox.disable();
+					App.DialogBox.el.attr("data-can-close", "false");
+					$.ajax({
+						url: "views/getchapter.html",
+						cache: true,
+						success: function(html) {
+							App.DialogBox.el.html(html);
+							App.DialogBox.enable();
+						},
+						error: function(xhrtemp, ajaxOptions, thrownError) {
+							App.Process.onError(xhrtemp, ajaxOptions, thrownError);
+						}
+					});
+				} else
+					App.Leaderboard.load($("select[name=codelab]").val());
+				
+			});
 			$("select[name=codelab]").change(function() {
 				App.Leaderboard.load($(this).val());
 			})

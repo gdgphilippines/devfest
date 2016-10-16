@@ -4,30 +4,6 @@ var App = {
 	viewLoad: false,
 	headLoad: false,
 	currentPage: "",
-	checkChapter: function(callback) {
-		App.Firebase.ref("users/"+App.User.loggedIn.uid).once("value", function(data) {
-			$(".loading").css("top", "80px");
-			if(!data.child("chapter").exists()) {
-				App.DialogBox.show();
-				App.DialogBox.disable();
-				App.DialogBox.el.attr("data-can-close", "false");
-				$.ajax({
-					url: "views/getchapter.html",
-					cache: true,
-					success: function(html) {
-						App.DialogBox.el.html(html);
-						App.DialogBox.enable();
-					},
-					error: function(xhrtemp, ajaxOptions, thrownError) {
-						App.Process.onError(xhrtemp, ajaxOptions, thrownError);
-					}
-				});
-			} else {
-				App.User.updatePoints();
-				App.Leaderboard.load("score");
-			}
-		});
-	},
 	ready: function(page) {
 		this.Firebase.init(); 
 		if(page == "") 
@@ -146,11 +122,12 @@ var App = {
 				dataType: 'jsonp',
 				success: function(json) {
 					var userQuestionsRef = App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab+"/questions");
-					var codelabQuestionsRef = App.Firebase.ref("questions/"+App.User.codelab);
-					codelabQuestionsRef.once("value", function(value) {
+					App.Firebase.ref("codelabs/"+App.User.codelab+"/questions").once("value", function(value) {
+						console.log(value.val());
 						var questionList = [];
 						for(var v in value.val())
 							questionList.push(v);
+						console.log(questionList);
 						var done = 0;
 						for(var i = 10; i >= 6; i--) {
 							var rand = Math.floor(Math.random() * i);
@@ -160,6 +137,7 @@ var App = {
 							}, function() {
 								done++;
 							});
+							console.log(questionList[rand]);
 							questionList.splice(rand, 1);
 						}
 						var checkifdone = setInterval(function() {
@@ -410,32 +388,31 @@ var App = {
 						App.DialogBox.el.find(".wrapper span.title").html(data.val().desc);
 						App.Firebase.ref("users/"+App.User.loggedIn.uid+"/codelabs/"+App.User.codelab).once("value", function(ucdata) {
 							App.DialogBox.el.find(".wrapper p").html("Congratulations! You earned <b>"+ucdata.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(ucdata.val().end_quiz - ucdata.val().start_quiz));
-							App.Firebase.ref("questions/"+App.User.codelab).once("value", function(cQ) {
-								var i = 0;
-								$parent = $(".dialog-box .quiz");
-								$template = $parent.children(".row:first-child");
-								$parent.html("");
-								for(var q in ucdata.val().questions) {
-									$parent.append($template.clone());
-									$last = $(".dialog-box .quiz .row:last-child");
-									$last.find(".question-number").html(i+1);
-									$last.find(".question").html(cQ.val()[ucdata.val().questions[q].question].question);
-									var correctanswer = cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0];
-									var useranswer = ucdata.val().questions[q].answer;
-									$last.find(".your-answer").html("<b>Your Answer:</b> "+ useranswer);
-									if(correctanswer == useranswer) {
-										$last.find("i").html("done").addClass("green-text");
-									} else {
-										$last.find("i").html("close").addClass("red-text");
-									}
-									i++;
+							var cQ = data.child("questions");
+							var i = 0;
+							$parent = $(".dialog-box .quiz");
+							$template = $parent.children(".row:first-child");
+							$parent.html("");
+							for(var q in ucdata.val().questions) {
+								$parent.append($template.clone());
+								$last = $(".dialog-box .quiz .row:last-child");
+								$last.find(".question-number").html(i+1);
+								$last.find(".question").html(cQ.val()[ucdata.val().questions[q].question].question);
+								var correctanswer = cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0];
+								var useranswer = ucdata.val().questions[q].answer;
+								$last.find(".your-answer").html("<b>Your Answer:</b> "+ useranswer);
+								if(correctanswer == useranswer) {
+									$last.find("i").html("done").addClass("green-text");
+								} else {
+									$last.find("i").html("close").addClass("red-text");
 								}
-								if(ucdata.val().cA < 4) {
-									App.DialogBox.el.find(".wrapper p").html("Sorry! You failed the quiz but you earned <b>"+ucdata.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(ucdata.val().end_quiz - ucdata.val().start_quiz));
-									App.DialogBox.el.find("#restartCodelab, span.message").show();
-								}
-								App.DialogBox.enable();
-							});
+								i++;
+							}
+							if(ucdata.val().cA < 4) {
+								App.DialogBox.el.find(".wrapper p").html("Sorry! You failed the quiz but you earned <b>"+ucdata.val().score+" points</b> in this codelab.<br><br>Time elapsed on this quiz is "+App.Codelabs.getTimeRemaining(ucdata.val().end_quiz - ucdata.val().start_quiz));
+								App.DialogBox.el.find("#restartCodelab, span.message").show();
+							}
+							App.DialogBox.enable();
 						});
 					});
 				},
@@ -521,8 +498,8 @@ var App = {
 						questionList.push(snapshot.val()[v].question);
 						answerList.push(snapshot.val()[v].answer);
 					}
-					var codelabQuestionsRef = App.Firebase.ref("questions/"+key);
-					codelabQuestionsRef.once("value", function(cQ) {
+					App.Firebase.ref("codelabs/"+key+"/questions").once("value", function(cQ) {
+						console.log(cQ);
 						$parent = $(".dialog-box .quiz");
 						$template = $parent.children(".row:first-child");
 						$parent.html("");
@@ -532,6 +509,7 @@ var App = {
 							$last.attr("data-question-id", qIDList[index]);
 							$last.find(".question-number").html(index+1);
 							$last.find(".question").html(cQ.val()[qid].question);
+							console.log(cQ.val()[qid].question);
 							var choices = cQ.val()[qid].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR);
 							for(var i = 4; i >= 1; i--) {
 								var rand = Math.floor(Math.random() * i);
@@ -586,41 +564,40 @@ var App = {
 				App.Firebase.ref("codelabs/"+key).once("value", function(data) {
 					userRef.once("value", function(udata) {
 						var ucdata = udata.child("codelabs/"+key);
-						App.Firebase.ref("questions/"+key).once("value", function(cQ) {
-							var cA = 0;
-							for(var q in ucdata.val().questions) {
-								if(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0] == ucdata.val().questions[q].answer)
-									cA++;
-							}
-							var start_quiz = ucdata.val()["start_quiz"];
-							end_quiz = ((end_quiz != false) ? App.Codelabs.end_quiz-App.Codelabs.remaining : App.Codelabs.end_quiz);
-							var time_spent = end_quiz - start_quiz;
-							var score = Math.ceil((((300 - time_spent)/300)*50)+((cA*20)/100)*50);
-							var gtech = data.val().tech;
-							userRef.update({
-								"score": udata.val().score + ((score >= 0) ? score : 0)
+						var cQ = data.child("questions");
+						var cA = 0;
+						for(var q in ucdata.val().questions) {
+							if(cQ.val()[ucdata.val().questions[q].question].choices.split(App.Codelabs.Quiz.CHOICES_SEPARATOR)[0] == ucdata.val().questions[q].answer)
+								cA++;
+						}
+						var start_quiz = ucdata.val()["start_quiz"];
+						end_quiz = ((end_quiz != false) ? App.Codelabs.end_quiz-App.Codelabs.remaining : App.Codelabs.end_quiz);
+						var time_spent = end_quiz - start_quiz;
+						var score = Math.ceil((((300 - time_spent)/300)*50)+((cA*20)/100)*50);
+						var gtech = data.val().tech;
+						userRef.update({
+							"score": udata.val().score + ((score >= 0) ? score : 0)
+						}, function() {
+							userRef.child("codelabs/"+key).update({
+								"end_quiz": end_quiz,
+								"cA": cA,
+								"score": ((score >= 0) ? score : 0)
 							}, function() {
-								userRef.child("codelabs/"+key).update({
-									"end_quiz": end_quiz,
-									"cA": cA,
-									"score": ((score >= 0) ? score : 0)
-								}, function() {
-									var updates = {};
-									updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
-									userRef.update(updates, function() {
-										App.User.codelab = key;
-										$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
-										if(cA > 3)
-											$(".codelabs [data-codelab-id="+key+"]").addClass("done");
-										else
-											$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
-										$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
-										$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
-										App.User.listCodelabs();
-										App.Process.step5();
-									});
-								});	
-							});
+								var updates = {};
+								updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
+								userRef.update(updates, function() {
+									App.User.codelab = key;
+									$(".codelabs [data-codelab-id="+key+"]").removeClass("quiz code")
+									if(cA > 3)
+										$(".codelabs [data-codelab-id="+key+"]").addClass("done");
+									else
+										$(".codelabs [data-codelab-id="+key+"]").addClass("fail");
+									$(".codelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+									$(".codelabs a.codelab-list").attr("data-codelab-status", "enabled");
+									App.User.listCodelabs();
+									App.Process.step5();
+								});
+							});	
 						});
 					});
 				});
@@ -654,7 +631,6 @@ var App = {
 					$("#pointMsg").show();
 				$("#mypoints").html(data.val().score);
 			});
-			$(".loading").css("top", "80px");
 			this.getRanking();
 		},
 		getRanking: function() {
@@ -779,7 +755,6 @@ var App = {
 					'	</div>' +
 					'</div>',
 		getCount: function(codelab) {
-
 			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/chapter").once("value", function(userChapter) {
 				App.Firebase.ref("users").once("value", function(data) {
 					var count = 0;
