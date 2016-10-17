@@ -564,31 +564,28 @@ var App = {
 						}
 						var start_quiz = ucdata.val()["start_quiz"];
 						end_quiz = ((end_quiz != false) ? App.Codelabs.end_quiz-App.Codelabs.remaining : App.Codelabs.end_quiz);
-						var time_spent = end_quiz - start_quiz;
+						var time_spent = (end_quiz - start_quiz > 300) ? 300 : end_quiz - start_quiz;
 						var score = Math.ceil((((300 - time_spent)/300)*((50)*(cA/5)))+(((cA*20)/100)*50));
-						var gtech = data.val().tech;
-						userRef.update({
+						var updates = {
 							"score": udata.val().score + ((score >= 0) ? score : 0)
-						}, function() {
+						};
+						updates[data.val().tech] = udata.val()[data.val().tech] + ((score >= 0) ? score : 0);
+						userRef.update(updates, function() {
 							userRef.child("codelabs/"+key).update({
 								"end_quiz": end_quiz,
 								"cA": cA,
 								"score": ((score >= 0) ? score : 0)
 							}, function() {
-								var updates = {};
-								updates[gtech] = udata.val()[gtech] + ((score >= 0) ? score : 0);
-								userRef.update(updates, function() {
-									App.User.codelab = key;
-									$("#listCodelabs [data-codelab-id="+key+"]").removeClass("quiz code")
-									if(cA > 3)
-										$("#listCodelabs [data-codelab-id="+key+"]").addClass("done");
-									else
-										$("#listCodelabs [data-codelab-id="+key+"]").addClass("fail");
-									$("#listCodelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
-									$("#listCodelabs a.codelab-list").attr("data-codelab-status", "enabled");
-									App.User.listCodelabs();
-									App.Process.step5();
-								});
+								App.User.codelab = key;
+								$("#listCodelabs [data-codelab-id="+key+"]").removeClass("quiz code")
+								if(cA > 3)
+									$("#listCodelabs [data-codelab-id="+key+"]").addClass("done");
+								else
+									$("#listCodelabs [data-codelab-id="+key+"]").addClass("fail");
+								$("#listCodelabs [data-codelab-id="+key+"] div:last-child").html('<i class="material-icons"></i>');
+								$("#listCodelabs a.codelab-list").attr("data-codelab-status", "enabled");
+								App.User.listCodelabs();
+								App.Process.step5();
 							});	
 						});
 					});
