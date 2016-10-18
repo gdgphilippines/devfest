@@ -662,7 +662,7 @@ var App = {
 						if(data.val().chapter == userChapter.val()) {
 							if(data.key == App.User.loggedIn.uid) {
 								if(data.val().score == 0) 
-									App.User.loadRanking(0);
+									App.User.loadRanking(-1);
 								else
 									App.User.loadRanking(rank);
 							}
@@ -682,7 +682,7 @@ var App = {
 							count++;
 					}
 					$("#myranking").html("-");
-					if(count - rank != 0)
+					if(rank >= 0)
 						$("#myranking").html(count-rank);
 					App.User.listCodelabs();
 				});
