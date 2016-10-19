@@ -49,7 +49,8 @@ var App = {
 		});
 		Input.ready();
 		$(document).on("click", "a#selectChapter", function() {
-			var chapter = $("select#chapters").val();
+			App.DialogBox.disable();
+			var chapter = $("input[name=chapter]:checked").val();
 			if(chapter != "-") {
 				App.Firebase.ref("users/"+App.User.loggedIn.uid).update({
 					"chapter": chapter
