@@ -944,7 +944,7 @@ var App = {
 			}
 		}
 	},
-	Admin: {
+	Chapter: {
 		load: function() {
 			this.getCount();
 		},
@@ -957,46 +957,48 @@ var App = {
 					'	</div>' +
 					'</div>',
 		getCount: function() {
-			var callback = function(data) {
-				var count = 0;
-				for(var u in data.val())
-					count++;
-				App.Admin.render(count);
-			};
 
-			App.Firebase.ref("users").on("value", callback);
+			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/chapter").once("value", function(userChapter) {
+				App.Firebase.ref("users").on("value", function(data) {
+					var count = 0;
+					for(var u in data.val())
+						if(data.val()[u]["chapter"] == userChapter.val())
+							count++;
+					App.Chapter.render(count);
+				});
+			});
 		},
 		render: function(count) {
 			$(".ranking").html("");
 			$(".ranking-2").html("");
 			var n = 0;
 			var rank = 0;
-			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
-				if(count-rank <= 20 && data.val()["score"] > 0) {
-					if(count-rank <= 10)
+			App.Firebase.ref("users/"+App.User.loggedIn.uid+"/chapter").once("value", function(userChapter) {
+				App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
+					if(data.val()["score"] > 0 && data.val()["chapter"] == userChapter.val()) {
 						$parent = $(".ranking");
+						$parent.prepend(App.Leaderboard.TEMPLATE);
+						$el = $parent.find(".rank-list:first-child");
+						$el.find(".table .cell:first-child").html(count-rank);
+						if(count-rank == 1)
+							$el.addClass("first-place").removeClass("second-place third-place");
+						else if(count-rank == 2)
+							$el.addClass("second-place").removeClass("third-place");
+						else if(count-rank == 3) 
+							$el.addClass("third-place");
+						$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
+						$el.find(".table .cell:last-child").html(data.val()["score"] + "pts");
+						$el.find("img").attr("src", data.val().photoURL);
+						n = 1;
+					}
+					if(n == 1)
+						$("#leaderboardMsg").hide();
 					else
-						$parent = $(".ranking-2");
-					$parent.prepend(App.Leaderboard.TEMPLATE);
-					$el = $parent.find(".rank-list:first-child");
-					$el.find(".table .cell:first-child").html(count-rank);
-					if(count-rank == 1)
-						$el.addClass("first-place").removeClass("second-place third-place");
-					else if(count-rank == 2)
-						$el.addClass("second-place").removeClass("third-place");
-					else if(count-rank == 3) 
-						$el.addClass("third-place");
-					$el.find(".table .cell:nth-child(3)").html(data.val().displayName);
-					$el.find(".table .cell:last-child").html(data.val()["score"] + "pts");
-					$el.find("img").attr("src", data.val().photoURL);
-					n = 1;
-				}
-				if(n == 1)
-					$("#leaderboardMsg").hide();
-				else
-					$("#leaderboardMsg").show();
-					rank++;
-				$(".loading").css("top", "-80px");
+						$("#leaderboardMsg").show();
+					if(data.val()["chapter"] == userChapter.val())
+						rank++;
+					$(".loading").css("top", "-80px");
+				});
 			});
 		}
 	},
@@ -1029,10 +1031,7 @@ var App = {
 			var rank = 0;
 			App.Firebase.ref("users").orderByChild("score").on("child_added", function(data) {
 				if(data.val()["score"] > 0) {
-					if(count-rank <= 10)
-						$parent = $(".ranking");
-					else
-						$parent = $(".ranking-2");
+					$parent = $(".ranking");
 					$parent.prepend(App.Leaderboard.TEMPLATE);
 					$el = $parent.find(".rank-list:first-child");
 					$el.find(".table .cell:first-child").html(count-rank);
