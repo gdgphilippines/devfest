@@ -654,6 +654,76 @@ var App = {
 				$("#mypoints").html(data.val().score);
 			});
 			this.getRanking();
+			this.cleanDB();
+		},
+		cleanDB: function() {
+			function isExist(array, find) {
+				for(var x in array) {
+					if(array[x] == find)
+						return true;
+				}
+				return false;
+			}
+			App.Firebase.ref("users").once("value", function(users) {
+				for(var i in users.val()) {
+					var user = users.val()[i];
+					for(var j in user.codelabs) {
+						console.log("original");
+						console.log(user.codelabs[j]);
+						if(user.codelabs[j].hasOwnProperty("questions")) {
+							// var tempQ = [];
+							// console.log(codelab.questions);
+							// // get current questions
+							// for(var k in codelab.questions) {
+							// 	var qID = codelab.questions[k];
+							// 	tempQ.push(qID.question);
+							// }
+							var q = [];
+							var duplicate = [];
+							// remove duplicate questions
+							for(var k in user.codelabs[j].questions) {
+								var qID = user.codelabs[j].questions[k].question;
+								if(!isExist(q, qID))
+									q.push(qID);
+								else 
+									duplicate.push(k);
+							}
+							for(var k in duplicate) {
+								delete user.codelabs[j].questions[k];
+							}
+							console.log("remove duplicate");
+							console.log(user.codelabs[j]);
+
+							// // get 5 questions
+							// for(var k = 0; k < q.length; k++) {
+							// 	if(k > 4) {
+							// 		q.splice(k,1);
+							// 		k--;
+							// 	}
+							// }
+							// console.log("get 5 questions");
+							// console.log(q);
+
+							// delete questions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							console.log("--");
+						}
+					}
+				}
+			});
 		},
 		getRanking: function() {
 			var rank = 0;
