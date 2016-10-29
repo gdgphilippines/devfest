@@ -556,7 +556,8 @@ span.bignum {
   -o-transition: 0s top, 0s left;
   transition: 0s top, 0s left;
   position: fixed;
-  width: 500px;
+  min-width: 320px;
+  max-width: 500px;
   left: 0px;
   max-height: 80%;
   background: white;
