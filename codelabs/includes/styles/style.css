@@ -553,6 +553,12 @@ span.bignum {
   .rank-list.third-place {
     background: #795548;
     color: white; }
+  .rank-list.disabled {
+    opacity: .4; }
+  .rank-list span.chapter-name {
+    display: block;
+    font-size: 12px;
+    font-style: italic; }
 
 @media screen and (max-width: 425px) {
   .rank-list {

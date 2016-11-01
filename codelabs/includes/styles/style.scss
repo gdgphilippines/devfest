@@ -656,6 +656,14 @@ span.bignum {
 		background: #795548;
 		color: white;
 	}
+	&.disabled {
+		opacity: .4;
+	}
+	span.chapter-name {
+		display: block;
+		font-size: 12px;
+		font-style: italic;
+	}
 }
 @media screen and (max-width: 425px) {
 	.rank-list {
