@@ -654,7 +654,6 @@ var App = {
 				$("#mypoints").html(data.val().score);
 			});
 			this.getRanking();
-			this.cleanDB();
 		},
 		/*addGDGPhilippines: function() {
 			App.Firebase.ref("users").once("value", function(users) {
