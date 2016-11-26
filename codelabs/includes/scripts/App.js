@@ -921,6 +921,7 @@ var App = {
 	},
 	Leaderboard: {
 		load: function(codelab) {
+			App.User.checkScore();
 			if(!codelab)
 				codelab = "score";
 			this.getCount(codelab);
@@ -1163,6 +1164,7 @@ var App = {
 	},
 	All: {
 		load: function() {
+			App.User.checkScore();
 			this.getCount();
 		},
 		TEMPLATE: 	'<div class="card rank-list">' +
