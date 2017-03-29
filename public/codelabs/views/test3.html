@@ -1,0 +1,33 @@
+<div id="view">
+	<script>
+		var tara = {}
+		var total = 0;
+		var tech = ["pwa-1", "polymer-1", "polymer-2", "firebase-1", "firebase-2", "android-1", "android-2", "cardboard-1", "cardboard-2", "cloud-1", "cloud-2", "cloud-3"]
+		for(var i = 0; i < tech.length; i++) {
+			tara[tech[i]] = {
+				start: 0,
+				finish: 0,
+				morethan60: 0
+			};
+		}
+		App.Firebase.ref("users").once("value", function(data) {
+			for(var u in data.val()) {
+				if(data.val()[u].chapter == "GDG Cagayan de Oro") {
+					for(var i = 0; i < tech.length; i++) {
+						if(data.child(u+"/codelabs/"+tech[i]).exists())
+							tara[tech[i]].start++;
+						if(data.child(u+"/codelabs/"+tech[i]+"/score").exists()) {
+							tara[tech[i]].finish++;
+							if(data.val()[u].codelabs[tech[i]].score >= 60) {
+								tara[tech[i]].morethan60++;
+							}
+						}
+					}
+					total++;
+				}
+			}
+			console.log(JSON.stringify(tara));
+			console.log(total);
+		});
+	</script>
+</div>
