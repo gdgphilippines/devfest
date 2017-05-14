@@ -1,0 +1,33 @@
+{
+  "name": "minimal-appshell",
+  "description": "Brunch.io application",
+  "private": true,
+  "author": "Brunch",
+  "version": "0.0.1",
+  "repository": "",
+  "dependencies": {},
+  "devDependencies": {
+    "web-component-tester": "^5.0.1"
+  },
+  "standard": {
+    "globals": [
+      "$",
+      "jQuery",
+      "fetch",
+      "Polymer"
+    ],
+    "ignore": [
+      "node_modules/**",
+      "bower_components/**",
+      "test/**"
+    ],
+    "plugins": [
+      "html"
+    ],
+    "parser": "babel-eslint",
+    "validate": [
+      "javascript",
+      "html"
+    ]
+  }
+}

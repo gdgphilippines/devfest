@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="not-found-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    Not Found
+  </template>
+
+  <script>
+    /** @polymerElement */
+    (() => {
+      class NotFoundPage extends Polymer.Element {
+        static get is () { return 'not-found-page' }
+        static get properties () {
+          return Object.assign({}, super.properties, {})
+        }
+      }
+      window.customElements.define(NotFoundPage.is, NotFoundPage)
+    })()
+  </script>
+</dom-module>

@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="home-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    Home page
+    <a href="/authorized">Not authorized</a>
+  </template>
+
+  <script>
+    /** @polymerElement */
+    (() => {
+      class HomePage extends Polymer.Element {
+        static get is () { return 'home-page' }
+        static get properties () {
+          return Object.assign({}, super.properties, {})
+        }
+      }
+      window.customElements.define(HomePage.is, HomePage)
+    })()
+  </script>
+</dom-module>

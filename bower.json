@@ -1,0 +1,14 @@
+{
+  "name": "minimal-appshell",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0-rc.3",
+    "iron-location": "tjmonsi/iron-location#2.0-preview",
+    "iron-flex-layout": "tjmonsi/iron-flex-layout#2.0-preview",
+    "minimal-appshell-toolset": "tjmonsi/minimal-appshell-toolset#master"
+  },
+  "devDependencies": {
+    "web-component-tester": "^6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7"
+  }
+}

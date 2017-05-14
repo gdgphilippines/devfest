@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>project-appshell test</title>
+
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../project_components/project-appshell/project-appshell.html">
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <project-appshell></project-appshell>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="ChangedPropertyTestFixture">
+      <template>
+        <project-appshell></project-appshell>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('project-appshell', function () {
+        test('instantiating the element works', function () {
+          var element = fixture('BasicTestFixture')
+          assert.equal(element.constructor.is, 'project-appshell')
+        })
+      })
+    </script>
+
+
+  </body>
+</html>
