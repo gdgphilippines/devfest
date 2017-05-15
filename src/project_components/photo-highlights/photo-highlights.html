@@ -1,0 +1,121 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../project_components/project-icons/project-icons.html">
+
+<link rel="import" href="../../project_components/project-style/project-style.html">
+
+<dom-module id="photo-highlights">
+  <template>
+    <style is="custom-style" include="project-style">
+      :host {
+        display: block
+      }
+
+      .primary-picture {
+        height: 600px;
+        min-width: 300px;
+      }
+
+      .section-title {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      .secondary-picture-container {
+        min-width: 300px;
+        max-width: 400px;
+      }
+
+      .secondary-picture {
+        width: 100%;
+      }
+
+      @media (max-width: 730px) {
+        .horizontal-1 {
+          display: block;
+        }
+
+        .vertical {
+          display: block;
+        }
+
+        .secondary-picture-container {
+          max-width: none;
+        }
+
+        .primary-picture, .secondary-picture {
+          width: 100%;
+          height: 240px;
+        }
+      }
+
+      @media (max-width: 950px) {
+        .horizontal-2 {
+          display: block;
+        }
+
+        .primary-picture {
+          height: 400px;
+        }
+
+        .section-title {
+          display: block;
+          margin: 0px;
+        }
+
+        .primary-button-white {
+          margin: 20px;
+        }
+      }
+
+    </style>
+
+    <div class="section-primary-color">
+      <div class="horizontal horizontal-1">
+        <iron-image class="flex-2 primary-picture"
+            sizing="cover"
+            src="https://lh3.googleusercontent.com/vQRm_CzMnTyfOd4yFb_liDnnT31LTuj7bZZzTbY7VXmrHTtqzSddtqm2s9un_BqZli9tSHSo8oYNEcYNL4w09waGH0FWwbl23JFeGgE55RCHJCwg37sAT51iutAh9wyocZ9Llcnu9nZ2-jvnfv6as9dSD5-kNoHycY0sQN2Blo7G5zR6btKV6u5gqcj6TdraVh8fJTXiZfR3cRJqSZiCJEWV1duTjdLlgOsX0xgO1ujbpHjGvWyR497I3L-wOdKE5qFM7Blu-VWbak-RLfGXqB0R3reVacM14j5mMzPTHQi3wTPXg1SqU1Kf8b9IeC3S-mXm7XfAVJODVk5_h--k8UZdLTc2tT_4toaw8tGIVAZNdJIn2od09FtH2W8R4SaelLuGyx_An2G3oFlQQIGY0imE_lLRyqXEmd27sCJqU8to833-mQDaZQxr3wBRFu7wh-UmAeOjIEWPmp1mRwuIWxxRLeODsJfNfxdpaTUf7LHIYdUiQ1hFYPSyTO0YLmFXX0gsM5R6LqRPKXZS5t6YIWm_SETnq132923jHqqzDEEPTAbiw31OxYwsI5p-v00wKgm8jlrRVtrdjwVtEvNOzS3NPDPMxdE3xnMvgu8bpoTpVH3sa7jUAqNZtjVTEoETGz-vNpmf2hp8GFVSfeW3rJq3zVYqxx8ZAceLyADNAA=w1440-h960-no"></iron-image>
+        <div class="flex secondary-picture-container vertical">
+          <iron-image class="secondary-picture flex"
+              sizing="cover"
+              src="https://lh3.googleusercontent.com/fVSZAUexHJCHdZYxkF999GsvKa1KKGgW90cASTPFcRL4dmK9wU9q9CeIYKb2AxtC0tdwqMtd_3PceH9NQPXLR47iQNd6fwrG6yDYoZCexC-qCeWMZaCk7qCjc3-bSHShiAoaKVuoYsrVpzNEw6Bk-CAOpcQsso83Y-CeoFsXh85ZfdDh6DzxhwJfD5sCnDHMDOzLybGEInaHZYwf3ZNsO4HH6LQ9zao4_jrtEVffU2T7C4m54JQrZnqRUabmzdWFwUqyM2nhuxiKtguQhBDwWIzYv8fgBXaxs_yVk4Oj8g6p5e-ft9twAYBcKEjdy3ott97O1hGe35T_voIvU_gTeb7fqXlhDoot6pjKgYipzMNxtVQkWle4BbbL9Ced80d03zntUSOpV10h3oZ0Nt8MxX5trluqOA4axtJABgGhshainHELR6DEfLTyIb-gXxFxs6Xi8vfspEwWLJSw6ULLxmn-2MCzcHkElpao9xMO_VA5WhYnH0xCoYwAPhXKclAdAyzOdinfrLO0Nxg_N6N1UgczNINNmcD-yp3dRGDhQNeolThgFBFqCp-z2x3lGHGsUgqUbUZl-_vEivCMMgIOtdDJtaMfPhGTPF9m9ZWQ2sKoKp4LP-dlCE4Nb_pez9OD3P4EQtY6Lq799TRgehdBgWBgqiu09-Jb8ZHLYPGC8uM=w1280-h960-no"></iron-image>
+          <iron-image class="secondary-picture flex"
+              sizing="cover"
+              src="https://lh3.googleusercontent.com/LEzaM-bemuAIkqrXOQb1FAG9zXwPzCgBSbm8U0fYnhYhlHpzU15BfvAiv5ciIPZptNPBxuUn8lgplEBdbz-WmX7ApG7YJLlAp4qToHGRjEuNF8LjYB8H8Y0IS0aY-3Va2FQw34Io3YMNS69SnmSe80f5RJqctjwWuU4J8VJeS0m_4ZzCtMh8R8zqol2k5LT0XFFBzr74LyNkFeNoynmwilcMUBKWs-EU0R8dhp2W0deQR_SV2pPB1cfINE3jXcwdqqg6HEoB5xOkDjtg8IfW4SYnRa_SuzWAq_RyFzbRJznsnK6ZY97p1LZXe7_aycaMrGnI5v9Wsi52r9t_Z5ZQQI6aL2dKmZgeyu5n5W1OoZFjq8SZQtEuFUKfP2ZDD0Wdoj_DsYe5UIsvKaL_ON1EQmYf5ztIwTcQzoSPIVxdvoLlSjDtMBJTXwZe5bkh2bVSbXnE33jaa7dfW41wn24q4TWFPJopP0GGSAz4enNjjYfFN9x1keGscNSgR_dm5u5aKMtRxtrWHNvR4gm88GiM_lX-1qDprMMfA_CU83S8WVEgXQkpol_w7cDjwUnv6P26kdwIKh5jZ3372_BXpErfD1M37ha-SMpBEEhMZ9WC-q0BCVlfTjA1-h3q1GyD_i6G92kHEZdw7UIFWOw57atPCcksraW9QWnafU37oWeNiVc=w1440-h960-no"></iron-image>
+        </div>
+      </div>
+      <section class="section center horizontal horizontal-2">
+        <div class="flex hide-on-phone"></div>
+        <a target="_blank" href="https://photos.google.com/share/AF1QipPEKlIZQ1pQhEWleyzz-DrwC7iY_D5ftk_uo9NbVYsEYHtfwbmbBxcyvq46vgAzqQ?key=YzJWVEpLZ2xwQWs4R2syVGl6ZEx4dnJVQU5kbFZn">
+          <paper-button raised class="primary-button-white">View</paper-button>
+        </a>
+        <h1 class="section-title">The Photo Highlights from #Devfest16PH</h1>
+        <div class="flex hide-on-phone"></div>
+      </section>
+    </div>
+
+
+  </template>
+
+  <script>
+    /** @polymerElement */
+    (() => {
+      class PhotoHighlights extends Polymer.Element {
+        static get is () { return 'photo-highlights' }
+        static get properties () {
+          return Object.assign({}, super.properties, {
+            images: {
+              type: Array,
+              value: () => [
+                'https://lh3.googleusercontent.com/vQRm_CzMnTyfOd4yFb_liDnnT31LTuj7bZZzTbY7VXmrHTtqzSddtqm2s9un_BqZli9tSHSo8oYNEcYNL4w09waGH0FWwbl23JFeGgE55RCHJCwg37sAT51iutAh9wyocZ9Llcnu9nZ2-jvnfv6as9dSD5-kNoHycY0sQN2Blo7G5zR6btKV6u5gqcj6TdraVh8fJTXiZfR3cRJqSZiCJEWV1duTjdLlgOsX0xgO1ujbpHjGvWyR497I3L-wOdKE5qFM7Blu-VWbak-RLfGXqB0R3reVacM14j5mMzPTHQi3wTPXg1SqU1Kf8b9IeC3S-mXm7XfAVJODVk5_h--k8UZdLTc2tT_4toaw8tGIVAZNdJIn2od09FtH2W8R4SaelLuGyx_An2G3oFlQQIGY0imE_lLRyqXEmd27sCJqU8to833-mQDaZQxr3wBRFu7wh-UmAeOjIEWPmp1mRwuIWxxRLeODsJfNfxdpaTUf7LHIYdUiQ1hFYPSyTO0YLmFXX0gsM5R6LqRPKXZS5t6YIWm_SETnq132923jHqqzDEEPTAbiw31OxYwsI5p-v00wKgm8jlrRVtrdjwVtEvNOzS3NPDPMxdE3xnMvgu8bpoTpVH3sa7jUAqNZtjVTEoETGz-vNpmf2hp8GFVSfeW3rJq3zVYqxx8ZAceLyADNAA=w1440-h960-no',
+                'https://lh3.googleusercontent.com/fVSZAUexHJCHdZYxkF999GsvKa1KKGgW90cASTPFcRL4dmK9wU9q9CeIYKb2AxtC0tdwqMtd_3PceH9NQPXLR47iQNd6fwrG6yDYoZCexC-qCeWMZaCk7qCjc3-bSHShiAoaKVuoYsrVpzNEw6Bk-CAOpcQsso83Y-CeoFsXh85ZfdDh6DzxhwJfD5sCnDHMDOzLybGEInaHZYwf3ZNsO4HH6LQ9zao4_jrtEVffU2T7C4m54JQrZnqRUabmzdWFwUqyM2nhuxiKtguQhBDwWIzYv8fgBXaxs_yVk4Oj8g6p5e-ft9twAYBcKEjdy3ott97O1hGe35T_voIvU_gTeb7fqXlhDoot6pjKgYipzMNxtVQkWle4BbbL9Ced80d03zntUSOpV10h3oZ0Nt8MxX5trluqOA4axtJABgGhshainHELR6DEfLTyIb-gXxFxs6Xi8vfspEwWLJSw6ULLxmn-2MCzcHkElpao9xMO_VA5WhYnH0xCoYwAPhXKclAdAyzOdinfrLO0Nxg_N6N1UgczNINNmcD-yp3dRGDhQNeolThgFBFqCp-z2x3lGHGsUgqUbUZl-_vEivCMMgIOtdDJtaMfPhGTPF9m9ZWQ2sKoKp4LP-dlCE4Nb_pez9OD3P4EQtY6Lq799TRgehdBgWBgqiu09-Jb8ZHLYPGC8uM=w1280-h960-no',
+                'https://lh3.googleusercontent.com/LEzaM-bemuAIkqrXOQb1FAG9zXwPzCgBSbm8U0fYnhYhlHpzU15BfvAiv5ciIPZptNPBxuUn8lgplEBdbz-WmX7ApG7YJLlAp4qToHGRjEuNF8LjYB8H8Y0IS0aY-3Va2FQw34Io3YMNS69SnmSe80f5RJqctjwWuU4J8VJeS0m_4ZzCtMh8R8zqol2k5LT0XFFBzr74LyNkFeNoynmwilcMUBKWs-EU0R8dhp2W0deQR_SV2pPB1cfINE3jXcwdqqg6HEoB5xOkDjtg8IfW4SYnRa_SuzWAq_RyFzbRJznsnK6ZY97p1LZXe7_aycaMrGnI5v9Wsi52r9t_Z5ZQQI6aL2dKmZgeyu5n5W1OoZFjq8SZQtEuFUKfP2ZDD0Wdoj_DsYe5UIsvKaL_ON1EQmYf5ztIwTcQzoSPIVxdvoLlSjDtMBJTXwZe5bkh2bVSbXnE33jaa7dfW41wn24q4TWFPJopP0GGSAz4enNjjYfFN9x1keGscNSgR_dm5u5aKMtRxtrWHNvR4gm88GiM_lX-1qDprMMfA_CU83S8WVEgXQkpol_w7cDjwUnv6P26kdwIKh5jZ3372_BXpErfD1M37ha-SMpBEEhMZ9WC-q0BCVlfTjA1-h3q1GyD_i6G92kHEZdw7UIFWOw57atPCcksraW9QWnafU37oWeNiVc=w1440-h960-no'
+              ]
+            }
+          })
+        }
+      }
+      window.customElements.define(PhotoHighlights.is, PhotoHighlights)
+    })()
+  </script>
+</dom-module>

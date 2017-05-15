@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../project_components/project-icons/project-icons.html">
+<link rel="import" href="../../project_components/project-style/project-style.html">
+
+<dom-module id="place-section">
+  <template>
+    <style is="custom-style" include="project-style">
+      :host {
+        display: block
+      }
+    </style>
+
+    <section class="section center">
+      place-section
+    </section>
+
+
+  </template>
+
+  <script>
+    /** @polymerElement */
+    (() => {
+      class PlaceSection extends Polymer.Element {
+        static get is () { return 'place-section' }
+        static get properties () {
+          return Object.assign({}, super.properties, {})
+        }
+      }
+      window.customElements.define(PlaceSection.is, PlaceSection)
+    })()
+  </script>
+</dom-module>

@@ -1,3 +1,16 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../project_components/statistics-block/statistics-block.html">
+<link rel="import" href="../../project_components/conference-update/conference-update.html">
+<link rel="import" href="../../project_components/story-share/story-share.html">
+<link rel="import" href="../../project_components/speaker-section/speaker-section.html">
+<!--<link rel="import" href="../../project_components/session-section/session-section.html">-->
+<link rel="import" href="../../project_components/about-organizer-section/about-organizer-section.html">
+<link rel="import" href="../../project_components/photo-highlights/photo-highlights.html">
+<link rel="import" href="../../project_components/news-section/news-section.html">
+<link rel="import" href="../../project_components/place-section/place-section.html">
+<link rel="import" href="../../project_components/socials-section/socials-section.html">
+<link rel="import" href="../../project_components/partners-section/partners-section.html">
+<link rel="import" href="../../project_components/footer-section/footer-section.html">
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="home-page">
@@ -5,11 +18,23 @@
     <style>
       :host {
         display: block;
+        padding-top: 424px;
       }
     </style>
 
-    Home page
-    <a href="/authorized">Not authorized</a>
+    <statistics-block></statistics-block>
+    <conference-update></conference-update>
+    <story-share></story-share>
+    <speaker-section></speaker-section>
+    <photo-highlights></photo-highlights>
+    <!--<session-section></session-section>-->
+    <about-organizer-section></about-organizer-section>
+    <!--<photo-highlights></photo-highlights>-->
+    <news-section></news-section>
+    <place-section></place-section>
+    <socials-section></socials-section>
+    <partners-section></partners-section>
+    <footer-section></footer-section>
   </template>
 
   <script>

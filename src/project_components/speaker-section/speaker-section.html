@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../project_components/project-icons/project-icons.html">
+<link rel="import" href="../../project_components/project-style/project-style.html">
+
+<dom-module id="speaker-section">
+  <template>
+    <style is="custom-style" include="project-style">
+      :host {
+        display: block
+      }
+    </style>
+
+    <section class="section center">
+      <h1 class="section-title">
+        Call for Speakers
+      </h1>
+      <p>
+        <a href="#">Nominate your Speakers now</a>
+      </p>
+    </section>
+
+
+  </template>
+
+  <script>
+    /** @polymerElement */
+    (() => {
+      class SpeakerSection extends Polymer.Element {
+        static get is () { return 'speaker-section' }
+        static get properties () {
+          return Object.assign({}, super.properties, {})
+        }
+      }
+      window.customElements.define(SpeakerSection.is, SpeakerSection)
+    })()
+  </script>
+</dom-module>

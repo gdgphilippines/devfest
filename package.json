@@ -12,6 +12,7 @@
     "build": "export LOGGY_STACKS=true && brunch build --production && npm run polymer-build"
   },
   "dependencies": {
+    "fontfaceobserver": "^2.0.9",
     "redux": "^3.6.0"
   },
   "devDependencies": {

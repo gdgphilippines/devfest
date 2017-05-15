@@ -6,10 +6,9 @@ const javascripts = {
       /^app\/scripts/
     ],
     'vendor.js': [
-      /^node_modules/  
+      /^node_modules/
     ]
   }
-    
 }
 const config = require('./config/app')
 

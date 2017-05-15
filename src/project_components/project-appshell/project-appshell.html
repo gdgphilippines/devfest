@@ -3,6 +3,10 @@
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../../bower_components/iron-location/iron-query-params.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/resize-title.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/parallax-background.html">
 <link rel="import" href="../../bower_components/minimal-appshell-toolset/project-router/project-router-mixin.html">
 
 <dom-module id="project-appshell">
@@ -95,6 +99,13 @@
               type: String
             }
           })
+        }
+
+        ready () {
+          super.ready()
+          setTimeout(() => {
+            this.importLazyGroup('project-header', document.body)
+          }, 10)
         }
       }
       window.customElements.define(ProjectAppshell.is, ProjectAppshell)

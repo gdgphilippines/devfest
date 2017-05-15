@@ -20,17 +20,30 @@
       body {
         background: white;
         margin: 0;
+        font-family: 'Arial', sans-serif;
+        line-height: 1.4;
+        min-height: 100vh;
+      }
+      body.roboto {
+        font-family: 'Roboto', 'Arial', sans-serif;
+        transition: 'font-family' 0.2s;
+      }
+      project-header {
+        position: fixed;
+        width: 100%;
+        z-index: 10;
       }
     </style>
   </head>
   <body>
+
     <link rel="lazy-import" href="/page_components/home-page/home-page.html" group="home-page" />
     <link rel="lazy-import" href="/page_components/not-found-page/not-found-page.html" group="not-found-page" />
     <link rel="lazy-import" href="/page_components/not-authorized-page/not-authorized-page.html" group="not-authorized-page" />
-
+    <link rel="lazy-import" href="/project_components/project-header/project-header.html" group="project-header" />
 
     <project-appshell>
-      <div slot="header">header</div>
+      <project-header slot="header"></project-header>
 
       <home-page route="/" slot="pages"></home-page>
       <home-page route="/authorized" slot="pages" auth-path="auth.value"></home-page>
@@ -38,5 +51,7 @@
       <not-authorized-page route="not-authorized" slot="pages"></not-authorized-page>
       <!--<div route="/home" slot="pages"><a href="/">back</a></div>-->
     </project-appshell>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
   </body>
 </html>
