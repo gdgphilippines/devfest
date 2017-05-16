@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../project_components/project-icons/project-icons.html">
 <link rel="import" href="../../project_components/project-style/project-style.html">
 
@@ -8,11 +9,51 @@
       :host {
         display: block
       }
+
+      .flex {
+        margin: 0 20px;
+      }
+
+      paper-icon-button {
+        margin-left: 0px;
+        padding-left: 0px;
+      }
     </style>
 
-    <section class="section center">
-      place-section
-    </section>
+    <div class="section-primary-color">
+      <section class="section horizontal">
+        <div class="flex">
+          <h2 class="section-title">
+            WHAT'S UP @gdgphilippines
+          </h2>
+
+          <p>
+            Google I/O 2017 Extended Manila Live Viewing Party: <a href="https://ioextended.gdgph.org/#live-viewing"> https://ioextended.gdgph.org/#live-viewing </a>  #io17Extended #gdg #gdgph
+          </p>
+
+
+        </div>
+        <div class="flex">
+          <h2 class="section-title">
+            Social
+          </h2>
+
+          <p>
+            Like, follow or connect with us on<br/>
+            <a href="https://twitter.com/gdgphilippines">
+              <paper-icon-button icon="myicons:twitter"></paper-icon-button>
+            </a>
+            <a href="https://www.facebook.com/gdgphilippines/">
+              <paper-icon-button icon="myicons:facebook"></paper-icon-button>
+            </a>
+            <a href="https://www.meetup.com/gdgphilippines/">
+              <paper-icon-button src="/images/meetup.png"></paper-icon-button>
+            </a>
+          </p>
+
+        </div>
+      </section>
+    </div>
 
 
   </template>

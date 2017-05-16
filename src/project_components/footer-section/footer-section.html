@@ -1,4 +1,7 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../project_components/project-icons/project-icons.html">
 <link rel="import" href="../../project_components/project-style/project-style.html">
 
@@ -6,12 +9,133 @@
   <template>
     <style is="custom-style" include="project-style">
       :host {
-        display: block
+        display: block;
+        border-top: 1px solid #eee;
+        background: #fcfcfc;
+        color: #757575;
+        font-size: 14px;
+      }
+
+      .footer-logo {
+        height: 40px;
+        width: 20px;
+      }
+
+      .gdg-footer {
+        margin-left: 20px;
+        font-size: 25px;
+      }
+
+      .section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .center-align {
+        @apply --layout-center;
+      }
+
+      .footer-area {
+        margin: 0 20px;
+      }
+
+      .footer-area:first-child {
+        margin-left: 0px;
+      }
+
+      .footer-area:last-child {
+        margin-right: 0px;
+      }
+
+      .footer-area-title {
+        margin-top: 20px;
+      }
+
+      .footer-list {
+        list-style: none;
+        margin-left: 0px;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 0px;
+      }
+
+      .footer-item {
+        margin-left: 0px;
+      }
+
+      .footer-link {
+        color: inherit
       }
     </style>
 
-    <section class="section center">
-      conference update
+    <section class="section">
+      <div class="horizontal center-align">
+        <div class="flex horizontal center-align">
+          <iron-image class="footer-logo" sizing="contain" src="/images/logo/gdg.png"></iron-image>
+          <div class="gdg-footer">GDG Philippines</div>
+        </div>
+        <paper-button>Back To top</paper-button>
+      </div>
+
+      <div class="horizontal">
+        <div class="flex footer-area">
+          <h2 class="footer-area-title">For Visitors</h2>
+          <p>
+            <ul class="footer-list">
+              <template is="dom-repeat" items="[[forVisitors]]">
+                <li class="footer-item">
+                  <a href="[[item.link]]" class="footer-link">[[item.text]]</a>
+                </li>
+              </template>
+            </ul>
+          </p>
+        </div>
+
+        <div class="flex footer-area">
+          <h2 class="footer-area-title">For Partners</h2>
+          <p>
+            <ul class="footer-list">
+              <template is="dom-repeat" items="[[forPartners]]">
+                <li class="footer-item">
+                  <a href="[[item.link]]" class="footer-link">[[item.text]]</a>
+                </li>
+              </template>
+            </ul>
+          </p>
+        </div>
+
+        <div class="flex footer-area">
+          <h2 class="footer-area-title">Contact Us</h2>
+          <p>
+            <ul class="footer-list">
+              <template is="dom-repeat" items="[[forContact]]">
+                <li class="footer-item">
+                  <a href="[[item.link]]" class="footer-link">[[item.text]]</a>
+                </li>
+              </template>
+            </ul>
+          </p>
+          <p>
+            <a href="https://twitter.com/gdgphilippines">
+              <paper-icon-button icon="myicons:twitter"></paper-icon-button>
+            </a>
+            <a href="https://www.facebook.com/gdgphilippines/">
+              <paper-icon-button icon="myicons:facebook"></paper-icon-button>
+            </a>
+            <a href="https://www.meetup.com/gdgphilippines/">
+              <paper-icon-button src="/images/meetup.png"></paper-icon-button>
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footnote">
+        <p>
+          © 2017 Based on designs from Project Hoverboard. Modified by GDG Philippines Team · GDG Philippines
+        </p>
+      </div>
     </section>
 
 
@@ -23,7 +147,31 @@
       class FooterSection extends Polymer.Element {
         static get is () { return 'footer-section' }
         static get properties () {
-          return Object.assign({}, super.properties, {})
+          return Object.assign({}, super.properties, {
+            forVisitors: {
+              type: Array,
+              value: () => [
+                {
+                  link: 'https://www.gdgph.org/#/team',
+                  text: 'Meet the Team'
+                },
+                {
+                  link: 'https://developers.google.com/',
+                  text: 'Google Developers'
+                }
+              ]
+            },
+
+            forContact: {
+              type: Array,
+              value: () => [
+                {
+                  link: 'mailto:gdgphilippines@gmail.com',
+                  text: 'gdgphilippines@gmail.com'
+                }
+              ]
+            }
+          })
         }
       }
       window.customElements.define(FooterSection.is, FooterSection)
