@@ -1,0 +1,163 @@
+{
+  // loggedIn: auth != null
+  // articleOwnedByUser: data.val() == auth.uid OR root.child('content').child('article_owners').child($article).val() == auth.uid
+  // isAdmin: root.child('users').child('roles').child('admins').child(auth.uid).val() == true
+  // isEditor: root.child('users').child('roles').child('editors').child(auth.uid).val() == true
+  // isContributor: root.child('users').child('roles').child('contributors').child(auth.uid).val() == true
+  "rules": {
+    "content": {
+      "category_groups": {
+        "category_options": {
+          // READ LIST: ALL
+          ".read": true,
+          "$category": {
+            // WRITE: loggedIn AND isAdmin
+            ".write": "auth != null && root.child('users').child('roles').child('admins').child(auth.uid).val() == true"
+          }
+        }
+      },
+      "infograph_group": {
+        "infograph_owners": {
+          "$infograph": {
+            // READ: loggedIn AND (articleOwnedByUser OR isAdmin OR isEditor)
+            ".read": "auth != null && (data.val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+            // WRITE: loggedIn AND ((onCreate && (isAdmin OR isContributor OR isEditor)) OR (onDelete && (articleOwnedByUser OR isAdmin OR isEditor)))
+            ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('contributors').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)) || (!newData.exists() && (data.val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))"
+          }
+        },
+        "infographs": {
+          "$infograph": {
+            // READ: loggedIn AND (articleOwnedByUser OR isAdmin OR isEditor)
+            ".read": "(root.child('content').child('inforgraph_group').child('inforgraph_category').child('published').child($infograph).exists() || (auth != null && (root.child('content').child('infograph_owners').child('$infograph').val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))",
+            // WRITE: loggedIn AND ((onCreate && (isAdmin OR isContributor OR isEditor)) OR (onDelete && (articleOwnedByUser OR isAdmin OR isEditor)))
+            ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('contributors').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)) || (!newData.exists() && (root.child('content').child('infograph_owners').child('$infograph').val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))"
+          }
+        },
+        "infograph_category": {
+          "draft": {
+            // READ LIST: loggedIn AND (isAdmin || isEditor)
+            ".read": "auth != null && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+            "$infograph": {
+              // READ: loggedIn AND articleOwnedByUser
+              ".read": "auth != null && root.child('content').child('infograph_owners').child($infograph).val() == auth.uid",
+              // WRITE: loggedIn && ((onCreate AND (isAdmin OR isEditor OR articleOwnedByUser)) || (onDelete AND (isAdmin OR isEditor)))
+              ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true || root.child('content').child('infograph_owners').child($infograph).val() == auth.uid))) || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true))"
+            }
+          },
+          "published": {
+            // READ LIST: ALL
+            ".read": true,
+            "$article": {
+              // WRITE: loggedIn && ((onCreate AND (isAdmin OR isEditor)) || (onDelete AND (isAdmin OR isEditor OR articleOwnedByUser)))
+              ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true))) || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true || root.child('content').child('article_owners').child($article).val() == auth.uid))"
+            }
+          }
+        }
+      },
+      "article_group": {
+        "articles": {
+          "$article": {
+            // READ: loggedIn AND (articleOwnedByUser OR isAdmin OR isEditor)
+            ".read": "(root.child('content').child('article_group').child('article_category').child('published').child($article).exists() || root.child('content').child('article_group').child('article_category').child('front_published').child($article).exists() || (auth != null && (root.child('content').child('article_owners').child('$article').val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))",
+            // WRITE: loggedIn AND ((onCreate && (isAdmin OR isContributor OR isEditor)) OR (onDelete && (articleOwnedByUser OR isAdmin OR isEditor)))
+            ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('contributors').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)) || (!newData.exists() && (root.child('content').child('article_owners').child('$article').val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))"
+          }
+        },
+        "article_owners": {
+          "$article": {
+            // READ: loggedIn AND (articleOwnedByUser OR isAdmin OR isEditor)
+            ".read": "auth != null && (data.val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+            // WRITE: loggedIn AND ((onCreate && (isAdmin OR isContributor OR isEditor)) OR (onDelete && (articleOwnedByUser OR isAdmin OR isEditor)))
+            ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('contributors').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)) || (!newData.exists() && (data.val() == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))"
+          }
+        },
+        "article_category": {
+          "draft": {
+            // READ LIST: loggedIn AND (isAdmin || isEditor)
+            ".read": "auth != null && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+            "$article": {
+              // READ: loggedIn AND articleOwnedByUser
+              ".read": "auth != null && root.child('content').child('article_owners').child($article).val() == auth.uid",
+              // WRITE: loggedIn && ((onCreate AND (isAdmin OR isEditor OR articleOwnedByUser)) || (onDelete AND (isAdmin OR isEditor)))
+              ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true || root.child('content').child('article_owners').child($article).val() == auth.uid))) || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true))"
+            }
+          },
+          "published": {
+            // READ LIST: ALL
+            ".read": true,
+            "$article": {
+              // WRITE: loggedIn && ((onCreate AND (isAdmin OR isEditor)) || (onDelete AND (isAdmin OR isEditor OR articleOwnedByUser)))
+              ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true))) || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true || root.child('content').child('article_owners').child($article).val() == auth.uid))"
+            }
+          },
+          "front_published": {
+            // READ LIST: ALL
+            ".read": true,
+            ".indexOn": ".value",
+            "$article": {
+              // WRITE: loggedIn && ((onCreate AND (isAdmin OR isEditor)) || (onDelete AND (isAdmin OR isEditor OR articleOwnedByUser)))
+              ".write": "auth != null && ((!data.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true))) || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true || root.child('content').child('article_owners').child($article).val() == auth.uid))"
+            }
+          }
+        }
+      }
+    },
+    "users": {
+      "profiles": {
+        // READ LIST: loggedIn AND isAdmin
+        ".read": "auth != null && root.child('users').child('roles').child('admins').child(auth.uid).val() == true",
+        "$uid": {
+          // READ: loggedIn AND isUser
+          ".read": "auth != null && $uid == auth.uid",
+          // WRITE: loggedIn AND (isUser OR isAdmin)
+          ".write": "auth != null && ($uid == auth.uid || root.child('users').child('roles').child('admins').child(auth.uid).val() == true)",
+          "display_name": {
+            ".read": true
+          }
+        }
+      },
+      "roles": {
+        "admins": {
+          // READ LIST: ALL
+          ".read": true,
+          "$uid": {
+            // WRITE: loggedIn AND ((isAdmin AND (onCreate OR onDelete)) OR (isUser AND onDelete))
+            ".write": "auth != null && ((root.child('users').child('roles').child('admins').child(auth.uid).val() == true && (!data.exists() || !newData.exists())) || ($uid == auth.uid && !newData.exists()))"
+          }
+        },
+        "contributors": {
+          // READ LIST: ALL
+          ".read": true,
+          "$uid": {
+            // WRITE: loggedIn AND (((isAdmin OR isEditor) AND (onCreate OR onDelete)) OR (isUser AND onDelete))
+            ".write": "auth != null && (((root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true) && (!data.exists() || !newData.exists())) || ($uid == auth.uid && !newData.exists()))"
+          }
+        },
+        "editors": {
+          // READ LIST: ALL
+          ".read": true,
+          "$uid": {
+            // WRITE: loggedIn AND (((isAdmin OR isEditor) AND (onCreate OR onDelete)) OR (isUser AND onDelete))
+            ".write": "auth != null && (((root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true) && (!data.exists() || !newData.exists())) || ($uid == auth.uid && !newData.exists()))"
+          }
+        },
+        "members": {
+          // READ LIST: loggedIn AND (isAdmin OR isMember OR isContributor OR isEditor)
+          ".read": "auth != null && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('members').child(auth.uid).val() == true || root.child('users').child('roles').child('contributors').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+          "$uid": {
+            // WRITE: loggedIn AND (((isAdmin OR isEditor) AND (onCreate OR onDelete)) OR (isUser AND onDelete))
+            ".write": "auth != null && (((root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true) && (!data.exists() || !newData.exists())) || ($uid == auth.uid && !newData.exists()))"
+          }
+        },
+        "pending": {
+          // READ LIST: loggedIn AND (isAdmin OR isEditor)
+          ".read": "auth != null && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)",
+          "$uid": {
+            // WRITE: loggedIn && (onCreate OR (onDelete AND (isAdmin OR isEditor)))
+            ".write": "auth != null && (!data.exists() || (!newData.exists() && (root.child('users').child('roles').child('admins').child(auth.uid).val() == true || root.child('users').child('roles').child('editors').child(auth.uid).val() == true)))"
+          }
+        }
+      }
+    }
+  }
+}
