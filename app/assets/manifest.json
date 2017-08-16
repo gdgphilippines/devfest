@@ -1,6 +1,0 @@
-{
-  "name": "minimal-appshell",
-  "short_name": "minimal-appshell",
-  "start_url": "/",
-  "display": "standalone"
-}
