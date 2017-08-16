@@ -1,0 +1,55 @@
+{
+  "app": {
+    "title": "GDG Devfest 2017",
+    "shortTitle": "Devfest",
+    "description": "GDG Devfest 2017",
+    "baseHref": "/",
+    "analytics": "UA-78413383-2",
+    "firebaseVersion": "4.2.0",
+    "database": "dev",
+    "waitBeforeFetchingSameURLInRest": 60,
+    "sentryUrl": "https://85d1091a410948caa823a5230bd0dbcf@sentry.io/204253",
+    "appVersion": "0.0.1",
+    "firebaseConfig": []
+  },
+  "theme": {
+    "src": "modules/devfest-theme",
+    "ignoreComponents": []
+  },
+  "fragments": {
+    "devfest-landing-page": "modules/devfest-module/pages/devfest-landing-page.html",
+    "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page.html",
+    "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page.html",
+    "example-app-header": "modules/example-module/components/example-app-header.html",
+    "example-app-drawer": "modules/example-module/components/example-app-drawer.html"
+  },
+  "routing": {
+    "/": "devfest-landing-page"
+  },
+  "httpCodes": {
+    "not-found": "devfest-not-found-page",
+    "not-authorized": "devfest-not-authorized-page"
+  },
+  "shellComponents": [
+    {
+      "node": "example-app-header",
+      "header": true,
+      "activate": false,
+      "attrs": []
+    },
+    {
+      "node": "example-app-drawer",
+      "drawer": true,
+      "activate": false,
+      "attrs": []
+    }
+  ],
+  "serviceWorker": {
+    "globIgnores": [],
+    "runtimeCaching": [],
+    "globPatterns": []
+  },
+  "hosting": {
+    "rewrites": []
+  }
+}

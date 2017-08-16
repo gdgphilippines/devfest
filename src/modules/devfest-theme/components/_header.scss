@@ -1,0 +1,22 @@
+.header {
+  margin: 0 auto;
+  max-width: 3000px;
+  height: 1000px;
+  background: url('/images/header.png') bottom/cover no-repeat;
+  @media only screen and (max-width: 1440px) {
+    height: 500px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    height: 500px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 400px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 250px;
+  }
+
+}

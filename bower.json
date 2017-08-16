@@ -1,0 +1,26 @@
+{
+  "name": "devfest",
+  "description": "GDG Devfest 2017",
+  "main": "dist/public/index.html",
+  "authors": [
+    "Toni-Jan Keith Monserrat"
+  ],
+  "license": "MIT",
+  "homepage": "git://github.com/gdgphilippines/devfest.git",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.1",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.1",
+    "polymer-redux": "^1.0.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "^6.0.0"
+  }
+}

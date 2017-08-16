@@ -1,0 +1,322 @@
+<link rel="import" href="../../firebase-property-mixin/mixins/firebase-property-mixin.html">
+<link rel="import" href="../reducers/reducers.html">
+
+<script>
+  (() => {
+    const authSubscriptions = []
+    const firebaseAuthsDB = new window.PouchDB('firebaseAuths', { auto_compaction: true })
+
+    window.App.Mixins.UserData = (superClass) => {
+      /**
+      * @polymer
+      * @extends HTMLElement
+      */
+      return class extends window.App.Mixins.FirebasePropertyMixin(window.App.Mixins.ReduxMixin(superClass)) {
+        static get properties () {
+          var properties = {
+            user: {
+              type: Object,
+              statePath: 'userModel.default.user',
+              readOnly: true,
+              notify: true
+            },
+
+            userProfile: {
+              type: Object,
+              firebasePath: '[[userPath.data]]/[[user.uid]]',
+              auth: true
+            },
+
+            appUsers: {
+              type: Object,
+              statePath: 'userModel.apps',
+              readOnly: true,
+              notify: true
+            },
+
+            userStatusKnown: {
+              type: Boolean,
+              statePath: 'userModel.default.userStatusKnown',
+              value: false,
+              readOnly: true,
+              reflectToAttribute: true,
+              notify: true
+            },
+
+            signedIn: {
+              type: Boolean,
+              statePath: 'userModel.default.signedIn',
+              value: false,
+              readOnly: true,
+              reflectToAttribute: true,
+              notify: true
+            },
+
+            auth: {
+              type: Object,
+              readOnly: true,
+              notify: true
+            }
+          }
+          return App.utils.extends({}, super.properties, properties)
+        }
+
+        constructor () {
+          super()
+          const modelName = 'user'
+          Object.defineProperty(this, `__${modelName}Database`, { value: App.__database || 'default' })
+          Object.defineProperty(this, `__${modelName}Model`, { value: modelName })
+          Object.defineProperty(this, `__${modelName}Actions`, { value: App.Actions[`${modelName}Model`] })
+          Object.defineProperty(this, `${modelName}Path`, {
+            configurable: true,
+            value: {
+              data: `${this[`__${modelName}Database`]}/${this[`__${modelName}Model`]}/data`,
+              query: `${this[`__${modelName}Database`]}/${this[`__${modelName}Model`]}/query`,
+              list: `${this[`__${modelName}Database`]}/${this[`__${modelName}Model`]}/list`
+            }
+          })
+
+          Object.freeze(this[`${modelName}Path`])
+          Object.freeze(this[`__${modelName}Actions`])
+          this.__boundAuthStateChanged = this.__authStateChanged.bind(this)
+        }
+
+        connectedCallback () {
+          super.connectedCallback()
+          this.__authStateChanged()
+        }
+
+        /**
+         * Authenticates a Firebase client using a new, temporary guest account.
+         *
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signInAnonymously (appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).signInAnonymously())
+        }
+
+        /**
+         * Authenticates a Firebase client using a custom JSON Web Token.
+         *
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signInWithCustomToken (token, appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).signInWithCustomToken(token))
+        }
+
+        /**
+         * Authenticates a Firebase client using an oauth id_token.
+         *
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signInWithCredential (credential, appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).signInWithCredential(credential))
+        }
+
+        /**
+         * Authenticates a Firebase client using a popup-based OAuth flow.
+         *
+         * @param  {?String} provider Provider OAuth flow to follow. If no
+         * provider is specified, it will default to the element's `provider`
+         * property's OAuth flow (See the `provider` property's documentation
+         * for supported providers).
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signInWithPopup (provider, appName) {
+          return this.__attemptProviderSignIn(this.__normalizeProvider(provider), this.__computeAuth(appName).signInWithPopup)
+        }
+
+        /**
+         * Authenticates a firebase client using a redirect-based OAuth flow.
+         *
+         * @param  {?String} provider Provider OAuth flow to follow. If no
+         * provider is specified, it will default to the element's `provider`
+         * property's OAuth flow (See the `provider` property's documentation
+         * for supported providers).
+         * @return {Promise} Promise that handles failure. (NOTE: The Promise
+         * will not get resolved on success due to the inherent page redirect
+         * of the auth flow, but it can be used to handle errors that happen
+         * before the redirect).
+         */
+        signInWithRedirect (provider, appName) {
+          return this.__attemptProviderSignIn(this.__normalizeProvider(provider), this.__computeAuth(appName).signInWithRedirect)
+        }
+
+        /**
+         * Authenticates a Firebase client using an email / password combination.
+         *
+         * @param  {!String} email Email address corresponding to the user account.
+         * @param  {!String} password Password corresponding to the user account.
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signInWithEmailAndPassword (email, password, appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).signInWithEmailAndPassword(email, password))
+        }
+
+        /**
+         * Creates a new user account using an email / password combination.
+         *
+         * @param  {!String} email Email address corresponding to the user account.
+         * @param  {!String} password Password corresponding to the user account.
+         * @return {Promise} Promise that handles success and failure.
+         */
+        createUserWithEmailAndPassword (email, password, appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).createUserWithEmailAndPassword(email, password))
+        }
+
+        /**
+         * Sends a password reset email to the given email address.
+         *
+         * @param  {!String} email Email address corresponding to the user account.
+         * @return {Promise} Promise that handles success and failure.
+         */
+        sendPasswordResetEmail (email, appName) {
+          return this.__handleSignIn(this.__computeAuth(appName).sendPasswordResetEmail(email))
+        }
+
+        /**
+         * Unauthenticates a Firebase client.
+         *
+         * @return {Promise} Promise that handles success and failure.
+         */
+        signOut (appName) {
+          return this.__computeAuth(appName).signOut()
+        }
+
+        __attemptProviderSignIn (provider, method, appName) {
+          if (!provider) {
+            return Promise.reject(new Error('Must supply a provider for popup sign in.'))
+          }
+          if (!this.__computeAuth(appName)) {
+            return Promise.reject(new Error('No app configured for firebase-auth!'))
+          }
+          return this.__handleSignIn(method.call(this.__computeAuth(appName), provider))
+        }
+
+        __providerFromName (name) {
+          switch (name) {
+            case 'facebook': return new firebase.auth.FacebookAuthProvider()
+            case 'github': return new firebase.auth.GithubAuthProvider()
+            case 'google': return new firebase.auth.GoogleAuthProvider()
+            case 'twitter': return new firebase.auth.TwitterAuthProvider()
+            default: this.fire('error', 'Unrecognized firebase-auth provider "' + name + '"')
+          }
+        }
+
+        __normalizeProvider (provider) {
+          if (typeof provider === 'string') {
+            return this.__providerFromName(provider)
+          }
+          return provider
+        }
+
+        __handleSignIn (promise) {
+          return promise.catch((err) => {
+            this.dispatchEvent(new window.ErrorEvent('error', {
+              error: err
+            }))
+            throw err
+          })
+        }
+
+        _computeSignedIn (user) {
+          return !!user
+        }
+
+        __getAuthSubscriptions () {
+          return authSubscriptions
+        }
+
+        __computeAuth (appName) {
+          var auth = appName == null ? firebase.app().auth() : firebase.app(appName).auth()
+          if (!auth) {
+            throw new Error('No app configured for firebase-auth!')
+          }
+          return auth
+        }
+
+        __authStateChanged () {
+          // console.log('firebase')
+          firebaseAuthsDB.get('currentSession').then((doc) => {
+            if ((this.user && !this.user.uid) || !this.user) {
+              this._setProperty('user', App.utils.extends({}, this.user, { uid: doc.uid }))
+            }
+          }).catch((err) => {
+            if (err.name !== 'not_found') {
+              console.error(err)
+            }
+          })
+
+          if (window.firebase) {
+            for (var i in App.__firebaseConfig) {
+              var appName = App.__firebaseConfig[i].appName
+              var auth = this.__computeAuth(appName)
+              var flag = true
+              for (var j in authSubscriptions) {
+                if (authSubscriptions[j].appName === (appName || '[[DEFAULT]]')) {
+                  flag = false
+                  break
+                }
+              }
+              if (flag) {
+                // console.log('subscribing user')
+                this.auth = auth
+                var subscription = auth.onAuthStateChanged((user) => {
+                  this.__stateUserStatusKnown(true, appName)
+                  if (user) {
+                    firebaseAuthsDB.upsert('currentSession', (doc) => {
+                      doc.uid = user.uid
+                      return doc
+                    })
+                    this.__stateSignIn(user, appName)
+                  } else {
+                    firebaseAuthsDB.upsert('currentSession', (doc) => {
+                      doc.uid = null
+                      return doc
+                    })
+                    this.__deleteAuthLocalDB()
+                    this.__stateSignOut(user, appName)
+                  }
+                }, this.__onError)
+                authSubscriptions.push({
+                  appName: appName || '[[DEFAULT]]',
+                  subscription
+                })
+              }
+            }
+            // console.log(authSubscriptions)
+            window.removeEventListener('firebase-app-initialized', this.__boundAuthStateChanged)
+          } else {
+            window.addEventListener('firebase-app-initialized', this.__boundAuthStateChanged)
+          }
+        }
+
+        __onError (err) {
+          console.error(err)
+        }
+
+        __stateUserStatusKnown (status, appName) {
+          this.dispatch({
+            type: this.__userActions['status' + (status ? 'Known' : 'Unknown')],
+            appName
+          })
+        }
+
+        __stateSignIn (user, appName) {
+          this.dispatch({
+            type: this.__userActions.signIn,
+            user,
+            appName
+          })
+        }
+
+        __stateSignOut (appName) {
+          this.dispatch({
+            type: this.__userActions.signOut,
+            appName
+          })
+        }
+      }
+    }
+  })()
+</script>
