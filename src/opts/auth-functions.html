@@ -1,0 +1,16 @@
+<script>
+  (() => {
+    window.App.Mixins.AuthFunctions = (superClass) => {
+      /**
+      * @polymer
+      * @extends HTMLElement
+      */
+      return class extends superClass {
+        // add methods of permissions here
+        checkUser () {
+          return this.user
+        }
+      }
+    }
+  })()
+</script>

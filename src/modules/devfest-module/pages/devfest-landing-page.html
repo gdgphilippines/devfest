@@ -1,0 +1,24 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="devfest-landing-page">
+  <template>
+    <style>
+      header > img {
+        width: 100%;
+      }
+    </style>
+
+    <header class="header">
+      <!-- <img class="header-image" src="/images/header.png"> -->
+    </header>
+  </template>
+  <script>
+    (() => {
+      class DevfestLandingPage extends Polymer.Element {
+        static get is () { return 'devfest-landing-page' }
+      }
+
+      window.customElements.define(DevfestLandingPage.is, DevfestLandingPage)
+    })()
+  </script>
+</dom-module>

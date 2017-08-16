@@ -1,0 +1,73 @@
+{
+  "name": "devfest",
+  "description": "GDG Devfest 2017",
+  "private": true,
+  "version": "0.0.1",
+  "author": {
+    "name": "Toni-Jan Keith Monserrat",
+    "email": "tjmonsi@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gdgphilippines/devfest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tjmonsi/devfest/issues"
+  },
+  "scripts": {
+    "test": "xvfb-run wct test --skip-plugin sauce",
+    "start": "gulp",
+    "serve": "firebase serve",
+    "serve-c9": "firebase serve -p $PORT -o $IP",
+    "build": "export NODE_ENV=production && gulp build"
+  },
+  "dependencies": {
+    "path-to-regexp": "^1.7.0",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "workbox-build": "^1.2.0",
+    "workbox-routing": "^1.1.0",
+    "workbox-sw": "^1.1.0",
+    "web-component-tester": "^6.0.0"
+  },
+  "standard": {
+    "globals": [
+      "$",
+      "jQuery",
+      "fetch",
+      "Polymer",
+      "CustomEvent",
+      "ga",
+      "performance"
+    ],
+    "ignore": [
+      "node_modules",
+      "bower_components",
+      "node_modules/**",
+      "bower_components/**",
+      "node_modules\\**",
+      "bower_components\\**",
+      "test/**",
+      "test\\**",
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**\\bower_components\\**",
+      "**\\node_modules\\**",
+      "**\\test\\**",
+      "**/test/**",
+      "node_modules/**",
+      "bower_components/**",
+      "src/test/**"
+    ],
+    "plugins": [
+      "html"
+    ],
+    "parser": "babel-eslint",
+    "validate": [
+      "javascript",
+      "html"
+    ]
+  }
+}

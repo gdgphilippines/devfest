@@ -1,0 +1,7 @@
+// @import "./core/modules/default-theme/partials/*";
+@import './partials/_base.scss';
+
+body {
+  margin: 0;
+  font-size: $base-font-size;
+}

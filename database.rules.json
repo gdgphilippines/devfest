@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "dev": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
