@@ -77,3 +77,9 @@ if (window.performance) {
 
 // Register the base URL
 window.App.baseUrl = window.App.baseUrl || '/'
+
+// loading more essential files
+
+var script = document.createElement('script')
+script.src = 'index.js'
+document.head.appendChild(script)
