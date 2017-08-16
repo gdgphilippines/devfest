@@ -22,16 +22,6 @@
           "version": "latest"
         },
         {
-          "browserName": "chrome",
-          "platform": "Windows 10",
-          "version": "latest-1"
-        },
-        {
-          "browserName": "chrome",
-          "platform": "Windows 10",
-          "version": "latest-2"
-        },
-        {
           "browserName": "firefox",
           "platform": "Linux",
           "version": "latest"
