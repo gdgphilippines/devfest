@@ -58,7 +58,7 @@ exports.files = {
 }
 
 exports.paths = {
-  watched: ['app', 'images', 'config', 'src']
+  watched: ['app', 'images', 'config', 'src', 'templates']
 }
 
 exports.conventions = {
@@ -74,7 +74,7 @@ exports.overrides = {
     }
   },
   production: {
-    optimize: true,
+    optimize: false,
     sourceMaps: false,
     paths: {
       public: 'temp_build'

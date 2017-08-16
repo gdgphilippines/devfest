@@ -15,6 +15,7 @@
   "sources": [
     "images/**/*",
     "app.js",
+    "vendor.js",
     "manifest.json"
   ]
 }
