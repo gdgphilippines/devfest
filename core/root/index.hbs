@@ -44,7 +44,7 @@
     {{/each}}
     <meta name="msapplication-TileColor" content="{{theme.themeColor}}">
     <meta name="msapplication-tap-highlight" content="{{theme.webApp.tapHighlight}}">
-    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now&flags=gated"></script>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries&flags=gated"></script>
     <script>
       // set project namespace
       Object.defineProperty(window, 'App', { value: window.App || {} })
@@ -111,7 +111,7 @@
       Object.defineProperty(App, '__build', { value: App.__build || '{{build}}' })
       Object.defineProperty(App, '__version', { value: App.__version || '{{version}}' })
       Object.defineProperty(App, '__database', { value: App.__database || '{{database}}' })
-      Object.defineProperty(App, '__analytics', { value: App.__analytics || '{{app.analytics}} '})
+      Object.defineProperty(App, '__analytics', { value: App.__analytics || '{{app.analytics}}' })
 
       // set config variables
       Object.defineProperty(App, '__routes', { value: App.__routes || '{{#compileRouting}}{{/compileRouting}}' })

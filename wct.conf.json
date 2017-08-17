@@ -1,0 +1,78 @@
+{
+  "suites": ["dist/public/test/"],
+  "plugins": {
+    "local": {
+      "browsers": ["firefox"]
+    },
+    "sauce": {
+      "browsers": [
+        {
+          "browserName": "microsoftedge",
+          "platform": "Windows 10",
+          "version": ""
+        },
+        {
+          "browserName": "safari",
+          "platform": "OS X 10.11",
+          "version": "10"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest-1"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest-2"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest-3"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest-4"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "latest-5"
+        },
+        {
+          "browserName": "firefox",
+          "platform": "Linux",
+          "version": "latest"
+        },
+        {
+          "browserName": "firefox",
+          "platform": "Linux",
+          "version": "latest-1"
+        },
+        {
+          "browserName": "firefox",
+          "platform": "Windows 10",
+          "version": "latest"
+        },
+        {
+          "browserName": "firefox",
+          "platform": "Windows 10",
+          "version": "latest-1"
+        },
+        {
+          "browserName": "firefox",
+          "platform": "Windows 10",
+          "version": "latest-2"
+        }
+
+      ]
+    }
+  }
+}

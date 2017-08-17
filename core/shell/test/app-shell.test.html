@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>app-shell test</title>
+
+    <script src="../../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../bower_components/web-component-tester/browser.js"></script>
+    <script src="../../test/essentials.js"></script>
+    <script src="../../index.js"></script>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries&flags=gated"></script>
+
+    <link rel="import" href="../app-shell.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <app-shell></app-shell>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('app-shell', function() {
+        setup(function() {
+          element = fixture('basic');
+        });
+
+        // instantiation
+        test('instantiating the element works', function() {
+          assert.equal(element.nodeName.toLowerCase(), 'app-shell');
+          assert.equal(element.constructor.is, 'app-shell');
+        });
+      });
+    </script>
+  </body>
+</html>
