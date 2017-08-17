@@ -1,22 +1,70 @@
 .header {
-  margin: 0 auto;
-  max-width: 2000px;
+  position: relative;
   height: 600px;
-  background: url('/images/header.png') bottom/cover no-repeat;
-  @media only screen and (max-width: 2000px) {
-    height: 600px;
-  }
+  background: url('/images/devfest-bg-repeatable.png') repeat;
 
   @media only screen and (max-width: 1200px) {
     height: 500px;
   }
 
   @media only screen and (max-width: 600px) {
+    background: url('/images/devfest-bg-repeatable.png') center/contain repeat;
     height: 400px;
   }
 
-  @media only screen and (max-width: 600px) {
-    height: 250px;
+  @media only screen and (max-width: 500px) {
+    background: url('/images/devfest-bg-repeatable.png') center/contain repeat;
+    height: 300px;
   }
+
+  > .header-white-fade {
+    position: absolute;
+    width: 100%;
+    height: 600px;
+    background: rgba(255,255,255,0.5); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.75), rgba(255,255,255,1), rgba(255,255,255,1)); /* Standard syntax */
+
+    @media only screen and (max-width: 1200px) {
+      height: 500px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      height: 400px;
+    }
+
+    @media only screen and (max-width: 500px) {
+      height: 300px;
+    }
+  }
+
+  > .header-image {
+    position: relative;
+    height: 100%;
+    // padding-top: 10%;
+    z-index: 1;
+    text-align: center;
+    @apply --layout-horizontal;
+    @apply --layout-center;
+
+    background: rgba(255,255,255,0.5); /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* Standard syntax */
+
+    >  .header-image-container {
+      height: 60%;
+      margin-left: 20px;
+      margin-right: 20px;
+      background: url('/images/devfest-10x-logo.png') center/contain no-repeat;
+      @apply --layout-flex;
+    }
+
+
+  }
+
 
 }
