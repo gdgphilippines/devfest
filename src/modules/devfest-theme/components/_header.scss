@@ -1,10 +1,10 @@
 .header {
   margin: 0 auto;
-  max-width: 3000px;
-  height: 1000px;
+  max-width: 2000px;
+  height: 600px;
   background: url('/images/header.png') bottom/cover no-repeat;
-  @media only screen and (max-width: 1440px) {
-    height: 500px;
+  @media only screen and (max-width: 2000px) {
+    height: 600px;
   }
 
   @media only screen and (max-width: 1200px) {
