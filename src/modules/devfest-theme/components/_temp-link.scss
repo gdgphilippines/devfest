@@ -2,9 +2,15 @@
   padding: 20px;
   padding-top: 0px;
   font-family: 'Roboto', 'Arial', sans-serif;
-  font-size: 1em;
+  color: #666;
+  line-height: 150%;
+  font-size: 1.25em;
   text-align: center;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 550px;
   padding-bottom: 100px;
+
+  @media only screen and (max-width: 500px) {
+    font-size: 1em;
+  }
 }

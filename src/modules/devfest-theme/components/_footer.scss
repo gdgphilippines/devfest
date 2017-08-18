@@ -1,6 +1,6 @@
 .footer {
   background: #303C42;
-  color: #ffffff;
+  color: rgba(255,255,255,0.8);
 
 
   a {
@@ -45,6 +45,12 @@
     @apply --layout-wrap;
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 20px;
+
+    @media only screen and (max-width: 500px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
 
     > .footer-column {
       @apply --layout-flex;
