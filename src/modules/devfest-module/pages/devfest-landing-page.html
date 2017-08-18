@@ -1,6 +1,8 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../components/devfest-footer.html">
+<link rel="import" href="../icons/devfest-icons.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
 
 <dom-module id="devfest-landing-page">
@@ -29,10 +31,21 @@
         GDG DevFest Philippines brings together experts in Mobile, Web and Cloud technologies to Manila for sessions, workshops and showcases
       </p>
       <p>
-        <br/></br>
+        <br/></br/>
         <a href="https://devfestphilippines.eventbrite.com" class="button" target="_blank">
           <paper-ripple></paper-ripple>
           Register Here
+        </a>
+        <br/><br/>
+      </p>
+      <p>
+        <br/><br/>
+        Tell your friends about it:<br/>
+        <a href="[[_shareFacebookLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">
+          <paper-icon-button icon="devfest:facebook"></paper-icon-button>
+        </a>
+        <a href="[[_shareTwitterLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">
+          <paper-icon-button icon="devfest:twitter"></paper-icon-button>
         </a>
       </p>
     </section>
@@ -43,6 +56,23 @@
     (() => {
       class DevfestLandingPage extends Polymer.Element {
         static get is () { return 'devfest-landing-page' }
+
+        _shareFacebookLink () {
+          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+          var link = window.location.protocol + '//' + window.location.hostname; //'https://uxphilippines.com' //
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
+          return `https://www.facebook.com/dialog/feed?app_id=476565679402935&redirect_uri=${encodeURI('https://devfest.gdgph.org')}&link=${linkdecoded}&picture=${picture}&name=${encodeURI(text)}&caption=${encodeURI('GDG Devfest Philippines 2017')}&description=${encodeURI(text)}&display=page`
+
+        }
+
+        _shareTwitterLink () {
+          var link = window.location.protocol + '//' + window.location.hostname;
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
+          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+          return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest')}`;
+        }
       }
 
       window.customElements.define(DevfestLandingPage.is, DevfestLandingPage)

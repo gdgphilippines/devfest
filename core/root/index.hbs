@@ -8,6 +8,18 @@
     <title>{{app.title}}</title>
     <meta name="description" content="{{app.description}}">
 
+    <meta property="og:title" content="{{app.title}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{app.image}}" />
+    <meta property="og:description" content="{{app.description}}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="{{app.twitter}}" />
+    <meta name="twitter:creator" content="{{app.twitter}}" />
+    <meta name="twitter:title" content="{{app.title}}" />
+    <meta name="twitter:description" content="{{app.description}}" />
+    <meta name="twitter:image" content="{{app.image}}" />
+
     <!--
       If deploying to a non-root path, replace href="/" with the full path to the project root.
       For example: href="/polymer-starter-kit/relative-path-example/"
