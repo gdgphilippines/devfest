@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../components/devfest-footer.html">
 <link rel="import" href="../icons/devfest-icons.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
@@ -11,7 +12,6 @@
     </style>
 
     <header class="header">
-
       <div class="header-white-fade">
       </div>
       <div class="header-image">
@@ -21,23 +21,9 @@
     </header>
 
     <section class="temp-link">
-      <p>
-        In celebration of GDG Philippines 10th Anniversary, we bring to you the Grandest Technology event of the year - GDG DevFest Philippines 2017!
-      </p>
-      <p>
-        In this conference our goal is to equip you with new knowledge & skills that you can immediately apply and bring back to your respective companies.
-      </p>
-      <p>
-        GDG DevFest Philippines brings together experts in Mobile, Web and Cloud technologies to Manila for sessions, workshops and showcases
-      </p>
-      <p>
-        <br/></br/>
-        <a href="https://devfestphilippines.eventbrite.com" class="button" target="_blank">
-          <paper-ripple></paper-ripple>
-          Register Here
-        </a>
-        <br/><br/>
-      </p>
+      <marked-element class="marked-temp-link" markdown="[[tempLink]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
       <p>
         <br/><br/>
         Tell your friends about it:<br/>
@@ -56,6 +42,51 @@
     (() => {
       class DevfestLandingPage extends Polymer.Element {
         static get is () { return 'devfest-landing-page' }
+
+        static get properties () {
+          return {
+            tempLink: {
+              type: String
+            }
+          }
+        }
+
+        connectedCallback () {
+          super.connectedCallback()
+          this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
+          this._fetchContent()
+
+        }
+
+        disconnectedCallback () {
+          this._db.close()
+        }
+
+        _fetchContent () {
+          const link = '/api/landing-temp-link'
+          this._db.get(link).then(doc => {
+            this.tempLink = doc.data
+          })
+
+          fetch(link)
+          .then((res) => {
+            return res.json()
+          })
+          .then(json => {
+            if (json.success) {
+              this.tempLink = json.data
+              this._db.upsert(link, doc => {
+                doc.data = json.data
+                return doc
+              })
+            }
+          })
+          .catch(err => {
+            if (window.Raven) {
+              Raven.captureException(err)
+            }
+          })
+        }
 
         _shareFacebookLink () {
           var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
