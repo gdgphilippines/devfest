@@ -19,7 +19,11 @@
     "polymer": "Polymer/polymer#^2.0.1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.1",
     "polymer-redux": "^1.0.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0"
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "iron-icon": "PolymerElements/iron-icon#^2.0.1",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^2.0.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^2.0.1"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"
