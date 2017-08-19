@@ -1,42 +1,61 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
-<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">
-<link rel="import" href="../components/devfest-footer.html">
-<link rel="import" href="../icons/devfest-icons.html">
+<!--<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">-->
+<!--<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">-->
+<!--<link rel="import" href="../components/devfest-footer.html">-->
+<!--<link rel="import" href="../icons/devfest-icons.html">-->
 <link rel="import" href="../fonts/devfest-fonts.html">
 
 <dom-module id="devfest-landing-page">
   <template>
     <style>
     </style>
-
+    
     <header class="header">
-      <div class="header-white-fade">
-      </div>
-      <div class="header-image">
-        <div class="header-image-container">
+      <div class="header-white"></div>
+      <div class="header-container">
+        <div class="header-image-text-container">
+          <div class="header-image">
+            <img src="/images/header.gif" alt="GDG Devfest Philippines 2017 10x Inspiration Ingenuity Impact">
+          </div>
+          <div class="header-text">
+            <h1>October 14, 2017</h1>
+            <a href="https://devfestphilippines.eventbrite.com/" class="button" target="_blank">
+              <paper-ripple></paper-ripple>
+              Get Tickets
+            </a>
+          </div>    
         </div>
       </div>
+      
     </header>
 
-    <section class="temp-link">
-      <marked-element class="marked-temp-link" markdown="[[tempLink]]">
-        <div slot="markdown-html"></div>
-      </marked-element>
-      <p>
-        <br/><br/>
-        Tell your friends about it:<br/>
-        <a href="[[_shareFacebookLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">
-          <paper-icon-button icon="devfest:facebook"></paper-icon-button>
-        </a>
-        <a href="[[_shareTwitterLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">
-          <paper-icon-button icon="devfest:twitter"></paper-icon-button>
-        </a>
-      </p>
-    </section>
+    <!--<header class="header">-->
+    <!--  <div class="header-white-fade">-->
+    <!--  </div>-->
+    <!--  <div class="header-image">-->
+    <!--    <div class="header-image-container">-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</header>-->
 
-    <devfest-footer></devfest-footer>
+    <!--<section class="temp-link">-->
+    <!--  <marked-element class="marked-temp-link" markdown="[[tempLink]]">-->
+    <!--    <div slot="markdown-html"></div>-->
+    <!--  </marked-element>-->
+    <!--  <p>-->
+    <!--    <br/><br/>-->
+    <!--    Tell your friends about it:<br/>-->
+    <!--    <a href="[[_shareFacebookLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
+    <!--      <paper-icon-button icon="devfest:facebook"></paper-icon-button>-->
+    <!--    </a>-->
+    <!--    <a href="[[_shareTwitterLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
+    <!--      <paper-icon-button icon="devfest:twitter"></paper-icon-button>-->
+    <!--    </a>-->
+    <!--  </p>-->
+    <!--</section>-->
+
+    <!--<devfest-footer></devfest-footer>-->
   </template>
   <script>
     (() => {
@@ -53,13 +72,13 @@
 
         connectedCallback () {
           super.connectedCallback()
-          this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
-          this._fetchContent()
+          // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
+          // this._fetchContent()
 
         }
 
         disconnectedCallback () {
-          this._db.close()
+          // this._db.close()
         }
 
         _fetchContent () {
