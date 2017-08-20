@@ -3,7 +3,7 @@
   "author": "TJ Monserrat",
   "themeColor": "#3f51b5",
   "backgroundColor": "#3f51b5",
-  "startUrl": "./?homescreen=1",
+  "startUrl": "/index.html",
   "display": "standalone",
   "webApp": {
     "capable": "yes",
