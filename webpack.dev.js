@@ -6,6 +6,20 @@ const webpack = require('webpack')
 const path = require('path')
 const config = require('./src/config/dev.json')
 const theme = require(`./src/${config.theme.src}/theme.json`)
+const GenerateAssetPlugin = require('generate-asset-webpack-plugin')
+
+const createServiceWorker = (compilation) => {
+  return `
+    importScripts("sw.js")
+    importScripts("workbox-routing.js")
+    const router = new workbox.routing.Router()
+    this.build = JSON.parse('${JSON.stringify(config.build)}')
+    this.app = JSON.parse('${JSON.stringify(config.app)}')
+    this.random = "${new Date().toString()}"
+    importScripts("service-worker-core/routing.js")
+    importScripts("service-worker-src/routing.js")
+  `
+}
 
 const firebase = {
   database: {
@@ -66,6 +80,18 @@ module.exports = {
       {
         from: path.resolve(__dirname, 'src/service-worker.js'),
         to: 'service-worker.js'
+      },
+      {
+        from: path.resolve(__dirname, 'src/service-worker'),
+        to: 'service-worker-src'
+      },
+      {
+        from: path.resolve(__dirname, 'core/service-worker'),
+        to: 'service-worker-core'
+      },
+      {
+        from: path.resolve(__dirname, 'node_modules/workbox-routing/build/importScripts/workbox-routing.dev.*.js'),
+        to: 'workbox-routing.js'
       }
     ]),
     new GenerateJsonPlugin('manifest.json', {
@@ -78,6 +104,12 @@ module.exports = {
       icons: theme.icons
     }),
     new GenerateJsonPlugin('../../firebase.json', firebase),
+    new GenerateAssetPlugin({
+      filename: 'service-worker-test.js',
+      fn: (compilation, cb) => {
+        cb(null, createServiceWorker(compilation))
+      }
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({

@@ -18,7 +18,7 @@
     "firebaseConfig": []
   },
   "theme": {
-    "src": "modules/devfest-theme",
+    "src": "modules/devfest-module",
     "ignoreComponents": []
   },
   "fragments": {

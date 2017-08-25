@@ -1,5 +1,7 @@
 import 'polymer/lib/mixins/property-accessors.html'
 import 'polymer/lib/utils/flattened-nodes-observer.html'
+import 'paper-toast/paper-toast.html'
+// import '../modules/polymer-deps/components/paper-toast.html'
 import LocationMixin from '../mixins/location-mixin.js'
 import QueryParamsMixin from '../mixins/query-params-mixin.js'
 // import pagesLocation from '../utils/pages-location'
@@ -59,8 +61,10 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     main.setAttribute('class', 'main')
     const slot = document.createElement('slot')
     main.appendChild(slot)
+    const toast = document.createElement('paper-toast')
     shadowRoot.appendChild(style)
     shadowRoot.appendChild(main)
+    shadowRoot.appendChild(toast)
     this._routes = {}
   }
 
@@ -98,6 +102,8 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       }
     })
     this._pathChanged(this.path)
+    // console.log('paper-toast')
+    this.shadowRoot.querySelector('paper-toast').show('hello')
   }
 
   _pathChanged (path) {

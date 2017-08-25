@@ -1,0 +1,81 @@
+.header {
+  font-family: 'Roboto';
+  position: relative;
+  min-height: 100vh;
+  background: url('/images/devfest-bg-repeatable.png') center/contain repeat;
+  
+  > .header-white {
+    background: rgba(255,255,255, 0.75);
+    min-height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  > .header-container {
+    position: relative;
+    height: 100vh;
+    @apply --layout-horizontal;
+    @apply --layout-center;
+    
+    > .header-image-text-container {
+      @apply --layout-flex;
+      
+      > .header-image {
+        position: relative;
+        // padding-top: 100px;
+        width: inherit;
+        text-align: center;
+        
+        > img {
+          width: 80%;
+          max-width: 600px;
+        }
+      }
+      
+      > .header-text {
+        text-align: center;
+        > h1 {
+          font-family: 'Product Sans';
+			    opacity: .75;
+        }
+        
+      }  
+    }
+  }
+
+  
+  
+  
+
+  // > .header-image {
+  //   position: relative;
+  //   height: 100%;
+  //   // padding-top: 10%;
+  //   z-index: 1;
+  //   text-align: center;
+  //   @apply --layout-horizontal;
+  //   @apply --layout-center;
+
+  //   background: rgba(255,255,255,0.5); /* For browsers that do not support gradients */
+  //   background: -webkit-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* Safari 5.1 to 6.0 */
+  //   background: -o-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* For Opera 11.6 to 12.0 */
+  //   background: -moz-radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+  //   background: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.75), rgba(255,255,255,0)); /* Standard syntax */
+
+  //   >  .header-image-container {
+  //     height: 60%;
+  //     margin-left: 20px;
+  //     margin-right: 20px;
+  //     background: url('/images/devfest-10x-logo.png') center/contain no-repeat;
+  //     @apply --layout-flex;
+  //   }
+
+
+  // }
+
+
+}
