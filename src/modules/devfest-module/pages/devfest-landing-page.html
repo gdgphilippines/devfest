@@ -1,5 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../polymer-deps/components/paper-ripple.html">
 <!-- <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html"> -->
+<link rel="import" href="../../polymer-deps/components/paper-ripple.html">
 <link rel="import" href="../../devfest-theme/devfest-theme.html">
 <!--<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">-->
 <!--<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">-->
@@ -10,6 +12,9 @@
 <dom-module id="devfest-landing-page">
   <template>
     <style include="devfest-theme">
+      .button {
+        position: relative
+      }
     </style>
 
     <header class="header">
@@ -21,7 +26,7 @@
           </div>
           <div class="header-text">
             <h1>October 14, 2017</h1>
-            <a href="https://devfestphilippines.eventbrite.com/" class="button" target="_blank">
+            <a href="#" class="button" target="">
               <paper-ripple></paper-ripple>
               Get Tickets
             </a>
@@ -75,7 +80,6 @@
           super.connectedCallback()
           // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
           // this._fetchContent()
-
         }
 
         disconnectedCallback () {

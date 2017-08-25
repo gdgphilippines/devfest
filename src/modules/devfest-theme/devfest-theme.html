@@ -1,73 +1,8 @@
-<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../polymer-deps/components/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/shadycss/apply-shim.html">
 
 <dom-module id="devfest-theme">
   <template>
-    <style>
-      .header {
-        font-family: 'Roboto';
-        position: relative;
-        min-height: 100vh;
-        background: url('../../images/devfest-bg-repeatable-compressed.png') center/contain repeat;
-      }
-  .header > .header-white {
-    background: rgba(255, 255, 255, 0.75);
-    min-height: 100%;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0; }
-  .header > .header-container {
-    position: relative;
-    height: 100vh;
-    @apply --layout-horizontal;
-    @apply --layout-center; }
-    .header > .header-container > .header-image-text-container {
-      @apply --layout-flex; }
-      .header > .header-container > .header-image-text-container > .header-image {
-        position: relative;
-        width: inherit;
-        text-align: center; }
-        .header > .header-container > .header-image-text-container > .header-image > img {
-          width: 80%;
-          max-width: 600px; }
-      .header > .header-container > .header-image-text-container > .header-text {
-        text-align: center; }
-        .header > .header-container > .header-image-text-container > .header-text > h1 {
-          font-family: 'Product Sans';
-          opacity: .75; }
-
-.temp-link {
-  padding: 20px;
-  padding-top: 0px;
-  font-family: 'Roboto', 'Arial', sans-serif;
-  color: #666;
-  line-height: 150%;
-  font-size: 1.25em;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 550px;
-  padding-bottom: 100px; }
-  @media only screen and (max-width: 500px) {
-    .temp-link {
-      font-size: 1em; } }
-
-.button {
-  background: #2e9be6;
-  color: white;
-  border: 3px solid #2e9be6;
-  padding: 24px;
-  font-size: 24px;
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  text-decoration: none; }
-
-:host {
-  font-family: 'Roboto', 'Arial', sans-serif; }
-
-    </style>
+    <link rel="stylesheet" href="./theme.scss">
   </template>
 </dom-module>
