@@ -18,10 +18,9 @@
     "test": "xvfb-run wct --skip-plugin sauce --skip-plugin chrome",
     "test-with-screen": "export DISPLAY=:0 && wct --skip-plugin sauce --skip-plugin chrome",
     "test-local": "wct --skip-plugin sauce",
-    "start": "gulp",
     "serve": "firebase serve",
     "serve-c9": "firebase serve -p $PORT -o $IP",
-    "watch": "/node_modules/.bin/webpack --env=dev -w",
+    "start": "/node_modules/.bin/webpack --env=dev -w",
     "build": "/node_modules/.bin/webpack --env=prod"
   },
   "dependencies": {
