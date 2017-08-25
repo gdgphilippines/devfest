@@ -11,9 +11,8 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester slush slush-polyapp-builder
-- slush polyapp-builder:install-deps
-- slush polyapp-builder:build
+- npm install -g bower polylint web-component-tester
+- ./node_modules/.bin/webpack --env=dev
 script:
 - xvfb-run wct
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi

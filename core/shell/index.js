@@ -141,3 +141,5 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
 AppShell.createPropertiesForAttributes()
 
 window.customElements.define(AppShell.is, AppShell)
+
+export default AppShell
