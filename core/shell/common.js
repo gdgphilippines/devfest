@@ -1,0 +1,5 @@
+import 'polymer/lib/property-accessors.html'
+import 'polymer/lib/property-effets.html'
+import 'polymer/lib/template-stamp.html'
+import 'polymer/lib/mutable-data.html'
+import 'polymer/lib/element-mixin.html'

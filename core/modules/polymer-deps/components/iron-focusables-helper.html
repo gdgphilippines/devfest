@@ -11,12 +11,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 
 <script>
-  (function() {
-    'use strict';
-
+  (() => {
     var p = Element.prototype;
     var matches = p.matches || p.matchesSelector || p.mozMatchesSelector ||
-      p.msMatchesSelector || p.oMatchesSelector || p.webkitMatchesSelector;
+      p.msMatchesSelector || p.oMatchesSelector || p.webkitMatchesSelector
 
     Polymer.IronFocusablesHelper = {
 
@@ -27,15 +25,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @param {!Node} node
        * @return {Array<HTMLElement>}
        */
-      getTabbableNodes: function(node) {
-        var result = [];
+      getTabbableNodes: function (node) {
+        var result = []
         // If there is at least one element with tabindex > 0, we need to sort
         // the final array by tabindex.
-        var needsSortByTabIndex = this._collectTabbableNodes(node, result);
+        var needsSortByTabIndex = this._collectTabbableNodes(node, result)
         if (needsSortByTabIndex) {
-          return this._sortByTabIndex(result);
+          return this._sortByTabIndex(result)
         }
-        return result;
+        return result
       },
 
       /**
@@ -43,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @param {!HTMLElement} element
        * @return {boolean}
        */
-      isFocusable: function(element) {
+      isFocusable: function (element) {
         // From http://stackoverflow.com/a/1600194/4228703:
         // There isn't a definite list, it's up to the browser. The only
         // standard we have is DOM Level 2 HTML https://www.w3.org/TR/DOM-Level-2-HTML/html.html,
@@ -56,11 +54,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         // Elements that cannot be focused if they have [disabled] attribute.
         if (matches.call(element, 'input, select, textarea, button, object')) {
-          return matches.call(element, ':not([disabled])');
+          return matches.call(element, ':not([disabled])')
         }
         // Elements that can be focused even if they have [disabled] attribute.
         return matches.call(element,
-          'a[href], area[href], iframe, [tabindex], [contentEditable]');
+          'a[href], area[href], iframe, [tabindex], [contentEditable]')
       },
 
       /**
@@ -69,10 +67,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @param {!HTMLElement} element
        * @return {boolean}
        */
-      isTabbable: function(element) {
+      isTabbable: function (element) {
         return this.isFocusable(element) &&
           matches.call(element, ':not([tabindex="-1"])') &&
-          this._isVisible(element);
+          this._isVisible(element)
       },
 
       /**
@@ -84,12 +82,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {!number}
        * @private
        */
-      _normalizedTabIndex: function(element) {
+      _normalizedTabIndex: function (element) {
         if (this.isFocusable(element)) {
-          var tabIndex = element.getAttribute('tabindex') || 0;
-          return Number(tabIndex);
+          var tabIndex = element.getAttribute('tabindex') || 0
+          return Number(tabIndex)
         }
-        return -1;
+        return -1
       },
 
       /**
@@ -101,16 +99,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {boolean}
        * @private
        */
-      _collectTabbableNodes: function(node, result) {
+      _collectTabbableNodes: function (node, result) {
         // If not an element or not visible, no need to explore children.
         if (node.nodeType !== Node.ELEMENT_NODE || !this._isVisible(node)) {
-          return false;
+          return false
         }
-        var element = /** @type {HTMLElement} */ (node);
-        var tabIndex = this._normalizedTabIndex(element);
-        var needsSort = tabIndex > 0;
+        var element = /** @type {HTMLElement} */ (node)
+        var tabIndex = this._normalizedTabIndex(element)
+        var needsSort = tabIndex > 0
         if (tabIndex >= 0) {
-          result.push(element);
+          result.push(element)
         }
 
         // In ShadowDOM v1, tab order is affected by the order of distrubution.
@@ -126,18 +124,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         //   <input id="B" slot="b" tabindex="1">
         //  </div>
         // TODO(valdrin) support ShadowDOM v1 when upgrading to Polymer v2.0.
-        var children;
+        var children
         if (element.localName === 'content' || element.localName === 'slot') {
-          children = Polymer.dom(element).getDistributedNodes();
+          children = Polymer.dom(element).getDistributedNodes()
         } else {
           // Use shadow root if possible, will check for distributed nodes.
-          children = Polymer.dom(element.root || element).children;
+          children = Polymer.dom(element.root || element).children
         }
         for (var i = 0; i < children.length; i++) {
           // Ensure method is always invoked to collect tabbable children.
-          needsSort = this._collectTabbableNodes(children[i], result) || needsSort;
+          needsSort = this._collectTabbableNodes(children[i], result) || needsSort
         }
-        return needsSort;
+        return needsSort
       },
 
       /**
@@ -146,15 +144,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {boolean}
        * @private
        */
-      _isVisible: function(element) {
+      _isVisible: function (element) {
         // Check inline style first to save a re-flow. If looks good, check also
         // computed style.
-        var style = element.style;
+        var style = element.style
         if (style.visibility !== 'hidden' && style.display !== 'none') {
-          style = window.getComputedStyle(element);
-          return (style.visibility !== 'hidden' && style.display !== 'none');
+          style = window.getComputedStyle(element)
+          return (style.visibility !== 'hidden' && style.display !== 'none')
         }
-        return false;
+        return false
       },
 
       /**
@@ -163,17 +161,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {Array<HTMLElement>}
        * @private
        */
-      _sortByTabIndex: function(tabbables) {
+      _sortByTabIndex: function (tabbables) {
         // Implement a merge sort as Array.prototype.sort does a non-stable sort
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-        var len = tabbables.length;
+        var len = tabbables.length
         if (len < 2) {
-          return tabbables;
+          return tabbables
         }
-        var pivot = Math.ceil(len / 2);
-        var left = this._sortByTabIndex(tabbables.slice(0, pivot));
-        var right = this._sortByTabIndex(tabbables.slice(pivot));
-        return this._mergeSortByTabIndex(left, right);
+        var pivot = Math.ceil(len / 2)
+        var left = this._sortByTabIndex(tabbables.slice(0, pivot))
+        var right = this._sortByTabIndex(tabbables.slice(pivot))
+        return this._mergeSortByTabIndex(left, right)
       },
 
       /**
@@ -183,17 +181,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {Array<HTMLElement>}
        * @private
        */
-      _mergeSortByTabIndex: function(left, right) {
-        var result = [];
+      _mergeSortByTabIndex: function (left, right) {
+        var result = []
         while ((left.length > 0) && (right.length > 0)) {
           if (this._hasLowerTabOrder(left[0], right[0])) {
-            result.push(right.shift());
+            result.push(right.shift())
           } else {
-            result.push(left.shift());
+            result.push(left.shift())
           }
         }
 
-        return result.concat(left, right);
+        return result.concat(left, right)
       },
 
       /**
@@ -207,13 +205,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @return {boolean}
        * @private
        */
-      _hasLowerTabOrder: function(a, b) {
+      _hasLowerTabOrder: function (a, b) {
         // Normalize tabIndexes
         // e.g. in Firefox `<div contenteditable>` has `tabIndex = -1`
-        var ati = Math.max(a.tabIndex, 0);
-        var bti = Math.max(b.tabIndex, 0);
-        return (ati === 0 || bti === 0) ? bti > ati : ati > bti;
+        var ati = Math.max(a.tabIndex, 0)
+        var bti = Math.max(b.tabIndex, 0)
+        return (ati === 0 || bti === 0) ? bti > ati : ati > bti
       }
-    };
-  })();
+    }
+  })()
 </script>

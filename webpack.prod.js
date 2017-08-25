@@ -46,7 +46,7 @@ firebase.hosting.public = './dist/build'
 module.exports = {
   entry: path.resolve(__dirname, 'core/shell/index.js'),
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist/build')
   },
   resolve: {
@@ -71,6 +71,10 @@ module.exports = {
       },
       config,
       theme
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true
+      // async: true
     }),
     new CopyWebpackPlugin([
       {

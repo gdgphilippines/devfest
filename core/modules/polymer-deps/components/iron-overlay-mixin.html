@@ -8,13 +8,12 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/utils/flattened-nodes-observer.html">
 <link rel="import" href="./iron-fit-mixin.html">
 <link rel="import" href="./iron-resizable-mixin.html">
-<link rel="import" href="../../../../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
-<link rel="import" href="../../../../bower_components/iron-overlay-behavior/iron-overlay-manager.html">
-<link rel="import" href="../../../../bower_components/iron-overlay-behavior/iron-focusables-helper.html">
+<link rel="import" href="./iron-overlay-manager.html">
+<link rel="import" href="./iron-focusables-helper.html">
 
 <script>
 (() => {
@@ -198,7 +197,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * Toggle the opened state of the overlay.
        */
       toggle () {
-        this._setCanceled(false)
+        this._setProperty('canceled', false)
         this.opened = !this.opened
       }
 
@@ -206,7 +205,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * Open the overlay.
        */
       open () {
-        this._setCanceled(false)
+        this._setProperty('canceled', false)
         this.opened = true
       }
 
@@ -214,7 +213,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * Close the overlay.
        */
       close () {
-        this._setCanceled(false)
+        this._setProperty('canceled', false)
         this.opened = false
       }
 
@@ -230,7 +229,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (cancelEvent.defaultPrevented) {
           return
         }
-        this._setCanceled(true)
+        this._setProperty('canceled', true)
         this.opened = false
       }
 

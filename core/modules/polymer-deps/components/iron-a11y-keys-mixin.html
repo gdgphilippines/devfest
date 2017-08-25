@@ -268,17 +268,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @polymerBehavior
      */
 
-    Polymer.utils = Polymer.utils || {}
-    Polymer.utils.keyboardEventMatchesKeys = (event, eventString) => {
-      var keyCombos = parseEventString(eventString)
-      for (var i = 0; i < keyCombos.length; ++i) {
-        if (keyComboMatchesEvent(keyCombos[i], event)) {
-          return true
-        }
-      }
-      return false
-    }
-
     Polymer.IronA11yKeysMixin = (superClass) => {
       return class extends superClass {
         static get properties () {
@@ -384,7 +373,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          * @return {boolean}
          */
         keyboardEventMatchesKeys (event, eventString) {
-          return Polymer.utils.keyboardEventMatchesKeys(event, eventString)
+          var keyCombos = parseEventString(eventString)
+          for (var i = 0; i < keyCombos.length; ++i) {
+            if (keyComboMatchesEvent(keyCombos[i], event)) {
+              return true
+            }
+          }
+          return false
         }
 
         _collectKeyBindings () {

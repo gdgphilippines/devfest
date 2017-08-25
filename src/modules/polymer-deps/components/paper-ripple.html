@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/utils/async.html">
-<link rel="import" href="./iron-a11y-keys-mixin.html">
+<link rel="import" href="../../../../core/modules/polymer-deps/components/iron-a11y-keys-mixin.html">
 
 <!--
 Material design: [Surface reaction](https://www.google.com/design/spec/animation/responsive-interaction.html#responsive-interaction-surface-reaction)
@@ -600,7 +600,7 @@ Apply `circle` class to make the rippling effect within a circle.
         this.downAction(null)
 
         // Please see polymer/polymer#1305
-        Polymer.Async.microTask.run(() => {
+        Polymer.Async.timeOut.after(1).run(() => {
           this.upAction()
         })
         // this.async(, 1)

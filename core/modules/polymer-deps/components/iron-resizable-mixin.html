@@ -193,9 +193,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _requestResizeNotifications () {
         // console.log(this.isAttached)
-        // if (!this.isAttached) {
-        //   return
-        // }
+        if (!this.isAttached) {
+          return
+        }
 
         // NOTE(valdrin) In CustomElements v1 with native HTMLImports, the order
         // of imports affects the order of `attached` callbacks (see webcomponents/custom-elements#15).

@@ -8,11 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../../bower_components/polymer/lib/utils/async.html">>
-<link rel="import" href="../../../../bower_components/iron-a11y-announcer/iron-a11y-announcer.html">
-<link rel="import" href="../../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
-<!-- <link rel="import" href="./iron-overlay-mixin.html"> -->
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/utils/async.html">
+<link rel="import" href="./iron-a11y-announcer.html">
+<link rel="import" href="./iron-overlay-mixin.html">
 
 <!--
 Material design: [Snackbars & toasts](https://www.google.com/design/spec/components/snackbars-toasts.html)
@@ -117,7 +116,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
       // Keeps track of the toast currently opened.
       var currentToast = null
 
-      class PaperToast extends Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element) {
+      class PaperToast extends Polymer.IronOverlayMixin(Polymer.Element) {
       // class PaperToast extends Polymer.IronOverlayMixin(Polymer.Element) {
         static get is () { return 'paper-toast' }
 
@@ -280,7 +279,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
         _openedChanged () {
           if (this._autoClose !== null) {
             // this.cancelAsync(this._autoClose)
-            Polymer.Async.timeout.cancel(this._autoClose)
+            Polymer.Async.timeOut.cancel(this._autoClose)
             this._autoClose = null
           }
           if (this.opened) {
@@ -294,13 +293,12 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
               }
             }))
             if (this._canAutoClose) {
-              this._autoClose = Polymer.Async.timeOut.after(this.duration).run(this.close)
+              this._autoClose = Polymer.Async.timeOut.after(this.duration).run(this.close.bind(this))
               // this._autoClose = this.async(this.close, this.duration)
             }
           } else if (currentToast === this) {
             currentToast = null
           }
-          console.log(super._openedChanged)
           super._openedChanged.apply(this, arguments)
         }
 
