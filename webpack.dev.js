@@ -4,6 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
+const fs = require('fs')
 const config = require('./src/config/dev.json')
 const theme = require(`./src/${config.theme.src}/theme.json`)
 const GenerateAssetPlugin = require('generate-asset-webpack-plugin')
@@ -19,6 +20,10 @@ const createServiceWorker = (compilation) => {
     importScripts("service-worker-core/routing.js")
     importScripts("service-worker-src/routing.js")
   `
+}
+
+const getConfig = (build) => {
+  const config = fs.readFileSync(`./src/config/${build}.json`, 'utf8')
 }
 
 const firebase = {
