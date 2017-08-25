@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="GDG DevFest Philippines 2017">
+    <meta name="viewport" content="width=device-width, minimum-scale = 1.0, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+
+    <title>GDG DevFest Philippines 2017</title>
+    <meta name="description" content="In celebration of GDG Philippines 10th Anniversary, we bring to you the Grandest Technology event of the year - GDG DevFest Philippines 2017! GDG DevFest Philippines brings together experts in Mobile, Web and Cloud technologies to Manila for sessions, workshops and showcases.     In this conference our goal is to equip you with new knowledge & skills that you can immediately apply and bring back to your respective companies.">
+
+    <meta property="og:title" content="GDG DevFest Philippines 2017" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://devfestph.firebaseapp.com/images/header.png" />
+    <meta property="og:description" content="In celebration of GDG Philippines 10th Anniversary, we bring to you the Grandest Technology event of the year - GDG DevFest Philippines 2017! GDG DevFest Philippines brings together experts in Mobile, Web and Cloud technologies to Manila for sessions, workshops and showcases.     In this conference our goal is to equip you with new knowledge & skills that you can immediately apply and bring back to your respective companies." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@gdgphilippines" />
+    <meta name="twitter:creator" content="@gdgphilippines" />
+    <meta name="twitter:title" content="GDG DevFest Philippines 2017" />
+    <meta name="twitter:description" content="In celebration of GDG Philippines 10th Anniversary, we bring to you the Grandest Technology event of the year - GDG DevFest Philippines 2017! GDG DevFest Philippines brings together experts in Mobile, Web and Cloud technologies to Manila for sessions, workshops and showcases.     In this conference our goal is to equip you with new knowledge & skills that you can immediately apply and bring back to your respective companies." />
+    <meta name="twitter:image" content="https://devfestph.firebaseapp.com/images/header.png" />
+
+    <!--
+      If deploying to a non-root path, replace href="/" with the full path to the project root.
+      For example: href="/polymer-starter-kit/relative-path-example/"
+    -->
+    <base href="/">
+
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="GDG DevFest Philippines 2017">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GDG DevFest Philippines 2017">
+
+    <!-- Homescreen icons -->
+    
+    <link rel="apple-touch-icon"  sizes="48x48" href="images/manifest/images/icons/icon-48x48.png">
+    
+    <link rel="apple-touch-icon"  sizes="72x72" href="images/manifest/images/icons/icon-72x72.png">
+    
+    <link rel="apple-touch-icon"  sizes="96x96" href="images/manifest/images/icons/icon-96x96.png">
+    
+    <link rel="apple-touch-icon"  sizes="128x128" href="images/manifest/images/icons/icon-128x128.png">
+    
+    <link rel="apple-touch-icon"  sizes="144x144" href="images/manifest/images/icons/icon-144x144.png">
+    
+    <link rel="apple-touch-icon"  sizes="152x152" href="images/manifest/images/icons/icon-152x152.png">
+    
+    <link rel="apple-touch-icon"  sizes="192x192" href="images/manifest/images/icons/icon-192x192.png">
+    
+    <link rel="apple-touch-icon"  sizes="384x384" href="images/manifest/images/icons/icon-384x384.png">
+    
+    <link rel="apple-touch-icon"  sizes="512x512" href="images/manifest/images/icons/icon-512x512.png">
+    
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+         
+    <meta name="msapplication-TileImage" content="images/manifest/images/icons/icon-512x512.png">    
+    <meta name="msapplication-TileColor" content="">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries&flags=gated"></script>
+    <script>
+      Object.defineProperty(window, 'App', { value: window.App || {} })
+      Object.defineProperty(App, '_build', { value: App.__build || 'dev' })
+      Object.defineProperty(App, '_version', { value: App.__version || '' })
+      Object.defineProperty(App, '_database', { value: App.__database || 'dev' })
+      Object.defineProperty(App, '_analytics', { value: App.__analytics || 'UA-78413383-2' })
+
+      if (window.performance) {
+        window.globalStart = window.globalStart || performance.now()
+      }
+
+      window.onerror = function (err, url, line) {
+        try {
+          if (window.ga) {
+            ga('send', 'exception', {
+              exDescription: err.message,
+              exFatal: true
+            })
+          }
+          if (window.Raven) {
+            Raven.captureException(err)
+          }
+        } catch (e) {
+          console.error(err)
+          console.error(e)
+        }
+      }
+
+      // Register the base URL
+      window.App.baseUrl = window.App.baseUrl || document.querySelector('base').href
+    </script>
+
+    
+    <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
+
+    <script>
+      function installRaven() {
+        if (window.Raven && !Raven.isSetup()) {
+          Raven.config('https://85d1091a410948caa823a5230bd0dbcf@sentry.io/204253', {
+            environment: App && App._build === 'prod' ? 'production' : App._build,
+            autoBreadcrumbs: App && App._build === 'prod',
+            debug: App && App._build !== 'prod'
+          }).install()
+          if (App.__build !== 'prod') {
+            console.log('Raven installed')
+          }
+          installRaven = null
+        }
+      }
+    </script>
+    
+
+    <!-- Load your application shell -->
+
+    <!-- Add any global styles for body, document, etc. -->
+    <style>
+
+    </style>
+  </head>
+  <body>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      if (window.ga) {
+        ga('create', App.__analytics, 'auto');
+        ga('send', 'pageview');
+      }
+      // setTimeout(() => {
+      //   App.utils.checkStorage().then((res) => {
+      //     if (res.usage && window.ga) {
+      //       ga('send', 'event', 'appLoad', 'load', null, res.usage)
+      //     } else if (res.type) {
+      //       Raven.captureMessage(res.type)
+      //     }
+      //   }).catch((err) => {
+      //     Raven.captureException(err)
+      //   })
+      // }, 10000)
+    </script>
+    
+
+    <app-shell>
+      
+        <devfest-landing-page route="/"></devfest-landing-page>
+      
+        <devfest-landing-page route="/index.html"></devfest-landing-page>
+      
+        <devfest-call-for-speakers-page route="/call-for-speakers"></devfest-call-for-speakers-page>
+      
+      
+        <devfest-not-found-page route="not-found"></devfest-not-found-page>
+      
+        <devfest-not-authorized-page route="not-authorized"></devfest-not-authorized-page>
+      
+    </app-shell>
+    <!-- Built with love using Polymer Starter Kit -->
+    <script>
+      // Load and register pre-caching Service Worker
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register(window.App.baseUrl + 'service-worker.js', {
+          scope: window.App.baseUrl
+        }).then(function (registration) {
+          registration.onupdatefound = function () {
+            var installingWorker = registration.installing
+
+            installingWorker.onstatechange = function () {
+              switch (installingWorker.state) {
+                case 'installed':
+                  if (!navigator.serviceWorker.controller) {
+                    // App.Shell.showMessage('Caching complete! Future visits will work offline.')
+                  }
+                  break
+
+                case 'redundant':
+                  console.error(Error('The installing service worker became redundant.'));
+                  Raven.captureMessage('The installing service worker became redundant.');
+              }
+            }
+          }
+          if (navigator.serviceWorker.controller) {
+            console.log('The service worker is currently handling network operations.')
+          } else {
+            console.log('Please reload this page to allow the service worker to handle network operations.')
+          }
+        })
+
+        // Check to see if the service worker controlling the page at initial load
+        // has become redundant, since this implies there's a new service worker with fresh content.
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.onstatechange = function (event) {
+            if (event.target.state === 'redundant') {
+              // Define a handler that will be used for the next io-toast tap, at which point it
+              // be automatically removed.
+              var tapHandler = function () {
+                window.location.reload()
+              }
+
+              // if (App.Shell.showMessage) {
+              //   App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+              // } else {
+              //   setTimeout(() => {
+              //     if (App.Shell.showMessage) {
+              //       App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+              //     } else {
+              //       tapHandler() // Force reload if user never was shown the toast.
+              //     }
+              //   }, 5000)
+              // }
+            }
+          };
+        }
+      }
+    </script>
+
+    <!--
+      Feature detect Custom Elements support. If the browser DOES support Custom
+      Elements then we need to load the custom-elements-es5-adapter because
+      our project code has been transpiled from ES2015 to ES5 and native Custom
+      Elements expect elements will be registered as classes.
+    -->
+    <div id="ce-es5-shim">
+      <script type="text/javascript">
+        if (!window.customElements) {
+          var ceShimContainer = document.querySelector('#ce-es5-shim');
+          ceShimContainer.parentElement.removeChild(ceShimContainer);
+        }
+      </script>
+      <script type="text/javascript" src="bower_components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    </div>
+
+    <!--
+      Use the webcomponents-loader script which will feature detect which Web
+      Components features are missing and lazy load the appropriate polyfills.
+      When we hear the 'WebComponentsReady' event from the polyfill bundle we can
+      insert our 'bundle.js'.
+    -->
+    <script>
+      (function () {
+        document.addEventListener('WebComponentsReady', function componentsReady() {
+          document.removeEventListener('WebComponentsReady', componentsReady, false)
+          var script = document.createElement('script')
+          script.src = 'bundle.js'
+          var refScript = document.getElementsByTagName('script')[0]
+          refScript.parentNode.insertBefore(script, refScript)
+        }, false)
+      })()
+    </script>
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!--
+      IMPORTANT: Make sure you set the inject: false option in HTMLWebpackPlugin
+      so it doesn't try to insert bundle.js. We're handling loading it ourselves
+      up above.
+    -->
+  </body>
+</html>

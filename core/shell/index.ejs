@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="<%= htmlWebpackPlugin.options.config.app.title %>">
+    <meta name="viewport" content="width=device-width, minimum-scale = 1.0, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+
+    <title><%= htmlWebpackPlugin.options.config.app.title %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.config.app.description %>">
+
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.config.app.title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= htmlWebpackPlugin.options.config.app.image %>" />
+    <meta property="og:description" content="<%= htmlWebpackPlugin.options.config.app.description %>" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="<%= htmlWebpackPlugin.options.config.app.twitter %>" />
+    <meta name="twitter:creator" content="<%= htmlWebpackPlugin.options.config.app.twitter %>" />
+    <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.config.app.title %>" />
+    <meta name="twitter:description" content="<%= htmlWebpackPlugin.options.config.app.description %>" />
+    <meta name="twitter:image" content="<%= htmlWebpackPlugin.options.config.app.image %>" />
+
+    <!--
+      If deploying to a non-root path, replace href="/" with the full path to the project root.
+      For example: href="/polymer-starter-kit/relative-path-example/"
+    -->
+    <base href="<%= htmlWebpackPlugin.options.config.build.baseHref %>">
+
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="<%= htmlWebpackPlugin.options.theme.themeColor %>">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="<%= htmlWebpackPlugin.options.theme.webApp.capable %>">
+    <meta name="application-name" content="<%= htmlWebpackPlugin.options.config.app.title %>">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="<%= htmlWebpackPlugin.options.theme.webApp.capable %>">
+    <meta name="apple-mobile-web-app-status-bar-style" content="<%= htmlWebpackPlugin.options.theme.webApp.statusBarStyle%>">
+    <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.config.app.title %>">
+
+    <!-- Homescreen icons -->
+    <% for (var i in htmlWebpackPlugin.options.theme.icons) {%>
+    <link rel="apple-touch-icon" <% if (htmlWebpackPlugin.options.theme.icons[i].sizes) {%> sizes="<%= htmlWebpackPlugin.options.theme.icons[i].sizes %>"<% } %> href="images/manifest/<%= htmlWebpackPlugin.options.theme.icons[i].src %>">
+    <% } %>
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <% for (var j in htmlWebpackPlugin.options.theme.icons) {%> <% if (htmlWebpackPlugin.options.theme.icons[j].tileImage) {%>
+    <meta name="msapplication-TileImage" content="images/manifest/<%= htmlWebpackPlugin.options.theme.icons[i].src %>"><% } %><% } %>
+    <meta name="msapplication-TileColor" content="<%= htmlWebpackPlugin.options.theme.webApp.themeColor %>">
+    <meta name="msapplication-tap-highlight" content="<%= htmlWebpackPlugin.options.theme.webApp.tapHighlight %>">
+
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries&flags=gated"></script>
+    <script>
+      Object.defineProperty(window, 'App', { value: window.App || {} })
+      Object.defineProperty(App, '_build', { value: App.__build || '<%= htmlWebpackPlugin.options.config.build.name %>' })
+      Object.defineProperty(App, '_version', { value: App.__version || '<%= htmlWebpackPlugin.options.config.build.version %>' })
+      Object.defineProperty(App, '_database', { value: App.__database || '<%= htmlWebpackPlugin.options.config.build.database %>' })
+      Object.defineProperty(App, '_analytics', { value: App.__analytics || '<%= htmlWebpackPlugin.options.config.build.analytics %>' })
+
+      if (window.performance) {
+        window.globalStart = window.globalStart || performance.now()
+      }
+
+      window.onerror = function (err, url, line) {
+        try {
+          if (window.ga) {
+            ga('send', 'exception', {
+              exDescription: err.message,
+              exFatal: true
+            })
+          }
+          if (window.Raven) {
+            Raven.captureException(err)
+          }
+        } catch (e) {
+          console.error(err)
+          console.error(e)
+        }
+      }
+
+      // Register the base URL
+      window.App.baseUrl = window.App.baseUrl || document.querySelector('base').href
+    </script>
+
+    <% if (htmlWebpackPlugin.options.config.build.sentryUrl) {%>
+    <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
+
+    <script>
+      function installRaven() {
+        if (window.Raven && !Raven.isSetup()) {
+          Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
+            environment: App && App._build === 'prod' ? 'production' : App._build,
+            autoBreadcrumbs: App && App._build === 'prod',
+            debug: App && App._build !== 'prod'
+          }).install()
+          if (App.__build !== 'prod') {
+            console.log('Raven installed')
+          }
+          installRaven = null
+        }
+      }
+    </script>
+    <% } %>
+
+    <!-- Load your application shell -->
+
+    <!-- Add any global styles for body, document, etc. -->
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <% if (htmlWebpackPlugin.options.config.build.analytics) {%>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      if (window.ga) {
+        ga('create', App.__analytics, 'auto');
+        ga('send', 'pageview');
+      }
+      // setTimeout(() => {
+      //   App.utils.checkStorage().then((res) => {
+      //     if (res.usage && window.ga) {
+      //       ga('send', 'event', 'appLoad', 'load', null, res.usage)
+      //     } else if (res.type) {
+      //       Raven.captureMessage(res.type)
+      //     }
+      //   }).catch((err) => {
+      //     Raven.captureException(err)
+      //   })
+      // }, 10000)
+    </script>
+    <% } %>
+
+    <app-shell>
+      <% for (var i in htmlWebpackPlugin.options.config.routing) { var node = htmlWebpackPlugin.options.config.routing[i].name || htmlWebpackPlugin.options.config.routing[i] %>
+        <<%= node %> route="<%= i %>"></<%= node %>>
+      <% } %>
+      <% for (var i in htmlWebpackPlugin.options.config.httpCodes) { var node = htmlWebpackPlugin.options.config.httpCodes[i].name || htmlWebpackPlugin.options.config.httpCodes[i] %>
+        <<%= node %> route="<%= i %>"></<%= node %>>
+      <% } %>
+    </app-shell>
+    <!-- Built with love using Polymer Starter Kit -->
+    <script>
+      // Load and register pre-caching Service Worker
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register(window.App.baseUrl + 'service-worker.js', {
+          scope: window.App.baseUrl
+        }).then(function (registration) {
+          registration.onupdatefound = function () {
+            var installingWorker = registration.installing
+
+            installingWorker.onstatechange = function () {
+              switch (installingWorker.state) {
+                case 'installed':
+                  if (!navigator.serviceWorker.controller) {
+                    // App.Shell.showMessage('Caching complete! Future visits will work offline.')
+                  }
+                  break
+
+                case 'redundant':
+                  console.error(Error('The installing service worker became redundant.'));
+                  Raven.captureMessage('The installing service worker became redundant.');
+              }
+            }
+          }
+          if (navigator.serviceWorker.controller) {
+            console.log('The service worker is currently handling network operations.')
+          } else {
+            console.log('Please reload this page to allow the service worker to handle network operations.')
+          }
+        })
+
+        // Check to see if the service worker controlling the page at initial load
+        // has become redundant, since this implies there's a new service worker with fresh content.
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.onstatechange = function (event) {
+            if (event.target.state === 'redundant') {
+              // Define a handler that will be used for the next io-toast tap, at which point it
+              // be automatically removed.
+              var tapHandler = function () {
+                window.location.reload()
+              }
+
+              // if (App.Shell.showMessage) {
+              //   App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+              // } else {
+              //   setTimeout(() => {
+              //     if (App.Shell.showMessage) {
+              //       App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+              //     } else {
+              //       tapHandler() // Force reload if user never was shown the toast.
+              //     }
+              //   }, 5000)
+              // }
+            }
+          };
+        }
+      }
+    </script>
+
+    <!--
+      Feature detect Custom Elements support. If the browser DOES support Custom
+      Elements then we need to load the custom-elements-es5-adapter because
+      our project code has been transpiled from ES2015 to ES5 and native Custom
+      Elements expect elements will be registered as classes.
+    -->
+    <div id="ce-es5-shim">
+      <script type="text/javascript">
+        if (!window.customElements) {
+          var ceShimContainer = document.querySelector('#ce-es5-shim');
+          ceShimContainer.parentElement.removeChild(ceShimContainer);
+        }
+      </script>
+      <script type="text/javascript" src="bower_components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    </div>
+
+    <!--
+      Use the webcomponents-loader script which will feature detect which Web
+      Components features are missing and lazy load the appropriate polyfills.
+      When we hear the 'WebComponentsReady' event from the polyfill bundle we can
+      insert our 'bundle.js'.
+    -->
+    <script>
+      (function () {
+        document.addEventListener('WebComponentsReady', function componentsReady() {
+          document.removeEventListener('WebComponentsReady', componentsReady, false)
+          var script = document.createElement('script')
+          script.src = '<%= htmlWebpackPlugin.files.js[htmlWebpackPlugin.files.js.indexOf("bundle.js")] %>'
+          var refScript = document.getElementsByTagName('script')[0]
+          refScript.parentNode.insertBefore(script, refScript)
+        }, false)
+      })()
+    </script>
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!--
+      IMPORTANT: Make sure you set the inject: false option in HTMLWebpackPlugin
+      so it doesn't try to insert bundle.js. We're handling loading it ourselves
+      up above.
+    -->
+  </body>
+</html>

@@ -1,6 +1,5 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
-<link rel="import" href="../../devfest-theme/devfest-theme.html">
 <!--<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">-->
 <!--<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">-->
 <!--<link rel="import" href="../components/devfest-footer.html">-->
@@ -9,9 +8,9 @@
 
 <dom-module id="devfest-landing-page">
   <template>
-    <style include="devfest-theme">
+    <style>
     </style>
-
+    
     <header class="header">
       <div class="header-white"></div>
       <div class="header-container">
@@ -25,10 +24,10 @@
               <paper-ripple></paper-ripple>
               Get Tickets
             </a>
-          </div>
+          </div>    
         </div>
       </div>
-
+      
     </header>
 
     <!--<header class="header">-->
@@ -110,19 +109,19 @@
 
         _shareFacebookLink () {
           var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
-          var link = window.location.protocol + '//' + window.location.hostname //'https://uxphilippines.com' //
-          var linkdecoded = encodeURI(link)
-          var picture = `${link}/images/header.png`
+          var link = window.location.protocol + '//' + window.location.hostname; //'https://uxphilippines.com' //
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
           return `https://www.facebook.com/dialog/feed?app_id=476565679402935&redirect_uri=${encodeURI('https://devfest.gdgph.org')}&link=${linkdecoded}&picture=${picture}&name=${encodeURI(text)}&caption=${encodeURI('GDG Devfest Philippines 2017')}&description=${encodeURI(text)}&display=page`
 
         }
 
         _shareTwitterLink () {
-          var link = window.location.protocol + '//' + window.location.hostname
-          var linkdecoded = encodeURI(link)
-          var picture = `${link}/images/header.png`
+          var link = window.location.protocol + '//' + window.location.hostname;
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
           var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
-          return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest,DevFestPH')}`
+          return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest,DevFestPH')}`;
         }
       }
 
