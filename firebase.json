@@ -15,6 +15,10 @@
       {
         "source": "/index.html",
         "destination": "/index.html"
+      },
+      {
+        "source": "/call-for-speakers",
+        "destination": "/index.html"
       }
     ],
     "headers": [
@@ -91,6 +95,6 @@
         ]
       }
     ],
-    "public": "dist/prod_temp/build"
+    "public": "./dist/public"
   }
 }
