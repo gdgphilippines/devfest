@@ -100,11 +100,14 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       }
     })
     this._pathChanged(this.path)
-    // console.log('paper-toast')
-    // this.shadowRoot.querySelector('paper-toast').show('hello')
   }
 
   _pathChanged (path) {
+    // load statistics if it went through here
+    if (path === '/_statistic.html' || path === '/_bundle-sizes.html') {
+      return window.location.href(path)
+    }
+    
     var routeName = null
     Object.entries(this._routes).forEach(route => {
       if (routeName) return
