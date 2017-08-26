@@ -2,21 +2,26 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const Visualizer = require('webpack-visualizer-plugin')
+const WorkboxBuildWebpackPlugin = require('workbox-webpack-plugin')
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
 const fs = require('fs')
 const GenerateAssetPlugin = require('./webpack-utils/generate-asset-plugin')
 const createServiceWorker = require('./webpack-utils/create-service-worker')
+const getConfig = require('./webpack-utils/get-config')
 const getManifest = require('./webpack-utils/get-manifest')
 const getFirebase = require('./webpack-utils/get-firebase')
 const getHTMLOptions = require('./webpack-utils/get-html-options')
 const createRouting = require('./webpack-utils/create-routing')
 const createHttpCodes = require('./webpack-utils/create-http-codes')
+const createPartials = require('./webpack-utils/create-partials')
 
 module.exports = (env) => {
   console.log('running...')
-  
+
+  const { config } = getConfig(env)
+
   var dest
   if (env === 'dev') {
     dest = 'dist/public'
@@ -25,8 +30,8 @@ module.exports = (env) => {
   } else {
     dest = `dist/` + env
   }
-  
-  const serviceWorker = env === 'prod' 
+
+  const serviceWorker = env === 'prod'
     ? new GenerateAssetPlugin({
       filename: 'service-worker.js',
       fn: (compilation, cb) => {
@@ -39,9 +44,9 @@ module.exports = (env) => {
         cb(null, createServiceWorker(env))
       }
     })
-    
+
   const environment = env === 'prod' ? 'production' : 'development'
-    
+
   const plugins = [
     new Visualizer({
       filename: './_statistic.html'
@@ -49,15 +54,15 @@ module.exports = (env) => {
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: '_bundle-sizes.html',
-      // Module sizes to show in report by default. 
-      // Should be one of `stat`, `parsed` or `gzip`. 
-      // See "Definitions" section for more information. 
+      // Module sizes to show in report by default.
+      // Should be one of `stat`, `parsed` or `gzip`.
+      // See "Definitions" section for more information.
       defaultSizes: 'gzip',
-      // Automatically open report in default browser 
+      // Automatically open report in default browser
       openAnalyzer: false,
       generateStatsFile: true,
-      // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`. 
-      // Relative to bundles output directory. 
+      // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`.
+      // Relative to bundles output directory.
       statsFilename: '_statistic.json'
     }),
     serviceWorker,
@@ -135,6 +140,20 @@ module.exports = (env) => {
         cb(null, newFile)
       }
     }),
+    new GenerateAssetPlugin({
+      filename: '../../src/partials.js',
+      fn: (c, cb) => {
+        const filename = path.resolve(__dirname, 'src/partials.js')
+        const newFile = createPartials(env)
+        if (fs.existsSync(filename)) {
+          const oldFile = fs.readFileSync(filename, 'utf8')
+          if (oldFile === newFile) {
+            return cb()
+          }
+        }
+        cb(null, newFile)
+      }
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -142,12 +161,12 @@ module.exports = (env) => {
     }),
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].bundle.js.map'
-    }),
+    })
   ]
-  
+
   if (env === 'prod') {
     const prod = [
-      
+
       new webpack.optimize.UglifyJsPlugin({
         beautify: false,
         mangle: {
@@ -159,17 +178,70 @@ module.exports = (env) => {
         },
         comments: false,
         sourceMap: true
+      }),
+
+      new WorkboxBuildWebpackPlugin({
+        cacheId: config.app.shortTitle,
+        swDest: `${dest}/sw.js`,
+        globPatterns: ['**/*.{js,css,html}', 'images/**.{png,jpg,ico,gif}', 'images/**/*.{png,jpg,ico,gif}', '**/*.json'].concat(config.serviceWorker.globPatterns),
+        globDirectory: dest,
+        navigateFallback: '/index.html',
+        navigateFallbackWhitelist: [
+          [/^(?!(\/__)|(\/service-worker\.js))/]
+        ].concat(config.serviceWorker.navigateFallbackWhitelist),
+        globIgnores: [
+          '404.html',
+          'service-worker.js',
+          'sw.js',
+          'routing-sw.js',
+          'routing-sw-src.js',
+          'workbox-sw.prod.v1.1.0.js',
+          'workbox-sw.prod.v1.1.0.js.map',
+          'workbox-routing.v1.1.0.js'
+        ].concat(config.serviceWorker.globIgnores),
+        skipWaiting: true,
+        handleFetch: env === 'prod',
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/maps.googleapis.com\/.*/,
+            handler: 'networkFirst'
+          },
+          {
+            urlPattern: /^https:\/\/fonts.googleapis.com\/.*/,
+            handler: 'cacheFirst'
+          },
+          {
+            urlPattern: /^https:\/\/fonts.gstatic.com\/.*/,
+            handler: 'cacheFirst'
+          },
+          {
+            urlPattern: /^https:\/\/cdn.ravenjs.com\/.*/,
+            handler: 'cacheFirst'
+          },
+          {
+            urlPattern: /^https:\/\/www.gstatic.com\/firebasejs\/.*/,
+            handler: 'cacheFirst'
+          },
+          {
+            urlPattern: /^https:\/\/www.google-analytics.com\/analytics.js/,
+            handler: 'networkFirst'
+          },
+          {
+            urlPattern: /^https:\/\/polyfill.io\/.*/,
+            handler: 'networkFirst'
+          }
+        ].concat(config.serviceWorker.runtimeCaching)
       })
-      // new webpack.optimize.AggressiveMergingPlugin()//Merge chunks 
+      // new webpack.optimize.AggressiveMergingPlugin()//Merge chunks
     ]
-    
+
     for (var i in prod) {
       plugins.push(prod[i])
     }
-    
+
     // console.log(plugins)
   }
-  
+
   return {
     entry: path.resolve(__dirname, 'core/shell/index.js'),
     output: {
@@ -217,7 +289,7 @@ module.exports = (env) => {
                 name: '[name].[ext]'
               }
             },
-            { 
+            {
               loader: 'image-webpack-loader'
             }
           ]

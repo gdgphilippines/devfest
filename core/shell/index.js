@@ -130,7 +130,8 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
   _pathChanged (path) {
     // load statistics if it went through here
     if (path === '/_statistic.html' || path === '/_bundle-sizes.html') {
-      return window.location.href(path)
+      window.location.href = path
+      return
     }
 
     var routeName = null

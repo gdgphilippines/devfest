@@ -39,6 +39,9 @@
     "not-found": "devfest-not-found-page",
     "not-authorized": "devfest-not-authorized-page"
   },
+  "partials": {
+    "header": "devfest-header"
+  },
   "shellComponents": [
     {
       "node": "example-app-header",

@@ -7,7 +7,7 @@
     "image": "https://devfestph.firebaseapp.com/images/header.png"
   },
   "build": {
-    "name": "dev",
+    "name": "prod",
     "baseHref": "/",
     "analytics": "UA-78413383-2",
     "firebaseVersion": "4.2.0",
@@ -32,8 +32,7 @@
   "routing": {
     "/": "devfest-landing-page",
     "/index.html": "devfest-landing-page",
-    "/call-for-speakers": "devfest-call-for-speakers-page",
-    "/test": "devfest-call-for-speakers-page"
+    "/call-for-speakers": "devfest-call-for-speakers-page"
   },
   "httpCodes": {
     "not-found": "devfest-not-found-page",
