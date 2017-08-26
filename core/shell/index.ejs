@@ -149,9 +149,9 @@
         <<%= node %> route="<%= i %>"></<%= node %>>
       <% } %>
     </app-shell>
-    <!-- Built with love using Polymer Starter Kit -->
     <script>
       // Load and register pre-caching Service Worker
+      App.Shell = document.querySelector('app-shell')
       if (navigator.serviceWorker) {
         navigator.serviceWorker.register(window.App.baseUrl + 'service-worker.js', {
           scope: window.App.baseUrl
@@ -159,20 +159,30 @@
           registration.onupdatefound = function () {
             var installingWorker = registration.installing
 
+
             installingWorker.onstatechange = function () {
               switch (installingWorker.state) {
                 case 'installed':
                   if (!navigator.serviceWorker.controller) {
-                    // App.Shell.showMessage('Caching complete! Future visits will work offline.')
+                    console.log('Caching Complete! Future visits will work offline.')
+                    if (App.Shell) {
+                      App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
+                    } else {
+                      setTimeout(() => {
+                        App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
+                      }, 5000)
+                    }
+
                   }
                   break
 
                 case 'redundant':
-                  console.error(Error('The installing service worker became redundant.'));
+                  console.error(new Error('The installing service worker became redundant.'));
                   Raven.captureMessage('The installing service worker became redundant.');
               }
             }
           }
+
           if (navigator.serviceWorker.controller) {
             console.log('The service worker is currently handling network operations.')
           } else {
@@ -191,17 +201,17 @@
                 window.location.reload()
               }
 
-              // if (App.Shell.showMessage) {
-              //   App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
-              // } else {
-              //   setTimeout(() => {
-              //     if (App.Shell.showMessage) {
-              //       App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
-              //     } else {
-              //       tapHandler() // Force reload if user never was shown the toast.
-              //     }
-              //   }, 5000)
-              // }
+              if (App.Shell.showMessage) {
+                App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+              } else {
+                setTimeout(() => {
+                  if (App.Shell.showMessage) {
+                    App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
+                  } else {
+                    tapHandler() // Force reload if user never was shown the toast.
+                  }
+                }, 5000)
+              }
             }
           };
         }

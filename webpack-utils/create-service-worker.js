@@ -15,13 +15,14 @@ module.exports = (env) => {
   `
   : `
     console.log('Development mode. Will cache files in production mode. Generated: ${new Date().toString()}')
-    self.addEventListener('install', function(event) {
-      // The promise that skipWaiting() returns can be safely ignored.
-      self.skipWaiting();
-    
-      // Perform any other actions required for your
-      // service worker to install, potentially inside
-      // of event.waitUntil();
-    });  
+    // The install handler takes care of precaching the resources we always need.
+    self.addEventListener('install', event => {
+      if (self.skipWaiting) { self.skipWaiting(); }
+    });
+
+    // The activate handler takes care of cleaning up old caches.
+    self.addEventListener('activate', event => {
+      console.log('activated')
+    });
   `
 }

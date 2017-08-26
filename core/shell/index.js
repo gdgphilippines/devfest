@@ -6,6 +6,8 @@ import pathToRegexp from 'path-to-regexp'
 import routing from '../../src/routing.js'
 import httpCodes from '../../src/http-codes.js'
 
+const messages = []
+
 class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(window.HTMLElement))) {
   static get is () { return 'app-shell' }
 
@@ -58,7 +60,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     main.setAttribute('class', 'main')
     const slot = document.createElement('slot')
     main.appendChild(slot)
-    const toast = document.createElement('paper-toast')
+    const toast = document.createElement('app-toast')
     shadowRoot.appendChild(style)
     shadowRoot.appendChild(main)
     shadowRoot.appendChild(toast)
@@ -73,7 +75,18 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     this._observer = new Polymer.FlattenedNodesObserver(this, (info) => {
       this._contentAdded(info.addedNodes.filter((node) => (node.nodeType === window.Node.ELEMENT_NODE)))
     })
-    System.import('../modules/polymer-deps/components/paper-toast.html')
+    // registerServiceWorker(this)
+    System.import('../modules/app-toast/components/app-toast.html').then(() => {
+      var messageInterval = setInterval(() => {
+        if (messages.length > 0) {
+          var {message, optTapHandler, optAction, optActionHandler, optDuration} = message.pop()
+          this.showMessage(message, optTapHandler, optAction, optActionHandler, optDuration)
+        } else {
+          clearInterval(messageInterval)
+          messageInterval = null
+        }
+      }, 5000)
+    })
   }
 
   disconnectedCallback () {
@@ -81,6 +94,18 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       super.disconnectedCallback()
     }
     if (this._observer) this._observer.disconnect()
+  }
+
+  showMessage (message, optTapHandler, optAction, optActionHandler, optDuration) {
+    if (this.shadowRoot.querySelector('app-toast').showMessage) {
+      this.shadowRoot.querySelector('app-toast').showMessage(message, optTapHandler, optAction, optActionHandler, optDuration)
+    } else {
+      messages.push({message, optTapHandler, optAction, optActionHandler, optDuration})
+    }
+  }
+
+  closeToast () {
+    this.shadowRoot.querySelector('app-toast').close()
   }
 
   _propertiesChanged (currentProps, changedProps, oldProps) {
@@ -107,7 +132,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     if (path === '/_statistic.html' || path === '/_bundle-sizes.html') {
       return window.location.href(path)
     }
-    
+
     var routeName = null
     Object.entries(this._routes).forEach(route => {
       if (routeName) return
