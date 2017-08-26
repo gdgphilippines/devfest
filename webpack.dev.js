@@ -187,17 +187,17 @@ module.exports = (env) => {
         globDirectory: dest,
         navigateFallback: '/index.html',
         navigateFallbackWhitelist: [
-          [/^(?!(\/__)|(\/service-worker\.js))/]
+          [/^(?!(\/__)|(\/service-worker\.js)|(\/sw\.js)|(\/routing-sw\.js)|(\/_bundle-sizes\.html)|(\/_statistic\.html)|(\/_statistic\.json))/]
         ].concat(config.serviceWorker.navigateFallbackWhitelist),
         globIgnores: [
           '404.html',
           'service-worker.js',
           'sw.js',
-          'routing-sw.js',
-          'routing-sw-src.js',
-          'workbox-sw.prod.v1.1.0.js',
-          'workbox-sw.prod.v1.1.0.js.map',
-          'workbox-routing.v1.1.0.js'
+          'service-worker-core/routing.js',
+          'service-worker-src/routing.js',
+          'workbox-sw.prod.v2.0.0.js',
+          'workbox-sw.prod.v2.0.0.js.map',
+          'workbox-routing.js'
         ].concat(config.serviceWorker.globIgnores),
         skipWaiting: true,
         handleFetch: env === 'prod',

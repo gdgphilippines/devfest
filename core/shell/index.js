@@ -5,6 +5,7 @@ import QueryParamsMixin from '../mixins/query-params-mixin.js'
 import pathToRegexp from 'path-to-regexp'
 import routing from '../../src/routing.js'
 import httpCodes from '../../src/http-codes.js'
+import partials from '../../src/partials.js'
 
 const messages = []
 
@@ -174,5 +175,10 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
 AppShell.createPropertiesForAttributes()
 
 window.customElements.define(AppShell.is, AppShell)
+
+// load partials here
+for (var p in partials) {
+  partials[p]()
+}
 
 export default AppShell
