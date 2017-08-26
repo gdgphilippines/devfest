@@ -140,11 +140,14 @@ module.exports = (env) => {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(environment)
     }),
-    new webpack.SourceMapDevToolPlugin()
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].bundle.js.map'
+    }),
   ]
   
   if (env === 'prod') {
     const prod = [
+      
       new webpack.optimize.UglifyJsPlugin({
         beautify: false,
         mangle: {
