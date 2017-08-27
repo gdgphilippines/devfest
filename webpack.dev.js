@@ -160,7 +160,11 @@ module.exports = (env) => {
       'process.env.NODE_ENV': JSON.stringify(environment)
     }),
     new webpack.SourceMapDevToolPlugin({
-      filename: '[name].bundle.js.map'
+      filename: '[file].map',
+      module: true,
+      columns: true,
+      // noSources: true,
+      linToLine: true
     })
   ]
 
