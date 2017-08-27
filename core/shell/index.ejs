@@ -59,10 +59,10 @@
     <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries&flags=gated"></script>
     <script>
       Object.defineProperty(window, 'App', { value: window.App || {} })
-      Object.defineProperty(App, '_build', { value: App.__build || '<%= htmlWebpackPlugin.options.config.build.name %>' })
-      Object.defineProperty(App, '_version', { value: App.__version || '<%= htmlWebpackPlugin.options.config.build.version %>' })
-      Object.defineProperty(App, '_database', { value: App.__database || '<%= htmlWebpackPlugin.options.config.build.database %>' })
-      Object.defineProperty(App, '_analytics', { value: App.__analytics || '<%= htmlWebpackPlugin.options.config.build.analytics %>' })
+      Object.defineProperty(App, '_build', { value: App._build || '<%= htmlWebpackPlugin.options.config.build.name %>' })
+      Object.defineProperty(App, '_version', { value: App._version || '<%= htmlWebpackPlugin.options.config.build.appVersion %>' })
+      Object.defineProperty(App, '_database', { value: App._database || '<%= htmlWebpackPlugin.options.config.build.database %>' })
+      Object.defineProperty(App, '_analytics', { value: App._analytics || '<%= htmlWebpackPlugin.options.config.build.analytics %>' })
 
       if (window.performance) {
         window.globalStart = window.globalStart || performance.now()
@@ -96,11 +96,11 @@
       function installRaven() {
         if (window.Raven && !Raven.isSetup()) {
           Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
-            environment: App && App.__build === 'prod' ? 'production' : App.__build,
-            autoBreadcrumbs: App && App.__build === 'prod',
-            debug: App && App.__build !== 'prod'
+            environment: App && App._build === 'prod' ? 'production' : App._build,
+            autoBreadcrumbs: App && App._build === 'prod',
+            debug: App && App._build !== 'prod'
           }).install()
-          if (App.__build !== 'prod') {
+          if (App._build !== 'prod') {
             console.log('Raven installed')
           }
           installRaven = null
@@ -257,10 +257,14 @@
       (function () {
         document.addEventListener('WebComponentsReady', function componentsReady() {
           document.removeEventListener('WebComponentsReady', componentsReady, false)
+          var modernizr = document.createElement('script')
+          modernizr.src = 'modernizr-bundle.js'
           var script = document.createElement('script')
           script.src = '<%= htmlWebpackPlugin.files.js[htmlWebpackPlugin.files.js.indexOf("main.bundle.js")] %>'
           var refScript = document.getElementsByTagName('script')[0]
+          refScript.parentNode.insertBefore(modernizr, refScript)
           refScript.parentNode.insertBefore(script, refScript)
+
         }, false)
       })()
     </script>

@@ -1,0 +1,30 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="devfest-banner">
+  <template>
+    <link rel="stylesheet" href="../styles/components/_header.scss">
+
+    <header class="header">
+      <div class="header-white"></div>
+      <div class="header-container">
+        <div class="header-image-text-container">
+          <div class="header-image">
+            <img src="/images/header-compressed.gif" alt="GDG Devfest Philippines 2017 10x Inspiration Ingenuity Impact">
+          </div>
+          <div class="header-slot">
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+    </header>
+  </template>
+  <script>
+    (() => {
+      class DevfestBanner extends Polymer.Element {
+        static get is () { return 'devfest-banner' }
+      }
+
+      window.customElements.define(DevfestBanner.is, DevfestBanner)
+    })()
+  </script>
+</dom-module>

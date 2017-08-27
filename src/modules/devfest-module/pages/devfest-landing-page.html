@@ -2,61 +2,50 @@
 <link rel="import" href="../../../../core/modules/paper-ripple/paper-ripple.html">
 <link rel="import" href="../../../../core/modules/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../components/devfest-button.html">
+<link rel="import" href="../components/devfest-icon-button.html">
+<link rel="import" href="../components/devfest-banner.html">
+<link rel="import" href="../components/devfest-footer.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
 
 <dom-module id="devfest-landing-page">
   <template>
-    <link rel="stylesheet" href="../styles/components/_header.scss">
-    <link rel="stylesheet" href="../styles/components/_temp-link.scss">
-    <link rel="stylesheet" href="../styles/components/_button.scss">
+    <link rel="stylesheet" href="../styles/pages/_devfest-landing-page.scss">
 
-    <header class="header">
-      <div class="header-white"></div>
-      <div class="header-container">
-        <div class="header-image-text-container">
-          <div class="header-image">
-            <img src="/images/header-compressed.gif" alt="GDG Devfest Philippines 2017 10x Inspiration Ingenuity Impact">
-          </div>
-          <div class="header-text">
-            <h1>October 14, 2017</h1>
-            <a href="#" class="button" target="">
-              <paper-ripple></paper-ripple>
-              Get Tickets
-            </a>
-          </div>
+    <devfest-banner>
+    </devfest-banner>
+
+    <section class="section about-container">
+      <div class="about-part about-image">
+      </div>
+      <div class="about-part about">
+      </div>
+    </section>
+
+    <section class="section expect-container">
+      <h1>What to Expect?</h1>
+      <div class="expect-horizontal">
+        <div class="expect expect-1">
+        </div>
+        <div class="expect expect-2">
+        </div>
+        <div class="expect expect-3">
+        </div>
+        <div class="expect expect-4">
         </div>
       </div>
+    </section>
 
-    </header>
+    <section class="section sponsors">
+    </section>
 
-    <!--<header class="header">-->
-    <!--  <div class="header-white-fade">-->
-    <!--  </div>-->
-    <!--  <div class="header-image">-->
-    <!--    <div class="header-image-container">-->
-    <!--    </div>-->
-    <!--  </div>-->
-    <!--</header>-->
-
-    <!--<section class="temp-link">-->
-    <!--  <marked-element class="marked-temp-link" markdown="[[tempLink]]">-->
-    <!--    <div slot="markdown-html"></div>-->
-    <!--  </marked-element>-->
-    <!--  <p>-->
-    <!--    <br/><br/>-->
-    <!--    Tell your friends about it:<br/>-->
-    <!--    <a href="[[_shareFacebookLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
-    <!--      <paper-icon-button icon="devfest:facebook"></paper-icon-button>-->
-    <!--    </a>-->
-    <!--    <a href="[[_shareTwitterLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
-    <!--      <paper-icon-button icon="devfest:twitter"></paper-icon-button>-->
-    <!--    </a>-->
-    <!--  </p>-->
-    <!--</section>-->
-
-    <!--<devfest-footer></devfest-footer>-->
+    <devfest-footer></devfest-footer>
   </template>
   <script>
+    import database from '../../../../core/modules/indexeddb/database.js'
+    import marked from 'marked'
+
     (() => {
       class DevfestLandingPage extends Polymer.Element {
         static get is () { return 'devfest-landing-page' }
@@ -71,6 +60,7 @@
 
         connectedCallback () {
           super.connectedCallback()
+          this._fetchContent()
           // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
           // this._fetchContent()
         }
@@ -80,28 +70,23 @@
         }
 
         _fetchContent () {
-          const link = '/api/landing-temp-link'
-          this._db.get(link).then(doc => {
-            this.tempLink = doc.data
+          fetch(`https://raw.githubusercontent.com/gdgphilippines/devfestph2017-files/master/content/${this.nodeName.toLowerCase()}.md`)
+          .then(res => {
+            return res.text()
           })
-
-          fetch(link)
-          .then((res) => {
-            return res.json()
-          })
-          .then(json => {
-            if (json.success) {
-              this.tempLink = json.data
-              this._db.upsert(link, doc => {
-                doc.data = json.data
-                return doc
-              })
-            }
-          })
-          .catch(err => {
-            if (window.Raven) {
-              Raven.captureException(err)
-            }
+          .then(body => {
+            const contentArray = body.split('-----')
+            contentArray.forEach(contentBody => {
+              if (contentBody.trim()) {
+                const array = contentBody.split('=====')
+                const query = array[0].trim()
+                const content = array[1]
+                const node = this.shadowRoot.querySelector(query)
+                if (node) {
+                  node.innerHTML = marked(content)
+                }
+              }
+            })
           })
         }
 

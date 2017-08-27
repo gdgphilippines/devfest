@@ -1,0 +1,85 @@
+:host {
+  font-family: 'Roboto';
+  font-weight: 300;
+  color: #666;
+  font-size: 1em;
+}
+
+h1 {
+  font-family: 'Product Sans';
+  color: #666;
+  font-weight: normal;
+}
+
+
+devfest-header {
+  text-align: center;
+  > h1 {
+    font-family: 'Product Sans';
+    opacity: .75;
+  }
+}
+
+.about-container {
+  @apply --layout-horizontal;
+  @apply --layout-wrap;
+
+  > .about-part {
+    @apply --layout-flex;
+    min-width: 300px;
+
+    @media only screen and (max-width: 500px) {
+      min-width: 200px;
+    }
+  }
+
+  > .about-image {
+    min-height: 400px;
+    background: url('/images/about-image-compressed-1.jpg') center/cover no-repeat;
+  }
+
+  > .about {
+    padding: 36px;
+
+    @media only screen and (max-width: 500px) {
+      padding: 20px;
+    }
+  }
+}
+
+.expect-container {
+  background: #2196f3;
+  color: #fff;
+  padding: 36px;
+
+  > h1 {
+    color: inherit
+  }
+
+  > .expect-horizontal {
+    @apply --layout-horizontal;
+    @apply --layout-wrap;
+
+    > .expect {
+      @apply --layout-flex;
+      min-width: 200px;
+      text-align: center;
+      padding: 36px;
+
+      > h2 {
+        font-size: 1.17em;
+      }
+
+      > p {
+        max-width: 350px;
+        margin: 0 auto;
+      }
+
+    }
+  }
+}
+
+.sponsors {
+  padding: 36px;
+}
+

@@ -1,0 +1,43 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../core/modules/paper-ripple/paper-ripple.html">
+
+<dom-module id="devfest-button">
+  <template>
+    <link rel="stylesheet" href="../styles/components/_button.scss">
+
+    <a href="{{href}}" class$="button {{_isBig(isBig)}}" target="{{target}}">
+      <paper-ripple></paper-ripple>
+      <slot></slot>
+    </a>
+  </template>
+
+  <script>
+    (() => {
+      class DevfestButton extends Polymer.Element {
+        static get is () { return 'devfest-button' }
+
+        static get properties () {
+          return {
+            href: {
+              type: String,
+              value: '#'
+            },
+            isBig: {
+              type: Boolean,
+              value: false
+            },
+            target: {
+              type: String
+            }
+          }
+        }
+
+        _isBig (isBig) {
+          return isBig ? 'button__big' : ''
+        }
+      }
+
+      window.customElements.define(DevfestButton.is, DevfestButton)
+    })()
+  </script>
+</dom-module>

@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const Visualizer = require('webpack-visualizer-plugin')
 const WorkboxBuildWebpackPlugin = require('workbox-webpack-plugin')
+const ModernizrWebpackPlugin = require('modernizr-webpack-plugin')
 // const GenerateJsonPlugin = require('generate-json-webpack-plugin')
 const webpack = require('webpack')
 const path = require('path')
@@ -48,6 +49,13 @@ module.exports = (env) => {
   const environment = env === 'prod' ? 'production' : 'development'
 
   const plugins = [
+    new ModernizrWebpackPlugin({
+      'feature-detects': [
+        'indexeddb'
+      ],
+      htmlWebpackPlugin: true,
+      minify: env === 'prod'
+    }),
     new GenerateAssetPlugin({
       filename: '../../src/routing.js',
       fn: (c, cb) => {
@@ -269,7 +277,9 @@ module.exports = (env) => {
           // polymer-webpack-loader, and hand the output to
           // babel-loader. This let's us transpile JS in our `<script>` elements.
           use: [
-            { loader: 'babel-loader' },
+            {
+              loader: 'babel-loader'
+            },
             {
               loader: 'polymer-webpack-loader',
               options: {

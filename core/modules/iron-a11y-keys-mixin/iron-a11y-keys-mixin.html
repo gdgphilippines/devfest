@@ -231,6 +231,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       })
     }
 
+    Polymer.utils = Polymer.utils || {}
+    Polymer.utils.keyboardEventMatchesKeys = (event, eventString) => {
+      var keyCombos = parseEventString(eventString)
+      for (var i = 0; i < keyCombos.length; ++i) {
+        if (keyComboMatchesEvent(keyCombos[i], event)) {
+          return true
+        }
+      }
+      return false
+    }
+
     /**
      * `Polymer.IronA11yKeysBehavior` provides a normalized interface for processing
      * keyboard commands that pertain to [WAI-ARIA best practices](http://www.w3.org/TR/wai-aria-practices/#kbd_general_binding).
@@ -373,13 +384,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          * @return {boolean}
          */
         keyboardEventMatchesKeys (event, eventString) {
-          var keyCombos = parseEventString(eventString)
-          for (var i = 0; i < keyCombos.length; ++i) {
-            if (keyComboMatchesEvent(keyCombos[i], event)) {
-              return true
-            }
-          }
-          return false
+          return Polymer.utils.keyboardEventMatchesKeys(event, eventString)
         }
 
         _collectKeyBindings () {

@@ -1,19 +1,34 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
 
 <dom-module id="gdg-logo">
   <template>
-    <style>
-    </style>
+    <link rel="stylesheet" href="../styles/components/_gdg-logo.scss">
 
     <a href="/" class="gdg-logo-anchor">
-      <img src="/images/gdg-icon.png"> GDG Philippines
+      <template is="dom-if" if="[[grey]]">
+        <img src="/images/gdgph-grey-compressed.png">
+      </template>
+      <template is="dom-if" if="[[!grey]]">
+        <img src="/images/gdg-icon.png"> GDG Philippines
+      </template>
+
     </a>
   </template>
   <script>
     (() => {
       class GDGLogo extends Polymer.Element {
         static get is () { return 'gdg-logo' }
+
+        static get properties () {
+          return {
+            grey: {
+              type: Boolean,
+              value: false
+            }
+          }
+        }
 
       }
 

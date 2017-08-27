@@ -1,16 +1,33 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<!-- <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html"> -->
 <link rel="import" href="../components/gdg-logo.html">
 <link rel="import" href="../icons/devfest-icons.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
 
 <dom-module id="devfest-footer">
   <template>
-    <style>
-    </style>
+    <link rel="stylesheet" href="../styles/components/_footer.scss">
 
     <footer class="footer">
+      <gdg-logo grey></gdg-logo>
+
+      <div class="footer-links">
+        <template is="dom-repeat" items="[[footerLinks]]">
+          <a href="[[item.href]]" class="footer-link">
+            [[item.text]]
+          </a>
+        </template>
+      </div>
+
+      <div class="footer-socials">
+        <template is="dom-repeat" items="[[contactUs]]">
+          <devfest-icon-button is-white href="[[item.href]]" icon="[[item.icon]]">
+          </devfest-icon-button>
+        </template>
+      </div>
+    </footer>
+    <!-- <footer class="footer">
       <div class="top-mini">
         <div class="flex">
         </div>
@@ -57,7 +74,7 @@
       <div class="footer-bottom">
         <gdg-logo></gdg-logo>
       </div>
-    </footer>
+    </footer> -->
   </template>
   <script>
     (() => {
@@ -70,63 +87,16 @@
               type: Array,
               value: [
                 {
-                  title: 'About GDG',
-                  links: [
-                    {
-                      name: 'About',
-                      href: 'https://www.gdgph.org/#/about'
-                    },
-                    {
-                      name: 'Blog',
-                      href: 'http://blog.gdgph.org/'
-                    },
-                    {
-                      name: 'Events',
-                      href: 'https://www.gdgph.org/#/events'
-                    },
-                    {
-                      name: 'Team',
-                      href: 'https://www.gdgph.org/#/team'
-                    },
-                    {
-                      name: 'Code of Conduct',
-                      href: 'https://www.gdgph.org/#/community/guidelines'
-                    },
-                    {
-                      name: 'Google Developers Page',
-                      href: 'https://developers.google.com/groups/chapter/105750470224587854845/'
-                    }
-                  ]
+                  href: 'https://www.gdgph.org/#/community/guidelines',
+                  text: 'Code of Conduct'
                 },
                 {
-                  title: 'Get Involved',
-                  links: [
-                    {
-                      name: 'Become a Sponsor',
-                      href: 'https://www.gdgph.org/#/be/a-sponsor'
-                    },
-                    {
-                      name: 'Become a Volunteer',
-                      href: 'https://www.gdgph.org/#/be/a-volunteer'
-                    },
-                    {
-                      name: 'Speaker Request',
-                      href: 'http://eventrequest.gdgph.org/'
-                    }
-                  ]
+                  href: '#',
+                  text: '#GDGPH'
                 },
                 {
-                  title: 'Resources',
-                  links: [
-                    {
-                      name: 'Media Kit',
-                      href: 'https://drive.google.com/open?id=0Bz1mkCHCa8ndV3BoWE56NTh6OXM'
-                    },
-                    {
-                      name: 'Photo Gallery',
-                      href: 'https://www.facebook.com/gdgphilippines/photos/?tab=albums'
-                    }
-                  ]
+                  href: '#',
+                  text: '#Devfest17'
                 }
               ]
             },
@@ -160,6 +130,71 @@
       }
 
       window.customElements.define(DevfestFooter.is, DevfestFooter)
+
+      const footerLinks = {
+        type: Array,
+        value: [
+          {
+            title: 'About GDG',
+            links: [
+              {
+                name: 'About',
+                href: 'https://www.gdgph.org/#/about'
+              },
+              {
+                name: 'Blog',
+                href: 'http://blog.gdgph.org/'
+              },
+              {
+                name: 'Events',
+                href: 'https://www.gdgph.org/#/events'
+              },
+              {
+                name: 'Team',
+                href: 'https://www.gdgph.org/#/team'
+              },
+              {
+                name: 'Code of Conduct',
+                href: 'https://www.gdgph.org/#/community/guidelines'
+              },
+              {
+                name: 'Google Developers Page',
+                href: 'https://developers.google.com/groups/chapter/105750470224587854845/'
+              }
+            ]
+          },
+          {
+            title: 'Get Involved',
+            links: [
+              {
+                name: 'Become a Sponsor',
+                href: 'https://www.gdgph.org/#/be/a-sponsor'
+              },
+              {
+                name: 'Become a Volunteer',
+                href: 'https://www.gdgph.org/#/be/a-volunteer'
+              },
+              {
+                name: 'Speaker Request',
+                href: 'http://eventrequest.gdgph.org/'
+              }
+            ]
+          },
+          {
+            title: 'Resources',
+            links: [
+              {
+                name: 'Media Kit',
+                href: 'https://drive.google.com/open?id=0Bz1mkCHCa8ndV3BoWE56NTh6OXM'
+              },
+              {
+                name: 'Photo Gallery',
+                href: 'https://www.facebook.com/gdgphilippines/photos/?tab=albums'
+              }
+            ]
+          }
+        ]
+      }
     })()
   </script>
 </dom-module>

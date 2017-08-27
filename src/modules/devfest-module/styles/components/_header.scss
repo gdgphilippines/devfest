@@ -1,8 +1,8 @@
 .header {
   font-family: 'Roboto';
   position: relative;
-  min-height: 150vh;
-  // min-height: calc(100vh - 64px);
+  // min-height: 150vh;
+  min-height: calc(100vh - 64px);
   background: url('/images/devfest-bg-repeatable.png') center/contain repeat;
 
   > .header-white {
@@ -37,20 +37,11 @@
         }
       }
 
-      > .header-text {
+      > .header-slot {
         text-align: center;
-        > h1 {
-          font-family: 'Product Sans';
-			    opacity: .75;
-        }
-
       }
     }
   }
-
-
-
-
 
   // > .header-image {
   //   position: relative;
