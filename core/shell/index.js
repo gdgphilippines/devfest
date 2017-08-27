@@ -6,6 +6,7 @@ import pathToRegexp from 'path-to-regexp'
 import routing from '../../src/routing.js'
 import httpCodes from '../../src/http-codes.js'
 import partials from '../../src/partials.js'
+import auth from '../../src/authentication/index.js'
 
 const messages = []
 
@@ -122,7 +123,8 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     pages.forEach(page => {
       page.classList.add('page')
       this._routes[page.getAttribute('route')] = {
-        element: page
+        element: page,
+        auth: page.getAttribute('auth')
       }
     })
     this._pathChanged(this.path)
@@ -152,7 +154,32 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       }
     })
 
-    this._loadPage(routeName || 'not-found')
+    this._checkAuth(routeName || 'not-found')
+  }
+
+  _checkAuth (route) {
+    if (this._routes[route] && this._routes[route].auth && auth[this._routes[route].auth]) {
+      if (auth[this._routes[route].auth] instanceof Promise) {
+        auth[this._routes[route].auth]()
+        .then((res) => {
+          if (res) {
+            this._loadPage(route)
+          } else {
+            this._loadPage('not-authorized')
+          }
+        })
+        .catch((e) => {
+          console.log(e)
+          this._loadPage('not-authorized')
+        })
+      } else if (typeof auth[this._routes[route].auth] === 'function' && auth[this._routes[route].auth](this)) {
+        this._loadPage(route)
+      } else {
+        this._loadPage('not-authorized')
+      }
+    } else {
+      this._loadPage(route)
+    }
   }
 
   _loadPage (route) {
@@ -160,6 +187,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     for (var i in this._routes) {
       if (this._routes[i] && this._routes[i].element) this._routes[i].element.classList.remove('page--on-view')
     }
+
     if (this._routes[route] && this._routes[route].element) this._routes[route].element.classList.add('page--on-view')
     if (this._routes[route]) {
       routes[route]().then(() => {

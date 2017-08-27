@@ -48,6 +48,48 @@ module.exports = (env) => {
   const environment = env === 'prod' ? 'production' : 'development'
 
   const plugins = [
+    new GenerateAssetPlugin({
+      filename: '../../src/routing.js',
+      fn: (c, cb) => {
+        const filename = path.resolve(__dirname, 'src/routing.js')
+        const newFile = createRouting(env)
+        if (fs.existsSync(filename)) {
+          const oldFile = fs.readFileSync(filename, 'utf8')
+          if (oldFile === newFile) {
+            return cb()
+          }
+        }
+        cb(null, newFile)
+      }
+    }),
+    new GenerateAssetPlugin({
+      filename: '../../src/http-codes.js',
+      fn: (c, cb) => {
+        const filename = path.resolve(__dirname, 'src/http-codes.js')
+        const newFile = createHttpCodes(env)
+        if (fs.existsSync(filename)) {
+          const oldFile = fs.readFileSync(filename, 'utf8')
+          if (oldFile === newFile) {
+            return cb()
+          }
+        }
+        cb(null, newFile)
+      }
+    }),
+    new GenerateAssetPlugin({
+      filename: '../../src/partials.js',
+      fn: (c, cb) => {
+        const filename = path.resolve(__dirname, 'src/partials.js')
+        const newFile = createPartials(env)
+        if (fs.existsSync(filename)) {
+          const oldFile = fs.readFileSync(filename, 'utf8')
+          if (oldFile === newFile) {
+            return cb()
+          }
+        }
+        cb(null, newFile)
+      }
+    }),
     new Visualizer({
       filename: './_statistic.html'
     }),
@@ -110,48 +152,6 @@ module.exports = (env) => {
       filename: '../../firebase.json',
       fn: (compilation, cb) => {
         cb(null, getFirebase(env, dest))
-      }
-    }),
-    new GenerateAssetPlugin({
-      filename: '../../src/routing.js',
-      fn: (c, cb) => {
-        const filename = path.resolve(__dirname, 'src/routing.js')
-        const newFile = createRouting(env)
-        if (fs.existsSync(filename)) {
-          const oldFile = fs.readFileSync(filename, 'utf8')
-          if (oldFile === newFile) {
-            return cb()
-          }
-        }
-        cb(null, newFile)
-      }
-    }),
-    new GenerateAssetPlugin({
-      filename: '../../src/http-codes.js',
-      fn: (c, cb) => {
-        const filename = path.resolve(__dirname, 'src/http-codes.js')
-        const newFile = createHttpCodes(env)
-        if (fs.existsSync(filename)) {
-          const oldFile = fs.readFileSync(filename, 'utf8')
-          if (oldFile === newFile) {
-            return cb()
-          }
-        }
-        cb(null, newFile)
-      }
-    }),
-    new GenerateAssetPlugin({
-      filename: '../../src/partials.js',
-      fn: (c, cb) => {
-        const filename = path.resolve(__dirname, 'src/partials.js')
-        const newFile = createPartials(env)
-        if (fs.existsSync(filename)) {
-          const oldFile = fs.readFileSync(filename, 'utf8')
-          if (oldFile === newFile) {
-            return cb()
-          }
-        }
-        cb(null, newFile)
       }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),

@@ -7,7 +7,7 @@
     "image": "https://devfestph.firebaseapp.com/images/header.png"
   },
   "build": {
-    "name": "dev",
+    "name": "prod",
     "baseHref": "/",
     "analytics": "UA-78413383-2",
     "firebaseVersion": "4.2.0",
@@ -26,6 +26,8 @@
     "devfest-call-for-speakers-page": "modules/devfest-module/pages/devfest-call-for-speakers-page.html",
     "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page.html",
     "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page.html",
+    "devfest-authorized-page": "modules/devfest-module/pages/devfest-authorized-page.html",
+    "devfest-header": "modules/devfest-module/components/devfest-header.html",
     "example-app-header": "modules/example-module/components/example-app-header.html",
     "example-app-drawer": "modules/example-module/components/example-app-drawer.html"
   },
@@ -33,7 +35,10 @@
     "/": "devfest-landing-page",
     "/index.html": "devfest-landing-page",
     "/call-for-speakers": "devfest-call-for-speakers-page",
-    "/test": "devfest-call-for-speakers-page"
+    "/auth-check": {
+      "name": "devfest-authorized-page",
+      "auth": "exampleAuthentication"
+    }
   },
   "httpCodes": {
     "not-found": "devfest-not-found-page",

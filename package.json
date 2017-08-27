@@ -20,8 +20,8 @@
     "test-local": "wct --skip-plugin sauce",
     "serve": "firebase serve",
     "serve-c9": "firebase serve -p $PORT -o $IP",
-    "start": "./node_modules/.bin/webpack --env=dev -w",
-    "build": "./node_modules/.bin/webpack --env=prod"
+    "start": "./node_modules/.bin/gulp && ./node_modules/.bin/webpack --env=dev -w",
+    "build": "./node_modules/.bin/gulp --env=prod && ./node_modules/.bin/webpack --env=prod"
   },
   "dependencies": {
     "path-to-regexp": "^1.7.0",
@@ -41,6 +41,8 @@
     "file-loader": "^0.11.2",
     "generate-asset-webpack-plugin": "^0.3.0",
     "generate-json-webpack-plugin": "^0.2.2",
+    "gulp": "^3.9.1",
+    "gulp-options": "^1.1.1",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.3.1",
     "json-loader": "^0.5.7",
@@ -48,6 +50,7 @@
     "node-sass": "^4.5.3",
     "polymer-webpack-loader": "^2.0.0",
     "postcss-loader": "^2.0.6",
+    "run-sequence": "^2.1.0",
     "sass-loader": "^6.0.6",
     "standard": "^10.0.3",
     "stats-webpack-plugin": "^0.6.1",

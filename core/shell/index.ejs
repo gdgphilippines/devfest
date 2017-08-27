@@ -96,9 +96,9 @@
       function installRaven() {
         if (window.Raven && !Raven.isSetup()) {
           Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
-            environment: App && App._build === 'prod' ? 'production' : App._build,
-            autoBreadcrumbs: App && App._build === 'prod',
-            debug: App && App._build !== 'prod'
+            environment: App && App.__build === 'prod' ? 'production' : App.__build,
+            autoBreadcrumbs: App && App.__build === 'prod',
+            debug: App && App.__build !== 'prod'
           }).install()
           if (App.__build !== 'prod') {
             console.log('Raven installed')
@@ -112,6 +112,12 @@
     <!-- Load your application shell -->
 
     <!-- Add any global styles for body, document, etc. -->
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+
     <style>
 
     </style>
@@ -141,6 +147,13 @@
     </script>
     <% } %>
 
+    <% if (htmlWebpackPlugin.options.config.partials.header) { var header = htmlWebpackPlugin.options.config.partials.header %>
+      <<%= header %>></<%= header %>>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.config.partials.drawer) { var drawer = htmlWebpackPlugin.options.config.partials.drawer %>
+      <<%= drawer %>></<%= drawer %>>
+    <% } %>
+
     <app-shell>
       <% for (var i in htmlWebpackPlugin.options.config.routing) { var node = htmlWebpackPlugin.options.config.routing[i].name || htmlWebpackPlugin.options.config.routing[i] %>
         <<%= node %> route="<%= i %>"></<%= node %>>
@@ -168,7 +181,7 @@
                     if (App.Shell) {
                       App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                     } else {
-                      setTimeout(() => {
+                      setTimeout(function () {
                         App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                       }, 5000)
                     }
@@ -204,7 +217,7 @@
               if (App.Shell.showMessage) {
                 App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
               } else {
-                setTimeout(() => {
+                setTimeout(function () {
                   if (App.Shell.showMessage) {
                     App.Shell.showMessage('A new version of this app is available.', tapHandler, 'Refresh', null, 0); // duration 0 indications shows the toast indefinitely.
                   } else {
