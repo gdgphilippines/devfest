@@ -22,7 +22,7 @@
   },
   "fragments": {
     "devfest-landing-page": "modules/devfest-module/pages/devfest-landing-page.html",
-    "devfest-call-for-speakers-page": "modules/devfest-module/pages/devfest-call-for-speakers-page.html",
+    "devfest-speakers-page": "modules/devfest-module/pages/devfest-speakers-page.html",
     "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page.html",
     "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page.html",
     "devfest-authorized-page": "modules/devfest-module/pages/devfest-authorized-page.html",
@@ -33,7 +33,7 @@
   "routing": {
     "/": "devfest-landing-page",
     "/index.html": "devfest-landing-page",
-    "/call-for-speakers": "devfest-call-for-speakers-page",
+    "/speakers": "devfest-speakers-page",
     "/auth-check": {
       "name": "devfest-authorized-page",
       "auth": "exampleAuthentication"

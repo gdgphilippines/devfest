@@ -35,6 +35,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       opacity: 0;
       z-index: -1;
       transition: opacity 0.3s;
+      display: none;
     }
 
     ::slotted(*) > .page {
@@ -45,18 +46,21 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
       opacity: 0;
       z-index: -1;
       transition: opacity 0.3s;
+      display: none;
     }
 
     ::slotted(.page--on-view) {
       position: relative !important;
       opacity: 1;
       z-index: 0;
+      display: block;
     }
 
     ::slotted(*) > .page--on-view {
       position: relative !important;
       opacity: 1;
       z-index: 0;
+      display: block;
     }`
     const main = document.createElement('div')
     main.setAttribute('class', 'main')

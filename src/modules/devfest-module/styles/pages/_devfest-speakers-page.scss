@@ -1,0 +1,116 @@
+:host {
+  font-family: 'Roboto';
+  font-weight: 300;
+  color: #666;
+  font-size: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Product Sans';
+  color: #666;
+  font-weight: normal;
+}
+
+.banner-container {
+  @apply --layout-horizontal;
+  @apply --layout-wrap;
+  text-align: left;
+
+  > .banner-part {
+    @apply --layout-flex;
+    min-width: 300px;
+
+    @media only screen and (max-width: 500px) {
+      min-width: 200px;
+    }
+  }
+
+  > .banner-image {
+    min-height: 400px;
+    background: url('/images/speakers-compressed.jpg') center/cover no-repeat;
+  }
+
+  > .banner {
+    padding: 36px;
+
+    @media only screen and (max-width: 500px) {
+      padding: 20px;
+    }
+  }
+}
+
+.section {
+  text-align: center;
+  padding: 36px;
+  padding-bottom: 96px;
+
+  > .section-title {
+    > h1 {
+      font-size: 2.5em;
+      color: inherit;
+    }
+  }
+
+  > .section-layout {
+    @apply --layout-horizontal;
+    @apply --layout-wrap;
+  }
+
+  iron-icon {
+    --iron-icon-height: 96px;
+    --iron-icon-width: 96px;
+  }
+}
+
+.perk {
+  padding: 36px;
+  min-width: 500px;
+  @apply --layout-flex;
+}
+
+.session {
+  padding: 36px;
+  min-width: 250px;
+  @apply --layout-flex;
+}
+
+.topic-card {
+  padding: 36px;
+  color: #666;
+  background-color: #fff;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  @apply --layout-flex;
+  margin: 16px;
+
+  > p {
+    line-height: 150%;
+  }
+
+  iron-icon {
+    color: #2196f3;
+  }
+}
+
+.important-date {
+  @apply --layout-horizontal;
+
+  > .text {
+    padding: 36px;
+    text-align: right;
+    padding-right: 20px;
+    @apply --layout-flex;
+  }
+
+  > .date {
+    padding: 36px;
+    text-align: left;
+    padding-left: 20px;
+    @apply --layout-flex;
+  }
+
+}
+
+.blue.section {
+  background-color: #2196f3;
+  color: #fff;
+}
