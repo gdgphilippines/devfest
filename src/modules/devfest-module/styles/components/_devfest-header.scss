@@ -4,8 +4,28 @@ app-header {
 
   > app-toolbar {
     @apply --layout-horizontal;
+    @apply --layout-center;
+
+    > gdg-logo {
+      padding-top: 10px;
+    }
+
     > .spacer {
       @apply --layout-flex;
+    }
+
+    > .menu {
+      display: none;
+
+      @media screen and (max-width: 700px) {
+        display: block;
+      }
+    }
+
+    > .links {
+      @media screen and (max-width: 700px) {
+        display: none;
+      }
     }
   }
 }

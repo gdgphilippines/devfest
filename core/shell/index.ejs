@@ -116,6 +116,10 @@
       body {
         margin: 0;
       }
+
+      .drawer {
+        z-index: 10;
+      }
     </style>
 
     <style>
@@ -151,7 +155,7 @@
       <<%= header %>></<%= header %>>
     <% } %>
     <% if (htmlWebpackPlugin.options.config.partials.drawer) { var drawer = htmlWebpackPlugin.options.config.partials.drawer %>
-      <<%= drawer %>></<%= drawer %>>
+      <<%= drawer %> class="drawer"></<%= drawer %>>
     <% } %>
 
     <app-shell>

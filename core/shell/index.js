@@ -210,6 +210,7 @@ window.customElements.define(AppShell.is, AppShell)
 
 // load partials here
 for (var p in partials) {
+  console.log(p)
   partials[p]()
 }
 

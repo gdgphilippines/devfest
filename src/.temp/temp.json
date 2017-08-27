@@ -27,6 +27,7 @@
     "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page.html",
     "devfest-authorized-page": "modules/devfest-module/pages/devfest-authorized-page.html",
     "devfest-header": "modules/devfest-module/components/devfest-header.html",
+    "devfest-drawer": "modules/devfest-module/components/devfest-drawer.html",
     "example-app-header": "modules/example-module/components/example-app-header.html",
     "example-app-drawer": "modules/example-module/components/example-app-drawer.html"
   },
@@ -44,7 +45,8 @@
     "not-authorized": "devfest-not-authorized-page"
   },
   "partials": {
-    "header": "devfest-header"
+    "header": "devfest-header",
+    "drawer": "devfest-drawer"
   },
   "shellComponents": [
     {

@@ -146,9 +146,9 @@
                   if (type && type.trim() === 'json') {
                     var prop = query
                     if (!prop) throw new Error('No property found: ' + array[0])
-                    console.log(content, prop, JSON.parse(content))
+                    // console.log(content, prop, JSON.parse(content))
                     this._setProperty(prop, JSON.parse(content))
-                    console.log(this[prop])
+                    // console.log(this[prop])
                   } else if (node) {
                     node.innerHTML = marked(content)
                   }

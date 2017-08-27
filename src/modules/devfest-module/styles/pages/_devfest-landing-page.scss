@@ -12,11 +12,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-devfest-header {
+devfest-banner {
   text-align: center;
-  > h1 {
+  h1 {
     font-family: 'Product Sans';
-    opacity: .75;
+    opacity: 1;
+
+    @media only screen and (max-width: 500px) {
+      font-size: 1.5em
+    }
+  }
+
+  .button {
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 }
 
@@ -52,6 +61,10 @@ devfest-header {
   color: #fff;
   padding: 36px;
 
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+
   > h1 {
     color: inherit
   }
@@ -69,6 +82,15 @@ devfest-header {
       min-width: 200px;
       text-align: center;
       padding: 36px;
+
+      @media only screen and (max-width: 500px) {
+        padding: 20px;
+      }
+
+      iron-icon {
+        --iron-icon-height: 64px;
+        --iron-icon-width: 64px;
+      }
 
       > h2 {
         font-size: 1.17em;

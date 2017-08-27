@@ -1,9 +1,11 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../../../core/modules/app-layout/app-header/app-header.html">
 <link rel="import" href="../../../../core/modules/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../../../core/modules/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../../bower_components/shadycss/apply-shim.html">
 <link rel="import" href="./devfest-button.html">
+<link rel="import" href="./devfest-icon-button.html">
 <link rel="import" href="../fonts/devfest-fonts.html">
 <link rel="import" href="./gdg-logo.html">
 
@@ -13,6 +15,7 @@
 
     <app-header>
       <app-toolbar>
+        <devfest-icon-button class="menu" icon="devfest:menu" on-tap="openDrawer"></devfest-icon-button>
         <gdg-logo mono></gdg-logo>
         <div class="spacer">
         </div>
@@ -26,8 +29,12 @@
   </template>
   <script>
     (() => {
-      class DevfestHeader extends Polymer.Element {
+      class DevfestHeader extends Polymer.GestureEventListeners(Polymer.Element) {
         static get is () { return 'devfest-header' }
+
+        openDrawer () {
+          window.dispatchEvent(new CustomEvent('open-drawer'))
+        }
       }
 
       window.customElements.define(DevfestHeader.is, DevfestHeader)
