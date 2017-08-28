@@ -138,7 +138,7 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       if (window.ga) {
-        ga('create', App.__analytics, 'auto');
+        ga('create', App._analytics, 'auto');
         ga('send', 'pageview');
       }
       // setTimeout(() => {
@@ -186,12 +186,12 @@
                 case 'installed':
                   if (!navigator.serviceWorker.controller) {
                     console.log('Caching Complete! Future visits will work offline.')
-                    if (App.Shell) {
+                    if (App.Shell && App.Shell.showMessage && typeof App.Shell.showMessage === 'function') {
                       App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                     } else {
                       setTimeout(function () {
                         App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
-                      }, 5000)
+                      }, 30000)
                     }
 
                   }

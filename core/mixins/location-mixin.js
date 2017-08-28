@@ -180,6 +180,10 @@ export default (superClass) => {
       }
       // Target blank is a new tab, don't intercept.
       if (anchor.target === '_blank') {
+        // capture link click
+        if (anchor.href && window.ga) {
+          ga('send', 'event', 'Link', 'Click', anchor.href, 1)
+        }
         return null
       }
       // If the link is for an existing parent frame, don't intercept.

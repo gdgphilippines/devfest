@@ -7,11 +7,11 @@
     "image": "https://devfestph.firebaseapp.com/images/header.png"
   },
   "build": {
-    "name": "dev",
+    "name": "prod",
     "baseHref": "/",
     "analytics": "UA-78413383-2",
     "firebaseVersion": "4.2.0",
-    "database": "dev",
+    "database": "prod",
     "waitBeforeFetchingSameURLInRest": 60,
     "sentryUrl": "https://85d1091a410948caa823a5230bd0dbcf@sentry.io/204253",
     "firebaseConfig": []

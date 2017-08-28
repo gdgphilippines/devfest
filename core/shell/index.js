@@ -187,7 +187,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
     System.import('../modules/app-toast/components/app-toast.html').then(() => {
       var messageInterval = setInterval(() => {
         if (messages.length > 0) {
-          var {message, optTapHandler, optAction, optActionHandler, optDuration} = message.pop()
+          var {message, optTapHandler, optAction, optActionHandler, optDuration} = messages.pop()
           this.showMessage(message, optTapHandler, optAction, optActionHandler, optDuration)
         } else {
           clearInterval(messageInterval)
