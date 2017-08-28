@@ -1,4 +1,5 @@
-import 'polymer/lib/mixins/property-accessors.html'
+// import 'polymer/lib/mixins/property-accessors.html'
+import 'polymer/polymer-element.html'
 import 'polymer/lib/utils/flattened-nodes-observer.html'
 import LocationMixin from '../mixins/location-mixin.js'
 import QueryParamsMixin from '../mixins/query-params-mixin.js'
@@ -9,67 +10,168 @@ import partials from '../../src/partials.js'
 import auth from '../../src/authentication/index.js'
 
 const messages = []
-
-class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(window.HTMLElement))) {
+class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
+// class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(window.HTMLElement))) {
   static get is () { return 'app-shell' }
 
-  static get observedAttributes () {
-    const observedAttributes = super.observedAttributes || []
-    return observedAttributes.concat(['params', 'queryParams', 'currentRoute'])
+  static get properties () {
+    return {
+      params: {
+        type: Object
+      },
+
+      queryParams: {
+        type: Object
+      },
+
+      currentRoute: {
+        type: String
+      },
+
+      // location-mixin
+      path: {
+        type: String
+      },
+
+      query: {
+        type: String,
+        observer: '_queryChanged'
+      },
+
+      urlSpaceRegex: {
+        type: String
+      },
+
+      hash: {
+        type: String
+      },
+
+      dwellTime: {
+        type: Number
+      },
+
+      _urlSpaceRegExp: {
+        type: String,
+        computed: '_makeRegExp(urlSpaceRegex)'
+      },
+
+      _lastChangedAt: {
+        type: String
+      },
+
+      _initialized: {
+        type: Boolean
+      },
+
+      // query params 'paramsString', 'paramsObject', '_dontReact'
+
+      paramsString: {
+        type: String,
+        observer: '_paramsStringChanged'
+      },
+
+      paramsObject: {
+        type: Object
+      },
+
+      _dontReact: {
+        type: Boolean
+      }
+    }
   }
+
+  static get observers () {
+    return [
+      '_pathChanged(path)',
+      '_updateUrl(path, query, hash)',
+
+    ]
+  }
+
+  static get template () {
+    return `
+      <style is="custom-style">
+        div[role='main'] {
+          position: relative;
+        }
+
+        ::slotted(.page) {
+          position: absolute;
+          background-color: white;
+          width: 100%;
+          top: 0;
+          opacity: 0;
+          z-index: -1;
+          transition: opacity 0.3s;
+          display: none;
+        }
+
+        ::slotted(*) > .page {
+          position: absolute;
+          background-color: white;
+          width: 100%;
+          top: 0;
+          opacity: 0;
+          z-index: -1;
+          transition: opacity 0.3s;
+          display: none;
+        }
+
+        ::slotted(.page--on-view) {
+          position: relative !important;
+          opacity: 1;
+          z-index: 0;
+          display: block;
+        }
+
+        ::slotted(*) > .page--on-view {
+          position: relative !important;
+          opacity: 1;
+          z-index: 0;
+          display: block;
+        }
+      </style>
+
+      <div class="main">
+        <slot></slot>
+      </div>
+
+      <app-toast></app-toast>
+    `
+  }
+
+  //path', 'query', 'urlSpaceRegex', 'hash', 'dwellTime', 'urlSpaceRegex', '_urlSpaceRegExp', '_lastChangedAt', '_initialized
+
+  // static get observedAttributes () {
+  //   const observedAttributes = super.observedAttributes || []
+  //   return observedAttributes.concat(['params', 'queryParams', 'currentRoute'])
+  // }
+
+  // _propertiesChanged (currentProps, changedProps, oldProps) {
+  //   if (super._propertiesChanged) {
+  //     super._propertiesChanged(currentProps, changedProps, oldProps)
+  //   }
+  //   if ('path' in changedProps) {
+  //     this._pathChanged(changedProps['path'])
+  //   }
+  // }
 
   constructor () {
     super()
-    const shadowRoot = this.attachShadow({ mode: 'open' })
-    const style = document.createElement('style')
-    style.setAttribute('is', 'custom-style')
-    style.innerHTML = `div[role='main'] {
-      position: relative;
-    }
-
-    ::slotted(.page) {
-      position: absolute;
-      background-color: white;
-      width: 100%;
-      top: 0;
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s;
-      display: none;
-    }
-
-    ::slotted(*) > .page {
-      position: absolute;
-      background-color: white;
-      width: 100%;
-      top: 0;
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s;
-      display: none;
-    }
-
-    ::slotted(.page--on-view) {
-      position: relative !important;
-      opacity: 1;
-      z-index: 0;
-      display: block;
-    }
-
-    ::slotted(*) > .page--on-view {
-      position: relative !important;
-      opacity: 1;
-      z-index: 0;
-      display: block;
-    }`
-    const main = document.createElement('div')
-    main.setAttribute('class', 'main')
-    const slot = document.createElement('slot')
-    main.appendChild(slot)
-    const toast = document.createElement('app-toast')
-    shadowRoot.appendChild(style)
-    shadowRoot.appendChild(main)
-    shadowRoot.appendChild(toast)
+    // const shadowRoot = this.attachShadow({ mode: 'open' })
+    // const style = document.createElement('style')
+    // style.setAttribute('is', 'custom-style')
+    // style.innerHTML = ``
+    // const main = document.createElement('div')
+    // main.setAttribute('class', 'main')
+    // const slot = document.createElement('slot')
+    // main.appendChild(slot)
+    // const toast = document.createElement('app-toast')
+    // shadowRoot.appendChild(style)
+    // shadowRoot.appendChild(main)
+    // shadowRoot.appendChild(toast)
+    // this._template = shadowRoot
+    // console.log(window.ShadyCSS.styleElement)
     this._routes = {}
   }
 
@@ -114,14 +216,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
     this.shadowRoot.querySelector('app-toast').close()
   }
 
-  _propertiesChanged (currentProps, changedProps, oldProps) {
-    if (super._propertiesChanged) {
-      super._propertiesChanged(currentProps, changedProps, oldProps)
-    }
-    if ('path' in changedProps) {
-      this._pathChanged(changedProps['path'])
-    }
-  }
+
 
   _contentAdded (pages) {
     pages.forEach(page => {
@@ -204,7 +299,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(
   }
 }
 
-AppShell.createPropertiesForAttributes()
+// AppShell.createPropertiesForAttributes()
 
 window.customElements.define(AppShell.is, AppShell)
 

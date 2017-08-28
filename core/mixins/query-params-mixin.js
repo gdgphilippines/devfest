@@ -11,26 +11,26 @@ export default (superClass) => {
       this._dontReact = false
     }
 
-    static get observedAttributes () {
-      const observedAttributes = super.observedAttributes || []
-      return observedAttributes.concat(['paramsString', 'paramsObject', '_dontReact'])
-    }
+    // static get observedAttributes () {
+    //   const observedAttributes = super.observedAttributes || []
+    //   return observedAttributes.concat(['paramsString', 'paramsObject', '_dontReact'])
+    // }
 
-    _propertiesChanged (currentProps, changedProps, oldProps) {
-      if (super._propertiesChanged) {
-        super._propertiesChanged(currentProps, changedProps, oldProps)
-      }
-      if ('paramsString' in changedProps) {
-        if (changedProps['paramsString'] !== oldProps['paramsString']) {
-          this._paramsStringChanged()
-        }
-      }
-      if ('query' in changedProps) {
-        if (changedProps['query'] !== oldProps['query']) {
-          this._queryChanged(changedProps['query'])
-        }
-      }
-    }
+    // _propertiesChanged (currentProps, changedProps, oldProps) {
+    //   if (super._propertiesChanged) {
+    //     super._propertiesChanged(currentProps, changedProps, oldProps)
+    //   }
+    //   if ('paramsString' in changedProps) {
+    //     if (changedProps['paramsString'] !== oldProps['paramsString']) {
+    //       this._paramsStringChanged()
+    //     }
+    //   }
+    //   if ('query' in changedProps) {
+    //     if (changedProps['query'] !== oldProps['query']) {
+    //       this._queryChanged(changedProps['query'])
+    //     }
+    //   }
+    // }
 
     _queryChanged (query) {
       this.paramsString = query

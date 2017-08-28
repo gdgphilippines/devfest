@@ -126,6 +126,10 @@ module.exports = (env) => {
         to: 'bower_components/webcomponentsjs/[name].[ext]'
       },
       {
+        from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.map'),
+        to: 'bower_components/webcomponentsjs/[name].[ext]'
+      },
+      {
         from: path.resolve(__dirname, 'bower_components/web-component-tester/*.js'),
         to: 'bower_components/web-component-tester/[name].[ext]'
       },

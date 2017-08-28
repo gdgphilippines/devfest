@@ -3,26 +3,26 @@ import resolveUrl from '../utils/resolve-url.js'
 
 export default (superClass) => {
   return class extends superClass {
-    static get observedAttributes () {
-      const observedAttributes = super.observedAttributes || []
-      return observedAttributes.concat(['path', 'query', 'urlSpaceRegex', 'hash', 'dwellTime', 'urlSpaceRegex', '_urlSpaceRegExp', '_lastChangedAt', '_initialized'])
-    }
+    // static get observedAttributes () {
+    //   const observedAttributes = super.observedAttributes || []
+    //   return observedAttributes.concat(['path', 'query', 'urlSpaceRegex', 'hash', 'dwellTime', 'urlSpaceRegex', '_urlSpaceRegExp', '_lastChangedAt', '_initialized'])
+    // }
 
-    _propertiesChanged (currentProps, changedProps, oldProps) {
-      if (super._propertiesChanged) {
-        super._propertiesChanged(currentProps, changedProps, oldProps)
-      }
-      if ('path' in changedProps && 'query' in changedProps && 'hash' in changedProps) {
-        if (changedProps['path'] !== oldProps['path'] && changedProps['query'] !== oldProps['query'] && changedProps['hash'] !== oldProps['hash']) {
-          this._updateUrl(changedProps['path'], changedProps['query'], changedProps['hash'])
-        }
-      }
-      if ('urlSpaceRegex' in changedProps) {
-        if (changedProps['urlSpaceRegex'] !== oldProps['urlSpaceRegex']) {
-          this.__urlSpaceRegExp = this._makeRegExp(changedProps['urlSpaceRegex'])
-        }
-      }
-    }
+    // _propertiesChanged (currentProps, changedProps, oldProps) {
+    //   if (super._propertiesChanged) {
+    //     super._propertiesChanged(currentProps, changedProps, oldProps)
+    //   }
+    //   if ('path' in changedProps && 'query' in changedProps && 'hash' in changedProps) {
+    //     if (changedProps['path'] !== oldProps['path'] && changedProps['query'] !== oldProps['query'] && changedProps['hash'] !== oldProps['hash']) {
+    //       this._updateUrl(changedProps['path'], changedProps['query'], changedProps['hash'])
+    //     }
+    //   }
+    //   if ('urlSpaceRegex' in changedProps) {
+    //     if (changedProps['urlSpaceRegex'] !== oldProps['urlSpaceRegex']) {
+    //       this.__urlSpaceRegExp = this._makeRegExp(changedProps['urlSpaceRegex'])
+    //     }
+    //   }
+    // }
 
     constructor () {
       super()

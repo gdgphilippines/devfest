@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.1",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.1",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1.0.7",
     "polymer-redux": "^1.0.1",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
     "iron-icon": "PolymerElements/iron-icon#^2.0.1",

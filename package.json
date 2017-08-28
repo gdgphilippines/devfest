@@ -26,6 +26,7 @@
   "dependencies": {
     "dexie": "^1.5.1",
     "indexeddbshim": "^3.0.4",
+    "js-yaml": "^3.9.1",
     "marked": "^0.3.6",
     "path-to-regexp": "^1.7.0",
     "pouchdb": "^6.3.4",
