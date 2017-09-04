@@ -8,19 +8,12 @@
 <link rel="import" href="../components/devfest-footer.html">
 <link rel="import" href="../components/devfest-button.html">
 
-<dom-module id="devfest-speakers-page">
+<dom-module id="devfest-tickets-page">
   <template>
-    <link rel="stylesheet" href="../styles/pages/_devfest-speakers-page.scss">
+    <link rel="stylesheet" href="../styles/pages/_devfest-tickets-page.scss">
 
-    <header class="banner-container">
-      <div class="banner-part banner-image">
-      </div>
-      <div class="banner-part banner">
-      </div>
-    </header>
-
-    <section class="section perks-container blue">
-      <div class="perks-title section-title">
+    <header class="section ticket-perks-container blue">
+      <div class="ticket-perks-title section-title">
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[perks]]">
@@ -32,6 +25,12 @@
           </div>
         </template>
       </div>
+    </header>
+
+    <section class="section perks-container blue">
+      <div class="perks-title section-title">
+      </div>
+
     </section>
 
     <section class="section session-container">
@@ -93,8 +92,8 @@
   <script>
     import marked from 'marked'
     (() => {
-      class DevfestCallForSpeakersPage extends Polymer.Element {
-        static get is () { return 'devfest-speakers-page' }
+      class DevfestTicketsPage extends Polymer.Element {
+        static get is () { return 'devfest-tickets-page' }
 
         static get properties () {
           return {
@@ -161,7 +160,7 @@
         }
       }
 
-      window.customElements.define(DevfestCallForSpeakersPage.is, DevfestCallForSpeakersPage)
+      window.customElements.define(DevfestTicketsPage.is, DevfestTicketsPage)
     })()
   </script>
 </dom-module>

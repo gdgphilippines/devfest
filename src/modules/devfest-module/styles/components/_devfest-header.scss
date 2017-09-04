@@ -31,4 +31,8 @@ app-header {
   @apply --layout-flex;
   min-width: 100px;
   height: 10px;
+
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 }

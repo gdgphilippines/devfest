@@ -1,4 +1,0 @@
-{
-  "presets": ["es2015"],
-  "plugins": ["dynamic-import-webpack", ["transform-runtime", { "polyfill": false }]]
-}

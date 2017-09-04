@@ -43,7 +43,7 @@
     <devfest-footer></devfest-footer>
   </template>
   <script>
-    import database from '../../../../core/modules/indexeddb/database.js'
+    // import database from '../../../../core/modules/indexeddb/database.js'
     import marked from 'marked'
 
     (() => {
@@ -70,7 +70,7 @@
         }
 
         _fetchContent () {
-          fetch(`https://raw.githubusercontent.com/gdgphilippines/devfestph2017-files/master/content/${this.nodeName.toLowerCase()}.md`)
+          fetch(`https://raw.githubusercontent.com/gdgphilippines/devfestph2017-files/old-master/content/${this.nodeName.toLowerCase()}.md`)
           .then(res => {
             return res.text()
           })

@@ -2,7 +2,7 @@
   font-family: 'Roboto';
   position: relative;
   // min-height: 150vh;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 112px);
   background: url('/images/devfest-bg-repeatable.png') center/contain repeat;
 
   > .header-white {
@@ -18,28 +18,39 @@
 
   > .header-container {
     position: relative;
-    height: calc(100vh - 64px);
-    @apply --layout-horizontal;
-    @apply --layout-center;
+    min-height: calc(100vh - 112px);
+    display: block;
 
-    > .header-image-text-container {
-      @apply --layout-flex;
+    > .header-container-flex {
+      @apply --layout-horizontal;
+      @apply --layout-center;
 
-      > .header-image {
+      > .header-image-text-container {
         position: relative;
-        // padding-top: 100px;
-        width: inherit;
-        text-align: center;
+        @apply --layout-flex;
 
-        > img {
-          width: 80%;
-          max-width: 600px;
+        > .header-image {
+          position: relative;
+          // padding-top: 100px;
+          width: inherit;
+          text-align: center;
+
+          > img {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 100px;
+
+            @media screen and (max-width: 500px) {
+              margin-top: 50px;
+            }
+          }
         }
-      }
 
-      > .header-slot {
-        text-align: center;
-        padding: 20px;
+        > .header-slot {
+          text-align: center;
+          padding: 20px;
+          padding-bottom: 100px;
+        }
       }
     }
   }
