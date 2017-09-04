@@ -56,7 +56,7 @@
     <meta name="msapplication-TileColor" content="<%= htmlWebpackPlugin.options.theme.webApp.themeColor %>">
     <meta name="msapplication-tap-highlight" content="<%= htmlWebpackPlugin.options.theme.webApp.tapHighlight %>">
 
-    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries,WeakMap,WeakSet,Object.setPrototypeOf&flags=gated"></script>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries,WeakMap,WeakSet&flags=gated"></script>
     <script>
       Object.defineProperty(window, 'App', { value: window.App || {} })
       Object.defineProperty(App, '_build', { value: App._build || '<%= htmlWebpackPlugin.options.config.build.name %>' })
@@ -92,7 +92,7 @@
     <% if (htmlWebpackPlugin.options.config.build.sentryUrl) {%>
     <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
 
-    <script>
+    <script>      
       function installRaven() {
         if (window.Raven && !Raven.isSetup()) {
           Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
@@ -141,7 +141,7 @@
         ga('create', App._analytics, 'auto');
         ga('send', 'pageview');
 
-        setTimeout(function () {
+        setTimeout(() => {
           ga('send', 'event', 'App', 'read', 'User at app at least 15 seconds', 15)
           // ga('event')
         }, 15000)
@@ -195,9 +195,7 @@
                       App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                     } else {
                       setTimeout(function () {
-                        if (App.Shell && App.Shell.showMessage && typeof App.Shell.showMessage === 'function') {
-                          App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
-                        }
+                        App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                       }, 30000)
                     }
 

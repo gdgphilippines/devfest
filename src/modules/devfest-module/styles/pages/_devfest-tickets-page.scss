@@ -1,0 +1,86 @@
+:host {
+  font-family: 'Roboto';
+  font-weight: 300;
+  color: #666;
+  font-size: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Product Sans';
+  color: #666;
+  font-weight: normal;
+}
+
+p { line-height: 150% }
+
+.section {
+  text-align: center;
+  padding: 36px;
+  padding-bottom: 96px;
+
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+
+  > .section-title {
+    > h1 {
+      font-size: 2.5em;
+      color: inherit;
+    }
+  }
+
+  > .section-layout {
+    @apply --layout-horizontal;
+    @apply --layout-wrap;
+  }
+
+  iron-icon {
+    --iron-icon-height: 96px;
+    --iron-icon-width: 96px;
+  }
+}
+
+.perk {
+  padding: 36px;
+  min-width: 500px;
+  @apply --layout-flex;
+
+  @media only screen and (max-width: 800px) {
+    min-width: 250px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+}
+
+.online-option {
+  padding: 36px;
+  min-width: 250px;
+  @apply --layout-flex;
+
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+}
+
+.offline-option {
+  padding: 36px;
+  min-width: 250px;
+  @apply --layout-flex;
+
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+
+  p {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+
+.blue.section {
+  background-color: #2196f3;
+  color: #fff;
+}

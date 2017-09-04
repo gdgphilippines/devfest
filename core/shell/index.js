@@ -1,5 +1,4 @@
-// import 'polymer/lib/mixins/property-accessors.html'
-import 'polymer/polymer-element.html'
+import 'polymer/polymer.html'
 import 'polymer/lib/utils/flattened-nodes-observer.html'
 import LocationMixin from '../mixins/location-mixin.js'
 import QueryParamsMixin from '../mixins/query-params-mixin.js'
@@ -11,7 +10,6 @@ import auth from '../../src/authentication/index.js'
 
 const messages = []
 class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
-// class AppShell extends QueryParamsMixin(LocationMixin(Polymer.PropertyAccessors(window.HTMLElement))) {
   static get is () { return 'app-shell' }
 
   static get properties () {
@@ -83,8 +81,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
   static get observers () {
     return [
       '_pathChanged(path)',
-      '_updateUrl(path, query, hash)',
-
+      '_updateUrl(path, query, hash)'
     ]
   }
 
@@ -140,51 +137,17 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
     `
   }
 
-  //path', 'query', 'urlSpaceRegex', 'hash', 'dwellTime', 'urlSpaceRegex', '_urlSpaceRegExp', '_lastChangedAt', '_initialized
-
-  // static get observedAttributes () {
-  //   const observedAttributes = super.observedAttributes || []
-  //   return observedAttributes.concat(['params', 'queryParams', 'currentRoute'])
-  // }
-
-  // _propertiesChanged (currentProps, changedProps, oldProps) {
-  //   if (super._propertiesChanged) {
-  //     super._propertiesChanged(currentProps, changedProps, oldProps)
-  //   }
-  //   if ('path' in changedProps) {
-  //     this._pathChanged(changedProps['path'])
-  //   }
-  // }
-
   constructor () {
     super()
-    // const shadowRoot = this.attachShadow({ mode: 'open' })
-    // const style = document.createElement('style')
-    // style.setAttribute('is', 'custom-style')
-    // style.innerHTML = ``
-    // const main = document.createElement('div')
-    // main.setAttribute('class', 'main')
-    // const slot = document.createElement('slot')
-    // main.appendChild(slot)
-    // const toast = document.createElement('app-toast')
-    // shadowRoot.appendChild(style)
-    // shadowRoot.appendChild(main)
-    // shadowRoot.appendChild(toast)
-    // this._template = shadowRoot
-    // console.log(window.ShadyCSS.styleElement)
     this._routes = {}
   }
 
   connectedCallback () {
-    if (super.connectedCallback) {
-      super.connectedCallback()
-    }
-    this._enableProperties() // turn on accessors
+    super.connectedCallback()
     this._observer = new Polymer.FlattenedNodesObserver(this, (info) => {
       this._contentAdded(info.addedNodes.filter((node) => (node.nodeType === window.Node.ELEMENT_NODE)))
     })
-    // registerServiceWorker(this)
-    System.import('../modules/app-toast/components/app-toast.html').then(() => {
+    import(/* webpackChunkName: "app-toast" */ '../modules/app-toast/components/app-toast.html').then(() => {
       var messageInterval = setInterval(() => {
         if (messages.length > 0) {
           var {message, optTapHandler, optAction, optActionHandler, optDuration} = messages.pop()
@@ -216,8 +179,6 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
     this.shadowRoot.querySelector('app-toast').close()
   }
 
-
-
   _contentAdded (pages) {
     pages.forEach(page => {
       page.classList.add('page')
@@ -236,6 +197,8 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
       return
     }
 
+    path = path.replace(/index\.html$/, '')
+
     var routeName = null
     Object.entries(this._routes).forEach(route => {
       if (routeName) return
@@ -250,6 +213,7 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
           params[keys[j].name] = exec[j + 1]
         }
         routeName = route[0]
+        this.params = params
       }
     })
 
@@ -287,9 +251,13 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
       if (this._routes[i] && this._routes[i].element) this._routes[i].element.classList.remove('page--on-view')
     }
 
-    if (this._routes[route] && this._routes[route].element) this._routes[route].element.classList.add('page--on-view')
+    if (this._routes[route] && this._routes[route].element) {
+      this._routes[route].element.classList.add('page--on-view')
+    }
     if (this._routes[route]) {
       routes[route]().then(() => {
+        this._routes[route].element._setProperty('params', this.params)
+        this._routes[route].element._setProperty('queryParams', this.paramsObject)
         if (window.ga) {
           ga('set', 'page', this.path)
           ga('send', 'pageview')
@@ -299,13 +267,10 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
   }
 }
 
-// AppShell.createPropertiesForAttributes()
-
 window.customElements.define(AppShell.is, AppShell)
 
 // load partials here
 for (var p in partials) {
-  console.log(p)
   partials[p]()
 }
 

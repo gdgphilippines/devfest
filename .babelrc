@@ -1,6 +1,6 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["dynamic-import-webpack", ["transform-runtime", {
+  "presets": ["env"],
+  "plugins": ["syntax-dynamic-import", ["transform-runtime", {
     "helpers": false,
     "polyfill": false,
     "regenerator": true

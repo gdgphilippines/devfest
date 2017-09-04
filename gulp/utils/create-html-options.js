@@ -12,9 +12,9 @@ module.exports = (env) => {
       preserveLineBreaks: true
     }
     : false
-  
+
   return {
-    template: path.resolve(__dirname, '../core/shell/index.ejs'),
+    template: path.resolve(__dirname, '../../core/shell/index.ejs'),
     inject: false,
     filename: 'index.html',
     minify,

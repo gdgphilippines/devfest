@@ -10,5 +10,5 @@ module.exports = (env) => {
     theme_color: theme.themeColor,
     background_color: theme.backgroundColor,
     icons: theme.icons
-  })
+  }, null, 2)
 }
