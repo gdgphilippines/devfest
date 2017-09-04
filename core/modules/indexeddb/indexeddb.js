@@ -8,13 +8,21 @@ export default () => {
         time = 500
       }
       setTimeout(() => {
-        if (window.Modernizr.indexeddb === false) {
-          import('indexeddbshim').then(mod => {
-            resolve(indexedDB || mod)
-          })
-        } else {
-          resolve(indexedDB)
+        try {
+          if (window.Modernizr.indexeddb === false) {
+            import('indexeddbshim').then(mod => {
+              resolve(indexedDB || mod)
+            })
+          } else {
+            resolve(indexedDB)
+          }
+        } catch (e) {
+          console.error(e)
+          if (window.Raven) {
+            Raven.captureException(e)
+          }
         }
+
       }, time)
     } else {
       // YOLO
