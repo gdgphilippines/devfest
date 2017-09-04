@@ -56,7 +56,7 @@
     <meta name="msapplication-TileColor" content="<%= htmlWebpackPlugin.options.theme.webApp.themeColor %>">
     <meta name="msapplication-tap-highlight" content="<%= htmlWebpackPlugin.options.theme.webApp.tapHighlight %>">
 
-    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries,WeakMap,WeakSet&flags=gated"></script>
+    <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver,fetch,Promise,Array.prototype.findIndex,Object.defineProperty,Map,Set,CustomEvent,performance.now,Object.entries,WeakMap,WeakSet,Object.setPrototypeOf&flags=gated"></script>
     <script>
       Object.defineProperty(window, 'App', { value: window.App || {} })
       Object.defineProperty(App, '_build', { value: App._build || '<%= htmlWebpackPlugin.options.config.build.name %>' })
