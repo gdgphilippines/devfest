@@ -35,6 +35,7 @@ gulp.task('default', (done) => {
     'create-firebase-json',
     'watch-build',
     'run-webpack',
+    'run-after-webpack',
     'run-server',
     'run-workbox',
     done

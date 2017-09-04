@@ -37,7 +37,10 @@
     "babel-preset-env": "^1.6.0",
     "eslint-plugin-html": "^3.2.0",
     "gulp-markdox": "^0.1.2",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "workbox-build": "^2.0.0",
+    "workbox-routing": "^1.1.0",
+    "workbox-sw": "^1.1.0"
   },
   "standard": {
     "globals": [

@@ -25,6 +25,6 @@ module.exports = (env, dest) => {
     })
   }
 
-  firebase.hosting.public = './' + dest
+  firebase.hosting.public = dest
   return JSON.stringify(firebase, null, 2)
 }

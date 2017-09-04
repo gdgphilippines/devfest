@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const createFirebaseJson = require('../utils/create-firebase-json')
 const getEnv = require('../utils/get-env')
+const getDest = require('../utils/get-dest')
 
 /**
  * # Slush Task Create Firebase JSON
@@ -23,6 +24,6 @@ const getEnv = require('../utils/get-env')
  */
 
 gulp.task('create-firebase-json', (done) => {
-  fs.writeFileSync(path.resolve(__dirname, '../../firebase.json'), createFirebaseJson(getEnv(), 'dist/public'), 'utf8')
+  fs.writeFileSync(path.resolve(__dirname, '../../firebase.json'), createFirebaseJson(getEnv(), getDest(getEnv())), 'utf8')
   done()
 })

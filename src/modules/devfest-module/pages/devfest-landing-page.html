@@ -43,7 +43,6 @@
     <devfest-footer></devfest-footer>
   </template>
   <script>
-    // import database from '../../../../core/modules/indexeddb/database.js'
     import marked from 'marked'
 
     (() => {
@@ -90,22 +89,22 @@
           })
         }
 
-        _shareFacebookLink () {
-          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
-          var link = window.location.protocol + '//' + window.location.hostname //'https://uxphilippines.com' //
-          var linkdecoded = encodeURI(link)
-          var picture = `${link}/images/header.png`
-          return `https://www.facebook.com/dialog/feed?app_id=476565679402935&redirect_uri=${encodeURI('https://devfest.gdgph.org')}&link=${linkdecoded}&picture=${picture}&name=${encodeURI(text)}&caption=${encodeURI('GDG Devfest Philippines 2017')}&description=${encodeURI(text)}&display=page`
+        // _shareFacebookLink () {
+        //   var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+        //   var link = window.location.protocol + '//' + window.location.hostname //'https://uxphilippines.com' //
+        //   var linkdecoded = encodeURI(link)
+        //   var picture = `${link}/images/header.png`
+        //   return `https://www.facebook.com/dialog/feed?app_id=476565679402935&redirect_uri=${encodeURI('https://devfest.gdgph.org')}&link=${linkdecoded}&picture=${picture}&name=${encodeURI(text)}&caption=${encodeURI('GDG Devfest Philippines 2017')}&description=${encodeURI(text)}&display=page`
 
-        }
+        // }
 
-        _shareTwitterLink () {
-          var link = window.location.protocol + '//' + window.location.hostname
-          var linkdecoded = encodeURI(link)
-          var picture = `${link}/images/header.png`
-          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
-          return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest,DevFestPH')}`
-        }
+        // _shareTwitterLink () {
+        //   var link = window.location.protocol + '//' + window.location.hostname
+        //   var linkdecoded = encodeURI(link)
+        //   var picture = `${link}/images/header.png`
+        //   var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+        //   return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest,DevFestPH')}`
+        // }
       }
 
       window.customElements.define(DevfestLandingPage.is, DevfestLandingPage)
