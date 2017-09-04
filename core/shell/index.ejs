@@ -90,7 +90,7 @@
     </script>
 
     <% if (htmlWebpackPlugin.options.config.build.sentryUrl) {%>
-    <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
+
 
     <script>
       function installRaven() {
@@ -107,6 +107,8 @@
         }
       }
     </script>
+
+    <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
     <% } %>
 
     <!-- Load your application shell -->
