@@ -11,12 +11,17 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester slush slush-polyapp-builder
-- slush polyapp-builder:install-deps
-- slush polyapp-builder:build
+- npm install -g bower polylint web-component-tester
+- ./node_modules/.bin/webpack --env=dev
 script:
 - xvfb-run wct
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
+# deploy:
+  # deploy master to production
+  # - provider: script
+  #  script: firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting
+  #  on:
+  #    branch: master
 env:
   global:
   - secure: O6GDqr2TbHf5QA2iKJjErcZi0MsAoz3OnGTanAxyjJnK/1qr7K/FdMUv6pOZo0Nu05/P4bvll7Xn4y5C9EynaXc53d77eqcrXttbXzFD1WQ/UHr67waYOQPRN/wCPFDmxZsgSzakSAhD2JGPT+dFENrRVuPw7PmZXlKVDNa/W0MlqghvyDb/OH3o16W+5gmFvGVeCg5Bst54K77/V5uzWu34fgIzT1YZshCRn3LGoV5yOBmzXWjA5bJ56PAcXsD3aoWUZNNdb4jdqOJVffpKmqTbEe3MvvzuedkCJE3KmBpHkpb7yWBFFiwzFsJQaDEpQdQoUrWFM1mOTc91VNPfpghJ0AVhQMG4yTzi3klN1jYLpDh5BFUi0J7D2ttnDvfCZk7xRwt2X1o8lnDvEuEAdNL5BdbZWdhBsxVO4BwGR6aj5PI5m25TBdMgTgcniqzfD68E926p4/UqGc8hJJ2LaDYf0CNz99ej2PW5rEtfAbEl0NqfSD9x4oMNMn/Wh/Px5P1WxGDxTNb0HhYxPuyjInbk6jj0orDwa09p3vdICz30RLNZ/ip2cJBUHdAd9qyAul9d9LIu7hzmktNBXJ6hGE+QP2NlWhC4b3ykA20m7iFjxhRbyn5CFOPZTOJgmqL9eG+eFSrq00j98QfYF9Imhrpa5yQa8H59HTOI2n+gtuA=

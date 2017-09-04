@@ -1,0 +1,17 @@
+.icon-button {
+  color: #2e9be6;
+	// color: white;
+	// border: 3px solid #2e9be6;
+	border-radius: 50%;
+	padding: 12px;
+	font-size: 1em;
+	display: inline-block;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	position: relative;
+}
+
+.icon-button__white {
+	color: rgba(255, 255, 255, 0.8);
+}

@@ -1,13 +1,13 @@
-for (var i in app.firebaseConfig) {
+for (var i in this.build.firebaseConfig) {
   router.registerRoute({route: new workbox.routing.ExpressRoute({
-    path: 'https://' + app.firebaseConfig[i].projectId + '.firebaseio.com/:json+',
+    path: 'https://' + this.build.firebaseConfig[i].projectId + '.firebaseio.com/:json+',
     handler: function (obj) {
       var event = obj.event
       var url = obj.url
 
       return fetch(url.href)
         .then(function (response) {
-          caches.open(app.shortTitle).then(function (cache) {
+          caches.open(this.app.shortTitle).then(function (cache) {
             cache.put(event.request, response)
           })
           return response.clone()

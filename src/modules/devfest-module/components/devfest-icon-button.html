@@ -1,0 +1,48 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../core/modules/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../icons/devfest-icons.html">
+
+<dom-module id="devfest-icon-button">
+  <template>
+    <link rel="stylesheet" href="../styles/components/_icon-button.scss">
+
+    <a href="{{href}}" class$="icon-button [[_isWhite(isWhite)]]" target="{{target}}">
+      <paper-ripple></paper-ripple>
+      <iron-icon icon="devfest:[[icon]]"></iron-icon>
+    </a>
+  </template>
+
+  <script>
+    (() => {
+      class DevfestIconButton extends Polymer.Element {
+        static get is () { return 'devfest-icon-button' }
+
+        static get properties () {
+          return {
+            href: {
+              type: String,
+              value: ''
+            },
+            icon: {
+              type: String
+            },
+            target: {
+              type: String
+            },
+            isWhite: {
+              type: Boolean,
+              value: false
+            }
+          }
+        }
+
+        _isWhite (isWhite) {
+          return isWhite ? 'icon-button__white' : ''
+        }
+      }
+
+      window.customElements.define(DevfestIconButton.is, DevfestIconButton)
+    })()
+  </script>
+</dom-module>
