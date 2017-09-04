@@ -92,7 +92,7 @@
     <% if (htmlWebpackPlugin.options.config.build.sentryUrl) {%>
     <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous" async onload="installRaven()"></script>
 
-    <script>      
+    <script>
       function installRaven() {
         if (window.Raven && !Raven.isSetup()) {
           Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
@@ -195,8 +195,10 @@
                       App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
                     } else {
                       setTimeout(function () {
-                        App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
-                      }, 30000)
+                        if (App.Shell && App.Shell.showMessage && typeof App.Shell.showMessage === 'function') {
+                          App.Shell.showMessage('Caching complete! Future visits will work offline.', function() { App.Shell.closeToast() }, 'Close', null, 10000)
+                        }
+                      }, 60000)
                     }
 
                   }
