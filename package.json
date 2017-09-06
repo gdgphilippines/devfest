@@ -2,7 +2,7 @@
   "name": "devfest",
   "description": "GDG Devfest 2017",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Toni-Jan Keith Monserrat",
     "email": "tjmonsi@gmail.com"
@@ -16,6 +16,7 @@
   },
   "scripts": {
     "test": "cd gulp && karma start karma.conf.js",
+    "test-ci": "cd gulp && karma start karma.conf.js --single-run",
     "test-without-screen": "cd gulp && karma start karma.conf.js",
     "test-with-screen": "export DISPLAY=:0 && wct --skip-plugin sauce --skip-plugin chrome",
     "serve": "firebase serve",

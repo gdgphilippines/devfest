@@ -15,19 +15,24 @@ before_install:
 install:
 - yarn install --flat
 - bower install
+- cd functions && yarn install
+- cd ..
 - cd gulp && yarn install
+- cd ..
 script:
-- xvfb-run npm test -- --single-run
-# - xvfb-run wct
-# - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
+- cd gulp
+- xvfb-run karma start karma.conf.js --single-run
+before_deploy:
+- cd ..
+- npm run build-production
 deploy:
-  # deploy master to production
-  - provider: script
-    script:
-    - npm run build-production
-    - firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting
-    on:
-      branch: master
+- provider: firebase
+  skip_cleanup: true
+  project: devfestph
+  token:
+    secure: Z+qOhhwpkAvvfoxQA6Nt6hz4exPFQWhwZlWsjRIhmC6D5bmmgC+ypMXjV1TP92pnjYjCkeXBUy9xhiA2NphSTYzzU/ROTV3ZxptLlCMQJNBtHS269owL7PuSc7UC1xJ+y4z19ypAMVUlvhxM0I5kYmr5JFy0C6MHAqTlbuP1iWoccM4yik8t32azarw4fnSxcg258DlD472kzmgkg2rmMrrC8HEIFb/KWHnCIJN5at5B4KCFPf52kiYUCa88MBwtsBOXyO0bvmJAQP6RAuExpelw8VvdVpdJZPrJ9z9s+K8f1PQA2y6To2Q7aR/kicJJo0YRw4TXdkSWOP1cQUThEjUMVPmOvEnz+Ty+vvK+XWhgBKIHAdJqwT7WlrSl0GBdOBl7kTI7JGwDv+Spmk/QRYV/qtoZjNEuK42J8Yhhfn31ydFq49w60cZqo0YnbOxhq/y7FYj8gV9IzrPwg2zNe8cmKb/yqVjYwmT67j8Hvg6t2HXe6OzSsBNcVN/vR9d0SZP0DQyz8AXWKXtDniBN2pOojarYYHKQiNivhkCWedrgw5yCR9T84w5jWJ4UAwLfKMS7r/6SVAW5lPRfYSIqBSBJZIs/WXVBefds0aFrBW1LyqQSt1Hvpt71CMT3QHaNTZ9Vws0ddgW66KqpyZRHrS+fhphwHLy2NNXVAgmFcRs=
+  on:
+    branch: master
 branches:
   only:
   - master
