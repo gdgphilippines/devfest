@@ -2,42 +2,37 @@
   <template>
     <link rel="stylesheet" href="./devfest-tickets-page.scss">
 
-    <section class="section ticket-perks-container">
+    <section class="section perks-container ">
+      <div class="perks-title section-title">
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[perks]]">
+          <div class="perk">
+            <iron-icon icon="[[item.icon]]"></iron-icon>
+            <h2 class="text">
+              [[item.text]]
+            </h2>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section ticket-perks-container blue">
       <div class="ticket-perks-title section-title">
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[details]]">
           <div class="perk">
             <iron-icon icon="[[item.icon]]"></iron-icon>
-            <p class="ticket">
+            <h2 class="ticket">
               [[item.ticket]]
-            </p>
+            </h2>
             <p class="date">
               [[item.date]]
             </p>
           </div>
         </template>
       </div>
-    </section>
-
-
-
-    <section class="section perks-container blue">
-      <div class="perks-title section-title">
-      </div>
-      <div class="section-layout">
-          <template is="dom-repeat" items="[[perks]]">
-            <div class="perk">
-              <iron-icon icon="[[item.icon]]"></iron-icon>
-              <p class="text">
-                [[item.text]]
-              </p>
-              <p class="sub">
-                [[item.sub]]
-              </p>
-            </div>
-          </template>
-        </div>
     </section>
 
     <section class="section payment-container ">

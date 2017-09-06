@@ -2,7 +2,7 @@
   <template>
     <link rel="stylesheet" href="./devfest-header.scss">
 
-    <app-header>
+    <app-header fixed>
       <app-toolbar>
         <devfest-icon-button class="menu" icon="devfest:menu" on-tap="openDrawer"></devfest-icon-button>
         <gdg-logo mono></gdg-logo>
@@ -10,9 +10,8 @@
         </div>
         <div class="links">
           <devfest-button no-color href="/">Home</devfest-button>
-          <devfest-button no-color href="/tickets">Tickets</devfest-button>
           <devfest-button no-color href="/speakers">Call for Speakers</devfest-button>
-          <devfest-button href="https://devfestphilippines.eventbrite.com/" target="_blank">Get Tickets</devfest-button>
+          <devfest-button href="/tickets">Get Tickets</devfest-button>
         </div>
       </app-toolbar>
     </app-header>
