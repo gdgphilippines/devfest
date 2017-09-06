@@ -16,13 +16,9 @@
   },
   "scripts": {
     "test": "cd gulp && karma start karma.conf.js",
-    "test-ci": "cd gulp && karma start karma.conf.js --single-run",
-    "test-without-screen": "cd gulp && karma start karma.conf.js",
-    "test-with-screen": "export DISPLAY=:0 && wct --skip-plugin sauce --skip-plugin chrome",
     "start": "cd gulp && ./node_modules/.bin/gulp --watch",
     "build": "cd gulp && ./node_modules/.bin/gulp",
-    "build-production": "cd gulp && ./node_modules/.bin/gulp --prod",
-    "sentry": "cd gulp && ./node_modules/.bin/sentry-cli"
+    "build-production": "cd gulp && ./node_modules/.bin/gulp --prod"
   },
   "dependencies": {
     "indexeddbshim": "^3.0.4",
