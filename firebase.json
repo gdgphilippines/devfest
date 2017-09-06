@@ -103,6 +103,6 @@
         ]
       }
     ],
-    "public": "./dist/build"
+    "public": "./dist/public"
   }
 }
