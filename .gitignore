@@ -29,5 +29,3 @@ build
 prod_temp
 public
 prod.json
-
-.firebaserc
