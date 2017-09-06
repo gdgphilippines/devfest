@@ -1,0 +1,17 @@
+<dom-module id="gdg-logo">
+  <template>
+    <link rel="stylesheet" href="./gdg-logo.scss">
+
+    <a href="[[href]]" class="gdg-logo-anchor">
+      <template is="dom-if" if="[[mono]]">
+        <img class="mono" src="/images/logo_mono-compressed.png">
+      </template>
+      <template is="dom-if" if="[[grey]]">
+        <img src="/images/gdgph-grey-compressed.png">
+      </template>
+      <template is="dom-if" if="[[colored]]">
+        <img src="/images/gdg-icon.png"> GDG Philippines
+      </template>
+    </a>
+  </template>
+</dom-module>

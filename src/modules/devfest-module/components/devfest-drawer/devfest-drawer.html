@@ -1,0 +1,17 @@
+<dom-module id="devfest-drawer">
+  <template>
+    <link rel="stylesheet" href="./devfest-drawer.scss">
+
+    <app-drawer>
+      <app-header>
+        <app-toolbar>
+          <gdg-logo colored on-tap="closeDrawer"></gdg-logo>
+        </app-toolbar>
+      </app-header>
+      <div class="links">
+        <devfest-button no-color href="/" on-tap="closeDrawer">Home</devfest-button>
+        <devfest-button no-color href="/speakers" on-tap="closeDrawer">Call for Speakers</devfest-button>
+        <devfest-button href="https://devfestphilippines.eventbrite.com/" target="_blank" on-tap="closeDrawer">Get Tickets</devfest-button>
+      </div>
+  </template>
+</dom-module>

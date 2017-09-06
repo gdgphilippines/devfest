@@ -1,0 +1,175 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../../../bower_components/shadycss/apply-shim.html">
+<link rel="import" href="../../../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="app-toast">
+  <template>
+    <style>
+      :host {
+        font-family: 'Roboto', 'Arial', sans-serif;
+      }
+
+      .clickable {
+        cursor: pointer;
+      }
+
+      paper-toast {
+        user-select: none;
+      }
+
+      paper-toast[fit-bottom] {
+        width: 100%;
+        min-width: 0;
+        border-radius: 0;
+        margin: 0;
+      }
+
+      .toast-action {
+        @apply (--layout-self-center);
+        padding-left: 24px;
+        color: #eeff41;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      @media screen and (max-width: 500px) {
+        .toast-action {
+          padding-left: 0px;
+          padding-top: 20px;
+          display: block;
+        }
+
+      }
+    </style>
+
+    <paper-toast
+        id="internalToast"
+        class$="{{_computeClass(_tapHandler)}}"
+        on-tap="_handleTap" layout horizontal justified
+        fit-bottom$="{{app.isPhoneSize}}">
+      <span class="toast-action"
+            on-click="_handleAction" hidden$="{{!action}}">[[action]]</span>
+
+    </paper-toast>
+
+  </template>
+
+  <script>
+    (() => {
+      class AppToast extends Polymer.GestureEventListeners(Polymer.Element) {
+        static get is () { return 'app-toast' }
+
+        static get properties () {
+          return Object.assign({}, super.properties, {
+            app: {
+              type: Object
+            },
+            action: {
+              type: String,
+              value: null,
+              observer: '_actionChanged'
+            },
+            duration: {
+              type: Number,
+              value: 6000
+            },
+            _actionHandler: {
+              value: null
+            },
+            _handledAction: {
+              type: Boolean,
+              value: false
+            },
+            _listeners: {
+              value: function () {
+                return []
+              }
+            },
+            _tapHandler: {
+              value: null
+            }
+          })
+        }
+
+        static get listeners () {
+          return Object.assign({}, super.listeners, {
+            'iron-overlay-closed': '_handleOverlayClosed'
+          })
+        }
+
+        _actionChanged () {
+          this.textContent = this.action ? this.action : null
+        }
+
+        show () {
+          this.shadowRoot.querySelector('#internalToast').show({
+            text: this.text,
+            duration: this.duration
+          })
+        }
+
+        close () {
+          this.shadowRoot.querySelector('#internalToast').close()
+        }
+
+        showMessage (message, optTapHandler, optAction, optActionHandler, optDuration) {
+          this.close()
+          // Override duration just for this toast.
+          var obj = {
+            text: message
+          }
+          var originalDuration = this.duration
+          if (typeof optDuration !== 'undefined') {
+            this.duration = optDuration
+            obj.duration = optDuration
+          }
+          this.text = message
+          this._tapHandler = optTapHandler
+          this.action = optAction
+          this._actionHandler = optActionHandler
+          this.shadowRoot.querySelector('#internalToast').show(obj)
+          this.dispatchEvent(new CustomEvent('toast-message', {
+            detail: {
+              message
+            }
+          }))
+          this.duration = originalDuration // reset site-wide duration.
+        }
+
+        _handleTap () {
+          if (typeof this._tapHandler === 'function' && !this._handledAction) {
+            this._tapHandler()
+            this.shadowRoot.querySelector('#internalToast').close()
+          }
+          this._handledAction = false
+        }
+
+        _handleAction (e, detail) {
+          if (typeof this._actionHandler === 'function') {
+            e.stopPropagation()
+            this._actionHandler()
+            this._handledAction = true
+            // Need because handleTap will also be called from a tap.
+            // This handle is a click.
+            this.shadowRoot.querySelector('#internalToast').close()
+          }
+        }
+
+        _handleOverlayClosed () {
+          this._tapHandler = null
+        }
+
+        _computeClass (tapHandler) {
+          return tapHandler ? 'clickable' : ''
+        }
+      }
+
+      window.customElements.define(AppToast.is, AppToast)
+    })()
+  </script>
+</dom-module>

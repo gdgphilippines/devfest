@@ -1,0 +1,131 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
+<!--<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">-->
+<!--<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">-->
+<!--<link rel="import" href="../components/devfest-footer.html">-->
+<!--<link rel="import" href="../icons/devfest-icons.html">-->
+<link rel="import" href="../fonts/devfest-fonts.html">
+
+<dom-module id="devfest-landing-page">
+  <template>
+    <style>
+    </style>
+    
+    <header class="header">
+      <div class="header-white"></div>
+      <div class="header-container">
+        <div class="header-image-text-container">
+          <div class="header-image">
+            <img src="/images/header.gif" alt="GDG Devfest Philippines 2017 10x Inspiration Ingenuity Impact">
+          </div>
+          <div class="header-text">
+            <h1>October 14, 2017</h1>
+            <a href="https://devfestphilippines.eventbrite.com/" class="button" target="_blank">
+              <paper-ripple></paper-ripple>
+              Get Tickets
+            </a>
+          </div>    
+        </div>
+      </div>
+      
+    </header>
+
+    <!--<header class="header">-->
+    <!--  <div class="header-white-fade">-->
+    <!--  </div>-->
+    <!--  <div class="header-image">-->
+    <!--    <div class="header-image-container">-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</header>-->
+
+    <!--<section class="temp-link">-->
+    <!--  <marked-element class="marked-temp-link" markdown="[[tempLink]]">-->
+    <!--    <div slot="markdown-html"></div>-->
+    <!--  </marked-element>-->
+    <!--  <p>-->
+    <!--    <br/><br/>-->
+    <!--    Tell your friends about it:<br/>-->
+    <!--    <a href="[[_shareFacebookLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
+    <!--      <paper-icon-button icon="devfest:facebook"></paper-icon-button>-->
+    <!--    </a>-->
+    <!--    <a href="[[_shareTwitterLink()]]" target="_blank" style="text-decoration: none; color: #005FEA">-->
+    <!--      <paper-icon-button icon="devfest:twitter"></paper-icon-button>-->
+    <!--    </a>-->
+    <!--  </p>-->
+    <!--</section>-->
+
+    <!--<devfest-footer></devfest-footer>-->
+  </template>
+  <script>
+    (() => {
+      class DevfestLandingPage extends Polymer.Element {
+        static get is () { return 'devfest-landing-page' }
+
+        static get properties () {
+          return {
+            tempLink: {
+              type: String
+            }
+          }
+        }
+
+        connectedCallback () {
+          super.connectedCallback()
+          // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
+          // this._fetchContent()
+
+        }
+
+        disconnectedCallback () {
+          // this._db.close()
+        }
+
+        _fetchContent () {
+          const link = '/api/landing-temp-link'
+          this._db.get(link).then(doc => {
+            this.tempLink = doc.data
+          })
+
+          fetch(link)
+          .then((res) => {
+            return res.json()
+          })
+          .then(json => {
+            if (json.success) {
+              this.tempLink = json.data
+              this._db.upsert(link, doc => {
+                doc.data = json.data
+                return doc
+              })
+            }
+          })
+          .catch(err => {
+            if (window.Raven) {
+              Raven.captureException(err)
+            }
+          })
+        }
+
+        _shareFacebookLink () {
+          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+          var link = window.location.protocol + '//' + window.location.hostname; //'https://uxphilippines.com' //
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
+          return `https://www.facebook.com/dialog/feed?app_id=476565679402935&redirect_uri=${encodeURI('https://devfest.gdgph.org')}&link=${linkdecoded}&picture=${picture}&name=${encodeURI(text)}&caption=${encodeURI('GDG Devfest Philippines 2017')}&description=${encodeURI(text)}&display=page`
+
+        }
+
+        _shareTwitterLink () {
+          var link = window.location.protocol + '//' + window.location.hostname;
+          var linkdecoded = encodeURI(link);
+          var picture = `${link}/images/header.png`;
+          var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
+          return `https://twitter.com/share?text=${encodeURI(text)}&url=${encodeURI('https://devfest.gdgph.org')}&hashtags=${encodeURI('gdgph,devfest,DevFestPH')}`;
+        }
+      }
+
+      window.customElements.define(DevfestLandingPage.is, DevfestLandingPage)
+    })()
+  </script>
+</dom-module>
