@@ -21,6 +21,7 @@ script:
 - cd gulp
 - xvfb-run karma start karma.conf.js --single-run
 before_deploy:
+- cd ..
 - npm run build-production
 deploy:
 - provider: firebase
