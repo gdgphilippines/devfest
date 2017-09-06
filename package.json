@@ -15,8 +15,8 @@
     "url": "https://github.com/tjmonsi/devfest/issues"
   },
   "scripts": {
-    "test": "cd gulp karma start karma.conf.js",
-    "test-without-screen": "cd gulp karma start karma.conf.js",
+    "test": "cd gulp && karma start karma.conf.js",
+    "test-without-screen": "cd gulp && karma start karma.conf.js",
     "test-with-screen": "export DISPLAY=:0 && wct --skip-plugin sauce --skip-plugin chrome",
     "serve": "firebase serve",
     "serve-c9": "firebase serve -p $PORT -o $IP",

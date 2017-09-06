@@ -1,0 +1,21 @@
+<dom-module id="devfest-banner">
+  <template>
+    <link rel="stylesheet" href="./devfest-banner.scss">
+
+    <section class="banner">
+      <div class="banner-white"></div>
+      <div class="banner-container">
+        <div class="banner-container-flex">
+          <div class="banner-image-text-container">
+            <div class="banner-image">
+              <img src="/images/header-compressed.gif" alt="GDG Devfest Philippines 2017 10x Inspiration Ingenuity Impact">
+            </div>
+            <div class="banner-slot">
+              <slot></slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+</dom-module>

@@ -1,13 +1,12 @@
 // Karma configuration
 // Generated on Wed Sep 06 2017 15:40:22 GMT+0800 (PHT)
-const webpack = require('./utils/create-webpack-config')
+const path = require('path')
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -21,7 +20,92 @@ module.exports = function(config) {
       {pattern: '../src/modules/**/*.test.js', included: true},
     ],
 
-    webpack: webpack(true),
+    webpack: {
+      resolve: {
+        modules: [
+          path.resolve(__dirname, '../node_modules'),
+          path.resolve(__dirname, './node_modules'),
+          path.resolve(__dirname, '../bower_components')
+        ]
+      },
+      module: {
+        rules: [
+          {
+            // If you see a file that ends in .html, send it to these loaders.
+            test: /\.html$/,
+            // This is an example of chained loaders in Webpack.
+            // Chained loaders run last to first. So it will run
+            // polymer-webpack-loader, and hand the output to
+            // babel-loader. This let's us transpile JS in our `<script>` elements.
+            use: [
+              {
+                loader: 'polymer-webpack-loader',
+                options: {
+                  processStyleLinks: true
+                }
+              }
+            ]
+          },
+          {
+            test: /\.(gif|png|jpe?g|svg)$/i,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  useRelativePath: true,
+                  name: '[name].[ext]'
+                }
+              },
+              {
+                loader: 'image-webpack-loader',
+                options: {
+                  gifsicle: {
+                    optimizationLevel: 2
+                  },
+                  optipng: {
+                    optimizationLevel: 5
+                  },
+                  mozjpeg: {
+                    quality: 70,
+                    progressive: true
+                  },
+                  svgo: {
+                    plugins: [
+                      {removeViewBox: true},
+                      {cleanupIDs: false}
+                    ]
+                  },
+                  webp: {
+                    quality: 70,
+                    method: 5,
+                    size: 60000
+                  }
+                }
+              }
+            ]
+          },
+          {
+            test: /\.scss$/,
+            use: [
+              {
+                loader: 'css-loader'
+              },
+              {
+                loader: 'sass-loader'
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: [
+              {
+                loader: 'css-loader'
+              }
+            ]
+          }
+        ]
+      }
+    },
 
     webpackMiddleware: {
       // webpack-dev-middleware configuration
