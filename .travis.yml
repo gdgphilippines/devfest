@@ -17,7 +17,8 @@ install:
 - bower install
 - cd gulp && yarn install
 script:
-- xvfb-run && npm run test-ci
+- cd gulp
+- xvfb karma start karma.conf.js --single-run
 # - xvfb-run wct
 # - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
 before_deploy:
