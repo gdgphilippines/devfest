@@ -11,7 +11,7 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester
+- npm install -g bower polylint web-component-tester mocha
 - ./node_modules/.bin/webpack --env=dev
 script:
 - xvfb-run wct
