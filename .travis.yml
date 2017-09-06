@@ -16,6 +16,7 @@ install:
 - yarn install --flat
 - bower install
 - cd gulp && yarn install
+- cd ..
 script:
 - cd gulp
 - xvfb karma start karma.conf.js --single-run
