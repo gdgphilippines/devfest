@@ -1,0 +1,44 @@
+<script>
+  (() => {
+     const actions = {
+      statusKnown: 'USER_STATUS_KNOWN',
+      statusUnknown: 'USER_STATUS_UNKNOWN',
+      signIn: 'USER_USERIN',
+      signOut: 'USER_SIGNOUT'
+    }
+    window.App.Reducers.userModel = (state = { default: { userStatusKnown: false }, apps: {} }, action) => {
+      var obj
+      const setState = (newState) => {
+        if (action.appName) {
+          var newApps = {}
+          newApps[action.appName] = App.utils.extends({}, state.apps[action.appName], newState)
+          obj = { apps: App.utils.extends({}, state.apps, newApps) }
+          return App.utils.extends({}, state, obj)
+        }
+        return App.utils.extends({}, state, { default: App.utils.extends({}, state.default, newState) })
+      }
+
+      switch (action.type) {
+        case actions.statusKnown:
+          return setState({ userStatusKnown: true })
+        case actions.statusUnknown:
+          return setState({ userStatusKnown: false })
+        case actions.signIn:
+          return setState({
+            user: action.user,
+            signedIn: true
+          })
+        case actions.signOut:
+          return setState({
+            user: null,
+            signedIn: false
+          })
+        default:
+          return state
+      }
+    }
+    window.App.Actions.userModel = actions
+    window.App.updateReducers()
+  })()
+
+</script>

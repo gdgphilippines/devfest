@@ -1,0 +1,56 @@
+<script>
+  (() => {
+    const networkStatusSubscribers = []
+    const notifySubscribers = () => {
+      for (var i = 0; i < networkStatusSubscribers.length; ++i) {
+        networkStatusSubscribers[i].refreshNetworkStatus()
+      }
+    }
+    window.addEventListener('online', notifySubscribers)
+    window.addEventListener('offline', notifySubscribers)
+
+    window.App.Mixins.AppNetworkStatusMixin = (superClass) => {
+      /**
+      * @polymer
+      * @extends HTMLElement
+      */
+      return class extends superClass {
+        // add methods of permissions here
+        static get properties () {
+          return App.utils.extends({}, super.properties, {
+            online: {
+              type: Boolean,
+              readOnly: true,
+              notify: true,
+              value: () => {
+                return window.navigator.onLine
+              }
+            }
+          })
+        }
+
+        connectedCallback () {
+          super.connectedCallback()
+          networkStatusSubscribers.push(this)
+          this.refreshNetworkStatus()
+        }
+
+        disconnectedCallback () {
+          super.disconnectedCallback()
+          var index = networkStatusSubscribers.indexOf(this)
+          if (index < 0) {
+            return
+          }
+          networkStatusSubscribers.splice(index, 1)
+        }
+
+        /**
+         * Updates the `online` property to reflect the browser connection status.
+         */
+        refreshNetworkStatus () {
+          this._setOnline(window.navigator.onLine)
+        }
+      }
+    }
+  })()
+</script>

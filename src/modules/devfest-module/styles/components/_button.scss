@@ -1,0 +1,29 @@
+.button {
+	font-family: 'Roboto', 'Arial', sans-serif;
+  background: #2e9be6;
+	color: white;
+	border: 3px solid #2e9be6;
+	border-radius: 4px;
+	padding: 12px;
+	font-size: 16px;
+	display: inline-block;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	position: relative;
+}
+
+.button__big {
+	padding: 24px;
+	font-size: 1.5em;
+}
+
+.button__no-color {
+	background: none;
+	color: #666;
+	border: none;
+}
+
+.button__no-color:hover {
+	color: #4688f4;
+}

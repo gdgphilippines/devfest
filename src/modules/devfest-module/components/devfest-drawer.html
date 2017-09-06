@@ -1,0 +1,76 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../../../bower_components/app-layout/app-drawer/app-drawer.html">
+<!-- <link rel="import" href="../../../../bower_components/paper-menu/paper-menu.html"> -->
+<!-- <link rel="import" href="../../../../bower_components/paper-item/paper-item.html"> -->
+<link rel="import" href="../../../../core/modules/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../../core/modules/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="./devfest-button.html">
+<link rel="import" href="./gdg-logo.html">
+
+<dom-module id="devfest-drawer">
+  <template>
+    <link rel="stylesheet" href="../styles/components/_devfest-drawer.scss">
+
+    <app-drawer>
+      <app-header>
+        <app-toolbar>
+          <gdg-logo colored on-tap="closeDrawer"></gdg-logo>
+        </app-toolbar>
+      </app-header>
+      <div class="links">
+
+        <devfest-button no-color href="/" on-tap="closeDrawer">Home</devfest-button>
+        <devfest-button no-color href="/speakers" on-tap="closeDrawer">Call for Speakers</devfest-button>
+        <devfest-button href="https://devfestphilippines.eventbrite.com/" target="_blank" on-tap="closeDrawer">Get Tickets</devfest-button>
+      </div>
+      <!-- <paper-menu>
+        <paper-item>
+          <a href="/">
+            Home
+          </a>
+        </paper-item>
+        <paper-item>
+          <a href="/speakers">
+            Call For Speakers
+          </a>
+        </paper-item>
+        <paper-item>
+          <devfest-button href="https://devfestphilippines.eventbrite.com/" target="_blank">Get Tickets</devfest-button>
+        </paper-item>
+      </paper-menu>
+    </app-drawer> -->
+  </template>
+  <script>
+    (() => {
+      class DevfestDrawer extends Polymer.GestureEventListeners(Polymer.Element) {
+        static get is () { return 'devfest-drawer' }
+
+        constructor () {
+          super()
+          this._boundOpenDrawer = this.openDrawer.bind(this)
+        }
+
+        connectedCallback () {
+          super.connectedCallback()
+          window.addEventListener('open-drawer', this._boundOpenDrawer)
+        }
+
+        disconnectedCallback () {
+          super.disconnectedCallback()
+          window.removeEventListener('open-drawer', this._boundOpenDrawer)
+        }
+
+        openDrawer () {
+          this.shadowRoot.querySelector('app-drawer').open()
+        }
+
+        closeDrawer () {
+          this.shadowRoot.querySelector('app-drawer').close()
+        }
+      }
+
+      window.customElements.define(DevfestDrawer.is, DevfestDrawer)
+    })()
+  </script>
+</dom-module>
