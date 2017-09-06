@@ -16,11 +16,6 @@
   },
   "scripts": {
     "test": "cd gulp && karma start karma.conf.js",
-    "test-ci": "cd gulp && karma start karma.conf.js --single-run",
-    "test-without-screen": "cd gulp && karma start karma.conf.js",
-    "test-with-screen": "export DISPLAY=:0 && wct --skip-plugin sauce --skip-plugin chrome",
-    "serve": "firebase serve",
-    "serve-c9": "firebase serve -p $PORT -o $IP",
     "start": "cd gulp && ./node_modules/.bin/gulp --watch",
     "build": "cd gulp && ./node_modules/.bin/gulp",
     "build-production": "cd gulp && ./node_modules/.bin/gulp --prod"

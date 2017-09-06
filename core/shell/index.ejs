@@ -98,7 +98,8 @@
           Raven.config('<%= htmlWebpackPlugin.options.config.build.sentryUrl %>', {
             environment: App && App._build === 'prod' ? 'production' : App._build,
             autoBreadcrumbs: App && App._build === 'prod',
-            debug: App && App._build !== 'prod'
+            debug: App && App._build !== 'prod',
+            release: App && App._version ? App._version : '0.0.1-zero-build'
           }).install()
           if (App._build !== 'prod') {
             console.log('Raven installed')
@@ -143,7 +144,7 @@
         ga('create', App._analytics, 'auto');
         ga('send', 'pageview');
 
-        setTimeout(() => {
+        setTimeout(function () {
           ga('send', 'event', 'App', 'read', 'User at app at least 15 seconds', 15)
           // ga('event')
         }, 15000)
