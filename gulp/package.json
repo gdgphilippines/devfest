@@ -42,6 +42,7 @@
     "postcss-loader": "^2.0.6",
     "run-sequence": "^2.1.0",
     "sass-loader": "^6.0.6",
+    "sentry-cli-binary": "^1.19.1",
     "standard": "^10.0.3",
     "stats-webpack-plugin": "^0.6.1",
     "style-loader": "^0.18.2",
