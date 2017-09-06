@@ -1,0 +1,63 @@
+<dom-module id="devfest-tickets-page">
+  <template>
+    <link rel="stylesheet" href="./devfest-tickets-page.scss">
+
+    <section class="section ticket-perks-container">
+      <div class="ticket-perks-title section-title">
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[details]]">
+          <div class="perk">
+            <iron-icon icon="[[item.icon]]"></iron-icon>
+            <p class="ticket">
+              [[item.ticket]]
+            </p>
+            <p class="date">
+              [[item.date]]
+            </p>
+          </div>
+        </template>
+      </div>
+    </section>
+
+
+
+    <section class="section perks-container blue">
+      <div class="perks-title section-title">
+      </div>
+      <div class="section-layout">
+          <template is="dom-repeat" items="[[perks]]">
+            <div class="perk">
+              <iron-icon icon="[[item.icon]]"></iron-icon>
+              <p class="text">
+                [[item.text]]
+              </p>
+              <p class="sub">
+                [[item.sub]]
+              </p>
+            </div>
+          </template>
+        </div>
+    </section>
+
+    <section class="section payment-container ">
+      <div class="payment-title section-title">
+      </div>
+      <div class="section-layout">
+        <div class="online-option">
+        </div>
+        <div class="offline-option">
+        </div>
+      </div>
+    </section>
+
+    <devfest-footer></devfest-footer>
+
+  </template>
+  <script>
+    import marked from 'marked'
+    (() => {
+
+    })()
+  </script>
+</dom-module>

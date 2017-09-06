@@ -7,11 +7,11 @@
     "image": "https://devfestph.firebaseapp.com/images/header.png"
   },
   "build": {
-    "name": "dev",
+    "name": "prod",
     "baseHref": "/",
     "analytics": "UA-78413383-2",
     "firebaseVersion": "4.2.0",
-    "database": "dev",
+    "database": "prod",
     "waitBeforeFetchingSameURLInRest": 60,
     "sentryUrl": "https://85d1091a410948caa823a5230bd0dbcf@sentry.io/204253",
     "firebaseConfig": []
@@ -21,16 +21,14 @@
     "ignoreComponents": []
   },
   "fragments": {
-    "devfest-landing-page": "modules/devfest-module/pages/devfest-landing-page.html",
-    "devfest-speakers-page": "modules/devfest-module/pages/devfest-speakers-page.html",
-    "devfest-tickets-page": "modules/devfest-module/pages/devfest-tickets-page.html",
-    "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page.html",
-    "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page.html",
-    "devfest-authorized-page": "modules/devfest-module/pages/devfest-authorized-page.html",
-    "devfest-header": "modules/devfest-module/components/devfest-header.html",
-    "devfest-drawer": "modules/devfest-module/components/devfest-drawer.html",
-    "example-app-header": "modules/example-module/components/example-app-header.html",
-    "example-app-drawer": "modules/example-module/components/example-app-drawer.html"
+    "devfest-landing-page": "modules/devfest-module/pages/devfest-landing-page/devfest-landing-page.js",
+    "devfest-speakers-page": "modules/devfest-module/pages/devfest-speakers-page/devfest-speakers-page.js",
+    "devfest-tickets-page": "modules/devfest-module/pages/devfest-tickets-page/devfest-tickets-page.js",
+    "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page/devfest-not-found-page.js",
+    "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page/devfest-not-authorized-page.js",
+    "devfest-authorized-page": "modules/devfest-module/pages/devfest-authorized-page/devfest-authorized-page.js",
+    "devfest-header": "modules/devfest-module/components/devfest-header/devfest-header.js",
+    "devfest-drawer": "modules/devfest-module/components/devfest-drawer/devfest-drawer.js"
   },
   "routing": {
     "/": "devfest-landing-page",

@@ -1,0 +1,24 @@
+<dom-module id="devfest-footer">
+  <template>
+    <link rel="stylesheet" href="./devfest-footer.scss">
+
+    <footer class="footer">
+      <gdg-logo grey></gdg-logo>
+
+      <div class="footer-links">
+        <template is="dom-repeat" items="[[footerLinks]]">
+          <a href="[[item.href]]" class="footer-link">
+            [[item.text]]
+          </a>
+        </template>
+      </div>
+
+      <div class="footer-socials">
+        <template is="dom-repeat" items="[[contactUs]]">
+          <devfest-icon-button is-white href="[[item.href]]" icon="[[item.icon]]">
+          </devfest-icon-button>
+        </template>
+      </div>
+    </footer>
+  </template>
+</dom-module>

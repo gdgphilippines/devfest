@@ -31,5 +31,10 @@
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "v1.0.7",
+    "polymer": "^2.0.1",
+    "iron-flex-layout": "^2.0.0"
   }
 }
