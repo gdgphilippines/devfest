@@ -11,11 +11,12 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester mocha
+- npm install -g bower firebase-tools karma-cli
 - ./node_modules/.bin/webpack --env=dev
 script:
-- xvfb-run wct
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
+- karma
+# - xvfb-run wct
+# - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
 deploy:
   # deploy master to production
   - provider: script
