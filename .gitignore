@@ -28,3 +28,4 @@ bower_components/
 build
 prod_temp
 public
+.firebaserc
