@@ -6,6 +6,9 @@
       <div class="banner-part banner-image">
       </div>
       <div class="banner-part banner">
+        <marked-element markdown="[[banner]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
     </header>
 
@@ -28,8 +31,8 @@
       <div class="session-title section-title">
       </div>
       <div class="section-layout">
-        <template is="dom-repeat" items="[[sessions]]">
-          <div class="session">
+        <template is="dom-repeat" items="[[session]]">
+          <!-- <div class="session">
             <iron-icon icon="[[item.icon]]"></iron-icon>
             <h2>[[item.title]]</h2>
             <p>
@@ -37,7 +40,7 @@
               [[text]]<br/>
             </template>
             </p>
-          </div>
+          </div> -->
         </template>
       </div>
     </section>
@@ -47,7 +50,7 @@
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[topics]]">
-          <div class="topic-card">
+          <!-- <div class="topic-card">
             <iron-icon icon="[[item.icon]]"></iron-icon>
             <h2>[[item.title]]</h2>
             <p>
@@ -55,7 +58,7 @@
               [[text]]<br/>
             </template>
             </p>
-          </div>
+          </div> -->
         </template>
       </div>
     </section>

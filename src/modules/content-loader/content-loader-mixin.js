@@ -15,6 +15,13 @@ export default (superClass) => {
             const [property, type] = query.split(':')
             const propArray = property.split('.')
             const push = propArray[propArray.length-1]
+            var newContent = ''
+            var newType = type ? type.trim() : 'md'
+            if (newType === 'json') {
+              newContent = JSON.parse(content)
+            } else {
+              newContent = content
+            }
 
             if (push && push === '$push') {
               this.push(propArray
@@ -23,13 +30,11 @@ export default (superClass) => {
                   return item && item.trim()
                 })
                 .join('.'),
-                content
+                newContent
               )
             } else {
-              this._setProperty(property.trim(), content)
+              this._setProperty(property.trim(), newContent)
             }
-
-
           }
         })
       })
