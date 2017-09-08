@@ -3,8 +3,8 @@
 
 
 "@types/express-serve-static-core@*":
-  version "4.0.50"
-  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.50.tgz#c5a139b5d29d2305aae6d982f69cef36120beacf"
+  version "4.0.51"
+  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.51.tgz#6b436955b8d01b9bc0908f59785c9d44268e91fc"
   dependencies:
     "@types/node" "*"
 

@@ -43,7 +43,6 @@
     "run-sequence": "^2.1.0",
     "sass-loader": "^6.0.6",
     "sentry-cli-binary": "^1.19.1",
-    "standard": "^10.0.3",
     "stats-webpack-plugin": "^0.6.1",
     "style-loader": "^0.18.2",
     "web-component-tester": "^6.0.0",
@@ -56,43 +55,5 @@
     "workbox-build": "^2.0.0",
     "workbox-routing": "^1.1.0",
     "workbox-sw": "^1.1.0"
-  },
-  "standard": {
-    "globals": [
-      "$",
-      "jQuery",
-      "fetch",
-      "Polymer",
-      "CustomEvent",
-      "ga",
-      "performance"
-    ],
-    "ignore": [
-      "node_modules",
-      "bower_components",
-      "node_modules/**",
-      "bower_components/**",
-      "node_modules\\**",
-      "bower_components\\**",
-      "test/**",
-      "test\\**",
-      "**/node_modules/**",
-      "**/bower_components/**",
-      "**\\bower_components\\**",
-      "**\\node_modules\\**",
-      "**\\test\\**",
-      "**/test/**",
-      "node_modules/**",
-      "bower_components/**",
-      "src/test/**"
-    ],
-    "plugins": [
-      "html"
-    ],
-    "parser": "babel-eslint",
-    "validate": [
-      "javascript",
-      "html"
-    ]
   }
 }
