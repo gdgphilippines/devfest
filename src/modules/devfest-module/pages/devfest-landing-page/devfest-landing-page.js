@@ -3,56 +3,44 @@ import 'paper-ripple/paper-ripple.html'
 import 'iron-flex-layout/iron-flex-layout.html'
 import 'shadycss/apply-shim.html'
 import 'iron-icon/iron-icon.html'
+import 'marked-element/marked-element.html'
 import '../../components/devfest-button/devfest-button.js'
 import '../../components/devfest-icon-button/devfest-icon-button.js'
 import '../../components/devfest-banner/devfest-banner.js'
 import '../../components/devfest-footer/devfest-footer.js'
 import '../../fonts/devfest-fonts.html'
 import './devfest-landing-page.html'
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 import marked from 'marked'
+window.marked = window.marked || marked
 
-class DevfestLandingPage extends Polymer.Element {
+class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
   static get is () { return 'devfest-landing-page' }
 
   static get properties () {
     return {
-      tempLink: {
+      banner: {
         type: String
+      },
+      about: {
+        type: String
+      },
+      aboutImage: {
+        type: String
+      },
+      expect: {
+        type: Array,
+        value: []
       }
     }
   }
 
   connectedCallback () {
     super.connectedCallback()
-    this._fetchContent()
-    // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
-    // this._fetchContent()
+    this._fetchContent('pages/landing.md')
   }
 
-  disconnectedCallback () {
-    // this._db.close()
-  }
 
-  _fetchContent () {
-    fetch(`https://raw.githubusercontent.com/gdgphilippines/devfestph2017-files/old-master/content/${this.nodeName.toLowerCase()}.md`)
-    .then(res => {
-      return res.text()
-    })
-    .then(body => {
-      const contentArray = body.split('-----')
-      contentArray.forEach(contentBody => {
-        if (contentBody.trim()) {
-          const array = contentBody.split('=====')
-          const query = array[0].trim()
-          const content = array[1]
-          const node = this.shadowRoot.querySelector(query)
-          if (node) {
-            node.innerHTML = marked(content)
-          }
-        }
-      })
-    })
-  }
 
   // _shareFacebookLink () {
   //   var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'

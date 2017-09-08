@@ -32,6 +32,8 @@ gulp.task('default', (done) => {
     'create-routing',
     'create-partials',
     'create-http-codes',
+    'create-app-config',
+    'create-firebase-config',
     'create-firebase-json',
     'watch-build',
     'run-webpack',

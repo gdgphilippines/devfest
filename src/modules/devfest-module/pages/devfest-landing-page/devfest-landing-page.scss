@@ -36,7 +36,7 @@ devfest-banner {
   @apply --layout-horizontal;
   @apply --layout-wrap;
 
-  > .about-part {
+  .about-part {
     @apply --layout-flex;
     min-width: 300px;
 
@@ -45,12 +45,12 @@ devfest-banner {
     }
   }
 
-  > .about-image {
+  .about-image {
     min-height: 400px;
     background: url('/images/about-image-compressed-1.jpg') center/cover no-repeat;
   }
 
-  > .about {
+  .about {
     padding: 36px;
 
     @media only screen and (max-width: 500px) {
@@ -68,7 +68,7 @@ devfest-banner {
     padding: 20px;
   }
 
-  > h1 {
+  h1 {
     color: inherit
   }
 
@@ -76,11 +76,11 @@ devfest-banner {
     color: inherit
   }
 
-  > .expect-horizontal {
+  .expect-horizontal {
     @apply --layout-horizontal;
     @apply --layout-wrap;
 
-    > .expect {
+    .expect {
       @apply --layout-flex;
       min-width: 200px;
       text-align: center;
@@ -95,11 +95,11 @@ devfest-banner {
         --iron-icon-width: 64px;
       }
 
-      > h2 {
+      h2 {
         font-size: 1.17em;
       }
 
-      > p {
+      p {
         max-width: 350px;
         margin: 0 auto;
       }

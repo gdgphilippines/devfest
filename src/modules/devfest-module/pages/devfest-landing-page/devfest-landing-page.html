@@ -3,39 +3,40 @@
     <link rel="stylesheet" href="./devfest-landing-page.scss">
 
     <devfest-banner>
+      <marked-element markdown="[[banner]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
     </devfest-banner>
 
     <section class="section about-container">
       <div class="about-part about-image">
       </div>
       <div class="about-part about">
+        <marked-element markdown="[[about]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
     </section>
 
     <section class="section expect-container">
       <h1>What to Expect?</h1>
       <div class="expect-horizontal">
-        <div class="expect expect-1">
-        </div>
-        <div class="expect expect-2">
-        </div>
-        <div class="expect expect-3">
-        </div>
-        <div class="expect expect-4">
-        </div>
+        <template is="dom-repeat" items="[[expect]]">
+          <div class="expect">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
       </div>
     </section>
 
     <section class="section sponsors">
+      <marked-element markdown="[[sponsors]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
     </section>
 
     <devfest-footer></devfest-footer>
   </template>
-  <script>
-
-
-    (() => {
-
-    })()
-  </script>
 </dom-module>
