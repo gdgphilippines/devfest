@@ -55,3 +55,5 @@ See the [CONTRIBUTING Guidelines](https://github.com/gdgphilippines/devfest/blob
 
 ## Support
 If you have any problem or suggestion please open an issue [here](https://github.com/gdgphilippines/devfest/issues).
+
+## How to fork this project?
