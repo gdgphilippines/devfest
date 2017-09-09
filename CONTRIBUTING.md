@@ -46,21 +46,25 @@ details will help people to fix any potential bugs.
 
 Example:
 
-> Short and descriptive example bug report title
->
-> A summary of the issue and the browser/OS environment in which it occurs. If
-> suitable, include the steps required to reproduce the bug.
->
-> 1. This is the first step
-> 2. This is the second step
-> 3. Further steps, etc.
->
-> `<url>` - a link to the reduced test case
->
-> Any other information you want to share that is relevant to the issue being
-> reported. This might include the lines of code that you have identified as
-> causing the bug, and potential solutions (and your opinions on their
-> merits).
+```
+The `paper-foo` element causes the page to turn pink when clicked.
+
+## Expected outcome
+
+The page stays the same color.
+
+## Actual outcome
+
+The page turns pink.
+
+## Steps to reproduce
+
+1. Put a `paper-foo` element in the page.
+2. Open the page in a web browser.
+3. Click the `paper-foo` element.
+```
+
+If it is possible, **please provide a reduced test case that demonstrates the problem**.
 
 
 ## Feature requests
@@ -69,6 +73,12 @@ Feature requests are welcome. But take a moment to find out whether your idea
 fits with the scope and aims of the project. It's up to *you* to make a strong
 case to convince the project's developers of the merits of this feature. Please
 provide as much detail and context as possible.
+
+If you still want to file an issue to request a feature, please provide a clear description of the feature. It can be helpful to describe answers to the following questions:
+
+1. Who will use the feature? *“As someone filling out a form…”*
+2. When will they use the feature? *“When I enter an invalid value…”*
+3. What is the user’s goal? *“I want to be visually notified that the value needs to be corrected…”*
 
 
 ## Pull requests
@@ -85,8 +95,25 @@ project's developers might not want to merge into the project.
 Please adhere to the coding conventions used throughout a project (indentation,
 accurate comments, etc.) and any other requirements (such as test coverage).
 
-Follow this process if you'd like your work considered for inclusion in the
-project:
+When submitting pull requests, please provide:
+
+1. **A reference to the corresponding issue** or issues that will be closed by the pull request. Please refer to these issues in the pull request description using the following syntax:
+```
+(For a single issue)
+Fixes #20
+
+(For multiple issues)
+Fixes #32, fixes #40
+```
+
+2. **A succinct description of the design** used to fix any related issues. For example:
+```
+This fixes #20 by removing styles that leaked which would cause the page to turn pink whenever `paper-foo` is clicked.
+```
+
+3. **At least one test for each bug fixed or feature added as part of the pull request.** We will still consider approving your pull request but if you can add a test, please add them :)
+
+To contribute your work:
 
 1. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork,
    and configure the remotes:
