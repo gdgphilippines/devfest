@@ -1,5 +1,6 @@
 <!-- Instructions: https://github.com/gdgphilippines/devfest/blob/master/CONTRIBUTING.md -->
 <!-- Copied from Firebase Polyfire template -->
+
 ### Description
 <!-- Example: The `paper-foo` element causes the page to turn pink when clicked. -->
 
