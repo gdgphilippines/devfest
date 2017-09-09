@@ -6,7 +6,7 @@
 ```
 $ cd gulp
 $ rm -r node_modules
-$ yarn install
+$ yarn install --force
 ```
 
 - if it fails because of Firebase
