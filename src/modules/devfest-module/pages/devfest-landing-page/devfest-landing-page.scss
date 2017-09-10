@@ -1,0 +1,113 @@
+:host {
+  font-family: 'Roboto';
+  font-weight: 300;
+  color: #666;
+  font-size: 1em;
+  padding-top: 112px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Product Sans';
+  color: #666;
+  font-weight: normal;
+}
+
+p { line-height: 150% }
+
+
+devfest-banner {
+  text-align: center;
+  h1 {
+    font-family: 'Product Sans';
+    opacity: 1;
+
+    @media only screen and (max-width: 500px) {
+      font-size: 1.5em
+    }
+  }
+
+  .button {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+.about-container {
+  @apply --layout-horizontal;
+  @apply --layout-wrap;
+
+  .about-part {
+    @apply --layout-flex;
+    min-width: 300px;
+
+    @media only screen and (max-width: 500px) {
+      min-width: 200px;
+    }
+  }
+
+  .about-image {
+    min-height: 400px;
+    background: url('/images/about-image-compressed-1.jpg') center/cover no-repeat;
+  }
+
+  .about {
+    padding: 36px;
+
+    @media only screen and (max-width: 500px) {
+      padding: 20px;
+    }
+  }
+}
+
+.expect-container {
+  background: #2196f3;
+  color: #fff;
+  padding: 36px;
+
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
+
+  h1 {
+    color: inherit
+  }
+
+  h2 {
+    color: inherit
+  }
+
+  .expect-horizontal {
+    @apply --layout-horizontal;
+    @apply --layout-wrap;
+
+    .expect {
+      @apply --layout-flex;
+      min-width: 200px;
+      text-align: center;
+      padding: 36px;
+
+      @media only screen and (max-width: 500px) {
+        padding: 20px;
+      }
+
+      iron-icon {
+        --iron-icon-height: 64px;
+        --iron-icon-width: 64px;
+      }
+
+      h2 {
+        font-size: 1.17em;
+      }
+
+      p {
+        max-width: 350px;
+        margin: 0 auto;
+      }
+
+    }
+  }
+}
+
+.sponsors {
+  padding: 36px;
+}

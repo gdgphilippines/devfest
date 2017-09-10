@@ -1,0 +1,16 @@
+.gdg-logo-anchor {
+  display: block;
+  vertical-align: middle;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 24px;
+  font-family: 'Product Sans';
+
+  > img {
+    height: 24px;
+  }
+
+  > .mono {
+    height: 48px;
+  }
+}

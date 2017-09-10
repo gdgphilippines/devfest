@@ -1,0 +1,10 @@
+<dom-module id="devfest-icon-button">
+  <template>
+    <link rel="stylesheet" href="./devfest-icon-button.scss">
+
+    <a href="{{href}}" class$="icon-button [[_isWhite(isWhite)]]" target="{{target}}">
+      <paper-ripple></paper-ripple>
+      <iron-icon icon="devfest:[[icon]]"></iron-icon>
+    </a>
+  </template>
+</dom-module>

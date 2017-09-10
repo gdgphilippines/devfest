@@ -1,0 +1,19 @@
+<dom-module id="devfest-header">
+  <template>
+    <link rel="stylesheet" href="./devfest-header.scss">
+
+    <app-header fixed>
+      <app-toolbar>
+        <devfest-icon-button class="menu" icon="devfest:menu" on-tap="openDrawer"></devfest-icon-button>
+        <gdg-logo mono></gdg-logo>
+        <div class="spacer">
+        </div>
+        <div class="links">
+          <devfest-button no-color href="/">Home</devfest-button>
+          <devfest-button no-color href="/speakers">Call for Speakers</devfest-button>
+          <devfest-button href="/tickets">Get Tickets</devfest-button>
+        </div>
+      </app-toolbar>
+    </app-header>
+  </template>
+</dom-module>

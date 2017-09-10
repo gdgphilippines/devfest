@@ -1,0 +1,47 @@
+{
+  "name": "devfest",
+  "description": "GDG Devfest 2017",
+  "private": true,
+  "version": "0.0.4-preview",
+  "author": {
+    "name": "Toni-Jan Keith Monserrat",
+    "email": "tjmonsi@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gdgphilippines/devfest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tjmonsi/devfest/issues"
+  },
+  "scripts": {
+    "test": "cd gulp && karma start karma.conf.js",
+    "start": "cd gulp && ./node_modules/.bin/gulp --watch",
+    "build": "cd gulp && ./node_modules/.bin/gulp",
+    "build-production": "cd gulp && ./node_modules/.bin/gulp --prod"
+  },
+  "dependencies": {
+    "indexeddbshim": "^3.0.4",
+    "marked": "^0.3.6",
+    "path-to-regexp": "^1.7.0",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint-plugin-html": "^3.2.0",
+    "workbox-build": "^2.0.0",
+    "workbox-routing": "^1.1.0",
+    "workbox-sw": "^1.1.0"
+  },
+  "resolutions": {
+    "workbox-sw": "2.0.1",
+    "regenerator-runtime": "0.11.0",
+    "minimist": "1.2.0",
+    "isarray": "1.0.0",
+    "assert-plus": "1.0.0",
+    "domelementtype": "1.3.0"
+  }
+}

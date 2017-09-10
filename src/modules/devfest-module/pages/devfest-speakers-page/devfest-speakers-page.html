@@ -1,0 +1,91 @@
+<dom-module id="devfest-speakers-page">
+  <template>
+    <link rel="stylesheet" href="./devfest-speakers-page.scss">
+
+    <header class="banner-container">
+      <div class="banner-part banner-image">
+      </div>
+      <div class="banner-part banner">
+        <marked-element markdown="[[banner]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+    </header>
+
+    <section class="section perks-container blue">
+      <div class="perks-title section-title">
+        <marked-element markdown="[[perksTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[perks]]">
+          <div class="perk">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section session-container">
+      <div class="session-title section-title">
+        <marked-element markdown="[[sessionTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[session]]">
+          <div class="session">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section topics-container blue">
+      <div class="topics-title section-title">
+        <marked-element markdown="[[topicsTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[topics]]">
+
+
+          <div class="topic-card">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section important-dates-container">
+      <div class="important-dates-title section-title">
+        <marked-element markdown="[[importantDatesTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="important-dates">
+        <template is="dom-repeat" items="[[importantDates]]">
+          <div class="important-date">
+            <div class="text">
+              [[item.text]]
+            </div>
+            <div class="date">
+              [[item.date]]
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <devfest-footer></devfest-footer>
+
+  </template>
+</dom-module>

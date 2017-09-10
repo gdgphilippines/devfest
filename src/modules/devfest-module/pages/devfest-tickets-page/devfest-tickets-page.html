@@ -1,0 +1,59 @@
+<dom-module id="devfest-tickets-page">
+  <template>
+    <link rel="stylesheet" href="./devfest-tickets-page.scss">
+
+    <section class="section perks-container ">
+      <div class="perks-title section-title">
+        <marked-element markdown="[[perksTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[perks]]">
+          <div class="perk">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section ticket-perks-container blue">
+      <div class="ticket-perks-title section-title">
+        <marked-element markdown="[[ticketsTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[details]]">
+          <div class="perk">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section payment-container ">
+      <div class="payment-title section-title">
+        <marked-element markdown="[[paymentTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+      <div class="section-layout">
+        <template is="dom-repeat" items="[[payment]]">
+          <div class="payment-option">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <devfest-footer></devfest-footer>
+
+  </template>
+</dom-module>

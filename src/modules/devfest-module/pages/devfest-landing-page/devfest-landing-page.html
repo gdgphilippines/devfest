@@ -1,0 +1,42 @@
+<dom-module id="devfest-landing-page">
+  <template>
+    <link rel="stylesheet" href="./devfest-landing-page.scss">
+
+    <devfest-banner>
+      <marked-element markdown="[[banner]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
+    </devfest-banner>
+
+    <section class="section about-container">
+      <div class="about-part about-image">
+      </div>
+      <div class="about-part about">
+        <marked-element markdown="[[about]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+    </section>
+
+    <section class="section expect-container">
+      <h1>What to Expect?</h1>
+      <div class="expect-horizontal">
+        <template is="dom-repeat" items="[[expect]]">
+          <div class="expect">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="section sponsors">
+      <marked-element markdown="[[sponsors]]">
+        <div slot="markdown-html"></div>
+      </marked-element>
+    </section>
+
+    <devfest-footer></devfest-footer>
+  </template>
+</dom-module>
