@@ -3,14 +3,17 @@ import 'polymer/lib/elements/dom-repeat.html'
 import 'iron-icon/iron-icon.html'
 import 'iron-flex-layout/iron-flex-layout.html'
 import 'shadycss/apply-shim.html'
+import 'marked-element/marked-element.html'
 import '../../fonts/devfest-fonts.html'
 import '../../icons/devfest-icons.html'
-import '../../components/devfest-footer/devfest-footer.html'
-import '../../components/devfest-button/devfest-button.html'
+import '../../components/devfest-footer/devfest-footer.js'
+import '../../components/devfest-button/devfest-button.js'
 import './devfest-tickets-page.html'
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 import marked from 'marked'
+window.marked = window.marked || marked
 
-class DevfestTicketsPage extends Polymer.Element {
+class DevfestTicketsPage extends contentLoaderMixin(Polymer.Element) {
   static get is () { return 'devfest-tickets-page' }
 
   static get properties () {
@@ -19,15 +22,11 @@ class DevfestTicketsPage extends Polymer.Element {
         type: Array,
         value: []
       },
-      sessions: {
+      details: {
         type: Array,
         value: []
       },
-      topics: {
-        type: Array,
-        value: []
-      },
-      importantDates: {
+      payment: {
         type: Array,
         value: []
       }
@@ -36,46 +35,7 @@ class DevfestTicketsPage extends Polymer.Element {
 
   connectedCallback () {
     super.connectedCallback()
-    this._fetchContent()
-    // this._db = new PouchDB('devfest-landing-page', {auto_compaction: true})
-    // this._fetchContent()
-  }
-
-  disconnectedCallback () {
-    // this._db.close()
-  }
-
-  _fetchContent () {
-    console.log('fetch')
-    fetch(`https://raw.githubusercontent.com/gdgphilippines/devfestph2017-files/old-master/content/${this.nodeName.toLowerCase()}.md`)
-    .then(res => {
-      return res.text()
-    })
-    .then(body => {
-      const contentArray = body.split('-----')
-      contentArray.forEach(contentBody => {
-        if (contentBody.trim()) {
-          try {
-            const array = contentBody.split('=====')
-            const query = array[0].trim().split(':')[0].trim()
-            const type = array[0].trim().split(':')[1]
-            const content = array[1]
-            const node = this.shadowRoot.querySelector(query)
-            if (type && type.trim() === 'json') {
-              var prop = query
-              if (!prop) throw new Error('No property found: ' + array[0])
-              // console.log(content, prop, JSON.parse(content))
-              this._setProperty(prop, JSON.parse(content))
-              // console.log(this[prop])
-            } else if (node) {
-              node.innerHTML = marked(content)
-            }
-          } catch (e) {
-            console.log(e, contentBody)
-          }
-        }
-      })
-    })
+    this._fetchContent('pages/tickets.md')
   }
 }
 
