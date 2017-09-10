@@ -14,7 +14,8 @@ export default (superClass) => {
             const [query, content] = contentBody.split('-----')
             const [property, type] = query.split(':')
             const propArray = property.split('.')
-            const push = propArray[propArray.length-1]
+            var push = propArray[propArray.length-1]
+            push = push ? push.trim() : ''
             var newContent = ''
             var newType = type ? type.trim() : 'md'
             if (newType === 'json') {

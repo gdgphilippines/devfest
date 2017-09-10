@@ -23,14 +23,14 @@ p { line-height: 150% }
     padding: 20px;
   }
 
-  > .section-title {
-    > h1 {
+   .section-title {
+     h1 {
       font-size: 2.5em;
       color: inherit;
     }
   }
 
-  > .section-layout {
+   .section-layout {
     @apply --layout-horizontal;
     @apply --layout-wrap;
   }
@@ -65,7 +65,7 @@ p { line-height: 150% }
   }
 }
 
-.offline-option {
+.payment-option {
   padding: 36px;
   min-width: 250px;
   @apply --layout-flex;
