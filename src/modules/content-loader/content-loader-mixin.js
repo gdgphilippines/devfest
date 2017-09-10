@@ -17,11 +17,13 @@ export default (superClass) => {
             const push = propArray[propArray.length-1]
             var newContent = ''
             var newType = type ? type.trim() : 'md'
+            console.log(newType)
             if (newType === 'json') {
               newContent = JSON.parse(content)
             } else {
               newContent = content
             }
+            console.log(property, newContent)
 
             if (push && push === '$push') {
               this.push(propArray

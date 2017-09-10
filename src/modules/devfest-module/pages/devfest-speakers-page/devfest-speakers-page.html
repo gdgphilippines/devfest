@@ -14,14 +14,16 @@
 
     <section class="section perks-container blue">
       <div class="perks-title section-title">
+        <marked-element markdown="[[perksTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[perks]]">
           <div class="perk">
-            <iron-icon icon="[[item.icon]]"></iron-icon>
-            <p>
-              [[item.text]]
-            </p>
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
           </div>
         </template>
       </div>
@@ -29,27 +31,37 @@
 
     <section class="section session-container">
       <div class="session-title section-title">
+        <marked-element markdown="[[sessionTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[session]]">
-          <!-- <div class="session">
-            <iron-icon icon="[[item.icon]]"></iron-icon>
-            <h2>[[item.title]]</h2>
-            <p>
-            <template is="dom-repeat" items="[[item.text]]" as="text">
-              [[text]]<br/>
-            </template>
-            </p>
-          </div> -->
+          <div class="session">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
         </template>
       </div>
     </section>
 
     <section class="section topics-container blue">
       <div class="topics-title section-title">
+        <marked-element markdown="[[topicsTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
       <div class="section-layout">
         <template is="dom-repeat" items="[[topics]]">
+
+
+          <div class="topic-card">
+            <marked-element markdown="[[item]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </div>
+
           <!-- <div class="topic-card">
             <iron-icon icon="[[item.icon]]"></iron-icon>
             <h2>[[item.title]]</h2>
@@ -65,6 +77,9 @@
 
     <section class="section important-dates-container">
       <div class="important-dates-title section-title">
+        <marked-element markdown="[[importantDatesTitle]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
       </div>
       <div class="important-dates">
         <template is="dom-repeat" items="[[importantDates]]">
