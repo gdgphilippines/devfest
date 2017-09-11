@@ -35,7 +35,12 @@ class DevfestTicketsPage extends contentLoaderMixin(Polymer.Element) {
 
   connectedCallback () {
     super.connectedCallback()
+    this.reload()
+  }
+
+  reload() {
     this._fetchContent('pages/tickets.md')
+    // this._fetchJson('speakers/speakers.json', 'speakers')
   }
 }
 

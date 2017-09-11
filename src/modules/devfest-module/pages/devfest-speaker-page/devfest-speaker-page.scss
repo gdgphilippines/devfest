@@ -1,0 +1,87 @@
+@import '../../styles/components/host.scss';
+@import '../../styles/components/typography.scss';
+
+.content {
+  display: flex;
+  min-height: calc(100vh - 112px);
+
+  @media screen and (max-width: 700px) {
+    display: block;
+  }
+
+}
+
+.left-top {
+  flex: 4;
+  padding: 48px 0;
+  text-align: center;
+  background-color: #2196f3;
+  color: #fff;
+
+
+  @media screen and (max-width: 700px) {
+    padding-left: 30px;
+    text-align: left;
+    display: flex;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding-left: 0px;
+    text-align: center;
+    display: block;
+  }
+
+  .name-address {
+    flex: 1;
+    margin-left: 20px;
+    display: none;
+
+    .name {
+      color: inherit;
+    }
+
+    @media screen and (min-width: 501px) and (max-width: 700px) {
+      display: block;
+    }
+  }
+
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 66%;
+
+  @media screen and (max-width: 700px) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.right-bottom {
+  flex: 6;
+  padding: 36px;
+
+  .name {
+    @media screen and (min-width: 501px) and (max-width: 700px) {
+      display: none;
+    }
+  }
+
+  .address {
+    @media screen and (min-width: 501px) and (max-width: 700px) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    padding-top: 0px;
+  }
+}
+
+.spacer {
+  flex: 2;
+}
+
+.session-item {
+  font-weight: 700;
+}

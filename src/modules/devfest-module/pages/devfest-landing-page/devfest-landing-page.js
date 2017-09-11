@@ -6,6 +6,7 @@ import 'iron-icon/iron-icon.html'
 import 'marked-element/marked-element.html'
 import '../../components/devfest-button/devfest-button.js'
 import '../../components/devfest-icon-button/devfest-icon-button.js'
+import '../../components/devfest-speakers-section/devfest-speakers-section.js'
 import '../../components/devfest-banner/devfest-banner.js'
 import '../../components/devfest-footer/devfest-footer.js'
 import '../../fonts/devfest-fonts.html'
@@ -31,13 +32,22 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
       expect: {
         type: Array,
         value: []
+      },
+      speakers: {
+        type: Array,
+        value: []
       }
     }
   }
 
   connectedCallback () {
     super.connectedCallback()
+    this.reload()
+  }
+
+  reload() {
     this._fetchContent('pages/landing.md')
+    this._fetchJson('speakers/speakers.json', 'speakers')
   }
 
 

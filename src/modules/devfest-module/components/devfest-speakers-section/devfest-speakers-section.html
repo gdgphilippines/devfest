@@ -1,0 +1,23 @@
+<dom-module id="devfest-speakers-section">
+  <template>
+    <link rel="stylesheet" href="./devfest-speakers-section.scss">
+
+    <section class="section gray speakers">
+      <h1>
+        Speakers
+      </h1>
+
+      <div class="speakers-list">
+        <template is="dom-repeat" items="[[speakersArray]]">
+          <a class="speaker-item" href="/speakers/[[item.id]]">
+            <img class="speaker-avatar" src="[[_app.contentRepo]][[_app.branch]]/speakers/images-cropped/[[item.id]].jpg">
+            <h2 class="speaker-name">[[item.name]]</h2>
+            <p>[[item.company]]</p>
+            <p>[[item.country]]</p>
+          </div>
+        </template>
+      </div>
+    </section>
+
+  </template>
+</dom-module>
