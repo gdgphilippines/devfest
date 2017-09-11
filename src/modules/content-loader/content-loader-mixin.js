@@ -38,6 +38,15 @@ export default (superClass) => {
             }
           }
         })
+
+        // fix for markdown not adding a class for shady css
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          this.shadowRoot.querySelectorAll('[slot=markdown-html]').forEach((item) => {
+            item.querySelectorAll('*').forEach((node) => {
+              node.classList.add(this.nodeName.toLowerCase())
+            })
+          })
+        })
       })
     }
   }
