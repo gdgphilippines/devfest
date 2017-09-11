@@ -53,7 +53,7 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
     }
     this._fetchJson('speakers/speakers.json', 'speakers')
     this._fetchJson('sessions/sessions.json', 'sessions')
-    this._fetchJson('schedule/schedule.json', 'sessions')
+    this._fetchJson('schedule/schedule.json', 'schedule')
   }
 
   _getInfo(id, attribute) {
@@ -68,8 +68,9 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
   }
 
   _getSession(id, attribute) {
-
+    console.log(this.sessions[id])
     if (this.sessions[id]) {
+      console.log(this.sessions[id][attribute])
       return this.sessions[id][attribute]
     }
   }
