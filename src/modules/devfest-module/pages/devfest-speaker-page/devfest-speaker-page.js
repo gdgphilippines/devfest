@@ -68,7 +68,7 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
   }
 
   _getSession(id, attribute) {
-    console.log(id, attribute)
+
     if (this.sessions[id]) {
       return this.sessions[id][attribute]
     }

@@ -39,7 +39,7 @@
             <ul>
             <template is="dom-repeat" items="[[_getInfo(params.id, 'sessions', speakers, sessions)]]">
               <li class="session-item">
-                [[_getSession(item, 'title', sessions)]]
+                [[_getSession(item, 'title', speakers, sessions)]]
               </li>
             </template>
             </ul>
