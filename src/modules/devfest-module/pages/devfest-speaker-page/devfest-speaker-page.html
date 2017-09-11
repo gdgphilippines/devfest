@@ -1,0 +1,55 @@
+<dom-module id="devfest-speaker-page">
+  <template>
+    <link rel="stylesheet" href="./devfest-speaker-page.scss">
+
+    <div class="content">
+      <div class="left-top">
+        <img class="avatar" src="[[_app.contentRepo]][[_app.branch]]/speakers/images-cropped/[[params.id]].jpg">
+
+        <div class="name-address">
+          <h1 class="name">[[_getInfo(params.id, 'name', speakers)]]</h1>
+
+          <address class="address">
+            [[_getInfo(params.id, 'company', speakers)]]<br/>
+            [[_getInfo(params.id, 'country', speakers)]]
+          </address>
+        </div>
+
+      </div>
+
+      <div class="right-bottom">
+        <section class="bio">
+          <h1 class="name">[[_getInfo(params.id, 'name', speakers)]]</h1>
+
+          <address class="address">
+            [[_getInfo(params.id, 'company', speakers)]]<br/>
+            [[_getInfo(params.id, 'country', speakers)]]
+          </address>
+
+          <marked-element markdown="[[body]]">
+            <div slot="markdown-html"></div>
+          </marked-element>
+        </section>
+
+        <template is="dom-if" if="[[_checkSessions(params.id, speakers)]]">
+          <section class="sessions">
+            <h1>Session</h1>
+
+            <hr>
+            <ul>
+            <template is="dom-repeat" items="[[_getInfo(params.id, 'sessions', speakers, sessions)]]">
+              <li class="session-item">
+                [[_getSession(item, 'title', sessions)]]
+              </li>
+            </template>
+            </ul>
+          </section>
+        </template>
+      </div>
+      <div class="spacer">
+      </div>
+    </div>
+
+    <devfest-footer></devfest-footer>
+  </template>
+</dom-module>

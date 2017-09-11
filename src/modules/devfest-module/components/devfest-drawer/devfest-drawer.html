@@ -9,9 +9,9 @@
         </app-toolbar>
       </app-header>
       <div class="links">
-        <devfest-button no-color href="/" on-tap="closeDrawer">Home</devfest-button>
-        <devfest-button no-color href="/speakers" on-tap="closeDrawer">Call for Speakers</devfest-button>
-        <devfest-button href="https://devfestphilippines.eventbrite.com/" target="_blank" on-tap="closeDrawer">Get Tickets</devfest-button>
+        <template is="dom-repeat" items="[[menu]]">
+          <devfest-button no-color="[[item.attributes.noColor]]" href="[[item.href]]" on-tap="closeDrawer">[[item.text]]</devfest-button>
+        </template>
       </div>
   </template>
 </dom-module>

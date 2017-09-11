@@ -9,9 +9,9 @@
         <div class="spacer">
         </div>
         <div class="links">
-          <devfest-button no-color href="/">Home</devfest-button>
-          <devfest-button no-color href="/speakers">Call for Speakers</devfest-button>
-          <devfest-button href="/tickets">Get Tickets</devfest-button>
+          <template is="dom-repeat" items="[[menu]]">
+            <devfest-button no-color="[[item.attributes.noColor]]" href="[[item.href]]">[[item.text]]</devfest-button>
+          </template>
         </div>
       </app-toolbar>
     </app-header>
