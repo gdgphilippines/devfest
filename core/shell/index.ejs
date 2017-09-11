@@ -64,6 +64,18 @@
       Object.defineProperty(App, '_database', { value: App._database || '<%= htmlWebpackPlugin.options.config.build.database %>' })
       Object.defineProperty(App, '_analytics', { value: App._analytics || '<%= htmlWebpackPlugin.options.config.build.analytics %>' })
 
+      if (!Object.entries) {
+        Object.entries = function (obj) {
+          var ownProps = Object.keys(obj)
+          var i = ownProps.length
+          var resArray = new Array(i) // preallocate the Array
+          while (i--) {
+            resArray[i] = [ownProps[i], obj[ownProps[i]]]
+          }
+          return resArray;
+        }
+      }
+
       if (window.performance) {
         window.globalStart = window.globalStart || performance.now()
       }
