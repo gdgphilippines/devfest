@@ -1,29 +1,20 @@
-:host {
-  font-family: 'Roboto';
-  font-weight: 300;
-  color: #666;
-  font-size: 1em;
-  padding-top: 112px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Product Sans';
-  color: #666;
-  font-weight: normal;
-}
-
-p { line-height: 150% }
-
+@import '../../styles/components/host.scss';
+@import '../../styles/components/typography.scss';
 
 devfest-banner {
   text-align: center;
   h1 {
     font-family: 'Product Sans';
     opacity: 1;
+    margin-bottom: 0px;
 
     @media only screen and (max-width: 500px) {
       font-size: 1.5em
     }
+  }
+
+  p {
+    margin-top: 0px;
   }
 
   .button {

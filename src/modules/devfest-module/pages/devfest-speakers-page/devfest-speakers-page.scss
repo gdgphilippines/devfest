@@ -1,18 +1,6 @@
-:host {
-  font-family: 'Roboto';
-  font-weight: 300;
-  color: #666;
-  font-size: 1em;
-  padding-top: 112px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Product Sans';
-  color: #666;
-  font-weight: normal;
-}
-
-p { line-height: 150% }
+@import '../../styles/components/host.scss';
+@import '../../styles/components/typography.scss';
+@import '../../styles/components/section.scss';
 
 .banner-container {
   @apply --layout-horizontal;
@@ -39,38 +27,6 @@ p { line-height: 150% }
     @media only screen and (max-width: 500px) {
       padding: 20px;
     }
-  }
-}
-
-.section {
-  text-align: center;
-  padding: 36px;
-  padding-bottom: 96px;
-
-  @media only screen and (max-width: 500px) {
-    padding: 20px;
-  }
-
-  .section-title {
-    h1 {
-      font-size: 2.5em;
-      color: inherit;
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding-left: 0px;
-  }
-
-  .section-layout {
-    @apply --layout-horizontal;
-    @apply --layout-wrap;
-  }
-
-  iron-icon {
-    --iron-icon-height: 96px;
-    --iron-icon-width: 96px;
   }
 }
 
@@ -150,10 +106,4 @@ p { line-height: 150% }
       padding-left: 10px;
     }
   }
-
-}
-
-.blue.section {
-  background-color: #2196f3;
-  color: #fff;
 }

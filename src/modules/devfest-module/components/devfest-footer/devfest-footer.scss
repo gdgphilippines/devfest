@@ -1,7 +1,8 @@
 .footer {
-
-    background: #4688f4;
+    background-color: rgb(51, 51, 51);
+    // background: #4688f4;
     color: rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
     @apply --layout-horizontal;
     @apply --layout-wrap;
     @apply --layout-center;
