@@ -1,0 +1,59 @@
+@import '../../styles/components/host.scss';
+@import '../../styles/components/typography.scss';
+@import '../../styles/components/section.scss';
+
+.speakers {
+  text-align: left;
+}
+
+.speakers-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  @media screen and (max-width: 1130px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 620px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 460px) {
+    display: block;
+  }
+}
+
+.speaker-item {
+  display: block;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 36px;
+  text-decoration: none;
+  color: inherit;
+
+  @media screen and (max-width: 460px) {
+    min-width: 0px;
+    padding: 15px;
+  }
+
+  &:hover {
+    background: #fff;
+    box-shadow: 0px 3px 4px rgba(0,0,0,.2);
+  }
+}
+
+.speaker-avatar {
+  border-radius: 100%;
+  box-shadow: 0px 3px 4px rgba(0,0,0,.2);
+  width: 200px;
+}

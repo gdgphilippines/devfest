@@ -21,6 +21,10 @@
         "destination": "/index.html"
       },
       {
+        "source": "/speakers/**",
+        "destination": "/index.html"
+      },
+      {
         "source": "/tickets",
         "destination": "/index.html"
       },

@@ -6,9 +6,18 @@ import 'app-layout/app-drawer/app-drawer.html'
 import '../devfest-button/devfest-button.js'
 import '../gdg-logo/gdg-logo.js'
 import './devfest-drawer.html'
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 
-class DevfestDrawer extends Polymer.GestureEventListeners(Polymer.Element) {
+class DevfestDrawer extends contentLoaderMixin(Polymer.GestureEventListeners(Polymer.Element)) {
   static get is () { return 'devfest-drawer' }
+
+  static get properties () {
+    return {
+      menu: {
+        type: Array
+      }
+    }
+  }
 
   constructor () {
     super()
@@ -17,12 +26,17 @@ class DevfestDrawer extends Polymer.GestureEventListeners(Polymer.Element) {
 
   connectedCallback () {
     super.connectedCallback()
+    this.reload()
     window.addEventListener('open-drawer', this._boundOpenDrawer)
   }
 
   disconnectedCallback () {
     super.disconnectedCallback()
     window.removeEventListener('open-drawer', this._boundOpenDrawer)
+  }
+
+  reload (menu) {
+    this._fetchJson(menu || 'menu/default.json', 'menu')
   }
 
   openDrawer () {
