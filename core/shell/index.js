@@ -269,6 +269,8 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
         if (document.querySelector('.drawer') && document.querySelector('.drawer').reload) {
           document.querySelector('.drawer').reload()
         }
+
+        window.scrollTo(0, 0)
         if (window.ga) {
           ga('set', 'page', this.path)
           ga('send', 'pageview')
