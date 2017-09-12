@@ -2,7 +2,7 @@
   "name": "devfest",
   "description": "GDG Devfest 2017",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Toni-Jan Keith Monserrat",
     "email": "tjmonsi@gmail.com"
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "indexeddbshim": "^3.0.4",
+    "intersection-observer": "^0.4.2",
     "marked": "^0.3.6",
     "path-to-regexp": "^1.7.0",
     "redux": "^3.7.2"

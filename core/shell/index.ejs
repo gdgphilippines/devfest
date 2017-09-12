@@ -101,6 +101,15 @@
       window.App.baseUrl = window.App.baseUrl || document.querySelector('base').href
     </script>
 
+    <script>
+      if (!window.IntersectionObserver) {
+        var script = document.createElement('script')
+        script.src = 'bower_components/intersection-observer/intersection-observer.js'
+        var refScript = document.getElementsByTagName('script')[0]
+        refScript.parentNode.insertBefore(script, refScript)
+      }
+    </script>
+
     <% if (htmlWebpackPlugin.options.config.build.sentryUrl) {%>
 
 
@@ -130,6 +139,7 @@
     <style>
       body {
         margin: 0;
+        background: #333;
       }
 
       .drawer {
