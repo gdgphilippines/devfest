@@ -2,6 +2,10 @@
   <template>
     <link rel="stylesheet" href="./devfest-landing-page.scss">
 
+    <iron-media-query query="(min-width: 801px)" query-matches="{{largeMapSize}}"></iron-media-query>
+    <iron-media-query query="(max-width: 800px) and (min-width: 601px)" query-matches="{{middleSizeMap}}"></iron-media-query>
+    <iron-media-query query="(max-width: 600px)" query-matches="{{smallSizeMap}}"></iron-media-query>
+
     <devfest-banner>
       <marked-element markdown="[[banner]]">
         <div slot="markdown-html"></div>
@@ -32,6 +36,22 @@
     </section>
 
     <devfest-speakers-section speakers="[[speakers]]"></devfest-speakers-section>
+
+    <google-map class="venue-section" api-key="[[_apiKey]]" latitude="14.536921" longitude="121.0151518" zoom="15" map="{{_map}}">
+      <div class="venue-description">
+        <picture>
+          <source srcset="[[_app.contentRepo]][[_app.branch]]/venue/greensun-md.jpg" media="(min-width: 600px)">
+          <source srcset="[[_app.contentRepo]][[_app.branch]]/venue/greensun-sm.jpg" media="(max-width: 599px)">
+          <img src="[[_app.contentRepo]][[_app.branch]]/venue/greensun-sm.jpg" class="venue-image">
+        </picture>
+        <div class="venue-content">
+          <marked-element markdown="[[venue]]">
+            <div slot="markdown-html"></div>
+          </marked-element>
+        </div>
+      </div>
+      <google-map-marker class="venue-mark" latitude="14.53676" longitude="121.0214175" title="Green Sun Hotel" marker="{{_marker}}"></google-map-marker>
+    </google-map>
 
     <section class="section sponsors">
       <marked-element markdown="[[sponsors]]">
