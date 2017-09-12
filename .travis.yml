@@ -19,13 +19,13 @@ install:
 - cd ..
 - cd gulp && yarn install
 - cd ..
+- npm run build-production
 script:
 - cd gulp
 - xvfb-run karma start karma.conf.js --single-run
 before_deploy:
 - cd ..
 - export VERSION=$(node -p -e "require('./package.json').version")
-- npm run build-production
 - cd gulp && ./node_modules/.bin/sentry-cli releases new "$VERSION"
 - cd ..
 deploy:
