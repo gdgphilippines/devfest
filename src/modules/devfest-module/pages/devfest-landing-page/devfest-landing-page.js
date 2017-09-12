@@ -138,11 +138,6 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
     const map = this.shadowRoot.querySelector('.venue-section')
     if (map && typeof map.resize === 'function') {
       map.resize()
-
-      this.shadowRoot.querySelectorAll('iron-media-query').forEach(item => {
-        console.log(item.queryChanged)
-        item.queryChanged()
-      })
     }
   }
 
