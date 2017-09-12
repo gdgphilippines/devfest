@@ -4,6 +4,9 @@ import 'iron-flex-layout/iron-flex-layout.html'
 import 'shadycss/apply-shim.html'
 import 'iron-icon/iron-icon.html'
 import 'marked-element/marked-element.html'
+import 'google-map/google-map.html'
+import 'google-map/google-map-marker.html'
+import 'iron-media-query/iron-media-query.html'
 import '../../components/devfest-button/devfest-button.js'
 import '../../components/devfest-icon-button/devfest-icon-button.js'
 import '../../components/devfest-speakers-section/devfest-speakers-section.js'
@@ -13,6 +16,8 @@ import '../../fonts/devfest-fonts.html'
 import './devfest-landing-page.html'
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 import marked from 'marked'
+import firebaseConfig from '../../../../firebase.js'
+import app from '../../../../app.js'
 window.marked = window.marked || marked
 
 class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
@@ -36,8 +41,40 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
       speakers: {
         type: Array,
         value: []
+      },
+      _map: {
+        type: Object,
+        observer: '_setMapOptions'
+      },
+      _marker: {
+        type: Object,
+        observer: '_animateMarker'
+      },
+      largeMapSize: {
+        type: Boolean,
+        value: false
+      },
+      middleSizeMap: {
+        type: Boolean,
+        value: false
+      },
+      smallMapSize: {
+        type: Boolean,
+        value: false
       }
     }
+  }
+
+  static get observers () {
+    return [
+      '_setMap(largeMapSize, middleSizeMap, smallMapSize, _map)'
+    ]
+  }
+
+  constructor () {
+    super()
+    this._apiKey = firebaseConfig[0].apiKey
+    this._app = app
   }
 
   connectedCallback () {
@@ -45,9 +82,63 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
     this.reload()
   }
 
+  _setMap (large, middle, small, m) {
+    const map = this.shadowRoot.querySelector('.venue-section')
+
+    if (map) {
+      if (!large && !middle && !small) {
+        large = window.innerWidth > 800
+        small = window.innerWidth <= 600
+        middle = !large && !small
+      }
+      if (large) {
+        map.latitude = 14.536921
+        map.longitude = 121.0151518
+      } else if (middle) {
+        map.latitude = 14.52676
+        map.longitude = 121.0214175
+      } else if (small) {
+        map.latitude = 14.52976
+        map.longitude = 121.0214175
+      } else {
+
+      }
+    }
+  }
+
+  _setMapOptions (map) {
+    if (map) {
+      map.setOptions({
+        // center: {lat: 14.536921, lng: 121.0151518},
+        panControl:false,
+        zoomControl:false,
+        mapTypeControl:false,
+        scaleControl:false,
+        streetViewControl:false,
+        overviewMapControl:false,
+        rotateControl:false,
+        scrollwheel: false,
+        navigationControl: false,
+        draggable: false
+      })
+    }
+  }
+
+  _animateMarker (marker) {
+    if (marker) {
+      marker.setAnimation(google.maps.Animation.BOUNCE)
+    }
+  }
+
+
   reload() {
     this._fetchContent('pages/landing.md')
     this._fetchJson('speakers/speakers.json', 'speakers')
+
+    const map = this.shadowRoot.querySelector('.venue-section')
+    if (map && typeof map.resize === 'function') {
+      map.resize()
+    }
   }
 
 

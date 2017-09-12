@@ -25,10 +25,48 @@ class DevfestHeader extends contentLoaderMixin(Polymer.GestureEventListeners(Pol
   connectedCallback () {
     super.connectedCallback()
     this.reload()
+    this._observedObject = null
+    if (window.IntersectionObserver) {
+      this._observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.target === this._observedObject) {
+            if (entry.intersectionRatio === 0) {
+              this.shadowRoot.querySelector('gdg-logo').style.opacity = 1
+            } else {
+              this.shadowRoot.querySelector('gdg-logo').style.opacity = 0
+            }
+          }
+        })
+      }, {
+        threshold: [0, 0.25, 0.5, 0.75, 1.0]
+      })
+    }
   }
 
   reload (menu) {
     this._fetchJson(menu || 'menu/default.json', 'menu')
+
+    Polymer.RenderStatus.afterNextRender(this, () => {
+      this._observer.disconnect()
+
+      const page = document.querySelector('.page--on-view')
+      if (page && page.nodeName.toLowerCase() === 'devfest-landing-page' && page.shadowRoot) {
+
+        const children = page.shadowRoot.children
+        this._observedObject = null
+
+        for (var i = 0; i < children.length; i++) {
+          if (children[i].getBoundingClientRect().height > 0) {
+            this._observedObject = children[i]
+            break;
+          }
+        }
+
+        if (this._observedObject) {
+          this._observer.observe(this._observedObject)
+        }
+      }
+    })
   }
 
   openDrawer () {

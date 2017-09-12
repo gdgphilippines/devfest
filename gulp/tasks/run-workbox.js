@@ -50,6 +50,11 @@ gulp.task('run-workbox', (done) => {
           handler: 'networkFirst'
         },
         {
+          urlPattern: /^https:\/\/raw.githubusercontent.com\/.*/,
+          // urlPattern: /^https:\/\/polyfill.io\/.*/,
+          handler: 'networkFirst'
+        },
+        {
           urlPattern: /^https:\/\/fonts.googleapis.com\/.*/,
           handler: 'cacheFirst'
         },
