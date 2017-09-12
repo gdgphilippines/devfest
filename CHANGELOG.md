@@ -6,7 +6,6 @@ Unreleased:
 - Fixed the long needed fix on logo in the app-header #3 #82
 - Fixed Css of Footer and Body Background #76 #78
 - Fixed Icon sizes for Edge 14 below #108
-
 Please take note that you need to do yarn install --flat and bower install on the project folder for this release
 
 2017-09-11: 0.0.5-bugfix-1
