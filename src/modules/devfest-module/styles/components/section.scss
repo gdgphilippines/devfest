@@ -16,11 +16,6 @@
     @apply --layout-horizontal;
     @apply --layout-wrap;
   }
-
-  iron-icon {
-    --iron-icon-height: 96px;
-    --iron-icon-width: 96px;
-  }
 }
 
 .blue.section {
@@ -30,4 +25,14 @@
 
 .gray.section {
   background-color: #fafafa;
+}
+
+.section iron-icon {
+  height: 96px;
+  width: 96px;
+}
+
+.section iron-icon {
+  --iron-icon-height: 96px;
+  --iron-icon-width: 96px;
 }
