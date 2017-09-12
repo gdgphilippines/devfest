@@ -47,7 +47,9 @@ class DevfestHeader extends contentLoaderMixin(Polymer.GestureEventListeners(Pol
     this._fetchJson(menu || 'menu/default.json', 'menu')
 
     Polymer.RenderStatus.afterNextRender(this, () => {
-      this._observer.disconnect()
+      if (this._observer) {
+        this._observer.disconnect()
+      }
 
       const page = document.querySelector('.page--on-view')
       if (page && page.nodeName.toLowerCase() === 'devfest-landing-page' && page.shadowRoot) {

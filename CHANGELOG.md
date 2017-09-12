@@ -1,22 +1,24 @@
-Unreleased:
+# 0.0.6 / 2017-09-12
+- [FIXED] Fixed bug on devfest-header #124
+- [CHANGED] To proper semver
 
-2017-09-12: 0.0.5-bugfix-2
-- Added Venue section #111
-- Added Slack notification #118
-- Fixed the long needed fix on logo in the app-header #3 #82
-- Fixed Css of Footer and Body Background #76 #78
-- Fixed Icon sizes for Edge 14 below #108
-Please take note that you need to do yarn install --flat and bower install on the project folder for this release
+# 0.0.5-bugfix-2 / 2017-09-12
+- [ADDED] Venue section #111
+- [ADDED] Slack notification #118
+- [FIXED] Fixed the long needed fix on logo in the app-header #3 #82
+- [FIXED] Fixed Css of Footer and Body Background #76 #78
+- [FIXED] Fixed Icon sizes for Edge 14 below #108
+- [NOTE] Please take note that you need to do `yarn install --flat` and `bower install` on the project folder for this release
 
-2017-09-11: 0.0.5-bugfix-1
-- Added Object.entries polyfill for Safari 9 below #103
-- Fixed scroll issue when changing pages #93
+# 0.0.5-bugfix-1 / 2017-09-11
+- [ADDED] Added Object.entries polyfill for Safari 9 below #103
+- [FIXED] Fixed scroll issue when changing pages #93
 
-2017-09-11: 0.0.5
-- Added Speaker pages #75
-- Changed footer design #76
-- Changed loading of content #61
-- Fixed header font sizes #77
-- Fixed bullet points on ticket page #85
-- Fixed Icon sizes on Edge 15 and Firefox #84
-- Removed Raven capture on window.error to lessen error capturing
+# 0.0.5 / 2017-09-11
+- [ADDED] Added Speaker pages #75
+- [CHANGED] Changed footer design #76
+- [CHANGED] Changed loading of content #61
+- [FIXED] Fixed header font sizes #77
+- [FIXED]Fixed bullet points on ticket page #85
+- [FIXED] Fixed Icon sizes on Edge 15 and Firefox #84
+- [REMOVED] Removed Raven capture on window.error to lessen error capturing
