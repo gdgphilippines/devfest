@@ -9,6 +9,7 @@ import partials from '../../src/partials.js'
 import auth from '../../src/authentication/index.js'
 
 const messages = []
+
 class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
   static get is () { return 'app-shell' }
 

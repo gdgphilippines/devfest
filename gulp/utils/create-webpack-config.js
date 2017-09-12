@@ -51,6 +51,10 @@ module.exports = (test) => {
     }),
     new CopyWebpackPlugin([
       {
+        from: path.resolve(__dirname, '../../node_modules/intersection-observer/*.js'),
+        to: 'bower_components/intersection-observer/[name].[ext]'
+      },
+      {
         from: path.resolve(__dirname, '../../bower_components/webcomponentsjs/*.js'),
         to: 'bower_components/webcomponentsjs/[name].[ext]'
       },
