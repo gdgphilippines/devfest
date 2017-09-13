@@ -30,7 +30,7 @@ class DevfestHeader extends contentLoaderMixin(Polymer.GestureEventListeners(Pol
       this._observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.target === this._observedObject) {
-            if (entry.intersectionRatio === 0) {
+            if (!entry.isIntersecting) {
               this.shadowRoot.querySelector('gdg-logo').style.opacity = 1
             } else {
               this.shadowRoot.querySelector('gdg-logo').style.opacity = 0
