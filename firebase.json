@@ -25,6 +25,14 @@
         "destination": "/index.html"
       },
       {
+        "source": "/sessions",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/sessions/**",
+        "destination": "/index.html"
+      },
+      {
         "source": "/tickets",
         "destination": "/index.html"
       },

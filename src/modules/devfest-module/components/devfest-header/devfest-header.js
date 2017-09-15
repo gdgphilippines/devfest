@@ -64,7 +64,7 @@ class DevfestHeader extends contentLoaderMixin(Polymer.GestureEventListeners(Pol
           }
         }
 
-        if (this._observedObject) {
+        if (this._observer && this._observedObject) {
           this._observer.observe(this._observedObject)
         }
       }
