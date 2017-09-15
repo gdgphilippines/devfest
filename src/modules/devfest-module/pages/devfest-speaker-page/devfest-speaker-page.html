@@ -36,19 +36,31 @@
             <h1>Session</h1>
 
             <hr>
-            <ul>
+            <ul class="session-list">
             <template is="dom-repeat" items="[[_getInfo(params.id, 'sessions', speakers, sessions)]]">
               <li class="session-item">
-                [[_getSession(item, 'title', speakers, sessions)]]
+                <div class="session-title-time">
+                  <h2 class="session-title">
+                    <a class="session-anchor" href="/sessions/[[item]]">
+                      [[_getSession(item, 'title', speakers, sessions)]]
+                    </a>
+                  </h2>
+                  <p class="session-time">
+                    [[_getTime(item, sessions, schedule)]]
+                  </p>
+                </div>
               </li>
             </template>
             </ul>
           </section>
         </template>
-        <devfest-button href="/speakers">
-          <iron-icon icon="devfest:arrow-back"></iron-icon>
-          BACK TO SPEAKERS
-        </devfest-button>
+
+        <section class="back-section">
+          <devfest-button href="/speakers">
+            <iron-icon icon="devfest:arrow-back"></iron-icon>
+            BACK TO SPEAKERS
+          </devfest-button>
+        </section>
       </div>
       <div class="spacer">
       </div>

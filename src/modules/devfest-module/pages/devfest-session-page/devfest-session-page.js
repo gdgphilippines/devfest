@@ -3,14 +3,14 @@ import 'marked-element/marked-element.html'
 import '../../fonts/devfest-fonts.html'
 import '../../icons/devfest-icons.html'
 import '../../components/devfest-footer/devfest-footer.js'
-import './devfest-speaker-page.html'
+import './devfest-session-page.html'
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 import app from '../../../../app'
 import marked from 'marked'
 window.marked = window.marked || marked
 
-class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-speaker-page' }
+class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
+  static get is () { return 'devfest-session-page' }
 
   static get properties () {
     return {
@@ -49,7 +49,7 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
 
   reload() {
     if (this.params.id) {
-      this._fetchContent(`speakers/bio/${this.params.id}.md`)
+      this._fetchContent(`sessions/session-description/${this.params.id}.md`)
     }
     this._fetchJson('speakers/speakers.json', 'speakers')
     this._fetchJson('sessions/sessions.json', 'sessions')
@@ -58,14 +58,9 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
   }
 
   _getInfo(id, attribute) {
-    if (this.speakers[id]) {
-      return this.speakers[id][attribute]
+    if (this.sessions[id]) {
+      return this.sessions[id][attribute]
     }
-  }
-
-  _checkSessions(id) {
-    // console.log(this.speakers[id].sessions.length)
-    return this.speakers[id] && this.speakers[id].sessions.length > 0
   }
 
   _getSession(id, attribute) {
@@ -84,8 +79,28 @@ class DevfestSpeakerPage extends contentLoaderMixin(Polymer.Element) {
       }
     }
   }
+
+  _getSpeakerId (id) {
+    if (this.sessions && id && this.sessions[id] && this.speakers) {
+      if (this.sessions[id].speaker) {
+        return this.sessions[id].speaker
+      }
+
+      // return this.sessions[id].title
+    }
+  }
+
+  _getSpeakerInfo (id, attribute) {
+    if (this.sessions && id && this.sessions[id] && this.speakers) {
+      if (this.speakers[this.sessions[id].speaker]) {
+        return this.speakers[this.sessions[id].speaker][attribute]
+      }
+
+      // return this.sessions[id].title
+    }
+  }
 }
 
-window.customElements.define(DevfestSpeakerPage.is, DevfestSpeakerPage)
+window.customElements.define(DevfestSessionPage.is, DevfestSessionPage)
 
-export default DevfestSpeakerPage
+export default DevfestSessionPage
