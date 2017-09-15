@@ -3,13 +3,24 @@
 
 devfest-banner {
   text-align: center;
-  h1 {
+  table {
+    margin: 0 auto;
+  }
+
+  h2 {
     font-family: 'Product Sans';
     opacity: 1;
     margin-bottom: 0px;
+    margin-left: 20px;
 
     @media only screen and (max-width: 500px) {
-      font-size: 1.5em
+      font-size: 1.25em
+    }
+  }
+
+  devfest-icon-button {
+    @media only screen and (max-width: 550px) {
+       display: block
     }
   }
 

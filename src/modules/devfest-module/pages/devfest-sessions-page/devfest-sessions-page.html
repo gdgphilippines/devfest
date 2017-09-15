@@ -1,0 +1,50 @@
+<dom-module id="devfest-sessions-page">
+    <template>
+      <link rel="stylesheet" href="./devfest-sessions-page.scss">
+
+      <section class="section">
+        <h1>Schedule</h1>
+        <template is="dom-repeat" items="[[schedule]]">
+          <div class="schedule-row">
+            <div class="schedule-time">
+              <h2 class="time-number">
+                [[_getTime(item.start)]]
+                <span class="time-ap">
+                  [[_getTimeArea(item.start)]]
+                </span>
+              </h2>
+            </div>
+            <div class="schedule-item">
+              <template is="dom-repeat" items="[[item.sessions]]" as="session">
+                <div class="session-item">
+                  <div class="session-title-time">
+                    <h2 class="session-title">
+                      <template is="dom-if" if="[[session.session]]">
+                        <a class="session-title-anchor" href="/sessions/[[session.session]]">
+                          [[_getTitle(session.session, sessions)]]
+                        </a>
+                      </template>
+                      [[session.title]]
+                    </h2>
+                    <p class="session-description">
+                      <template is="dom-if" if="[[session.session]]">
+                        <a class="session-anchor" href="/speakers/[[_getSpeakerId(session.session, sessions, speakers)]]">
+                          <template is="dom-if" if="[[_getSpeakerId(session.session, sessions, speakers)]]">
+                            <img class="session-image" src="[[_app.contentRepo]][[_app.branch]]/speakers/images-cropped/[[_getSpeakerId(session.session, sessions, speakers)]].jpg">
+                            <span class="session-text">[[_getSpeaker(session.session, sessions, speakers)]]</span>
+                          </template>
+                        </a>
+                      </template>
+                    </p>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </section>
+
+      <devfest-footer></devfest-footer>
+
+    </template>
+  </dom-module>

@@ -1,0 +1,60 @@
+@import '../../styles/components/host.scss';
+@import '../../styles/components/typography.scss';
+
+.content {
+  min-height: calc(100vh - 112px);
+}
+
+.top {
+  padding: 36px;
+  background: #FAFAFA;
+}
+
+.session-title {
+  transition: font-size 0.5s;
+  @media screen and (max-width: 500px){
+    font-size: 1.5em
+  }
+}
+
+.meta-information {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+
+.bottom {
+  padding: 36px;
+
+}
+
+.back-section {
+  padding-top: 20px;
+}
+
+.speaker-image {
+  width: 100px;
+  border-radius: 100%;
+
+}
+
+.speaker-info {
+  @apply --layout-horizontal;
+  @apply --layout-center;
+}
+
+.speaker-bio {
+  margin-left: 15px;
+  margin-bottom: 20px;
+  @apply --layout-flex;
+
+}
+
+.speaker-name {
+  margin-top: 10px;
+}
+
+.speaker-anchor {
+  color: inherit;
+  text-decoration: none;
+}

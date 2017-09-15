@@ -1,0 +1,51 @@
+<dom-module id="devfest-session-page">
+    <template>
+      <link rel="stylesheet" href="./devfest-session-page.scss">
+
+      <div class="content">
+        <div class="top">
+          <h1 class="session-title">[[_getInfo(params.id, 'title', sessions)]]</h1>
+        </div>
+
+        <div class="bottom">
+          <section class="description">
+            <div class="meta-information">
+              Saturday, October 14, [[_getTime(params.id, sessions, schedule)]]
+            </div>
+
+            <marked-element markdown="[[body]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </section>
+
+          <section class="speaker-section">
+            <div class="speaker-info">
+              <img class="speaker-image" src="[[_app.contentRepo]][[_app.branch]]/speakers/images-cropped/[[_getSpeakerId(params.id, speakers, sessions)]].jpg">
+              <div class="speaker-bio">
+                <h2 class="speaker-name">
+                  <a class="speaker-anchor" href="/speakers/[[_getSpeakerId(params.id, speakers, sessions)]]">
+                      [[_getSpeakerInfo(params.id, 'name', speakers, sessions)]]
+                  </a>
+                </h2>
+                <address class="meta-bio">
+                  [[_getSpeakerInfo(params.id, 'company', speakers, sessions)]]<br/>
+                  [[_getSpeakerInfo(params.id, 'country', speakers, sessions)]]
+                </address>
+              </div>
+            </div>
+          </section>
+
+          <section class="back-section">
+            <devfest-button href="/sessions">
+              <iron-icon icon="devfest:arrow-back"></iron-icon>
+              BACK TO SCHEDULE
+            </devfest-button>
+          </section>
+        </div>
+        <div class="spacer">
+        </div>
+      </div>
+
+      <devfest-footer></devfest-footer>
+    </template>
+  </dom-module>

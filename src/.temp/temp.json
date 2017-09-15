@@ -11,11 +11,11 @@
   "build": {
     "name": "dev",
     "baseHref": "/",
-    "analytics": "UA-78413383-2",
+    "analytics": "",
     "firebaseVersion": "4.2.0",
     "database": "dev",
     "waitBeforeFetchingSameURLInRest": 60,
-    "sentryUrl": "https://85d1091a410948caa823a5230bd0dbcf@sentry.io/204253",
+    "sentryUrl": "",
     "firebaseConfig": [
       {
         "apiKey": "AIzaSyB3VQN0MNOxcunaUKXZr54u0t6ruv2YbkE",
@@ -30,7 +30,9 @@
   "fragments": {
     "devfest-landing-page": "modules/devfest-module/pages/devfest-landing-page/devfest-landing-page.js",
     "devfest-speakers-page": "modules/devfest-module/pages/devfest-speakers-page/devfest-speakers-page.js",
+    "devfest-sessions-page": "modules/devfest-module/pages/devfest-sessions-page/devfest-sessions-page.js",
     "devfest-speaker-page": "modules/devfest-module/pages/devfest-speaker-page/devfest-speaker-page.js",
+    "devfest-session-page": "modules/devfest-module/pages/devfest-session-page/devfest-session-page.js",
     "devfest-tickets-page": "modules/devfest-module/pages/devfest-tickets-page/devfest-tickets-page.js",
     "devfest-not-found-page": "modules/devfest-module/pages/devfest-not-found-page/devfest-not-found-page.js",
     "devfest-not-authorized-page": "modules/devfest-module/pages/devfest-not-authorized-page/devfest-not-authorized-page.js",
@@ -43,6 +45,8 @@
     "/index.html": "devfest-landing-page",
     "/speakers": "devfest-speakers-page",
     "/speakers/:id": "devfest-speaker-page",
+    "/sessions": "devfest-sessions-page",
+    "/sessions/:id": "devfest-session-page",
     "/tickets": "devfest-tickets-page",
     "/auth-check": {
       "name": "devfest-authorized-page",
