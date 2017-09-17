@@ -1,5 +1,6 @@
 
 import resolveUrl from '../utils/resolve-url.js'
+import now from '../../node_modules/performance-now'
 
 export default (superClass) => {
   return class extends superClass {
@@ -29,6 +30,7 @@ export default (superClass) => {
       this._boundHashChanged = this._hashChanged.bind(this)
       this._boundUrlChanged = this._urlChanged.bind(this)
       this._boundGlobalOnClick = this._globalOnClick.bind(this)
+      this._windowPerformanceNow = this._getWindowPerformanceNow();
     }
 
     connectedCallback () {
@@ -39,7 +41,7 @@ export default (superClass) => {
       window.addEventListener('location-changed', this._boundUrlChanged)
       window.addEventListener('popstate', this._boundUrlChanged)
       document.body.addEventListener('click', this._boundGlobalOnClick, true)
-      this._lastChangedAt = window.performance.now() - (this.dwellTime - 200)
+      this._lastChangedAt = this._windowPerformanceNow - (this.dwellTime - 200)
       this._initialized = true
 
       // set initialize values
@@ -109,7 +111,7 @@ export default (superClass) => {
       var newUrl = this._getUrl()
       // Need to use a full URL in case the containing page has a base URI.
       var fullNewUrl = resolveUrl(newUrl, window.location.protocol + '//' + window.location.host).href
-      var now = window.performance.now()
+      var now = this._windowPerformanceNow
       var shouldReplace = this._lastChangedAt + this.dwellTime > now
       this._lastChangedAt = now
       if (shouldReplace) {
@@ -236,5 +238,21 @@ export default (superClass) => {
     _makeRegExp (urlSpaceRegex) {
       return RegExp(urlSpaceRegex)
     }
+
+    _getWindowPerformanceNow(){
+
+      if(!('performance' in window)){
+        window.performance={}
+      }
+
+      //use performance-now module if window.performance.now is not supported
+      if(typeof window.performance.now=='undefined'){
+        return now();
+      }
+
+      return window.performance.now();      
+
+    }
+
   }
 }
