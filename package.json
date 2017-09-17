@@ -25,6 +25,7 @@
     "intersection-observer": "^0.4.2",
     "marked": "^0.3.6",
     "path-to-regexp": "^1.7.0",
+    "performance-now": "^2.1.0",
     "redux": "^3.7.2"
   },
   "devDependencies": {
