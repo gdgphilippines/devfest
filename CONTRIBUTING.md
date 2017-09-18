@@ -162,6 +162,12 @@ To contribute your work:
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
     with a clear title and description.
 
+## Contributing Rules
+
+Adding an additional npm package without a clear detail on why it should be added and the byte impact it would add on core-shell or any other page will be disapproved immediately.
+
+I know this is not inherent in the docs (and I think I now have to add that) but I am focusing on making this a performant site. Adding packages at whim is an anti-pattern and I discourage the use of extra libraries without a clear reason WHY it should be part of the app.
+
 ## Conventions of commit messages
 
 Adding files on repo
