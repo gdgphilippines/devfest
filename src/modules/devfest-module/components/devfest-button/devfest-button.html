@@ -2,7 +2,7 @@
   <template>
     <link rel="stylesheet" href="./devfest-button.scss">
 
-    <a href="{{href}}" class$="button {{_isBig(isBig)}} [[_noColor(noColor)]]" target="{{target}}">
+    <a href="{{_getHref(href, disable)}}" class$="button {{_isBig(isBig)}} [[_noColor(noColor)]] [[_disabled(disable)]]" target="{{target}}">
       <paper-ripple></paper-ripple>
       <slot></slot>
     </a>
