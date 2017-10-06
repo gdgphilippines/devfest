@@ -122,6 +122,8 @@ devfest-banner {
   @apply --layout-horizontal;
   @apply --layout-wrap;
   @apply --layout-center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .flex {
