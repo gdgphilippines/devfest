@@ -25,6 +25,10 @@ class DevfestButton extends Polymer.Element {
       disable: {
         type: Boolean,
         value: false
+      },
+      red: {
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -41,8 +45,8 @@ class DevfestButton extends Polymer.Element {
     return disable ? '#' : href
   }
 
-  _disabled(disable) {
-    return disable ? 'disable' : ''
+  _red (red) {
+    return red ? 'red' : ''
   }
 }
 
