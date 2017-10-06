@@ -119,6 +119,6 @@
         ]
       }
     ],
-    "public": "./dist/public"
+    "public": "./dist/build"
   }
 }
