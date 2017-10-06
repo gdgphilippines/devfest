@@ -21,6 +21,14 @@ class DevfestButton extends Polymer.Element {
       noColor: {
         type: Boolean,
         value: false
+      },
+      disable: {
+        type: Boolean,
+        value: false
+      },
+      red: {
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -31,6 +39,14 @@ class DevfestButton extends Polymer.Element {
 
   _noColor (noColor) {
     return noColor ? 'button__no-color' : ''
+  }
+
+  _getHref (href, disable) {
+    return disable ? '#' : href
+  }
+
+  _red (red) {
+    return red ? 'red' : ''
   }
 }
 

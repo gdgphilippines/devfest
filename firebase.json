@@ -37,6 +37,10 @@
         "destination": "/index.html"
       },
       {
+        "source": "/sponsors",
+        "destination": "/index.html"
+      },
+      {
         "source": "/auth-check",
         "destination": "/index.html"
       }
@@ -115,6 +119,6 @@
         ]
       }
     ],
-    "public": "./dist/public"
+    "public": "./dist/build"
   }
 }

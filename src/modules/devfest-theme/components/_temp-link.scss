@@ -1,16 +1,15 @@
 .temp-link {
-  padding: 20px;
-  padding-top: 0px;
-  font-family: 'Roboto', 'Arial', sans-serif;
-  color: #666;
-  line-height: 150%;
-  font-size: 1.25em;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 550px;
-  padding-bottom: 100px;
-
-  @media only screen and (max-width: 500px) {
-    font-size: 1em;
-  }
+    padding: 20px;
+    padding-top: 0px;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    color: rgba(0, 0, 0, .2);
+    line-height: 150%;
+    font-size: 1.25em;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 550px;
+    padding-bottom: 100px;
+    @media only screen and (max-width: 500px) {
+        font-size: 1em;
+    }
 }

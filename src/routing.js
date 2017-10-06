@@ -7,6 +7,7 @@
 '/sessions': () => { return import(/* webpackChunkName: "devfest-sessions-page" */ './modules/devfest-module/pages/devfest-sessions-page/devfest-sessions-page.js') }, 
 '/sessions/:id': () => { return import(/* webpackChunkName: "devfest-session-page" */ './modules/devfest-module/pages/devfest-session-page/devfest-session-page.js') }, 
 '/tickets': () => { return import(/* webpackChunkName: "devfest-tickets-page" */ './modules/devfest-module/pages/devfest-tickets-page/devfest-tickets-page.js') }, 
+'/sponsors': () => { return import(/* webpackChunkName: "devfest-sponsors-page" */ './modules/devfest-module/pages/devfest-sponsors-page/devfest-sponsors-page.js') }, 
 '/auth-check': () => { return import(/* webpackChunkName: "devfest-authorized-page" */ './modules/devfest-module/pages/devfest-authorized-page/devfest-authorized-page.js') }
     }
   

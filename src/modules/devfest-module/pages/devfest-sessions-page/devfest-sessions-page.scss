@@ -1,82 +1,77 @@
 @import '../../styles/components/host.scss';
 @import '../../styles/components/section.scss';
 @import '../../styles/components/typography.scss';
-
 .section {
-  text-align: left;
+    text-align: left;
 }
 
 .schedule-row {
-  @apply --layout-horizontal;
-  @apply --layout-center;
-
-  @media screen and (max-width: 800px) {
-    display: block;
-  }
-
-  border-bottom: 1px solid #666;
+    @apply --layout-horizontal;
+    @apply --layout-center;
+    @media screen and (max-width: 800px) {
+        display: block;
+    }
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
 .schedule-row:first-of-type {
-  border-top: 1px solid #666;
+    border-top: 1px solid rgba(0, 0, 0, .2);
 }
 
 .schedule-time {
-  padding: 20px;
-  // border-right: 1px solid #666;
-  width: 100px;
+    padding: 20px;
+    // border-right: 1px solid #666;
+    width: 100px;
 }
 
 .time-number {
-  font-family: 'Product Sans';
-  font-size: 35px;
-  color: #2196f3;
-  font-weight: 700;
+    font-family: 'Product Sans';
+    font-size: 35px;
+    color: #2196f3;
+    font-weight: 700;
 }
 
 .time-ap {
-  font-size: 22px;
-  color: #666;
-  font-weight: 400;
+    font-size: 22px;
+    color: #666;
+    font-weight: 400;
 }
 
 .schedule-item {
-  @apply --layout-flex;
-
+    @apply --layout-flex;
 }
 
 .session-item {
-  @apply --layout-layout;
-  @apply --layout-center;
-
-  border-bottom: 1px solid #666;
+    @apply --layout-layout;
+    @apply --layout-center;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
 .session-item:last-of-type {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .session-title-time {
-  @apply --layout-flex;
+    @apply --layout-flex;
 }
 
 .session-title-anchor {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .session-description {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .session-image {
-  width: 30px;
-  border-radius: 100%;
-  margin-right: 10px;
-  vertical-align: bottom;
+    width: 30px;
+    border-radius: 100%;
+    margin-right: 10px;
+    vertical-align: bottom;
 }
 
 .session-anchor {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
