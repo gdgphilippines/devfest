@@ -1,0 +1,26 @@
+<dom-module id="devfest-sponsors-page">
+    <template>
+      <link rel="stylesheet" href="./devfest-sponsors-page.scss">
+
+      <section class="section sponsors">
+        <marked-element markdown="[[sponsors]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+
+        <div class="center">
+          <template is="dom-repeat" items="[[sponsorsData]]">
+            <h3 class="title">[[item.name]]</h3>
+            <div class="row">
+              <template is="dom-repeat" items="[[item.list]]" as="sponsor">
+                <div class$="flex [[item.class]]">
+                  <a href="[[sponsor.url]]"><img class="[[item.class]]" alt="[[sponsor.name]]" src="[[_app.contentRepo]][[_app.branch]]/sponsors/compressed/[[sponsor.image]]"></a>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <devfest-footer></devfest-footer>
+    </template>
+  </dom-module>

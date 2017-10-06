@@ -110,6 +110,7 @@ devfest-banner {
   }
 }
 
+
 .sponsors {
   padding: 36px;
 }
@@ -122,7 +123,7 @@ devfest-banner {
   @apply --layout-horizontal;
   @apply --layout-wrap;
   @apply --layout-center;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -141,38 +142,38 @@ devfest-banner {
 }
 
 .event-partner {
-  max-width: 300px;
-  min-width: 150px;
+  max-width: 400px;
+  min-width: 250px;
 }
 
 .hotel-partner {
-  max-width: 175px;
-  min-width: 125px;
+  max-width: 300px;
+  min-width: 200px;
 }
 
 .brought-to-you {
-  max-width: 175px;
-  min-width: 125px;
+  max-width: 250px;
+  min-width: 200px;
 }
 
 .special-thanks {
-  max-width: 125px;
-  min-width: 100px;
+  max-width: 175px;
+  min-width: 150px;
 }
 
 .party-sponsors {
-  max-width: 125px;
-  min-width: 100px;
+  max-width: 175px;
+  min-width: 150px;
 }
 
 .contributing-partners {
-  max-width: 100px;
-  min-width: 75px;
+  max-width: 150px;
+  min-width: 125px;
 }
 
 .media-partners {
-  max-width: 100px;
-  min-width: 75px;
+  max-width: 150px;
+  min-width: 125px;
 }
 
 .venue-section {
