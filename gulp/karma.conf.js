@@ -15,9 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      {pattern: '../bower_components/webcomponentsjs/custom-elements-es5-adapter.js', included: true, watched: false},
       // {pattern: '../bower_components/**/*', included: false, served: true, watched: true},
-      {pattern: '../core/**/*.test.js', included: true},
-      {pattern: '../src/modules/**/*.test.js', included: true},
+      {pattern: '../core/**/*.test.js', included: false, watched: true},
+      {pattern: '../src/modules/**/*.test.js', included: false, watched: true},
+      {pattern: './test.js', included: true, watched: true}
     ],
 
     webpack: {
@@ -39,12 +41,20 @@ module.exports = function(config) {
             // babel-loader. This let's us transpile JS in our `<script>` elements.
             use: [
               {
+                loader: 'babel-loader'
+              },
+              {
                 loader: 'polymer-webpack-loader',
                 options: {
                   processStyleLinks: true
                 }
               }
             ]
+          },
+          {
+            // If you see a file that ends in .js, just send it to the babel-loader.
+            test: /\.js$/,
+            use: 'babel-loader'
           },
           {
             test: /\.(gif|png|jpe?g|svg)$/i,
@@ -121,7 +131,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '../core/**/*.test.js': ['webpack']
+      './test.js': ['webpack']
     },
 
 

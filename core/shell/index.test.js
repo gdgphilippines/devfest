@@ -8,7 +8,6 @@ describe('App shell', () => {
   })
 
   it('should work', () => {
-    document.createElement('div')
     const el = document.createElement('app-shell')
     expect(el.constructor.is).to.equal('app-shell')
   })
