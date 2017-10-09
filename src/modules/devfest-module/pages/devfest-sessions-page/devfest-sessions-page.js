@@ -37,15 +37,27 @@ class DevfestSessionsPage extends contentLoaderMixin(Polymer.Element) {
   }
 
   _getTime (start) {
-    return start > 12 ? start - 12 : start
+    var hour = parseInt(start.substr(0, 2), 10)
+    const min = parseInt(start.substr(2, 2), 10)
+    hour = hour > 12 ? (hour - 12) : hour
+    return min === 0 ? hour : hour + ':' + min
   }
 
   _getTimeArea (start) {
-    return start > 12 ? 'pm' : 'am'
+    return parseInt(start.substr(0, 2)) > 12 ? 'pm' : 'am'
   }
 
   _getTimeRange(start, end) {
-    return end - start < 1 && end - start > 0 ? `${(end - start) * 60} minutes` : `${end - start} hour`
+    var hourStart = parseInt(start.substr(0, 2), 10)
+    const minStart = parseInt(start.substr(2, 2), 10)
+
+    var hourEnd = parseInt(end.substr(0, 2), 10)
+    const minEnd = parseInt(end.substr(2, 2), 10)
+
+    var hour = hourEnd - hourStart;
+    var min = minEnd - minStart;
+    return (hour * 60) + min + ' minutes';
+    // return end - start < 1 && end - start > 0 ? `${(end - start) * 60} minutes` : `${end - start} hour`
   }
 
   _getTitle (id) {

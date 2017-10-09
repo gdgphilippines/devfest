@@ -74,7 +74,7 @@ class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
       var schedule = this.sessions[id].schedule
       for (var i in this.schedule) {
         if (this.schedule[i].id === schedule) {
-          return (this.schedule[i].start + ':00') + ' - ' + (this.schedule[i].end + ':00')
+          return (this.schedule[i].start.substr(0, 2) + ':' + this.schedule[i].start.substr(2, 2)) + ' - ' + (this.schedule[i].end.substr(0, 2) + ':' + this.schedule[i].end.substr(2, 2))
         }
       }
     }
