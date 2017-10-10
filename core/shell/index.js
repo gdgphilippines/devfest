@@ -7,6 +7,32 @@ import routing from '../../src/routing.js'
 import httpCodes from '../../src/http-codes.js'
 import partials from '../../src/partials.js'
 import auth from '../../src/authentication/index.js'
+import { reducers, store, ReduxMixin } from '../modules/state-manager';
+import { combineReducers } from 'redux';
+
+const ROUTER_ACTION = {
+  PARAMS: 'ROUTER_UPDATE_PARAMS',
+  ROUTE: 'ROUTER_UPDATE_ROUTE'
+};
+
+reducers.router = (router = {}, action) => {
+  switch (action.type) {
+    case ROUTER_ACTION.PARAMS:
+      return Object.assign({}, router, {
+        params: action.params
+      });
+    case ROUTER_ACTION.ROUTE:
+      return Object.assign({}, router, {
+        route: action.route
+      });
+    default:
+      return router;
+  }
+};
+
+store.replaceReducer(combineReducers(reducers));
+
+export { ROUTER_ACTION };
 
 const messages = []
 
@@ -215,8 +241,18 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
         }
         routeName = route[0]
         this.params = params
+
+        this.dispatch({
+          type: ROUTER_ACTION.PARAMS,
+          params
+        });
       }
     })
+
+    this.dispatch({
+      type: ROUTER_ACTION.ROUTE,
+      route: routeName || 'not-found'
+    });
 
     this._checkAuth(routeName || 'not-found')
   }
@@ -257,8 +293,20 @@ class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
     }
     if (this._routes[route]) {
       routes[route]().then(() => {
+
+        if (!this._routes[route].element.constructor.is ||
+          this._routes[route].element.constructor === this._routes[route].element.nodeName.toLowerCase()) {
+          this.dispatch({
+            type: ROUTER_ACTION.ROUTE,
+            route: 'not-found'
+          });
+
+          this._checkAuth('not-found')
+        }
+
         this._routes[route].element._setProperty('params', this.params)
         this._routes[route].element._setProperty('queryParams', this.paramsObject)
+
         if (this._routes[route].element.reload) {
           this._routes[route].element.reload()
         }
