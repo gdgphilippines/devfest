@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { login, logout, firebaseDocumentLoader, observeAuth, firebaseRemoveListeners } from '../../firebase';
+import { login, logout, firebaseDocumentLoader, observeAuth, firebaseRemoveListeners, updateFirebase } from '../../firebase';
 import { ReduxMixin, store, reducers } from '../../../../core/modules/state-manager';
+
+const {fetch} = window;
 
 const profileModel = {
   primary: {
@@ -120,10 +122,30 @@ export default (superClass) => {
     login (e) {
       var el = e.target;
       var provider = el.id || 'google';
-      login(provider);
+      login(provider)
+        .then(result => {
+          const user = result.user;
+          const providerId = result.credential.providerId;
+          if (providerId === 'github.com') {
+            return fetch(`https://api.github.com/user?access_token=${result.credential.accessToken}`)
+              .then(response => Promise.all([response.json(), Promise.resolve(user)]));
+          }
+          return Promise.resolve();
+        })
+        .then(result => {
+          if (result[0] && result[1]) {
+            const updates = {};
+            updates[`v1/user/source/${result[1].uid}/primary/github`] = result[0].html_url;
+            updates[`v1/user/source/${result[1].uid}/primary/githubName`] = result[0].login;
+            updateFirebase(updates);
+          }
+        });
     }
 
     logout () {
+      if (this.shadowRoot.querySelector('app-drawer')) {
+        this.shadowRoot.querySelector('app-drawer').close();
+      }
       logout();
     }
   };

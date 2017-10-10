@@ -42,6 +42,7 @@ export const firebaseRemoveListeners = () => {
 };
 
 export const firebaseDocumentLoader = (modelPath, key, action, store, profileModel, type) => {
+  // console.log(modelPath, key, action, profileModel, type)
   const sourcePath = `${modelPath}/source/${key}`;
   if (action.modelType) {
     const modelType = `${sourcePath}/${action.modelType}`;
@@ -54,6 +55,7 @@ export const firebaseDocumentLoader = (modelPath, key, action, store, profileMod
               listeners[modelType + '/' + j] = null;
             }
           }
+
           listeners[modelType] = listeners[modelType] || firebase.database().ref(modelType);
           listeners[modelType].on('value', updateModelTypeSnapshot.bind(this, store, action.modelType, type));
           break;
@@ -67,6 +69,10 @@ export const firebaseDocumentLoader = (modelPath, key, action, store, profileMod
   }
 };
 
+export const updateFirebase = (updates) => {
+  return firebase.database().ref().update(updates);
+};
+
 export const login = (name) => {
   var provider = null;
   if (name === 'google') {
@@ -75,9 +81,10 @@ export const login = (name) => {
     provider = new firebase.auth.FacebookAuthProvider();
   } else if (name === 'github') {
     provider = new firebase.auth.GithubAuthProvider();
+    // provider.addScope('repo');
   }
 
-  return firebase.auth().signInWithPopup(provider);
+  return firebase.auth().signInWithPopup(provider)
 };
 
 export const logout = () => {
