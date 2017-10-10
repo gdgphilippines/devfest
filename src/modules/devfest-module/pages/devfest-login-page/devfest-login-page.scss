@@ -1,3 +1,31 @@
 @import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
 @import '../../styles/components/section.scss';
+
+.section {
+  max-width: 600px;
+  padding: 20px;
+  margin: 60px auto 60px;
+  text-align: center;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+
+  @media screen and (max-width: 720px) {
+    margin: 20px 20px;
+  }
+}
+
+.login-image {
+  width: 50%;
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 550px) {
+    width: 80%;
+  }
+}
+
+.button {
+  display: block;
+  margin: 0 auto 10px;
+  width: 80%;
+  cursor: pointer;
+}

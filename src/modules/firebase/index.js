@@ -71,6 +71,10 @@ export const login = (name) => {
   var provider = null;
   if (name === 'google') {
     provider = new firebase.auth.GoogleAuthProvider();
+  } else if (name === 'facebook') {
+    provider = new firebase.auth.FacebookAuthProvider();
+  } else if (name === 'github') {
+    provider = new firebase.auth.GithubAuthProvider();
   }
 
   return firebase.auth().signInWithPopup(provider);

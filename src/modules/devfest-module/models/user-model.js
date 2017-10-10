@@ -117,8 +117,10 @@ export default (superClass) => {
       }
     }
 
-    login () {
-      login('google');
+    login (e) {
+      var el = e.target;
+      var provider = el.id || 'google';
+      login(provider);
     }
 
     logout () {

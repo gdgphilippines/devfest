@@ -1,0 +1,55 @@
+.button {
+	font-family: 'Roboto', 'Arial', sans-serif;
+  background: #2e9be6;
+	color: white;
+	border: 3px solid #2e9be6;
+	border-radius: 2px;
+	padding: 12px;
+  font-size: 16px;
+  width: 100%;
+	display: block;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.google {
+  background: #DD4B39;
+  color: white;
+  border-color: #DD4B39;
+}
+
+.facebook {
+  background: #3B5998;
+  color: white;
+  border-color: #3B5998;
+}
+
+.github {
+  background: #444444;
+  color: white;
+  border-color: #444444;
+}
+
+.button__big {
+	padding: 24px;
+	font-size: 1.5em;
+}
+
+.button__no-color {
+	background: none;
+	color: #666;
+	border: none;
+}
+
+.button__no-color:hover {
+	color: #4688f4;
+}
+
+.red {
+	background: #e63125;
+	border: 3px solid #e63125;
+	color: white;
+}

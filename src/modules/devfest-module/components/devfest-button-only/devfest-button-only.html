@@ -1,0 +1,10 @@
+<dom-module id="devfest-button-only">
+  <template>
+    <link rel="stylesheet" href="./devfest-button-only.scss">
+
+    <button class$="button {{className}} {{_isBig(isBig)}} [[_noColor(noColor)]] [[_red(red)]]" target="{{target}}">
+      <paper-ripple></paper-ripple>
+      <slot></slot>
+    </button>
+  </template>
+</dom-module>

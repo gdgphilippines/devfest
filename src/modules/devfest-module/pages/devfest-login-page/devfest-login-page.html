@@ -2,8 +2,12 @@
     <template>
       <link rel="stylesheet" href="./devfest-login-page.scss">
 
-      <section class="section perks-container ">
+      <section class="section">
+        <img src="/images/header-compressed.gif" class="login-image"><br/>
 
+        <devfest-button-only class="button" class-name="google" id="google" on-tap="login">Google</devfest-button-only><br/>
+        <devfest-button-only class="button" class-name="facebook" id="facebook" on-tap="login">Facebook</devfest-button-only><br/>
+        <devfest-button-only class="button" class-name="github" id="github" on-tap="login">Github</devfest-button-only>
       </section>
 
       <devfest-footer></devfest-footer>
