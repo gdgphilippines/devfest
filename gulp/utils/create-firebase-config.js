@@ -1,9 +1,24 @@
-const getConfig = require('./get-config')
+const getConfig = require('./get-config');
 
-module.exports = (env) => {
-  const {config} = getConfig(env)
+module.exports = (dev) => {
+  const {config} = getConfig(dev);
 
   return `
-    export default ${JSON.stringify(config.build.firebaseConfig)}
-  `
-}
+    let firebase = null;
+    const configs = ${JSON.stringify(config.build.firebaseConfig)};
+    import(/* webpackChunkName: 'firebase' */ 'firebase').then(sdk => {
+      firebase = sdk;
+      configs.forEach(config => {
+        if (config.name) {
+          firebase.initializeApp(config, name);
+        } else {
+          firebase.initializeApp(config);
+        }
+      });
+      window.dispatchEvent(new window.CustomEvent('firebase-initialized', { detail: firebase }));
+    })
+    const firebaseConfig = configs;
+    export default firebase;
+    export { firebaseConfig };
+  `;
+};

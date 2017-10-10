@@ -19,7 +19,11 @@
     "firebaseConfig": [
       {
         "apiKey": "AIzaSyB3VQN0MNOxcunaUKXZr54u0t6ruv2YbkE",
-        "name": "DEFAULT"
+        "authDomain": "devfestph.firebaseapp.com",
+        "databaseURL": "https://devfestph.firebaseio.com",
+        "projectId": "devfestph",
+        "storageBucket": "devfestph.appspot.com",
+        "messagingSenderId": "36335134103"
       }
     ]
   },

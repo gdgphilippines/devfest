@@ -16,7 +16,7 @@ import '../../fonts/devfest-fonts.html'
 import './devfest-landing-page.html'
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
 import marked from 'marked'
-import firebaseConfig from '../../../../firebase.js'
+import { firebaseConfig } from '../../../../firebase.js'
 import app from '../../../../app.js'
 window.marked = window.marked || marked
 

@@ -9,6 +9,7 @@ import partials from '../../src/partials.js'
 import auth from '../../src/authentication/index.js'
 import { reducers, store, ReduxMixin } from '../modules/state-manager';
 import { combineReducers } from 'redux';
+import '../../src/firebase';
 
 const ROUTER_ACTION = {
   PARAMS: 'ROUTER_UPDATE_PARAMS',
@@ -36,7 +37,7 @@ export { ROUTER_ACTION };
 
 const messages = []
 
-class AppShell extends QueryParamsMixin(LocationMixin(Polymer.Element)) {
+class AppShell extends ReduxMixin(QueryParamsMixin(LocationMixin(Polymer.Element))) {
   static get is () { return 'app-shell' }
 
   static get properties () {

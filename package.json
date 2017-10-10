@@ -21,6 +21,7 @@
     "build-production": "cd gulp && ./node_modules/.bin/gulp --prod"
   },
   "dependencies": {
+    "firebase": "^4.5.0",
     "global": "^4.3.2",
     "indexeddbshim": "^3.0.4",
     "intersection-observer": "^0.4.2",
