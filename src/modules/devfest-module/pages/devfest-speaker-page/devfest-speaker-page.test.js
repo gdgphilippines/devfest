@@ -11,4 +11,10 @@ describe('Devfest speaker page', () => {
 		const el = document.createElement('devfest-speaker-page')
 		expect(el.constructor.is).to.equal('devfest-speaker-page')
 	})
+
+	it('back button should exist', () => {
+		const el = document.createElement('devfest-speaker-page')
+		const ret = el.shadowRoot.querySelector("section.back-section devfest-button[href='/speakers']")
+		expect(ret).to.exist
+	})
 })
