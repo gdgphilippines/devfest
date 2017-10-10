@@ -1,5 +1,13 @@
 export default {
   exampleAuthentication: () => {
-    return false
+    return false;
+  },
+
+  isLoggedIn: () => {
+    return true;
+  },
+
+  isSponsor: () => {
+    return true;
   }
-}
+};

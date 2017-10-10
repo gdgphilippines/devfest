@@ -1,9 +1,9 @@
-import 'polymer/polymer.html'
-import './devfest-speakers-section.html'
-import app from '../../../../app'
+import 'polymer/polymer.html';
+import './devfest-speakers-section.html';
+import app from '../../../../app';
 
 class DevfestSpeakersSection extends Polymer.Element {
-  static get is () { return 'devfest-speakers-section' }
+  static get is () { return 'devfest-speakers-section'; }
 
   static get properties () {
     return {
@@ -19,35 +19,33 @@ class DevfestSpeakersSection extends Polymer.Element {
         type: Boolean,
         value: false
       }
-    }
+    };
   }
 
   static get observers () {
     return [
       'reload(speakers)',
       'reload(speakers.*)'
-    ]
+    ];
   }
 
   constructor () {
     super()
-    this._app = app
+    this._app = app;
   }
 
   reload () {
-    this.speakersArray = []
-    const speakers = Object.entries(this.speakers)
+    this.speakersArray = [];
+    const speakers = Object.entries(this.speakers);
     speakers.forEach(speaker => {
-      const obj = speaker[1]
-      obj.id = speaker[0]
-      this.speakersArray.push(obj)
-    })
+      const obj = speaker[1];
+      obj.id = speaker[0];
+      this.speakersArray.push(obj);
+    });
     // console.log()
   }
-
-
 }
 
-window.customElements.define(DevfestSpeakersSection.is, DevfestSpeakersSection)
+window.customElements.define(DevfestSpeakersSection.is, DevfestSpeakersSection);
 
-export default DevfestSpeakersSection
+export default DevfestSpeakersSection;

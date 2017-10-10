@@ -1,27 +1,28 @@
-import 'polymer/polymer.html'
-import 'paper-ripple/paper-ripple.html'
-import 'iron-flex-layout/iron-flex-layout.html'
-import 'shadycss/apply-shim.html'
-import 'iron-icon/iron-icon.html'
-import 'marked-element/marked-element.html'
-import 'google-map/google-map.html'
-import 'google-map/google-map-marker.html'
-import 'iron-media-query/iron-media-query.html'
-import '../../components/devfest-button/devfest-button.js'
-import '../../components/devfest-icon-button/devfest-icon-button.js'
-import '../../components/devfest-speakers-section/devfest-speakers-section.js'
-import '../../components/devfest-banner/devfest-banner.js'
-import '../../components/devfest-footer/devfest-footer.js'
-import '../../fonts/devfest-fonts.html'
-import './devfest-landing-page.html'
-import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
-import marked from 'marked'
-import { firebaseConfig } from '../../../../firebase.js'
-import app from '../../../../app.js'
-window.marked = window.marked || marked
+import 'polymer/polymer.html';
+import 'paper-ripple/paper-ripple.html';
+import 'iron-flex-layout/iron-flex-layout.html';
+import 'shadycss/apply-shim.html';
+import 'iron-icon/iron-icon.html';
+import 'marked-element/marked-element.html';
+import 'google-map/google-map.html';
+import 'google-map/google-map-marker.html';
+import 'iron-media-query/iron-media-query.html';
+import '../../components/devfest-button/devfest-button.js';
+import '../../components/devfest-icon-button/devfest-icon-button.js';
+import '../../components/devfest-speakers-section/devfest-speakers-section.js';
+import '../../components/devfest-banner/devfest-banner.js';
+import '../../components/devfest-footer/devfest-footer.js';
+import '../../fonts/devfest-fonts.html';
+import './devfest-landing-page.html';
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
+import marked from 'marked';
+import { firebaseConfig } from '../../../../firebase.js';
+import app from '../../../../app.js';
+window.marked = window.marked || marked;
+const {Polymer, google} = window;
 
 class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-landing-page' }
+  static get is () { return 'devfest-landing-page'; }
 
   static get properties () {
     return {
@@ -62,44 +63,44 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
         type: Boolean,
         value: false
       }
-    }
+    };
   }
 
   static get observers () {
     return [
       '_setMap(largeMapSize, middleSizeMap, smallMapSize, _map)'
-    ]
+    ];
   }
 
   constructor () {
-    super()
-    this._apiKey = firebaseConfig[0].apiKey
-    this._app = app
+    super();
+    this._apiKey = firebaseConfig[0].apiKey;
+    this._app = app;
   }
 
   connectedCallback () {
-    super.connectedCallback()
-    this.reload()
+    super.connectedCallback();
+    this.reload();
   }
 
   _setMap (large, middle, small, m) {
-    const map = this.shadowRoot.querySelector('.venue-section')
+    const map = this.shadowRoot.querySelector('.venue-section');
 
     if (map) {
       if (!large && !middle && !small) {
-        large = window.innerWidth > 800
-        small = window.innerWidth <= 600
-        middle = !large && !small
+        large = window.innerWidth > 800;
+        small = window.innerWidth <= 600;
+        middle = !large && !small;
       }
       if (large) {
-        map.latitude = 14.536921
-        map.longitude = 121.0151518
+        map.latitude = 14.536921;
+        map.longitude = 121.0151518;
       } else if (middle) {
-        map.latitude = 14.52676
-        map.longitude = 121.0214175
+        map.latitude = 14.52676;
+        map.longitude = 121.0214175;
       } else if (small) {
-        map.latitude = 14.52976
-        map.longitude = 121.0214175
+        map.latitude = 14.52976;
+        map.longitude = 121.0214175;
       } else {
 
       }
@@ -110,38 +111,35 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
     if (map) {
       map.setOptions({
         // center: {lat: 14.536921, lng: 121.0151518},
-        panControl:false,
-        zoomControl:false,
-        mapTypeControl:false,
-        scaleControl:false,
-        streetViewControl:false,
-        overviewMapControl:false,
-        rotateControl:false,
+        panControl: false,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        overviewMapControl: false,
+        rotateControl: false,
         scrollwheel: false,
         navigationControl: false,
         draggable: false
-      })
+      });
     }
   }
 
   _animateMarker (marker) {
-    if (marker) {
-      marker.setAnimation(google.maps.Animation.BOUNCE)
+    if (marker && google) {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
     }
   }
 
+  reload () {
+    this._fetchContent('pages/landing.md');
+    this._fetchJson('speakers/speakers.json', 'speakers');
 
-  reload() {
-    this._fetchContent('pages/landing.md')
-    this._fetchJson('speakers/speakers.json', 'speakers')
-
-    const map = this.shadowRoot.querySelector('.venue-section')
+    const map = this.shadowRoot.querySelector('.venue-section');
     if (map && typeof map.resize === 'function') {
-      map.resize()
+      map.resize();
     }
   }
-
-
 
   // _shareFacebookLink () {
   //   var text = 'Let\'s attend the Grandest Technology event of the year - GDG DevFest Philippines 2017!'
@@ -161,6 +159,6 @@ class DevfestLandingPage extends contentLoaderMixin(Polymer.Element) {
   // }
 }
 
-window.customElements.define(DevfestLandingPage.is, DevfestLandingPage)
+window.customElements.define(DevfestLandingPage.is, DevfestLandingPage);
 
-export default DevfestLandingPage
+export default DevfestLandingPage;

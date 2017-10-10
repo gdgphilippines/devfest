@@ -35,6 +35,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "eslint-plugin-html": "^3.2.0",
+    "semistandard": "^11.0.0",
     "workbox-build": "^2.0.0",
     "workbox-routing": "^1.1.0",
     "workbox-sw": "^1.1.0"
@@ -45,6 +46,18 @@
     "minimist": "1.2.0",
     "isarray": "1.0.0",
     "assert-plus": "1.0.0",
-    "domelementtype": "1.3.0"
+    "domelementtype": "1.3.0",
+    "rimraf": "2.6.2",
+    "semver": "5.4.1",
+    "string-width": "2.1.1",
+    "strip-ansi": "4.0.0",
+    "is-fullwidth-code-point": "2.0.0",
+    "ansi-regex": "3.0.0",
+    "es-abstract": "1.9.0",
+    "debug": "2.6.9",
+    "doctrine": "2.0.0",
+    "acorn": "5.1.2",
+    "find-up": "2.1.0",
+    "path-exists": "3.0.0"
   }
 }

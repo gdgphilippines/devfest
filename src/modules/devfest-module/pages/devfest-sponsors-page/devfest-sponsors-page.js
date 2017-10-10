@@ -1,20 +1,20 @@
-import 'polymer/polymer.html'
-import 'paper-ripple/paper-ripple.html'
-import 'iron-flex-layout/iron-flex-layout.html'
-import 'shadycss/apply-shim.html'
-import 'iron-icon/iron-icon.html'
-import 'marked-element/marked-element.html'
-import '../../fonts/devfest-fonts.html'
-import './devfest-sponsors-page.html'
-import '../../components/devfest-footer/devfest-footer.js'
-import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
-import marked from 'marked'
-import firebaseConfig from '../../../../firebase.js'
-import app from '../../../../app.js'
-window.marked = window.marked || marked
+import 'polymer/polymer.html';
+import 'paper-ripple/paper-ripple.html';
+import 'iron-flex-layout/iron-flex-layout.html';
+import 'shadycss/apply-shim.html';
+import 'iron-icon/iron-icon.html';
+import 'marked-element/marked-element.html';
+import '../../fonts/devfest-fonts.html';
+import './devfest-sponsors-page.html';
+import '../../components/devfest-footer/devfest-footer.js';
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
+import marked from 'marked';
+import app from '../../../../app.js';
+window.marked = window.marked || marked;
+const {Polymer} = window;
 
 class DevfestSponsorsPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-sponsors-page' }
+  static get is () { return 'devfest-sponsors-page'; }
 
   static get properties () {
     return {
@@ -35,25 +35,24 @@ class DevfestSponsorsPage extends contentLoaderMixin(Polymer.Element) {
         type: Array,
         value: []
       }
-    }
+    };
   }
 
   constructor () {
-    super()
-    this._apiKey = firebaseConfig[0].apiKey
-    this._app = app
+    super();
+    this._app = app;
   }
 
   connectedCallback () {
-    super.connectedCallback()
-    this.reload()
+    super.connectedCallback();
+    this.reload();
   }
 
-  reload() {
-    this._fetchContent('pages/sponsors.md')
+  reload () {
+    this._fetchContent('pages/sponsors.md');
   }
 }
 
-window.customElements.define(DevfestSponsorsPage.is, DevfestSponsorsPage)
+window.customElements.define(DevfestSponsorsPage.is, DevfestSponsorsPage);
 
-export default DevfestSponsorsPage
+export default DevfestSponsorsPage;

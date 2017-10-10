@@ -12,6 +12,16 @@
         <template is="dom-repeat" items="[[menu]]">
           <devfest-button no-color="[[item.attributes.noColor]]" href="[[item.href]]" on-tap="closeDrawer">[[item.text]]</devfest-button>
         </template>
+
+        <template is="dom-if" if="[[user.uid]]">
+          <devfest-button no-color href="/codelabs">Codelabs</devfest-button>
+          <devfest-button no-color href="/profile">Profile</devfest-button>
+          <devfest-button on-tap="logout">Logout</devfest-button>
+        </template>
+
+        <template is="dom-if" if="[[!user.uid]]">
+          <devfest-button href="/login">Login</devfest-button>
+        </template>
       </div>
   </template>
 </dom-module>

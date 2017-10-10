@@ -41,6 +41,34 @@
         "destination": "/index.html"
       },
       {
+        "source": "/login",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/codelabs/**/**/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/connect-ticket",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/scan",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/scanned-list",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/are-you-a-sponsor",
+        "destination": "/index.html"
+      },
+      {
         "source": "/auth-check",
         "destination": "/index.html"
       }

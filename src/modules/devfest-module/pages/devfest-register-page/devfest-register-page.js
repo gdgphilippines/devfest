@@ -8,15 +8,15 @@ import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
 import '../../components/devfest-footer/devfest-footer.js';
 import '../../components/devfest-button/devfest-button.js';
-import './devfest-tickets-page.html';
+import './devfest-register-page.html';
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
 import marked from 'marked';
 window.marked = window.marked || marked;
 
 const {Polymer} = window;
 
-class DevfestTicketsPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-tickets-page'; }
+class DevfestRegisterPage extends contentLoaderMixin(Polymer.Element) {
+  static get is () { return 'devfest-register-page'; }
 
   static get properties () {
     return {
@@ -40,12 +40,9 @@ class DevfestTicketsPage extends contentLoaderMixin(Polymer.Element) {
     this.reload();
   }
 
-  reload () {
-    this._fetchContent('pages/tickets.md');
-    // this._fetchJson('speakers/speakers.json', 'speakers')
-  }
+  reload () {}
 }
 
-window.customElements.define(DevfestTicketsPage.is, DevfestTicketsPage);
+window.customElements.define(DevfestRegisterPage.is, DevfestRegisterPage);
 
-export default DevfestTicketsPage;
+export default DevfestRegisterPage;

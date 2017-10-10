@@ -20,13 +20,13 @@ app-header {
     .menu {
       display: none;
 
-      @media screen and (max-width: 700px) {
+      @media screen and (max-width: 1100px) {
         display: block;
       }
     }
 
     .links {
-      @media screen and (max-width: 700px) {
+      @media screen and (max-width: 1100px) {
         display: none;
       }
     }
@@ -38,7 +38,7 @@ app-header {
   min-width: 100px;
   height: 10px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 1100px) {
     display: none;
   }
 }
