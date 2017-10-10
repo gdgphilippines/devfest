@@ -63,7 +63,7 @@
     "/sponsors": "devfest-sponsors-page",
     "/login": "devfest-login-page",
     "/profile": {
-      "name": "devfest-login-page",
+      "name": "devfest-profile-page",
       "auth": "isLoggedIn"
     },
     "/codelabs/:type?/:id?/:page?": {

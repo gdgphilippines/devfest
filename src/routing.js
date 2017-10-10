@@ -9,7 +9,7 @@
 '/tickets': () => { return import(/* webpackChunkName: "devfest-tickets-page" */ './modules/devfest-module/pages/devfest-tickets-page/devfest-tickets-page.js') }, 
 '/sponsors': () => { return import(/* webpackChunkName: "devfest-sponsors-page" */ './modules/devfest-module/pages/devfest-sponsors-page/devfest-sponsors-page.js') }, 
 '/login': () => { return import(/* webpackChunkName: "devfest-login-page" */ './modules/devfest-module/pages/devfest-login-page/devfest-login-page.js') }, 
-'/profile': () => { return import(/* webpackChunkName: "devfest-login-page" */ './modules/devfest-module/pages/devfest-login-page/devfest-login-page.js') }, 
+'/profile': () => { return import(/* webpackChunkName: "devfest-profile-page" */ './modules/devfest-module/pages/devfest-profile-page/devfest-profile-page.js') }, 
 '/codelabs/:type?/:id?/:page?': () => { return import(/* webpackChunkName: "devfest-codelabs-page" */ './modules/devfest-module/pages/devfest-codelabs-page/devfest-codelabs-page.js') }, 
 '/connect-ticket': () => { return import(/* webpackChunkName: "devfest-connect-ticket-page" */ './modules/devfest-module/pages/devfest-connect-ticket-page/devfest-connect-ticket-page.js') }, 
 '/scan': () => { return import(/* webpackChunkName: "devfest-scan-page" */ './modules/devfest-module/pages/devfest-scan-page/devfest-scan-page.js') }, 

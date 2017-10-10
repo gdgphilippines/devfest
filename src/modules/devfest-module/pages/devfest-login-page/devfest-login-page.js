@@ -3,7 +3,7 @@ import 'polymer/lib/elements/dom-repeat.html';
 import 'iron-icon/iron-icon.html';
 import 'iron-flex-layout/iron-flex-layout.html';
 import 'shadycss/apply-shim.html';
-// import 'paper-button/paper-button.html';
+import 'paper-spinner/paper-spinner.html';
 import 'marked-element/marked-element.html';
 import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
@@ -37,12 +37,27 @@ class DevfestLoginPage extends User(Polymer.GestureEventListeners(contentLoaderM
     };
   }
 
+  static get observers () {
+    return [
+      '_checkUser(user)'
+    ];
+  }
+
   connectedCallback () {
     super.connectedCallback();
     this.reload();
   }
 
-  reload () {}
+  _checkUser (user) {
+    if (user) {
+      window.history.pushState({}, '', '/profile');
+      window.dispatchEvent(new CustomEvent('location-changed'));
+    }
+  }
+
+  reload () {
+    this._checkUser(this.user);
+  }
 }
 
 window.customElements.define(DevfestLoginPage.is, DevfestLoginPage);
