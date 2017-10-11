@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { login, logout, firebaseDocumentLoader, observeAuth, firebaseRemoveListeners, updateFirebase } from '../../firebase';
+import { login, link, unlink, reloadUser, logout, firebaseDocumentLoader, observeAuth, firebaseRemoveListeners, updateFirebase } from '../../firebase';
 import { ReduxMixin, store, reducers } from '../../../../core/modules/state-manager';
 
-const {fetch} = window;
+const {fetch, Polymer} = window;
 
 const profileModel = {
   primary: {
@@ -121,7 +121,10 @@ export default (superClass) => {
 
     login (e) {
       var el = e.target;
-      var provider = el.id || 'google';
+      while (!el.id) {
+        el = el.parentNode;
+      }
+      var provider = el.id;
       login(provider)
         .then(result => {
           const user = result.user;
@@ -130,16 +133,91 @@ export default (superClass) => {
             return fetch(`https://api.github.com/user?access_token=${result.credential.accessToken}`)
               .then(response => Promise.all([response.json(), Promise.resolve(user)]));
           }
+          document.querySelector('app-shell').showMessage('Login successful', null, null, null, 5000);
           return Promise.resolve();
         })
         .then(result => {
-          if (result[0] && result[1]) {
-            const updates = {};
-            updates[`v1/user/source/${result[1].uid}/primary/github`] = result[0].html_url;
-            updates[`v1/user/source/${result[1].uid}/primary/githubName`] = result[0].login;
-            updateFirebase(updates);
+          if (result) {
+            if (result[0] && result[1]) {
+              const updates = {};
+              updates[`v1/user/source/${result[1].uid}/primary/github`] = result[0].html_url;
+              updates[`v1/user/source/${result[1].uid}/primary/githubName`] = result[0].login;
+              updateFirebase(updates);
+            }
           }
         });
+    }
+
+    link (e) {
+      var el = e.target;
+      while (!el.id) {
+        el = el.parentNode;
+      }
+      var provider = el.id;
+      link(this.user, provider)
+        .then(result => {
+          const user = result.user;
+          const providerId = result.credential.providerId;
+
+          document.querySelector('app-shell').showMessage('Link successful', null, null, null, 5000);
+          this.dispatch({
+            type: USER_ACTION.UPDATE,
+            user
+          });
+          this.notifyPath('user.providerData');
+
+          if (providerId === 'github.com') {
+            return fetch(`https://api.github.com/user?access_token=${result.credential.accessToken}`)
+              .then(response => Promise.all([response.json(), Promise.resolve(user)]));
+          }
+
+          return Promise.resolve();
+        })
+        .then(result => {
+          if (result) {
+            if (result[0] && result[1]) {
+              const updates = {};
+              updates[`v1/user/source/${result[1].uid}/primary/github`] = result[0].html_url;
+              updates[`v1/user/source/${result[1].uid}/primary/githubName`] = result[0].login;
+              updateFirebase(updates);
+            }
+          }
+        });
+    }
+
+    unlink (e) {
+      if (this.user && this.user.providerData && this.user.providerData.length > 1) {
+        var el = e.target;
+        while (!el.id) {
+          el = el.parentNode;
+        }
+        var provider = el.id;
+        unlink(this.user, provider)
+        .then(() => {
+          const user = reloadUser();
+
+          this.dispatch({
+            type: USER_ACTION.UPDATE,
+            user
+          });
+
+          if (provider === 'github') {
+            const updates = {};
+            updates[`v1/user/source/${this.user.uid}/primary/github`] = null;
+            updates[`v1/user/source/${this.user.uid}/primary/githubName`] = null;
+            updateFirebase(updates);
+          }
+
+          this.notifyPath('user.providerData');
+
+          document.querySelector('app-shell').showMessage('Unlinked account successful', null, null, null, 5000);
+        })
+        .catch((e) => {
+          document.querySelector('app-shell').showMessage(e.message, null, null, null, 5000);
+        });
+      } else {
+        document.querySelector('app-shell').showMessage('You cannot unlink your only account.', null, null, null, 5000);
+      }
     }
 
     logout () {

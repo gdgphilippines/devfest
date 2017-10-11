@@ -14,6 +14,37 @@
   }
 }
 
+.row {
+  @apply --layout-horizontal;
+  @apply --layout-center;
+}
+
+
+.left {
+  text-align: left;
+  @apply --layout-flex-4;
+}
+
+.right {
+  @apply --layout-flex-3;
+  text-align: right;
+  margin-right: 40px;
+
+  @media screen and (max-width: 500px) {
+    margin-right: 20px;
+  }
+}
+
+.icon {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.icon {
+  --iron-icon-height: 24px !important;
+  --iron-icon-width: 24px !important;
+}
+
 .login-image {
   width: 50%;
   margin-bottom: 40px;
@@ -25,7 +56,7 @@
 
 .button {
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto 5px;
   width: 80%;
   cursor: pointer;
 }

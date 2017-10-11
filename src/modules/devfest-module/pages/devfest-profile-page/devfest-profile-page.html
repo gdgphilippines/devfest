@@ -2,8 +2,53 @@
   <template>
     <link rel="stylesheet" href="./devfest-profile-page.scss">
 
-    <section class="section perks-container ">
+    <section class="section">
+      <div class="row">
+        <div class="avatar" style="background: url([[profile.image]]) center/cover no-repeat"></div>
 
+        <div class="flex">
+          <h1 class="title">[[profile.displayName]]</h1>
+
+          <template is="dom-if" if="[[profile.score]]">
+            <p class="score">
+              Score: [[profile.score]]
+            </p>
+          </template>
+        </div>
+      </div>
+      <template is="dom-if" if="[[_getMoreLinksNumber(user.providerData)]]">
+        <h3 class="title">Link Accounts</h3>
+        <div class="row">
+          <template is="dom-repeat" items="[[_getMoreLinks(user.providerData)]]">
+            <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="link">
+              <div class="row">
+                <div class=" right">
+                  <iron-icon class="icon" icon="devfest:[[_getProviderIcon(item.providerId)]]"></iron-icon>
+                </div>
+                <div class=" left">
+                  [[_getProviderName(item.providerId)]]
+                </div>
+              </div>
+            </devfest-button-only>
+          </template>
+        </div>
+      </template>
+
+      <h3 class="title">Unlink Accounts</h3>
+      <div class="row">
+        <template is="dom-repeat" items="[[user.providerData]]">
+          <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="unlink">
+            <div class="row">
+              <div class=" right">
+                <iron-icon class="icon" icon="devfest:[[_getProviderIcon(item.providerId)]]"></iron-icon>
+              </div>
+              <div class=" left">
+                [[_getProviderName(item.providerId)]]
+              </div>
+            </div>
+          </devfest-button-only>
+        </template>
+      </div>
     </section>
 
     <devfest-footer></devfest-footer>

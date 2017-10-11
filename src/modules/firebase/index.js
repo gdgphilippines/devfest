@@ -84,7 +84,31 @@ export const login = (name) => {
     // provider.addScope('repo');
   }
 
-  return firebase.auth().signInWithPopup(provider)
+  return firebase.auth().signInWithPopup(provider);
+};
+
+export const link = (user, name) => {
+  var provider = null;
+  if (name === 'google') {
+    provider = new firebase.auth.GoogleAuthProvider();
+  } else if (name === 'facebook') {
+    provider = new firebase.auth.FacebookAuthProvider();
+  } else if (name === 'github') {
+    provider = new firebase.auth.GithubAuthProvider();
+    // provider.addScope('repo');
+  }
+
+  return user.linkWithPopup(provider);
+};
+
+export const unlink = (user, name) => {
+  var provider = name + '.com';
+
+  return user.unlink(provider);
+};
+
+export const reloadUser = () => {
+  return firebase.auth().currentUser;
 };
 
 export const logout = () => {

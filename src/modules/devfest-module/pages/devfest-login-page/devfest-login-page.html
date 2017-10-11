@@ -5,9 +5,36 @@
       <section class="section">
         <img src="/images/header-compressed.gif" class="login-image"><br/>
 
-        <devfest-button-only class="button" class-name="google" id="google" on-tap="login">Google</devfest-button-only><br/>
-        <devfest-button-only class="button" class-name="facebook" id="facebook" on-tap="login">Facebook</devfest-button-only><br/>
-        <devfest-button-only class="button" class-name="github" id="github" on-tap="login">Github</devfest-button-only>
+        <devfest-button-only class="button" class-name="google" id="google" on-tap="login">
+          <div class="row">
+            <div class="flex right">
+              <iron-icon class="icon" icon="devfest:google-plus"></iron-icon>
+            </div>
+            <div class="flex left">
+              Google
+            </div>
+          </div>
+        </devfest-button-only>
+        <devfest-button-only class="button" class-name="facebook" id="facebook" on-tap="login">
+          <div class="row">
+            <div class="flex right">
+              <iron-icon class="icon" icon="devfest:facebook"></iron-icon>
+            </div>
+            <div class="flex left">
+              Facebook
+            </div>
+          </div>
+        </devfest-button-only>
+        <devfest-button-only class="button" class-name="github" id="github" on-tap="login">
+          <div class="row">
+            <div class="flex right">
+              <iron-icon class="icon" icon="devfest:github"></iron-icon>
+            </div>
+            <div class="flex left">
+              Github
+            </div>
+          </div>
+        </devfest-button-only>
       </section>
 
       <devfest-footer></devfest-footer>
