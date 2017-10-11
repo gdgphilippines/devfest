@@ -29,3 +29,5 @@ build
 prod_temp
 public
 .firebaserc
+eventbrite.json
+firebase-config.json

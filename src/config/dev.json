@@ -123,8 +123,8 @@
   "hosting": {
     "rewrites": [
       {
-        "source": "/api/**",
-        "function": "app"
+        "source": "/connect",
+        "function": "connect"
       }
     ],
     "headers": [

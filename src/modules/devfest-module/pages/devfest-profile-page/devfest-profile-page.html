@@ -21,7 +21,7 @@
         <div class="row">
           <template is="dom-repeat" items="[[_getMoreLinks(user.providerData)]]">
             <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="link">
-              <div class="row">
+              <div class="brow">
                 <div class=" right">
                   <iron-icon class="icon" icon="devfest:[[_getProviderIcon(item.providerId)]]"></iron-icon>
                 </div>
@@ -38,7 +38,7 @@
       <div class="row">
         <template is="dom-repeat" items="[[user.providerData]]">
           <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="unlink">
-            <div class="row">
+            <div class="brow">
               <div class=" right">
                 <iron-icon class="icon" icon="devfest:[[_getProviderIcon(item.providerId)]]"></iron-icon>
               </div>
@@ -50,12 +50,25 @@
         </template>
       </div>
 
-      <h3 class="title">Link Ticket</h3>
-      <a href="/connect-ticket">
-        <devfest-button-only class="button">
-          Link your Eventbrite Ticket
-        </devfest-button-only>
-      </a>
+
+      <template is="dom-if" if="[[!profile.ticketNumber]]">
+        <h3 class="title">Link Ticket</h3>
+        <a href="/connect-ticket">
+          <devfest-button-only class="button">
+            Link your Eventbrite Ticket
+          </devfest-button-only>
+        </a>
+      </template>
+
+      <template is="dom-if" if="[[profile.ticketNumber]]">
+        <h3 class="title">Ticket Connected</h3>
+        <div class="text-area">
+          <p>
+            <b>Ticket#:</b> [[profile.ticketNumber]]<br>
+            <b>Name:</b> [[profile.ticketName]]
+          </p>
+        </div>
+      </template>
 
     </section>
 

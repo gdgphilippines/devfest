@@ -8,11 +8,13 @@ import(/* webpackChunkName: 'firebase' */ 'firebase').then(sdk => {
 
 const updateAttrSnapshot = (store, attr, type, snapshot) => {
   if (snapshot.exists()) {
-    store.dispatch({
-      type, // USER_ACTION.PROFILE,
-      value: snapshot.val(),
-      attr
-    });
+    setTimeout(() => {
+      store.dispatch({
+        type, // USER_ACTION.PROFILE,
+        value: snapshot.val(),
+        attr
+      });
+    }, 100);
   }
 };
 
@@ -25,10 +27,13 @@ const updateModelTypeSnapshot = (store, modelType, type, snapshot) => {
         value: child.val()
       });
     });
-    store.dispatch({
-      type, // USER_ACTION.PROFILE,
-      attrs
-    });
+    setTimeout(() => {
+      store.dispatch({
+        type, // USER_ACTION.PROFILE,
+        attrs
+      });
+    }, 100);
+
   }
 };
 

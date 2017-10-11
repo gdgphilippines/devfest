@@ -9,14 +9,15 @@ import '../../icons/devfest-icons.html';
 import '../../components/devfest-footer/devfest-footer.js';
 import '../../components/devfest-button/devfest-button.js';
 import './devfest-connect-page.html';
+import User from '../../models/user-model';
 import QrCode from 'qrcode-reader';
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
 import marked from 'marked';
 window.marked = window.marked || marked;
 
-const {Polymer} = window;
+const {Polymer, fetch, Raven, Headers} = window;
 
-class DevfestConnectPage extends contentLoaderMixin(Polymer.Element) {
+class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
   static get is () { return 'devfest-connect-page'; }
 
   static get properties () {
@@ -47,6 +48,37 @@ class DevfestConnectPage extends contentLoaderMixin(Polymer.Element) {
         if (this._interval) {
           clearInterval(this._interval);
           this._interval = null;
+        }
+        // console.log(result.result);
+        document.querySelector('app-shell').showMessage('Scanning...', function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        var user = this.user;
+        if (user) {
+          user.getIdToken().then(token => {
+            fetch('/connect', {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                id: result.result,
+                uid: user.uid,
+                token
+              })
+            }).then(res => {
+              return res.json();
+            }).then(json => {
+              if (json.success) {
+                document.querySelector('app-shell').showMessage('Scan complete', function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+                window.history.pushState({}, '', '/profile');
+                window.dispatchEvent(new CustomEvent('location-changed'));
+              } else {
+                if (Raven) {
+                  Raven.captureException(json);
+                }
+                document.querySelector('app-shell').showMessage('Error in scanning: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+              }
+            });
+          });
         }
       }
     };
@@ -94,7 +126,6 @@ class DevfestConnectPage extends contentLoaderMixin(Polymer.Element) {
           this._interval = setInterval(() => {
             this.scanned();
           }, 100);
-          // setTimeout(function() {console.log(video.videoHeight)}, 1000)
         });
       }
       this.resize();
