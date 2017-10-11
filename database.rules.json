@@ -1,5 +1,6 @@
 {
   "rules": {
+
     "v1": {
       "$modelName": {
         "$query": {
@@ -13,11 +14,15 @@
       "codelabtype": {
         ".read": true
       },
-      "codelabchecker": {
+      "codelabChecker": {
         ".read": false
       },
       "sponsors": {
-        ".read": false
+        "source": {
+          "$sponsor": {
+            ".read": true
+          }
+        }
       },
       "user": {
         "source": {

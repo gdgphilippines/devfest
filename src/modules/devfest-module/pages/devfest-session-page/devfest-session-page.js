@@ -1,16 +1,17 @@
-import 'polymer/polymer-element.html'
-import 'marked-element/marked-element.html'
-import '../../fonts/devfest-fonts.html'
-import '../../icons/devfest-icons.html'
-import '../../components/devfest-footer/devfest-footer.js'
-import './devfest-session-page.html'
-import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js'
-import app from '../../../../app'
-import marked from 'marked'
-window.marked = window.marked || marked
+import 'polymer/polymer-element.html';
+import 'marked-element/marked-element.html';
+import '../../fonts/devfest-fonts.html';
+import '../../icons/devfest-icons.html';
+import '../../components/devfest-footer/devfest-footer.js';
+import './devfest-session-page.html';
+import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
+import app from '../../../../app';
+import marked from 'marked';
+window.marked = window.marked || marked;
+const {Polymer} = window;
 
 class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-session-page' }
+  static get is () { return 'devfest-session-page'; }
 
   static get properties () {
     return {
@@ -25,56 +26,56 @@ class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
         type: Object,
         value: {}
       }
-    }
+    };
   }
 
   static get observers () {
     return [
       'reload(params.id)'
-    ]
+    ];
   }
 
   constructor () {
-    super()
-    this._app = app
+    super();
+    this._app = app;
   }
 
   connectedCallback () {
-    super.connectedCallback()
+    super.connectedCallback();
     if (this.params && this.params.id) {
-      this.reload()
+      this.reload();
     }
     // this._fetchContent('pages/speakers.md')
   }
 
-  reload() {
+  reload () {
     if (this.params.id) {
-      this._fetchContent(`sessions/session-description/${this.params.id}.md`)
+      this._fetchContent(`sessions/session-description/${this.params.id}.md`);
     }
-    this._fetchJson('speakers/speakers.json', 'speakers')
-    this._fetchJson('sessions/sessions.json', 'sessions')
-    this._fetchJson('sessions/sessions-type.json', 'sessionsType')
-    this._fetchJson('schedule/schedule.json', 'schedule')
+    this._fetchJson('speakers/speakers.json', 'speakers');
+    this._fetchJson('sessions/sessions.json', 'sessions');
+    this._fetchJson('sessions/sessions-type.json', 'sessionsType');
+    this._fetchJson('schedule/schedule.json', 'schedule');
   }
 
-  _getInfo(id, attribute) {
+  _getInfo (id, attribute) {
     if (this.sessions[id]) {
-      return this.sessions[id][attribute]
+      return this.sessions[id][attribute];
     }
   }
 
-  _getSession(id, attribute) {
+  _getSession (id, attribute) {
     if (this.sessions[id]) {
-      return this.sessions[id][attribute]
+      return this.sessions[id][attribute];
     }
   }
 
-  _getTime(id) {
+  _getTime (id) {
     if (this.schedule && this.sessions[id]) {
-      var schedule = this.sessions[id].schedule
+      var schedule = this.sessions[id].schedule;
       for (var i in this.schedule) {
         if (this.schedule[i].id === schedule) {
-          return (this.schedule[i].start.substr(0, 2) + ':' + this.schedule[i].start.substr(2, 2)) + ' - ' + (this.schedule[i].end.substr(0, 2) + ':' + this.schedule[i].end.substr(2, 2))
+          return (this.schedule[i].start.substr(0, 2) + ':' + this.schedule[i].start.substr(2, 2)) + ' - ' + (this.schedule[i].end.substr(0, 2) + ':' + this.schedule[i].end.substr(2, 2));
         }
       }
     }
@@ -83,7 +84,7 @@ class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
   _getSpeakerId (id) {
     if (this.sessions && id && this.sessions[id] && this.speakers) {
       if (this.sessions[id].speaker) {
-        return this.sessions[id].speaker
+        return this.sessions[id].speaker;
       }
 
       // return this.sessions[id].title
@@ -93,7 +94,7 @@ class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
   _getSpeakerInfo (id, attribute) {
     if (this.sessions && id && this.sessions[id] && this.speakers) {
       if (this.speakers[this.sessions[id].speaker]) {
-        return this.speakers[this.sessions[id].speaker][attribute]
+        return this.speakers[this.sessions[id].speaker][attribute];
       }
 
       // return this.sessions[id].title
@@ -101,6 +102,6 @@ class DevfestSessionPage extends contentLoaderMixin(Polymer.Element) {
   }
 }
 
-window.customElements.define(DevfestSessionPage.is, DevfestSessionPage)
+window.customElements.define(DevfestSessionPage.is, DevfestSessionPage);
 
-export default DevfestSessionPage
+export default DevfestSessionPage;
