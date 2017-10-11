@@ -40,6 +40,7 @@
     "devfest-tickets-page": "modules/devfest-module/pages/devfest-tickets-page/devfest-tickets-page.js",
     "devfest-sponsors-page": "modules/devfest-module/pages/devfest-sponsors-page/devfest-sponsors-page.js",
     "devfest-login-page": "modules/devfest-module/pages/devfest-login-page/devfest-login-page.js",
+    "devfest-tnc-page": "modules/devfest-module/pages/devfest-tnc-page/devfest-tnc-page.js",
     "devfest-profile-page": "modules/devfest-module/pages/devfest-profile-page/devfest-profile-page.js",
     "devfest-codelabs-page": "modules/devfest-module/pages/devfest-codelabs-page/devfest-codelabs-page.js",
     "devfest-connect-ticket-page": "modules/devfest-module/pages/devfest-connect-ticket-page/devfest-connect-ticket-page.js",
@@ -61,6 +62,7 @@
     "/sessions/:id": "devfest-session-page",
     "/tickets": "devfest-tickets-page",
     "/sponsors": "devfest-sponsors-page",
+    "/tnc": "devfest-tnc-page",
     "/login": "devfest-login-page",
     "/profile": {
       "name": "devfest-profile-page",

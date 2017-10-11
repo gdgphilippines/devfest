@@ -41,6 +41,10 @@
         "destination": "/index.html"
       },
       {
+        "source": "/tnc",
+        "destination": "/index.html"
+      },
+      {
         "source": "/login",
         "destination": "/index.html"
       },

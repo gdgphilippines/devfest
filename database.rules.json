@@ -1,8 +1,89 @@
 {
   "rules": {
-    "dev": {
-      ".read": true,
-      ".write": "auth != null"
+    "v1": {
+      "$modelName": {
+        "$query": {
+          ".read": true,
+          ".indexOn": ["value"]
+        }
+      },
+      "codelabs": {
+        ".read": true
+      },
+      "codelabtype": {
+        ".read": true
+      },
+      "codelabchecker": {
+        ".read": false
+      },
+      "sponsors": {
+        ".read": false
+      },
+      "user": {
+        "source": {
+          "$uid": {
+            "primary": {
+              ".read": "auth != null && auth.uid == $uid",
+              "email": {
+                ".write": "!data.exists()"
+              },
+              "displayName": {
+                ".read": true
+              },
+              "image": {
+                ".read": true
+              },
+              "ticketNumber": {
+                ".write": false
+              },
+							"ticketEmail": {
+                ".write": false
+              },
+              "ticketName": {
+                ".write": false
+              },
+              "github": {
+                ".read": true,
+                ".write": "(!data.exists() || !newData.exists()) && auth != null && auth.uid == $uid"
+              },
+              "githubName": {
+                ".read": true,
+                ".write": "(!data.exists() || !newData.exists()) && auth != null && auth.uid == $uid"
+              }
+            },
+            "meta": {
+              ".read": "auth != null && auth.uid == $uid",
+              "accepted": {
+                ".read": true,
+                ".write": "auth != null && auth.uid == $uid"
+              },
+              "score": {
+                ".read": true,
+                ".write": false
+              },
+              "verified": {
+                ".read": true,
+                ".write": false
+              },
+              "dateJoined": {
+                ".read": true,
+                ".write": "!data.exists()"
+              }
+            },
+            "cross": {
+              ".read": "auth != null && auth.uid == $uid",
+              "sponsor": {
+                ".read": true,
+                ".write": false
+              },
+              "codelabsDone": {
+                ".read": true,
+                ".write": false
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
