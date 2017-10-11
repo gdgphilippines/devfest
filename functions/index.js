@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 
 if (fs.existsSync(path.resolve(__dirname, './firebase-config.json'))) {
-  console.log('hello')
   var serviceAccount = require('./firebase-config.json');
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -82,10 +81,15 @@ exports.connect = functions.https.onRequest((req, res) => {
       })
   );
 
+  promises.push(
+    admin.database().ref(`v1/eventbrite/source/${req.body.id}`).once('value')
+  );
+
   Promise.all(promises)
     .then(results => {
       const user = results[0];
       const json = results[1];
+      const snapshot = results[2];
 
       if (json.status_code === 400) {
         return Promise.reject(json);
@@ -96,12 +100,48 @@ exports.connect = functions.https.onRequest((req, res) => {
       }
 
       if (!user) {
-        return Promise.reject(new Error('No user'));
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      if (snapshot.exists()) {
+        var eventbriteUser = snapshot.val();
+        var error = {
+          status_code: 403,
+          message: `${eventbriteUser.primary.displayName} has your ticket. Please approach the person to rescan their ticket or you might have scanning another person's ticket.`
+        };
+        return Promise.reject(error);
+      }
+
+      return Promise.all([
+        Promise.resolve(user),
+        Promise.resolve(json),
+        admin
+          .database()
+          .ref(`v1/user/source/${user.uid}/primary/ticketNumber`)
+          .once('value')
+      ]);
+    })
+    .then(results => {
+      var user = results[0];
+      var json = results[1];
+      var snapshot = results[2];
+
+      if (snapshot.exists()) {
+        var oldTicketNumber = snapshot.val();
       }
 
       updates[`v1/user/source/${user.uid}/primary/ticketEmail`] = json.profile.email;
       updates[`v1/user/source/${user.uid}/primary/ticketName`] = json.profile.first_name + ' ' + json.profile.last_name;
       updates[`v1/user/source/${user.uid}/primary/ticketNumber`] = req.body.id;
+      updates[`v1/user/source/${user.uid}/meta/accepted`] = true;
+      updates[`v1/eventbrite/source/${req.body.id}/primary/displayName`] = user.displayName || user.name || user.email;
+      updates[`v1/eventbrite/source/${req.body.id}/primary/email`] = user.email;
+      updates[`v1/eventbrite/source/${req.body.id}/primary/uid`] = user.uid;
+      updates[`v1/eventbrite/source/${oldTicketNumber}`] = null;
 
       return admin
         .database()
@@ -116,6 +156,7 @@ exports.connect = functions.https.onRequest((req, res) => {
         });
     })
     .catch(error => {
+      console.log(error)
       return res
         .status(error.status_code || 500)
         .json(error);

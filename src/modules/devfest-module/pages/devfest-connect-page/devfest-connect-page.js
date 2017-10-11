@@ -86,6 +86,8 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
                 if (Raven) {
                   Raven.captureException(json);
                 }
+                window.history.pushState({}, '', '/profile');
+                window.dispatchEvent(new CustomEvent('location-changed'));
                 document.querySelector('app-shell').showMessage('Error in scanning: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
               }
             });

@@ -50,11 +50,13 @@
         </template>
       </div>
 
-
       <template is="dom-if" if="[[!profile.ticketNumber]]">
         <h3 class="title">Link Ticket</h3>
         <p>
-          You need to connect your ticket and agree to <a href="/tnc">our terms and conditions</a> so sponsors can scan your ID.
+          Connect your ticket to qualify to the codelabs contest and to join to the event raffle.
+        </p>
+        <p>
+          By connecting your ticket, you agree to the <a href="/tnc">terms and conditions.</a>
         </p>
         <a href="/connect-ticket">
           <devfest-button-only class="button">
@@ -70,6 +72,15 @@
             <b>Ticket#:</b> [[profile.ticketNumber]]<br>
             <b>Name:</b> [[profile.ticketName]]
           </p>
+
+          <p>
+            If your name and email is different from the one above, you may have scanned a wrong ticket. You can rescan it here.
+          </p>
+          <a href="/connect-ticket">
+            <devfest-button-only class="button">
+              Rescan you eventbrite ticket.
+            </devfest-button-only>
+          </a>
         </div>
       </template>
 
