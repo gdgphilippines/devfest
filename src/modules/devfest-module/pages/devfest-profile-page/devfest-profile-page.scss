@@ -33,6 +33,10 @@
   @apply --layout-flex;
   margin-left: 40px;
   text-align: left;
+
+  @media screen and (max-width: 550px) {
+    margin-left: 0px;
+  }
 }
 
 .brow {
@@ -73,4 +77,5 @@
 .text-area {
   text-align: left;
 }
+
 

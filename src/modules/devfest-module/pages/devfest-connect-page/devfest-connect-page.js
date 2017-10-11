@@ -45,9 +45,20 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
 
       }
       if (result && result.result) {
+        this.shadowRoot.querySelector('#video').classList.add('scanned');
         if (this._interval) {
           clearInterval(this._interval);
           this._interval = null;
+        }
+
+        if (this._stream) {
+          var tracks = this._stream.getTracks();
+          for (var i in tracks) {
+            if (tracks[i].stop) {
+              console.log(tracks[i])
+              tracks[i].stop();
+            }
+          }
         }
         // console.log(result.result);
         document.querySelector('app-shell').showMessage('Scanning...', function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
@@ -89,47 +100,6 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
 
   connectedCallback () {
     super.connectedCallback();
-
-    Polymer.RenderStatus.afterNextRender(this, () => {
-      var video = this.shadowRoot.querySelector('#video');
-      // Get access to the camera!
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        console.log(navigator.mediaDevices.getSupportedConstraints());
-        // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } } }).then((stream) => {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-          if (this._interval) {
-            clearInterval(this._interval);
-            this._interval = null;
-          }
-
-          this._interval = setInterval(() => {
-            this.scanned();
-          }, 100);
-          // setTimeout(function() {console.log(video.videoHeight)}, 1000)
-        })
-        .catch((error) => {
-          console.error(error);
-          return navigator.mediaDevices.getUserMedia({ video: true });
-          // Raven.captureException(error)
-          // this.$.toast.show(error.message, 5000);
-        })
-        .then((stream) => {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-
-          if (this._interval) {
-            clearInterval(this._interval);
-            this._interval = null;
-          }
-          this._interval = setInterval(() => {
-            this.scanned();
-          }, 100);
-        });
-      }
-      this.resize();
-    });
     this.reload();
   }
 
@@ -191,7 +161,50 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
     // this._qr.decode(`http://localhost:5000/images/test.png`);
   }
 
-  reload () {}
+  reload () {
+    Polymer.RenderStatus.afterNextRender(this, () => {
+      var video = this.shadowRoot.querySelector('#video');
+      // Get access to the camera!
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        console.log(navigator.mediaDevices.getSupportedConstraints());
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } } }).then((stream) => {
+          this._stream = stream;
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+          if (this._interval) {
+            clearInterval(this._interval);
+            this._interval = null;
+          }
+
+          this._interval = setInterval(() => {
+            this.scanned();
+          }, 100);
+          // setTimeout(function() {console.log(video.videoHeight)}, 1000)
+        })
+        .catch((error) => {
+          console.error(error);
+          return navigator.mediaDevices.getUserMedia({ video: true });
+          // Raven.captureException(error)
+          // this.$.toast.show(error.message, 5000);
+        })
+        .then((stream) => {
+          this._stream = stream;
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+
+          if (this._interval) {
+            clearInterval(this._interval);
+            this._interval = null;
+          }
+          this._interval = setInterval(() => {
+            this.scanned();
+          }, 100);
+        });
+      }
+      this.resize();
+    });
+  }
 }
 
 window.customElements.define(DevfestConnectPage.is, DevfestConnectPage);
