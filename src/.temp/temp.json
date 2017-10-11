@@ -43,7 +43,7 @@
     "devfest-tnc-page": "modules/devfest-module/pages/devfest-tnc-page/devfest-tnc-page.js",
     "devfest-profile-page": "modules/devfest-module/pages/devfest-profile-page/devfest-profile-page.js",
     "devfest-codelabs-page": "modules/devfest-module/pages/devfest-codelabs-page/devfest-codelabs-page.js",
-    "devfest-connect-ticket-page": "modules/devfest-module/pages/devfest-connect-ticket-page/devfest-connect-ticket-page.js",
+    "devfest-connect-page": "modules/devfest-module/pages/devfest-connect-page/devfest-connect-page.js",
     "devfest-scan-page": "modules/devfest-module/pages/devfest-scan-page/devfest-scan-page.js",
     "devfest-scanned-list-page": "modules/devfest-module/pages/devfest-scanned-list-page/devfest-scanned-list-page.js",
     "devfest-not-sponsor-page": "modules/devfest-module/pages/devfest-not-sponsor-page/devfest-not-sponsor-page.js",
@@ -73,7 +73,7 @@
       "auth": "isLoggedIn"
     },
     "/connect-ticket": {
-      "name": "devfest-connect-ticket-page",
+      "name": "devfest-connect-page",
       "auth": "isLoggedIn"
     },
     "/scan": {

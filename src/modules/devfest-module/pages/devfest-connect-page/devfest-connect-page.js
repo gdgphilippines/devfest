@@ -8,7 +8,7 @@ import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
 import '../../components/devfest-footer/devfest-footer.js';
 import '../../components/devfest-button/devfest-button.js';
-import './devfest-connect-ticket-page.html';
+import './devfest-connect-page.html';
 import QrCode from 'qrcode-reader';
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
 import marked from 'marked';
@@ -16,8 +16,8 @@ window.marked = window.marked || marked;
 
 const {Polymer} = window;
 
-class DevfestConnectTicketPage extends contentLoaderMixin(Polymer.Element) {
-  static get is () { return 'devfest-connect-ticket-page'; }
+class DevfestConnectPage extends contentLoaderMixin(Polymer.Element) {
+  static get is () { return 'devfest-connect-page'; }
 
   static get properties () {
     return {
@@ -41,20 +41,22 @@ class DevfestConnectTicketPage extends contentLoaderMixin(Polymer.Element) {
     this._qr = new QrCode();
     this._qr.callback = (error, result) => {
       if (error) {
-        return console.log(error);
-      }
 
-      console.log(result.result);
+      }
+      if (result && result.result) {
+        if (this._interval) {
+          clearInterval(this._interval);
+          this._interval = null;
+        }
+      }
     };
 
-    console.log('hello')
     this._boundResize = this._boundResize || this.resize.bind(this);
     window.addEventListener('resize', this._boundResize);
   }
 
   connectedCallback () {
     super.connectedCallback();
-    console.log('hello2')
 
     Polymer.RenderStatus.afterNextRender(this, () => {
       var video = this.shadowRoot.querySelector('#video');
@@ -62,18 +64,42 @@ class DevfestConnectTicketPage extends contentLoaderMixin(Polymer.Element) {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.log(navigator.mediaDevices.getSupportedConstraints());
         // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then((stream) => {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } } }).then((stream) => {
           video.src = window.URL.createObjectURL(stream);
           video.play();
+          if (this._interval) {
+            clearInterval(this._interval);
+            this._interval = null;
+          }
+
+          this._interval = setInterval(() => {
+            this.scanned();
+          }, 100);
           // setTimeout(function() {console.log(video.videoHeight)}, 1000)
-        }).catch((error) => {
-          console.error(error)
+        })
+        .catch((error) => {
+          console.error(error);
+          return navigator.mediaDevices.getUserMedia({ video: true });
           // Raven.captureException(error)
           // this.$.toast.show(error.message, 5000);
+        })
+        .then((stream) => {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+
+          if (this._interval) {
+            clearInterval(this._interval);
+            this._interval = null;
+          }
+          this._interval = setInterval(() => {
+            this.scanned();
+          }, 100);
+          // setTimeout(function() {console.log(video.videoHeight)}, 1000)
         });
       }
       this.resize();
     });
+    this.reload();
   }
 
   resize () {
@@ -85,7 +111,7 @@ class DevfestConnectTicketPage extends contentLoaderMixin(Polymer.Element) {
       this.height = size.height - 240;
       this.width = size.width - 80;
       video.height = this.height;
-      video.width = this.width;
+      // video.width = this.width;
       canvas.height = this.height;
       canvas.width = this.width;
     }
@@ -134,14 +160,9 @@ class DevfestConnectTicketPage extends contentLoaderMixin(Polymer.Element) {
     // this._qr.decode(`http://localhost:5000/images/test.png`);
   }
 
-  connectedCallback () {
-    super.connectedCallback();
-    this.reload();
-  }
-
   reload () {}
 }
 
-window.customElements.define(DevfestConnectTicketPage.is, DevfestConnectTicketPage);
+window.customElements.define(DevfestConnectPage.is, DevfestConnectPage);
 
-export default DevfestConnectTicketPage;
+export default DevfestConnectPage;

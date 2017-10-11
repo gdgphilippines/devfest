@@ -16,6 +16,15 @@
   }
 }
 
+#video {
+  display: block;
+  width: 100%;
+}
+
+#canvas {
+  display: none;
+}
+
 .snap-area {
   padding: 0 20px 40px 20px;
 }

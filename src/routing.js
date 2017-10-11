@@ -12,7 +12,7 @@
 '/login': () => { return import(/* webpackChunkName: "devfest-login-page" */ './modules/devfest-module/pages/devfest-login-page/devfest-login-page.js') }, 
 '/profile': () => { return import(/* webpackChunkName: "devfest-profile-page" */ './modules/devfest-module/pages/devfest-profile-page/devfest-profile-page.js') }, 
 '/codelabs/:type?/:id?/:page?': () => { return import(/* webpackChunkName: "devfest-codelabs-page" */ './modules/devfest-module/pages/devfest-codelabs-page/devfest-codelabs-page.js') }, 
-'/connect-ticket': () => { return import(/* webpackChunkName: "devfest-connect-ticket-page" */ './modules/devfest-module/pages/devfest-connect-ticket-page/devfest-connect-ticket-page.js') }, 
+'/connect-ticket': () => { return import(/* webpackChunkName: "devfest-connect-page" */ './modules/devfest-module/pages/devfest-connect-page/devfest-connect-page.js') }, 
 '/scan': () => { return import(/* webpackChunkName: "devfest-scan-page" */ './modules/devfest-module/pages/devfest-scan-page/devfest-scan-page.js') }, 
 '/scanned-list': () => { return import(/* webpackChunkName: "devfest-scanned-list-page" */ './modules/devfest-module/pages/devfest-scanned-list-page/devfest-scanned-list-page.js') }, 
 '/are-you-a-sponsor': () => { return import(/* webpackChunkName: "devfest-not-sponsor-page" */ './modules/devfest-module/pages/devfest-not-sponsor-page/devfest-not-sponsor-page.js') }, 
