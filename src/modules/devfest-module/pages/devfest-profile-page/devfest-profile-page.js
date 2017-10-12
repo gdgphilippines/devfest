@@ -3,6 +3,7 @@ import 'polymer/lib/elements/dom-repeat.html';
 import 'iron-icon/iron-icon.html';
 import 'iron-flex-layout/iron-flex-layout.html';
 import 'shadycss/apply-shim.html';
+import 'paper-dialog/paper-dialog.html';
 import 'marked-element/marked-element.html';
 import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
@@ -103,6 +104,66 @@ class DevfestProfilePage extends User(contentLoaderMixin(Polymer.Element)) {
     } else {
       console.log(provider);
     }
+  }
+
+  disconnectDialog () {
+    this.shadowRoot.querySelector('#disconnect-dialog').open();
+  }
+
+  unlinkDialog (e) {
+    var el = e.target;
+    while (!el.id) {
+      el = el.parentNode;
+    }
+    this._unlinkId = el.id;
+    this.shadowRoot.querySelector('#unlink-dialog').open();
+  }
+
+  unlink () {
+    super.unlink();
+    this.shadowRoot.querySelector('#unlink-dialog').close();
+    this._unlinkId = null;
+  }
+
+  _closeUnlinkDialog () {
+    this.shadowRoot.querySelector('#unlink-dialog').cancel();
+    this._unlinkId = null;
+  }
+
+  _disconnect () {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    var user = this.user;
+    var profile = this.profile;
+    if (user && profile) {
+      user.getIdToken().then(token => {
+        fetch('/disconnect', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            id: profile.ticketNumber,
+            token
+          })
+        }).then(res => {
+          return res.json();
+        }).then(json => {
+          if (json.success) {
+            document.querySelector('app-shell').showMessage('Disconnected', function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+          } else {
+            if (Raven) {
+              Raven.captureException(json);
+            }
+            document.querySelector('app-shell').showMessage('Error in disconnecting ticket: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+          }
+          this.notifyPath('profile.ticketNumber');
+          this.shadowRoot.querySelector('#disconnect-dialog').close();
+        });
+      });
+    }
+  }
+
+  _closeDisconnectDialog () {
+    this.shadowRoot.querySelector('#disconnect-dialog').cancel();
   }
 
   reload () {}

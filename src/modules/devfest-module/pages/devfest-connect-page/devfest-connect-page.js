@@ -59,7 +59,6 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
               headers,
               body: JSON.stringify({
                 id: result.result,
-                uid: user.uid,
                 token
               })
             }).then(res => {

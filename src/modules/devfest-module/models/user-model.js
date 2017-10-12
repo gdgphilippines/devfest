@@ -192,11 +192,8 @@ export default (superClass) => {
 
     unlink (e) {
       if (this.user && this.user.providerData && this.user.providerData.length > 1) {
-        var el = e.target;
-        while (!el.id) {
-          el = el.parentNode;
-        }
-        var provider = el.id;
+        var provider = this._unlinkId;
+        console.log(provider)
         unlink(this.user, provider)
         .then(() => {
           const user = reloadUser();

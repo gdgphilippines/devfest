@@ -16,3 +16,4 @@
     const firebaseConfig = configs;
     export default firebase;
     export { firebaseConfig };
+  

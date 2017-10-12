@@ -274,6 +274,84 @@ exports.scanId = functions.https.onRequest((req, res) => {
     });
 });
 
+exports.resetScoreOnGithubUnlink = functions.https.onRequest((req, res) => {
+
+});
+
+exports.disconnect = functions.https.onRequest((req, res) => {
+  if (!req.body.token) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No auth or uid found'
+      });
+  }
+
+  if (!req.body.id) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No ticket Id found'
+      });
+  }
+
+  const updates = {};
+  const promises = [];
+
+  promises.push(
+    admin.auth().verifyIdToken(req.body.token)
+  );
+
+  promises.push(
+    admin.database().ref(`v1/sponsors/query/sponsors`).once('value')
+  );
+
+  Promise.all(promises)
+    .then(results => {
+      var user = results[0];
+      var sponsors = results[1];
+
+      if (!user) {
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      sponsors.forEach(child => {
+        updates[`v1/sponsors/source/${child.key}/cross/scanned/${user.uid}`] = null;
+      });
+
+      updates[`v1/user/source/${user.uid}/primary/ticketEmail`] = '';
+      updates[`v1/user/source/${user.uid}/primary/ticketName`] = '';
+      updates[`v1/user/source/${user.uid}/primary/ticketNumber`] = '';
+      updates[`v1/user/source/${user.uid}/meta/accepted`] = false;
+      updates[`v1/user/source/${user.uid}/meta/score`] = 0;
+      updates[`v1/eventbrite/source/${req.body.id}`] = null;
+
+      return admin
+      .database()
+      .ref()
+      .update(updates);
+    })
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          success: true
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      return res
+        .status(error.status_code || 500)
+        .json(error);
+    });
+});
+
 exports.connect = functions.https.onRequest((req, res) => {
   if (!req.body.token) {
     return res

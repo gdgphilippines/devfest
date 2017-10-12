@@ -133,6 +133,10 @@
       {
         "source": "/scan-id",
         "function": "scanId"
+      },
+      {
+        "source": "/disconnect",
+        "function": "disconnect"
       }
     ],
     "headers": [

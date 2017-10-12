@@ -35,9 +35,12 @@
       </template>
 
       <h3 class="title">Unlink Accounts</h3>
+      <p>
+        Note: Unlinking your Github account will reset your score.
+      </p>
       <div class="row">
         <template is="dom-repeat" items="[[user.providerData]]">
-          <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="unlink">
+          <devfest-button-only class="button button-row" class-name="[[_getProvider(item.providerId)]]" id="[[_getProvider(item.providerId)]]" on-tap="unlinkDialog">
             <div class="brow">
               <div class=" right">
                 <iron-icon class="icon" icon="devfest:[[_getProviderIcon(item.providerId)]]"></iron-icon>
@@ -82,6 +85,11 @@
               Rescan you eventbrite ticket.
             </devfest-button-only>
           </a>
+          <br/>
+          <devfest-button-only on-tap="disconnectDialog" class="button">
+            Disconnect Ticket.
+          </devfest-button-only>
+
         </div>
       </template>
 
@@ -89,5 +97,36 @@
 
     <devfest-footer></devfest-footer>
 
+    <paper-dialog id="disconnect-dialog" class="dialog-box">
+      <div class="dialog-container">
+        <p>
+          Are you sure you want to disconnect your ticket from your account? (You will not be eligible to be part of the raffle prizes and will reset your score)
+        </p>
+
+        <devfest-button-only on-tap="_disconnect" class="button">
+          Disconnect Ticket.
+        </devfest-button-only>
+        <br/>
+        <devfest-button-only on-tap="_closeDisconnectDialog" class="button">
+          Cancel
+        </devfest-button-only>
+      </div>
+    </paper-dialog>
+
+    <paper-dialog id="unlink-dialog" class="dialog-box">
+      <div class="dialog-container">
+        <p>
+          Are you sure you want to unlink [[_unlinkId]] from your account? (You will not be eligible to be part of the raffle prizes and will reset your score)
+        </p>
+
+        <devfest-button-only on-tap="unlink" class="button">
+          Disconnect [[_unlinkId]]
+        </devfest-button-only>
+        <br/>
+        <devfest-button-only on-tap="_closeUnlinkDialog" class="button">
+          Cancel
+        </devfest-button-only>
+      </div>
+    </paper-dialog>
   </template>
 </dom-module>

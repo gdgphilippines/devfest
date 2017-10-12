@@ -17,6 +17,10 @@
         "function": "scanId"
       },
       {
+        "source": "/disconnect",
+        "function": "disconnect"
+      },
+      {
         "source": "/",
         "destination": "/index.html"
       },
