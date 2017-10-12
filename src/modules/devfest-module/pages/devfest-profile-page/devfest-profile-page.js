@@ -38,7 +38,6 @@ class DevfestProfilePage extends User(contentLoaderMixin(Polymer.Element)) {
   }
 
   _setProfileImage (image) {
-    console.log(image)
     this.shadowRoot.querySelector('#profile-image').style.background = `url(${image}) center/cover no-repeat`;
   }
 

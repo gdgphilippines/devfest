@@ -93,6 +93,16 @@
         </div>
       </template>
 
+      <template is="dom-if" if="[[profile.sponsorId]]">
+        <h3 class="title">Welcome Sponsor!</h3>
+
+        <a href="/are-you-a-sponsor">
+          <devfest-button-only class="button">
+            Go to Sponsor page
+          </devfest-button-only>
+        </a>
+      </template>
+
     </section>
 
     <devfest-footer></devfest-footer>
