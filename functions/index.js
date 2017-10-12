@@ -449,9 +449,6 @@ exports.connect = functions.https.onRequest((req, res) => {
       if (oldTicketNumber) {
         updates[`v1/eventbrite/source/${oldTicketNumber}`] = null;
       }
-
-
-      console.log(updates)
       return admin
         .database()
         .ref()
