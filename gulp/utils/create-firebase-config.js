@@ -15,6 +15,7 @@ module.exports = (dev) => {
           firebase.initializeApp(config);
         }
       });
+      window.firebase = firebase;
       window.dispatchEvent(new window.CustomEvent('firebase-initialized', { detail: firebase }));
     })
     const firebaseConfig = configs;

@@ -4,6 +4,7 @@ import(/* webpackChunkName: 'firebase' */ 'firebase').then(sdk => {
   if (sdk) {
     firebase = sdk;
   }
+  window.firebase = sdk;
 });
 
 const updateAttrSnapshot = (store, attr, type, snapshot) => {
@@ -121,11 +122,16 @@ export const logout = () => {
 };
 
 export const observeAuth = (dispatch) => {
+  console.log(window.firebase, firebase, dispatch)
   if (firebase) {
     firebase.auth().onAuthStateChanged(dispatch);
+  } else if (window.firebase) {
+    window.firebase.auth().onAuthStateChanged(dispatch);
+    firebase = window.firebase;
   } else {
     window.addEventListener('firebase-initialized', event => {
-      firebase = event.detail;
+      firebase = window.firebase || event.detail;
+      console.log(firebase, event.detail, window.firebase, dispatch)
       firebase.auth().onAuthStateChanged(dispatch);
     });
   }
