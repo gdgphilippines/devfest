@@ -56,17 +56,27 @@ exports.updateScore = functions.database.ref('v1/user/source/{userId}/cross/code
   .onWrite(event => {
     var score = 0;
     var updates = {};
-    event.data.forEach(child => {
-      updates[`v1/codelabs/source/${child.key}/cross/scores/${event.params.userId}/value`] = child.val().value;
-      if (updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`]) {
-        updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] += child.val().value;
-      } else {
-        updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] = child.val().value;
-      }
-      score = score + child.val().value;
-    });
-    updates[`v1/user/source/${event.params.userId}/meta/score`] = score;
-    updates[`v1/user/query/score/${event.params.userId}/value`] = score;
+    if (!event.data.exists()) {
+      event.data.previous.forEach(child => {
+        updates[`v1/codelabs/source/${child.key}/cross/scores/${event.params.userId}/value`] = score;
+        updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] = score;
+      });
+      updates[`v1/user/source/${event.params.userId}/meta/score`] = score;
+      updates[`v1/user/query/score/${event.params.userId}/value`] = score;
+    } else {
+      event.data.forEach(child => {
+        updates[`v1/codelabs/source/${child.key}/cross/scores/${event.params.userId}/value`] = child.val().value;
+        if (updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`]) {
+          updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] += child.val().value;
+        } else {
+          updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] = child.val().value;
+        }
+        score = score + child.val().value;
+      });
+      updates[`v1/user/source/${event.params.userId}/meta/score`] = score;
+      updates[`v1/user/query/score/${event.params.userId}/value`] = score;
+    }
+
 
     return admin.database().ref().update(updates);
   });
