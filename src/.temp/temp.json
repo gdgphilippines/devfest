@@ -125,6 +125,14 @@
       {
         "source": "/connect",
         "function": "connect"
+      },
+      {
+        "source": "/validate-sponsor",
+        "function": "validate"
+      },
+      {
+        "source": "/scan-id",
+        "function": "scanId"
       }
     ],
     "headers": [

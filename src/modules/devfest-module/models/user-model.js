@@ -111,6 +111,11 @@ export default (superClass) => {
           type: USER_ACTION.FETCH,
           modelType: 'meta'
         });
+        this.dispatch({
+          type: USER_ACTION.FETCH,
+          modelType: 'cross',
+          attr: 'sponsorId'
+        });
       } else {
         this.dispatch({
           type: USER_ACTION.PROFILE,

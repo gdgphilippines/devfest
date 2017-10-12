@@ -19,6 +19,18 @@
           </div>
         </template>
       </div>
+
+      <template is="dom-if" if="[[user.uid]]">
+        <div class="center sponsor-question">
+          <h2 class="title">Are you a sponsor?</h2>
+
+          <a href="/are-you-a-sponsor">
+            <devfest-button-only class="button">
+              Are you a Sponsor?
+            </devfest-button-only>
+          </a>
+        </div>
+      </template>
     </section>
 
     <devfest-footer></devfest-footer>

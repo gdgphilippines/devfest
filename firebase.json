@@ -9,6 +9,14 @@
         "function": "connect"
       },
       {
+        "source": "/validate-sponsor",
+        "function": "validate"
+      },
+      {
+        "source": "/scan-id",
+        "function": "scanId"
+      },
+      {
         "source": "/",
         "destination": "/index.html"
       },

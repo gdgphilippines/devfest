@@ -1,3 +1,81 @@
 @import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
 @import '../../styles/components/section.scss';
+
+.section {
+  max-width: 600px;
+  padding: 20px;
+  margin: 60px auto 60px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+
+  @media screen and (max-width: 720px) {
+    margin: 20px 20px;
+  }
+}
+
+.row {
+  @apply --layout-horizontal;
+  @apply --layout-wrap;
+
+  @media screen and (max-width: 550px) {
+    display: block;
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.flex {
+  @apply --layout-flex;
+  margin-left: 40px;
+  text-align: left;
+
+  @media screen and (max-width: 550px) {
+    margin-left: 0px;
+  }
+}
+
+.brow {
+  @apply --layout-horizontal;
+  @apply --layout-center;
+}
+
+.button-row {
+  @apply --layout-flex;
+}
+
+
+.left {
+  text-align: left;
+  @apply --layout-flex-4;
+}
+
+.right {
+  @apply --layout-flex-3;
+  text-align: right;
+  margin-right: 40px;
+
+  @media screen and (max-width: 500px) {
+    margin-right: 20px;
+  }
+}
+
+.icon {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.icon {
+  --iron-icon-height: 24px !important;
+  --iron-icon-width: 24px !important;
+}
+
+.text-area {
+  text-align: left;
+}
+
+

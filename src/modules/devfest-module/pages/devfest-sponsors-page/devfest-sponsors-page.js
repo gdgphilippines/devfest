@@ -7,13 +7,15 @@ import 'marked-element/marked-element.html';
 import '../../fonts/devfest-fonts.html';
 import './devfest-sponsors-page.html';
 import '../../components/devfest-footer/devfest-footer.js';
+import '../../components/devfest-button-only/devfest-button-only.js';
+import User from '../../models/user-model';
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
 import marked from 'marked';
 import app from '../../../../app.js';
 window.marked = window.marked || marked;
 const {Polymer} = window;
 
-class DevfestSponsorsPage extends contentLoaderMixin(Polymer.Element) {
+class DevfestSponsorsPage extends User(contentLoaderMixin(Polymer.Element)) {
   static get is () { return 'devfest-sponsors-page'; }
 
   static get properties () {

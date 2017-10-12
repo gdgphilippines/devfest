@@ -48,6 +48,232 @@ exports.createProfile = functions.auth.user().onCreate(event => {
   // ...
 });
 
+exports.validate = functions.https.onRequest((req, res) => {
+  if (!req.body.token) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No auth or uid found'
+      });
+  }
+
+  if (!req.body.validate) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No verification code found'
+      });
+  }
+
+  if (!req.body.company) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No company ID found'
+      });
+  }
+
+  const updates = {};
+  const promises = [];
+
+  promises.push(
+    admin.auth().verifyIdToken(req.body.token)
+  );
+
+  promises.push(
+    admin.database().ref(`v1/sponsors/source/${req.body.company}/meta/code`)
+    .once('value')
+  );
+
+  Promise.all(promises)
+    .then(results => {
+      const user = results[0];
+      const sponsor = results[1];
+
+      if (!sponsor.exists()) {
+        var error3 = {
+          status_code: 404,
+          message: 'No Sponsor found for the given company ID'
+        };
+        return Promise.reject(error3);
+      }
+
+      if (!user) {
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      if (sponsor.val() !== req.body.validate) {
+        var error4 = {
+          status_code: 404,
+          message: 'Invalidate code given'
+        };
+        return Promise.reject(error4);
+      }
+
+      updates[`v1/sponsors/source/${req.body.company}/cross/sponsorUsers/${user.uid}/value`] = true;
+      updates[`v1/user/source/${user.uid}/cross/sponsorId`] = req.body.company;
+
+      return admin.database().ref().update(updates);
+    })
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          success: true
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      return res
+        .status(error.status_code || 500)
+        .json(error);
+    });
+});
+
+exports.scanId = functions.https.onRequest((req, res) => {
+  if (!req.body.token) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No auth or uid found'
+      });
+  }
+
+  if (!req.body.id) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No ticket Id found'
+      });
+  }
+
+  if (!req.body.company) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No company Id found'
+      });
+  }
+
+  const updates = {};
+  const promises = [];
+
+  promises.push(
+    admin.auth().verifyIdToken(req.body.token)
+  );
+
+  promises.push(
+    admin.database().ref(`v1/eventbrite/source/${req.body.id}`).once('value')
+  );
+
+  promises.push(
+    admin.database().ref(`v1/sponsors/source/${req.body.company}/cross/sponsorUsers/`)
+    .once('value')
+  );
+
+  Promise.all(promises)
+    .then(results => {
+      var user = results[0];
+      var eventbrite = results[1];
+      var sponsor = results[2];
+
+      if (!sponsor.exists()) {
+        var error3 = {
+          status_code: 404,
+          message: 'No Sponsor found for the given company ID'
+        };
+        return Promise.reject(error3);
+      }
+
+      if (!user) {
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      if (!sponsor.val()[user.uid].value) {
+        var error5 = {
+          status_code: 403,
+          message: 'Your user is not connected to this sponsor'
+        };
+        return Promise.reject(error5);
+      }
+
+      if (!eventbrite.exists()) {
+        var error = {
+          status_code: 403,
+          message: `This ticket is not connected to an account or the attendee hasn't accepted the terms and conditions :(`
+        };
+        return Promise.reject(error);
+      }
+
+      return Promise.all([
+        Promise.resolve(eventbrite),
+        Promise.resolve(sponsor),
+        Promise.resolve(user),
+        admin.database().ref(`v1/user/source/${eventbrite.val().primary.uid}`).once('value')
+      ]);
+    })
+    .then(results => {
+      // var eventbrite = results[0];
+      // var sponsor = results[1];
+      var user = results[2];
+      var attendee = results[3];
+
+      if (attendee.val().primary.ticketNumber.substring(9, 18) !== req.body.id.substring(9, 18)) {
+        var error = {
+          status_code: 403,
+          message: `This ticket is not connected to the scanned id :(`
+        };
+        return Promise.reject(error);
+      }
+
+      if (!attendee.val().meta.accepted) {
+        var error2 = {
+          status_code: 403,
+          message: `Attendee hasn't accepted the Terms and Conditions. :( `
+        };
+        return Promise.reject(error2);
+      }
+
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/dateScanned`] = admin.database.ServerValue.TIMESTAMP;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/email`] = attendee.val().primary.email;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/ticketEmail`] = attendee.val().primary.ticketEmail;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/ticketName`] = attendee.val().primary.ticketName;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/displayName`] = attendee.val().primary.displayName;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedByUid`] = user.uid;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedBy`] = user.name || user.displayName || user.email;
+      updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedByEmail`] = user.email;
+
+      return admin.database().ref().update(updates);
+    })
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          success: true
+        });
+    })
+    .catch(error => {
+      console.log(error)
+      return res
+        .status(error.status_code || 500)
+        .json(error);
+    });
+});
+
 exports.connect = functions.https.onRequest((req, res) => {
   if (!req.body.token) {
     return res
@@ -156,7 +382,7 @@ exports.connect = functions.https.onRequest((req, res) => {
         });
     })
     .catch(error => {
-      console.log(error)
+      console.log(error);
       return res
         .status(error.status_code || 500)
         .json(error);

@@ -2,8 +2,40 @@
   <template>
     <link rel="stylesheet" href="./devfest-not-sponsor-page.scss">
 
-    <section class="section perks-container ">
+    <section class="section">
 
+      <template is="dom-if" if="[[!profile.sponsorId]]">
+        <h2 class="title">Please put your sponsor verification code.</h2>
+        <p class="text">
+          If you forgot the verification code, please approach one of the organizers.
+        </p>
+        <paper-input label="Company ID" value="{{companyId}}"></paper-input>
+        <paper-input label="Verification Code" value="{{verificationCode}}"></paper-input>
+        <devfest-button-only on-tap="verify">
+          Verify
+        </devfest-button-only>
+      </template>
+
+      <template is="dom-if" if="[[profile.sponsorId]]">
+        <h2 class="title">Hi [[user.displayName]]</h2>
+        <p class="text">
+          You can do the following for your company ID: [[profile.sponsorId]]
+        </p>
+
+        <a href="/scan">
+          <devfest-button-only>
+            Scan IDs
+          </devfest-button-only>
+        </a>
+
+        <br/>
+
+        <a href="/scanned-list">
+          <devfest-button-only>
+            See Scanned IDs
+          </devfest-button-only>
+        </a>
+      </template>
     </section>
 
     <devfest-footer></devfest-footer>

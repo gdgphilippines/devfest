@@ -32,7 +32,8 @@
     "google-map": "GoogleWebComponents/google-map#^2.0.2",
     "iron-media-query": "PolymerElements/iron-media-query#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
-    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0"
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
+    "paper-input": "PolymerElements/paper-input#^2.0.2"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"

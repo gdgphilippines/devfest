@@ -7,7 +7,8 @@ import 'marked-element/marked-element.html';
 import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
 import '../../components/devfest-footer/devfest-footer.js';
-import '../../components/devfest-button/devfest-button.js';
+import '../../components/devfest-button-only/devfest-button-only.js';
+import User from '../../models/user-model';
 import './devfest-scanned-list-page.html';
 import contentLoaderMixin from '../../../content-loader/content-loader-mixin.js';
 import marked from 'marked';
@@ -15,7 +16,7 @@ window.marked = window.marked || marked;
 
 const {Polymer} = window;
 
-class DevfestScannedListPage extends contentLoaderMixin(Polymer.Element) {
+class DevfestScannedListPage extends User(contentLoaderMixin(Polymer.Element)) {
   static get is () { return 'devfest-scanned-list-page'; }
 
   static get properties () {
