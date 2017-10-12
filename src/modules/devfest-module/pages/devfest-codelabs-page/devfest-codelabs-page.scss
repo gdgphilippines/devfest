@@ -12,3 +12,15 @@
   width: 90vw;
   max-width: 1024px;
 }
+
+.codelabs-list {
+  @apply --layout-wrap;
+  @apply --layout-horizontal;
+
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 500px) {
+    display: block;
+  }
+}

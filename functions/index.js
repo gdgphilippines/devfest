@@ -3,6 +3,10 @@ const admin = require('firebase-admin');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
+var Chance = require('chance');
+
+// Instantiate Chance so it can be used
+var chance = new Chance();
 
 if (fs.existsSync(path.resolve(__dirname, './firebase-config.json'))) {
   var serviceAccount = require('./firebase-config.json');
@@ -47,6 +51,25 @@ exports.createProfile = functions.auth.user().onCreate(event => {
   admin.database().ref().update(updates);
   // ...
 });
+
+exports.updateScore = functions.database.ref('v1/user/source/{userId}/cross/codelabs')
+  .onWrite(event => {
+    var score = 0;
+    var updates = {};
+    event.data.forEach(child => {
+      updates[`v1/codelabs/source/${child.key}/cross/scores/${event.params.userId}/value`] = child.val().value;
+      if (updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`]) {
+        updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] += child.val().value;
+      } else {
+        updates[`v1/codelabtype/source/${child.val().type}/cross/scores/${event.params.userId}/value`] = child.val().value;
+      }
+      score = score + child.val().value;
+    });
+    updates[`v1/user/source/${event.params.userId}/meta/score`] = score;
+    updates[`v1/user/query/score/${event.params.userId}/value`] = score;
+
+    return admin.database().ref().update(updates);
+  });
 
 exports.validate = functions.https.onRequest((req, res) => {
   if (!req.body.token) {
@@ -284,7 +307,7 @@ exports.submitRepo = functions.https.onRequest((req, res) => {
       });
   }
 
-  if (!req.body.repository) {
+  if (!req.body.repo) {
     return res
       .status(404)
       .json({
@@ -292,6 +315,144 @@ exports.submitRepo = functions.https.onRequest((req, res) => {
         message: 'No repository found'
       });
   }
+
+  if (!req.body.codelabId) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No codelabId found'
+      });
+  }
+
+  const github = 'https://raw.githubusercontent.com';
+  const updates = {};
+  const promises = [];
+
+  admin.auth().verifyIdToken(req.body.token)
+    .then(user => {
+      if (!user) {
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      promises.push(
+        Promise.resolve(user)
+      );
+
+      promises.push(
+        admin.database().ref(`v1/user/source/${user.uid}/primary/githubName`).once('value')
+      );
+
+      promises.push(
+        admin.database().ref(`v1/user/source/${user.uid}/meta/accepted`).once('value')
+      );
+
+      promises.push(
+        admin.database().ref(`v1/codelabChecker/source/${req.body.codelabId}/primary/files`).once('value')
+      );
+
+      promises.push(
+        admin.database().ref(`v1/codelabs/source/${req.body.codelabId}/meta/type`).once('value')
+      );
+
+      return Promise.all(promises);
+    })
+    .then(results => {
+      var user = results[0];
+      var githubName = results[1].val();
+      var accepted = results[2].val();
+      var codelab = results[3];
+      var typeSnapshot = results[4];
+      var newPromises = [];
+
+      var multiplier = accepted ? 2 : 1;
+
+      if (!githubName) {
+        var error2 = {
+          status_code: 404,
+          message: 'No Github account found'
+        };
+        return Promise.reject(error2);
+      }
+
+      if (!codelab.exists()) {
+        var error3 = {
+          status_code: 404,
+          message: 'No codelab id found'
+        };
+        return Promise.reject(error3);
+      }
+
+      if (!typeSnapshot.exists()) {
+        var error4 = {
+          status_code: 404,
+          message: 'No codelab type found'
+        };
+        return Promise.reject(error4);
+      }
+
+      newPromises.push(Promise.resolve(user));
+      newPromises.push(Promise.resolve(multiplier));
+      var list = [];
+      codelab.forEach(child => {
+        list.push(child.val());
+      });
+
+      const index = chance.integer({min: 0, max: list.length - 1});
+      newPromises.push(Promise.resolve(list[index].strings));
+      console.log(`${github}/${githubName}/${req.body.repo}/master${list[index].filename}`);
+      newPromises.push(fetch(`${github}/${githubName}/${req.body.repo}/master${list[index].filename}`).then(response => response.text()));
+      newPromises.push(Promise.resolve(typeSnapshot.val()));
+
+      return Promise.all(newPromises);
+    })
+    .then(results => {
+      var user = results[0];
+      var multiplier = results[1];
+      var strings = results[2];
+      var string = results[3];
+      var type = results[4];
+      var score = 0;
+
+      if (string.indexOf('404: Not Found') < 0) {
+        score = 5 * multiplier;
+      }
+
+      if (strings && strings.length) {
+        for (var i in strings) {
+          // console.log(strings[i], string.indexOf(strings[i]))
+          if (string.indexOf(strings[i]) >= 0) {
+            score = score + (multiplier * 1);
+          }
+        }
+      }
+
+      updates[`v1/user/source/${user.uid}/cross/codelabs/${req.body.codelabId}/value`] = score;
+      updates[`v1/user/source/${user.uid}/cross/codelabs/${req.body.codelabId}/type`] = type;
+
+      return admin.database().ref().update(updates);
+      // console.log(score);
+
+      // return Promise.resolve();
+    })
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          success: true
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      return res
+        .status(error.status_code || 500)
+        .json(error);
+    });
+  // https://raw.githubusercontent.com/
 });
 
 exports.scannedList = functions.https.onRequest((req, res) => {
@@ -313,7 +474,6 @@ exports.scannedList = functions.https.onRequest((req, res) => {
       });
   }
 
-  const updates = {};
   const promises = [];
 
   promises.push(
@@ -442,6 +602,7 @@ exports.disconnect = functions.https.onRequest((req, res) => {
       updates[`v1/user/source/${user.uid}/primary/ticketNumber`] = '';
       updates[`v1/user/source/${user.uid}/meta/accepted`] = false;
       updates[`v1/user/source/${user.uid}/meta/score`] = 0;
+      updates[`v1/user/source/${user.uid}/cross/codelabs`] = null;
       updates[`v1/eventbrite/source/${req.body.id}`] = null;
 
       return admin

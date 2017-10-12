@@ -20,11 +20,15 @@
         </div>
         <div class="codelabs-list">
           <template is="dom-repeat" items="[[codelabs]]">
-            [[item.$key]]
+            <codelab-item codelab-id="[[item.$key]]" codelab-types="[[codelabTypes]]"></codelab-item>
           </template>
         </div>
 
       </section>
+    </template>
+
+    <template is="dom-if" if="[[params.id]]">
+      <codelab-block codelab-id="[[params.id]]" type="[[codelabTypePage]]" pages="[[pages]]" page="[[page]]" title="[[codelabTitle]]" page-id="[[params.page]]"></codelab-block>
     </template>
 
     <devfest-footer></devfest-footer>

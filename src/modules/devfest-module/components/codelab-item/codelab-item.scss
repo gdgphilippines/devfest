@@ -1,2 +1,67 @@
-@import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
+
+:host {
+  @apply --layout-flex;
+  margin: 20px;
+  max-width: 350px;
+  min-width: 250px;
+  border: 1px solid #BDBDBD;
+  box-shadow: 0px 3px 6px -3px #BDBDBD;
+}
+
+.web-header {
+  background: #4285f4;
+}
+
+.cloud-header {
+  background: #4285f4;
+}
+
+.assistant-header {
+  background: #4285f4;
+}
+
+.firebase-header {
+  background: #0288D1;
+}
+
+.android-header {
+  background: #a0bd3a;
+}
+
+.tensorflow-header {
+  background: #ef6c00;
+}
+
+.virtual-header {
+  background: #FF8A65;
+}
+
+.header {
+  padding: 20px;
+}
+
+.image {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: white;
+}
+
+.icon {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%
+}
+
+.body {
+  padding: 20px;
+}
+
+.footer {
+  padding: 20px;
+}
+
+.anchor {
+
+}

@@ -2,8 +2,61 @@
   <template>
     <link rel="stylesheet" href="./codelab-block.scss">
 
+    <section class="block">
+      <div class="sidebar">
+        <template is="dom-repeat" items="[[pages]]">
+          <a href="/codelabs/exer/[[codelabId]]/[[item.$key]]" class="page-item">
+            <paper-ripple></paper-ripple>
+            [[item.title]]
+          </a>
 
-    <devfest-footer></devfest-footer>
+        </template>
+        <a href="/codelabs/exer/[[codelabId]]/submit" class="page-item">
+          <paper-ripple></paper-ripple>
+          Submit
+        </a>
+      </div>
+      <div class="main">
+        <div class$="header [[type]]-header">
+          <h2 class="title">
+            <a href="/codelabs" class="icon">
+              <iron-icon icon="devfest:arrow-back" class="iron-icon"></iron-icon>
+            </a>
+            [[title]]
+          </h2>
+        </div>
+
+        <div class="body">
+          <template is="dom-if" if="[[!isSubmit(pageId)]]">
+            <marked-element markdown="[[page]]">
+              <div slot="markdown-html"></div>
+            </marked-element>
+          </template>
+
+          <template is="dom-if" if="[[isSubmit(pageId)]]">
+            <h1>Submit your Project</h1>
+            <p>
+              To get points, make sure you have connected your Github account and submit your Github repo by typing the repo name here:
+              (If your repo is in https://github.com/[account-name]/my-repo, then you'll need to put "my-repo" without the double-quotations).
+            </p>
+            <div class="form-repo">
+              <paper-input label="Github repository name" value="{{repo}}"></paper-input>
+              <devfest-button-only on-tap="submit">
+                Submit
+              </devfest-button-only>
+            </div>
+          </template>
+        </div>
+
+        <paper-fab class="previous" icon="devfest:navigate-before" on-tap="previous">
+        </paper-fab>
+
+        <paper-fab class="next" icon="devfest:navigate-next" on-tap="next">
+        </paper-fab>
+      </div>
+    </section>
+
+
 
   </template>
 </dom-module>

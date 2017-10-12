@@ -34,7 +34,8 @@
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
     "paper-input": "PolymerElements/paper-input#^2.0.2",
-    "paper-dialog": "PolymerElements/paper-dialog#^2.0.0"
+    "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"

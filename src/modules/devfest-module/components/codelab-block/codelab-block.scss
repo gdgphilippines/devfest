@@ -1,2 +1,144 @@
-@import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
+
+.block {
+  @apply --layout-horizontal;
+
+  @media screen and (max-width: 500px) {
+    display: block;
+  }
+}
+
+.next {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: #2e9be6;
+}
+
+.previous {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background: #2e9be6;
+}
+
+img {
+  max-width: 100%;
+}
+
+.form-repo {
+  max-width: 500px;
+}
+
+blockquote {
+  border-color: #6a6;
+  background: #ded;
+  color: #464;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  border-left: 4px solid;
+}
+
+p code {
+  color: white;
+  background-color: #28323f;
+  padding: 5px;
+  -webkit-text-size-adjust: none;
+  line-height: 1.4;
+}
+
+pre {
+  color: white;
+  background-color: #28323f;
+  padding: 14px;
+  -webkit-text-size-adjust: none;
+  line-height: 1.4;
+}
+
+a code {
+  display: inline;
+  background-color: #0F9D58;
+  color: #fff;
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+  box-shadow: 0px 3px 6px -3px #BDBDBD;
+  border-right: 1px solid #BDBDBD;
+
+  @media screen and (max-width: 500px) {
+    border-right: 0px;
+    width: auto;
+  }
+}
+
+.web-header {
+  background: #4285f4;
+  color: white;
+}
+
+.cloud-header {
+  background: #4285f4;
+  color: white;
+}
+
+.assistant-header {
+  background: #4285f4;
+  color: white;
+}
+
+.firebase-header {
+  background: #0288D1;
+  color: white;
+}
+
+.android-header {
+  background: #a0bd3a;
+}
+
+.tensorflow-header {
+  background: #ef6c00;
+  color: white;
+}
+
+.virtual-header {
+  background: #FF8A65;
+  color: white;
+}
+
+.header {
+  padding: 10px 20px;
+}
+
+.title {
+  color: inherit;
+}
+
+.icon {
+  text-decoration: none;
+  color: inherit;
+  margin-right: 20px;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
+
+.page-item {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.main {
+  @apply --layout-flex;
+  position: relative;
+  padding-bottom: 90px;
+}
+
+.body {
+  margin: 0 20px;
+
+}

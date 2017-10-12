@@ -2,8 +2,26 @@
   <template>
     <link rel="stylesheet" href="./codelab-item.scss">
 
-
-    <devfest-footer></devfest-footer>
+    <section class="item">
+      <div class$="header [[type]]-header">
+        <div class="image">
+          <img src="/images/codelabs/[[image]]" class="icon">
+        </div>
+      </div>
+      <div class="body">
+        <h3>
+          [[title]]
+        </h3>
+      </div>
+      <hr>
+      <div class="footer">
+        <a href="/codelabs/exer/[[codelabId]]" class="anchor">
+          <devfest-button-only>
+            Start Here
+          </devfest-button-only>
+        </a>
+      </div>
+    </section>
 
   </template>
 </dom-module>
