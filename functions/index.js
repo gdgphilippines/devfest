@@ -445,8 +445,13 @@ exports.connect = functions.https.onRequest((req, res) => {
       updates[`v1/eventbrite/source/${req.body.id}/primary/displayName`] = user.displayName || user.name || user.email;
       updates[`v1/eventbrite/source/${req.body.id}/primary/email`] = user.email;
       updates[`v1/eventbrite/source/${req.body.id}/primary/uid`] = user.uid;
-      updates[`v1/eventbrite/source/${oldTicketNumber}`] = null;
 
+      if (oldTicketNumber) {
+        updates[`v1/eventbrite/source/${oldTicketNumber}`] = null;
+      }
+
+
+      console.log(updates)
       return admin
         .database()
         .ref()
