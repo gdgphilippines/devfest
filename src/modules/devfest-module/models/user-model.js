@@ -111,8 +111,12 @@ export default (superClass) => {
     }
 
     _checkSponsorIdReloadPage (sponsorId) {
-      const shell = document.querySelector('app-shell');
-      shell._pathChanged(shell.path);
+      console.log(sponsorId, this.__sponsorId)
+      if (sponsorId !== this.__sponsorId) {
+        const shell = document.querySelector('app-shell');
+        shell._pathChanged(shell.path);
+        this.__sponsorId = sponsorId;
+      }
     }
 
     _userChanged (user) {

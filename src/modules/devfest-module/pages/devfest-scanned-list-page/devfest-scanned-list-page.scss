@@ -1,3 +1,29 @@
 @import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
 @import '../../styles/components/section.scss';
+
+.table {
+  padding: 20px;
+  width: 100%;
+}
+
+.table-body {
+  text-align: left;
+}
+
+.table-cell {
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}
+
+.hide-on-small {
+  @media screen and (max-width: 700px){
+    display: none;
+  }
+}
+
+.make-small {
+  @media screen and (max-width: 700px){
+    font-size: 10px;
+  }
+}

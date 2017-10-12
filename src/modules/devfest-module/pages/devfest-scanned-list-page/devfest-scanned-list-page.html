@@ -3,44 +3,50 @@
     <link rel="stylesheet" href="./devfest-scanned-list-page.scss">
 
     <section class="section">
-      <h2 class="title">List for [[profile.sponsorId]]</h2>
+      <h2 class="title">List for attendees scanned by: [[profile.sponsorId]]</h2>
 
-      <table>
+      <table class="table">
         <thead>
-          <th>
-            <td>
+          <tr>
+            <th class="hide-on-small">
               Name
-            </td>
-            <td>
+            </th>
+            <th>
               Email
-            </td>
-            <td>
+            </th>
+            <th>
               Scanned by
-            </td>
-            <td>
+            </th>
+            <th class="hide-on-small">
               Scanned date
-            </td>
-          </th>
+            </th>
+          </tr>
         </thead>
-        <tbody>
-          <template is="dom-repeat" items="scanned">
-            <tr>
-              <td>
+        <tbody class="table-body">
+          <template is="dom-repeat" items="[[scanned]]">
+            <tr class="table-row">
+              <td class="table-cell hide-on-small">
                 [[item.displayName]]
               </td>
-              <td>
+              <td class="table-cell make-small">
                 [[item.email]]
               </td>
-              <td>
+              <td class="table-cell make-small">
                 [[item.scannedBy]]
               </td>
-              <td>
-                [[item.dateScanned]]
+              <td class="table-cell hide-on-small">
+                [[_renderDate(item.dateScanned)]]
               </td>
             </tr>
           </template>
         </tbody>
       </table>
+
+      <a href="/are-you-a-sponsor">
+        <devfest-button-only>
+            Go back
+        </devfest-button-only>
+      </a>
     </section>
 
     <devfest-footer></devfest-footer>

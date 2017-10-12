@@ -267,7 +267,7 @@ exports.scanId = functions.https.onRequest((req, res) => {
         });
     })
     .catch(error => {
-      console.log(error)
+      console.log(error);
       return res
         .status(error.status_code || 500)
         .json(error);
@@ -295,7 +295,99 @@ exports.submitRepo = functions.https.onRequest((req, res) => {
 });
 
 exports.scannedList = functions.https.onRequest((req, res) => {
+  if (!req.body.token) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No auth or uid found'
+      });
+  }
 
+  if (!req.body.company) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No repository found'
+      });
+  }
+
+  const updates = {};
+  const promises = [];
+
+  promises.push(
+    admin.auth().verifyIdToken(req.body.token)
+  );
+
+  promises.push(
+    admin.database().ref(`v1/sponsors/source/${req.body.company}/cross/sponsorUsers/`)
+    .once('value')
+  );
+
+  promises.push(
+    admin.database().ref(`v1/sponsors/source/${req.body.company}/cross/scanned/`)
+    .once('value')
+  );
+
+  Promise.all(promises)
+    .then(results => {
+      var user = results[0];
+      var sponsor = results[1];
+      var scanned = results[2];
+      var list = [];
+
+      if (!user) {
+        var error2 = {
+          status_code: 404,
+          message: 'No User found'
+        };
+        return Promise.reject(error2);
+      }
+
+      if (!sponsor.exists()) {
+        var error3 = {
+          status_code: 404,
+          message: 'No Sponsor found for the given company ID'
+        };
+        return Promise.reject(error3);
+      }
+
+      if (!sponsor.val()[user.uid].value) {
+        var error5 = {
+          status_code: 403,
+          message: 'Your user is not connected to this sponsor'
+        };
+        return Promise.reject(error5);
+      }
+
+      scanned.forEach(child => {
+        list.push({
+          $key: child.key,
+          displayName: child.val().displayName,
+          email: child.val().email,
+          scannedBy: child.val().scannedBy,
+          dateScanned: child.val().dateScanned
+        });
+      });
+
+      list.sort((a, b) => {
+        return a.dateScanned - b.dateScanned;
+      });
+
+      return res
+        .status(200)
+        .json({
+          success: true,
+          list
+        });
+    })
+    .catch(error => {
+      console.log(error);
+      return res
+        .status(error.status_code || 500)
+        .json(error);
+    });
 });
 
 exports.disconnect = functions.https.onRequest((req, res) => {

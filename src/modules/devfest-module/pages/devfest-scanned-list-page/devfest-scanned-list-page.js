@@ -42,7 +42,44 @@ class DevfestScannedListPage extends User(contentLoaderMixin(Polymer.Element)) {
   }
 
   reload () {
-    this._fetchJson('scanned-list-for-sponsor', 'speakers', true);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    var user = this.user;
+    var profile = this.profile;
+    if (user && profile) {
+      user.getIdToken().then(token => {
+        fetch('/scanned-list-for-sponsor', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            uid: user.uid,
+            company: profile.sponsorId,
+            token
+          })
+        }).then(res => {
+          return res.json();
+        }).then(json => {
+          if (json.success) {
+            this.scanned = json.list;
+          } else {
+            if (Raven) {
+              Raven.captureException(json);
+            }
+            document.querySelector('app-shell').showMessage('Error in scanning: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
+          }
+        });
+      });
+    }
+    // this._fetchJson('scanned-list-for-sponsor', 'speakers', true);
+  }
+
+  _renderDate (d) {
+    var date = d;
+    if (typeof d === 'object' && d.value) {
+      date = d.value;
+    }
+    var nd = new Date(date);
+    return nd.toLocaleDateString() + ' - ' + nd.toLocaleTimeString();
   }
 }
 
