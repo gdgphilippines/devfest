@@ -184,47 +184,59 @@ class DevfestScanPage extends User(Polymer.GestureEventListeners(contentLoaderMi
 
   reload () {
     Polymer.RenderStatus.afterNextRender(this, () => {
-      var video = this.shadowRoot.querySelector('#video');
-      // Get access to the camera!
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        // console.log(navigator.mediaDevices.getSupportedConstraints());
-        // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } } }).then((stream) => {
-          this._stream = stream;
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-          if (this._interval) {
-            clearInterval(this._interval);
-            this._interval = null;
-          }
-
-          this._interval = setInterval(() => {
-            this.scanned();
-          }, 100);
-          // setTimeout(function() {console.log(video.videoHeight)}, 1000)
-        })
-          .catch((error) => {
-            console.error(error);
-            return navigator.mediaDevices.getUserMedia({ video: true });
-            // Raven.captureException(error)
-            // this.$.toast.show(error.message, 5000);
-          })
-          .then((stream) => {
-            this._stream = stream;
-            video.src = window.URL.createObjectURL(stream);
-            video.play();
-
-            if (this._interval) {
-              clearInterval(this._interval);
-              this._interval = null;
-            }
-            this._interval = setInterval(() => {
-              this.scanned();
-            }, 100);
-          });
+        this.getUserMedia();
+      } else {
+        import(/* webpackChunkName: 'md-gum-polyfill' */ 'md-gum-polyfill').then(() => {
+          console.log('loaded polyfill');
+          this.getUserMedia();
+        });
       }
-      this.resize();
+      // Get access to the camera!
     });
+  }
+
+  getUserMedia () {
+    var video = this.shadowRoot.querySelector('#video');
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // console.log(navigator.mediaDevices.getSupportedConstraints());
+      // Not adding `{ audio: true }` since we only want video now
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'environment' } } }).then((stream) => {
+        this._stream = stream;
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+        if (this._interval) {
+          clearInterval(this._interval);
+          this._interval = null;
+        }
+
+        this._interval = setInterval(() => {
+          this.scanned();
+        }, 100);
+        // setTimeout(function() {console.log(video.videoHeight)}, 1000)
+      })
+      .catch((error) => {
+        console.error(error);
+        return navigator.mediaDevices.getUserMedia({ video: true });
+        // Raven.captureException(error)
+        // this.$.toast.show(error.message, 5000);
+      })
+      .then((stream) => {
+        this._stream = stream;
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+
+        if (this._interval) {
+          clearInterval(this._interval);
+          this._interval = null;
+        }
+        this._interval = setInterval(() => {
+          this.scanned();
+        }, 100);
+      });
+    }
+    this.resize();
   }
 }
 

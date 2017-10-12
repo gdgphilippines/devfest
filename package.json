@@ -26,6 +26,7 @@
     "indexeddbshim": "^3.0.4",
     "intersection-observer": "^0.4.2",
     "marked": "^0.3.6",
+    "md-gum-polyfill": "^1.0.0",
     "path-to-regexp": "^1.7.0",
     "qrcode-reader": "^1.0.3",
     "redux": "^3.7.2"
