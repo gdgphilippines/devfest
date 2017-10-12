@@ -46,20 +46,7 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
       }
       if (result && result.result) {
         this.shadowRoot.querySelector('#video').classList.add('scanned');
-        if (this._interval) {
-          clearInterval(this._interval);
-          this._interval = null;
-        }
-
-        if (this._stream) {
-          var tracks = this._stream.getTracks();
-          for (var i in tracks) {
-            if (tracks[i].stop) {
-              console.log(tracks[i])
-              tracks[i].stop();
-            }
-          }
-        }
+        this.stopRecording();
         // console.log(result.result);
         document.querySelector('app-shell').showMessage('Scanning...', function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
         const headers = new Headers();
@@ -90,6 +77,8 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
                 window.dispatchEvent(new CustomEvent('location-changed'));
                 document.querySelector('app-shell').showMessage('Error in scanning: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
               }
+
+              this.shadowRoot.querySelector('#video').classList.remove('scanned');
             });
           });
         }
@@ -103,6 +92,27 @@ class DevfestConnectPage extends User(contentLoaderMixin(Polymer.Element)) {
   connectedCallback () {
     super.connectedCallback();
     this.reload();
+  }
+
+  stopRecording () {
+    if (this._interval) {
+      clearInterval(this._interval);
+      this._interval = null;
+    }
+
+    if (this._stream) {
+      var tracks = this._stream.getTracks();
+      for (var i in tracks) {
+        if (tracks[i].stop) {
+          console.log(tracks[i]);
+          tracks[i].stop();
+        }
+      }
+      // console.log(this._stream)
+      delete this._stream;
+      var video = this.shadowRoot.querySelector('#video');
+      video.src = '';
+    }
   }
 
   resize () {
