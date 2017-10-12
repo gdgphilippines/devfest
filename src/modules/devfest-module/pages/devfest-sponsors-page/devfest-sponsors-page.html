@@ -13,7 +13,7 @@
           <div class="row">
             <template is="dom-repeat" items="[[item.list]]" as="sponsor">
               <div class$="flex [[item.class]]">
-                <a href="[[sponsor.url]]" target="_blank"><img class="[[item.class]]" alt="[[sponsor.name]]" src="[[_app.contentRepo]][[_app.branch]]/sponsors/compressed/[[sponsor.image]]"></a>
+                <a href="[[sponsor.url]]" target="_blank"><img class$="[[item.class]]" alt="[[sponsor.name]]" src="[[_app.contentRepo]][[_app.branch]]/sponsors/compressed/[[sponsor.image]]"></a>
               </div>
             </template>
           </div>

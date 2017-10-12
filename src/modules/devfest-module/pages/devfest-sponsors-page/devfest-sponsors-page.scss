@@ -16,6 +16,10 @@
   @apply --layout-center;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media screen and (max-width: 500px) {
+    display: block;
+  }
 }
 
 .flex {
