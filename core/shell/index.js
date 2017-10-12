@@ -261,7 +261,7 @@ class AppShell extends ReduxMixin(QueryParamsMixin(LocationMixin(Polymer.Element
   _checkAuth (route) {
     if (this._routes[route] && this._routes[route].auth && auth[this._routes[route].auth]) {
       if (auth[this._routes[route].auth] instanceof Promise) {
-        auth[this._routes[route].auth]()
+        auth[this._routes[route].auth]
         .then((res) => {
           if (res) {
             this._loadPage(route)

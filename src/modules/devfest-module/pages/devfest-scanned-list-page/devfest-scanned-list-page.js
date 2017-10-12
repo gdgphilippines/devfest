@@ -42,7 +42,7 @@ class DevfestScannedListPage extends User(contentLoaderMixin(Polymer.Element)) {
   }
 
   reload () {
-    this._fetchJson('scanned-list-for-sponsor', 'speakers');
+    this._fetchJson('scanned-list-for-sponsor', 'speakers', true);
   }
 }
 

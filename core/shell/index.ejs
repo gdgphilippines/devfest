@@ -194,7 +194,7 @@
 
     <app-shell>
       <% for (var i in htmlWebpackPlugin.options.config.routing) { var node = htmlWebpackPlugin.options.config.routing[i].name || htmlWebpackPlugin.options.config.routing[i] %>
-        <<%= node %> route="<%= i %>"></<%= node %>>
+        <<%= node %> route="<%= i %>" <% if (htmlWebpackPlugin.options.config.routing[i].auth) { %> auth="<%= htmlWebpackPlugin.options.config.routing[i].auth %>" <% } %>></<%= node %>>
       <% } %>
       <% for (var i in htmlWebpackPlugin.options.config.httpCodes) { var node = htmlWebpackPlugin.options.config.httpCodes[i].name || htmlWebpackPlugin.options.config.httpCodes[i] %>
         <<%= node %> route="<%= i %>"></<%= node %>>

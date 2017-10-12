@@ -79,6 +79,9 @@ const userState = (user) => {
     type: USER_ACTION.UPDATE,
     user
   });
+
+  const shell = document.querySelector('app-shell');
+  shell._pathChanged(shell.path);
 };
 
 observeAuth(userState);
@@ -99,6 +102,17 @@ export default (superClass) => {
           statePath: 'user.profile'
         }
       };
+    }
+
+    static get observers () {
+      return [
+        '_checkSponsorIdReloadPage(profile.sponsorId)'
+      ];
+    }
+
+    _checkSponsorIdReloadPage (sponsorId) {
+      const shell = document.querySelector('app-shell');
+      shell._pathChanged(shell.path);
     }
 
     _userChanged (user) {
@@ -193,7 +207,6 @@ export default (superClass) => {
     unlink (e) {
       if (this.user && this.user.providerData && this.user.providerData.length > 1) {
         var provider = this._unlinkId;
-        console.log(provider)
         unlink(this.user, provider)
         .then(() => {
           const user = reloadUser();
