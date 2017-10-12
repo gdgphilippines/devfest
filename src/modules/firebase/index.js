@@ -34,7 +34,6 @@ const updateModelTypeSnapshot = (store, modelType, type, snapshot) => {
         attrs
       });
     }, 100);
-
   }
 };
 
@@ -122,7 +121,6 @@ export const logout = () => {
 };
 
 export const observeAuth = (dispatch) => {
-  console.log(window.firebase, firebase, dispatch)
   if (firebase) {
     firebase.auth().onAuthStateChanged(dispatch);
   } else if (window.firebase) {
@@ -131,7 +129,6 @@ export const observeAuth = (dispatch) => {
   } else {
     window.addEventListener('firebase-initialized', event => {
       firebase = window.firebase || event.detail;
-      console.log(firebase, event.detail, window.firebase, dispatch)
       firebase.auth().onAuthStateChanged(dispatch);
     });
   }

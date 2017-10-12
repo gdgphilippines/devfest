@@ -25,9 +25,20 @@ class DevfestProfilePage extends User(contentLoaderMixin(Polymer.Element)) {
     };
   }
 
+  static get observers () {
+    return [
+      '_setProfileImage(profile.image)'
+    ]
+  }
+
   connectedCallback () {
     super.connectedCallback();
     this.reload();
+  }
+
+  _setProfileImage (image) {
+    console.log(image)
+    this.shadowRoot.querySelector('#profile-image').style.background = `url(${image}) center/cover no-repeat`;
   }
 
   _getMoreLinks (providerData) {
