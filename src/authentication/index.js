@@ -1,17 +1,5 @@
 import { store } from '../../core/modules/state-manager';
 
-const isSponsor = new Promise(resolve => {
-  console.log(window.firebase)
-  if (window.firebase) {
-    if (window.firebase.auth().currentUser.uid) {
-      var profile = store.getState().profile;
-      console.log(profile)
-      return resolve(profile && profile.sponsorId);
-    }
-  }
-  resolve(false)
-})
-
 export default {
   exampleAuthentication: () => {
     return false;
@@ -19,7 +7,7 @@ export default {
 
   isLoggedIn: () => {
     if (window.firebase) {
-      return window.firebase.auth().currentUser.uid;
+      return window.firebase.auth() && window.firebase.auth().currentUser && window.firebase.auth().currentUser.uid;
     }
   },
 

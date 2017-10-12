@@ -20,24 +20,49 @@ class DevfestCodelabsPage extends contentLoaderMixin(Polymer.Element) {
 
   static get properties () {
     return {
-      perks: {
-        type: Array,
-        value: []
+      codelabs: {
+        type: Array
       },
-      details: {
-        type: Array,
-        value: []
-      },
-      payment: {
-        type: Array,
-        value: []
+      codelabType: {
+        type: String,
+        value: 'all'
       }
     };
+  }
+
+  static get observers () {
+    return [
+      '_changeListCodelab(codelabType, params.id, params.page)'
+    ];
   }
 
   connectedCallback () {
     super.connectedCallback();
     this.reload();
+  }
+
+  _changeListCodelab (codelabType, id, page) {
+    console.log(codelabType, id, page)
+    if (this._codelabs) {
+      this._codelabs.off();
+    }
+
+    if (codelabType === 'done') {
+
+    } if (codelabType === 'exer') {
+
+    } else {
+      this._codelabs = firebase.database().ref(`v1/codelabs/query/${codelabType}`)
+      this._codelabs.on('value', (snapshot) => {
+        var list = [];
+        snapshot.forEach(child => {
+          list.push({
+            $key: child.key
+          });
+        });
+        this.codelabs = list;
+      });
+    }
   }
 
   reload () {}

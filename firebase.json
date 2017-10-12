@@ -77,6 +77,18 @@
         "destination": "/index.html"
       },
       {
+        "source": "/codelabs/**/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/codelabs/**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/codelabs",
+        "destination": "/index.html"
+      },
+      {
         "source": "/connect-ticket",
         "destination": "/index.html"
       },

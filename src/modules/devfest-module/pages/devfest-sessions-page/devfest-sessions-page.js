@@ -25,7 +25,6 @@ class DevfestSessionsPage extends contentLoaderMixin(Polymer.Element) {
   connectedCallback () {
     super.connectedCallback()
     this.reload()
-    console.log(document.referrer)
   }
 
   reload () {

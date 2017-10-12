@@ -2,9 +2,30 @@
   <template>
     <link rel="stylesheet" href="./devfest-codelabs-page.scss">
 
-    <section class="section perks-container ">
+    <template is="dom-if" if="[[!params.id]]">
+      <section class="banner">
+        <div class="banner-text">
+          <h1 class="title">Welcome to Codelabs!</h1>
+          <p>
+            GDG Devfest 2017 Codelabs is a curated list of a guided, tutorial, hands-on coding experience handpicked by volunteers from the Google Developers Codelabs.
+            Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.
+            Connect your <a href="/profile">Github account</a>, if you haven't, to be eligible to our raffle at the end of the event.
+          </p>
+        </div>
+      </section>
 
-    </section>
+      <section class="codelabs">
+        <div class="codelabs-header">
+
+        </div>
+        <div class="codelabs-list">
+          <template is="dom-repeat" items="[[codelabs]]">
+            [[item.$key]]
+          </template>
+        </div>
+
+      </section>
+    </template>
 
     <devfest-footer></devfest-footer>
 

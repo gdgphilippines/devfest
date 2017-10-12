@@ -23,6 +23,20 @@ module.exports = (env, dest) => {
       source: i.split('/').map(path => (path.indexOf(':') === 0 ? '**' : path)).join('/'),
       destination: '/index.html'
     })
+    var arr = i.split('/')
+
+    while(arr.length > 0) {
+      if (arr[arr.length - 1].indexOf(':') === 0 && arr[arr.length -1].indexOf('?') === arr[arr.length - 1].length - 1) {
+        arr.pop()
+        firebase.hosting.rewrites.push({
+          source: arr.map(path => (path.indexOf(':') === 0 ? '**' : path)).join('/'),
+          destination: '/index.html'
+        })
+      } else {
+        break;
+      }
+    }
+
   }
 
   firebase.hosting.public = dest

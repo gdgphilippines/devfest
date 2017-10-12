@@ -32,6 +32,9 @@
                           <template is="dom-if" if="[[_getSpeakerId(session.session, sessions, speakers)]]">
                             <img class="session-image" src="[[_app.contentRepo]][[_app.branch]]/speakers/images-cropped/[[_getSpeakerId(session.session, sessions, speakers)]].jpg">
                             <span class="session-text">[[_getSpeaker(session.session, sessions, speakers)]]</span>
+                            <template is="dom-if" if="[[session.room]]">
+                              <span class="session-text"><br><br><b>Room:</b> [[session.room]]</span>
+                            </template>
                           </template>
                         </a>
                       </template>

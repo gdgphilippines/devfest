@@ -1,3 +1,14 @@
 @import '../../styles/components/host.scss';
 @import '../../styles/components/typography.scss';
 @import '../../styles/components/section.scss';
+
+.banner {
+  padding: 40px 0 48px 0;
+  box-shadow: 0px 3px 6px -3px #BDBDBD;
+}
+
+.banner-text {
+  margin: 0 auto;
+  width: 90vw;
+  max-width: 1024px;
+}
