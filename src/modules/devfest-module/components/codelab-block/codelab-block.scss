@@ -53,6 +53,9 @@ pre {
   padding: 14px;
   -webkit-text-size-adjust: none;
   line-height: 1.4;
+  max-width: 800px;
+  display: block;
+  overflow-x: auto;
 }
 
 a code {
