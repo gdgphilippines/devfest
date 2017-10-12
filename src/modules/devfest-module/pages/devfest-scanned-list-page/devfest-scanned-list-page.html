@@ -2,8 +2,45 @@
   <template>
     <link rel="stylesheet" href="./devfest-scanned-list-page.scss">
 
-    <section class="section perks-container ">
+    <section class="section">
+      <h2 class="title">List for [[profile.sponsorId]]</h2>
 
+      <table>
+        <thead>
+          <th>
+            <td>
+              Name
+            </td>
+            <td>
+              Email
+            </td>
+            <td>
+              Scanned by
+            </td>
+            <td>
+              Scanned date
+            </td>
+          </th>
+        </thead>
+        <tbody>
+          <template is="dom-repeat" items="scanned">
+            <tr>
+              <td>
+                [[item.displayName]]
+              </td>
+              <td>
+                [[item.email]]
+              </td>
+              <td>
+                [[item.scannedBy]]
+              </td>
+              <td>
+                [[item.dateScanned]]
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
     </section>
 
     <devfest-footer></devfest-footer>

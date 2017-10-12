@@ -41,7 +41,9 @@ class DevfestScannedListPage extends User(contentLoaderMixin(Polymer.Element)) {
     this.reload();
   }
 
-  reload () {}
+  reload () {
+    this._fetchJson('scanned-list-for-sponsor', 'speakers');
+  }
 }
 
 window.customElements.define(DevfestScannedListPage.is, DevfestScannedListPage);

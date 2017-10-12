@@ -274,7 +274,27 @@ exports.scanId = functions.https.onRequest((req, res) => {
     });
 });
 
-exports.resetScoreOnGithubUnlink = functions.https.onRequest((req, res) => {
+exports.submitRepo = functions.https.onRequest((req, res) => {
+  if (!req.body.token) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No auth or uid found'
+      });
+  }
+
+  if (!req.body.repository) {
+    return res
+      .status(404)
+      .json({
+        success: false,
+        message: 'No repository found'
+      });
+  }
+});
+
+exports.scannedList = functions.https.onRequest((req, res) => {
 
 });
 

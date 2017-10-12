@@ -21,6 +21,14 @@
         "function": "disconnect"
       },
       {
+        "source": "/scanned-list-for-sponsor",
+        "function": "scannedList"
+      },
+      {
+        "source": "/submit-repo",
+        "function": "submitRepo"
+      },
+      {
         "source": "/",
         "destination": "/index.html"
       },

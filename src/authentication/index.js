@@ -1,13 +1,22 @@
+import { store } from '../../core/modules/state-manager';
+
 export default {
   exampleAuthentication: () => {
     return false;
   },
 
   isLoggedIn: () => {
-    return true;
+    if (window.firebase) {
+      return window.firebase.auth().currentUser.uid;
+    }
   },
 
   isSponsor: () => {
-    return true;
+    if (window.firebase) {
+      if (window.firebase.auth().currentUser.uid) {
+        var profile = store.getState().profile;
+        return profile && profile.sponsorId;
+      }
+    }
   }
 };

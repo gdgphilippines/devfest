@@ -6,8 +6,9 @@ export default (superClass) => {
       super()
       this.__observeProps = {}
     }
-    _fetchJson (content, prop) {
-      fetch(`${app.contentRepo + app.branch}/${content}`)
+    _fetchJson (content, prop, own) {
+      var href = own ? `/${content}` : `${app.contentRepo + app.branch}/${content}`
+      fetch(href)
         .then(res => {
           return res.json()
         })
