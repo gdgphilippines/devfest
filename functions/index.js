@@ -48,7 +48,7 @@ exports.createProfile = functions.auth.user().onCreate(event => {
   updates[`${path}/meta/verified`] = false;
   updates[`${path}/meta/dateJoined`] = admin.database.ServerValue.TIMESTAMP;
   // updates[`${path}/cross/ticketEmail`] = '';
-  admin.database().ref().update(updates);
+  return admin.database().ref().update(updates);
   // ...
 });
 
