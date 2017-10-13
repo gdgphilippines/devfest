@@ -76,8 +76,16 @@ exports.updateScore = functions.database.ref('v1/user/source/{userId}/cross/code
       updates[`v1/user/source/${event.params.userId}/meta/score`] = score;
       updates[`v1/user/query/score/${event.params.userId}/value`] = score;
     }
+    return admin.database().ref().update(updates);
+  });
 
-
+exports.updateGithubScore = functions.database.ref('v1/user/source/{userId}/primary/github')
+  .onWrite(event => {
+    var updates = {};
+    var github = event.data.val();
+    if (!github) {
+      updates[`v1/user/source/${event.params.userId}/cross/codelabs`] = null;
+    }
     return admin.database().ref().update(updates);
   });
 
