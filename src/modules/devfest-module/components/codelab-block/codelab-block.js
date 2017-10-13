@@ -27,7 +27,8 @@ class CodelabBlock extends User(Polymer.Element) {
         type: Array
       },
       pageId: {
-        type: String
+        type: String,
+        observer: '_pageIdChanged'
       },
       codelabId: {
         type: String
@@ -36,6 +37,13 @@ class CodelabBlock extends User(Polymer.Element) {
         type: String
       }
     };
+  }
+
+  _pageIdChanged (pageId) {
+    console.log(pageId)
+    if (!pageId) {
+      this.pageId = 'page-01';
+    }
   }
 
   _pageChanged (page) {
@@ -95,6 +103,8 @@ class CodelabBlock extends User(Polymer.Element) {
   }
 
   isSubmit (page) {
+    console.log(page)
+    page = page || 'page-01';
     return page === 'submit';
   }
 
@@ -104,7 +114,7 @@ class CodelabBlock extends User(Polymer.Element) {
 
     if (index > 0) {
       var newPage = this.pages[index - 1];
-      window.history.pushState({}, '', `/codelabs/exer/${this.codelabId}/${newPage}`);
+      window.history.pushState({}, '', `/codelabs/exer/${this.codelabId}/${newPage.$key}`);
       window.dispatchEvent(new CustomEvent('location-changed'));
     }
   }
@@ -115,7 +125,7 @@ class CodelabBlock extends User(Polymer.Element) {
 
     if (index < this.pages.length - 1) {
       var newPage = this.pages[index + 1];
-      window.history.pushState({}, '', `/codelabs/exer/${this.codelabId}/${newPage}`);
+      window.history.pushState({}, '', `/codelabs/exer/${this.codelabId}/${newPage.$key}`);
       window.dispatchEvent(new CustomEvent('location-changed'));
     } else {
       window.history.pushState({}, '', `/codelabs/exer/${this.codelabId}/submit`);

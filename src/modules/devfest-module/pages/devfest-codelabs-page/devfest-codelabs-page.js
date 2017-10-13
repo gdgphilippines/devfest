@@ -93,7 +93,7 @@ class DevfestCodelabsPage extends contentLoaderMixin(Polymer.Element) {
   }
 
   _changeCodeLabType (type) {
-    console.log(type)
+    // console.log(type)
     this.codelabType = type || 'all';
   }
 
@@ -176,6 +176,10 @@ class DevfestCodelabsPage extends contentLoaderMixin(Polymer.Element) {
         this.codelabs = list;
       });
     }
+  }
+
+  _getPage (page) {
+    return page || 'page-01';
   }
 
   reload () {}

@@ -289,6 +289,7 @@ exports.scanId = functions.https.onRequest((req, res) => {
       updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedByUid`] = user.uid;
       updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedBy`] = user.name || user.displayName || user.email;
       updates[`v1/sponsors/source/${req.body.company}/cross/scanned/${attendee.key}/scannedByEmail`] = user.email;
+      updates[`v1/user/source/${attendee.key}/cross/scanned/${req.body.company}/value`] = admin.database.ServerValue.TIMESTAMP;
 
       return admin.database().ref().update(updates);
     })
