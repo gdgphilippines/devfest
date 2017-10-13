@@ -5,6 +5,7 @@ import 'iron-flex-layout/iron-flex-layout.html';
 import 'paper-input/paper-input.html';
 import 'paper-fab/paper-fab.html';
 import 'paper-ripple/paper-ripple.html';
+import 'paper-spinner/paper-spinner.html';
 import '../../fonts/devfest-fonts.html';
 import '../../icons/devfest-icons.html';
 import './codelab-block.html';
@@ -34,8 +35,38 @@ class CodelabBlock extends User(Polymer.Element) {
       },
       repo: {
         type: String
+      },
+      submitSpin: {
+        type: Boolean,
+        value: false
+      },
+      isGithub: {
+        type: Boolean,
+        value: false
       }
     };
+  }
+
+  static get observers () {
+    return [
+      '_checkGithubData(user.providerData)'
+    ];
+  }
+
+  _checkGithubData (providerData) {
+    console.log(providerData)
+
+    for (var i in providerData) {
+      if (providerData[i].providerId === 'github.com') {
+        return this.isGithub = true;
+      }
+    }
+    this.isGithub = false;
+  }
+
+  _checkGithub (providerData) {
+    // console.log(providerData)
+
   }
 
   _pageChanged (page) {
@@ -53,8 +84,9 @@ class CodelabBlock extends User(Polymer.Element) {
 
   submit () {
     var repo = this.repo;
-
     if (repo) {
+      this.set('submitSpin', true);
+      console.log(this.submitSpin)
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
       var user = this.user;
@@ -75,6 +107,8 @@ class CodelabBlock extends User(Polymer.Element) {
               document.querySelector('app-shell').showMessage('Done! Calculating', () => {
                 document.querySelector('app-shell').closeToast();
               }, 'Close', null, 10000);
+              window.history.pushState({}, '', `/codelabs`);
+              window.dispatchEvent(new CustomEvent('location-changed'));
             } else {
               if (Raven) {
                 Raven.captureException(json);
@@ -84,10 +118,15 @@ class CodelabBlock extends User(Polymer.Element) {
               }, 'Close', null, 10000);
               // document.querySelector('app-shell').showMessage('Error in scanning: ' + json.message, function () { document.querySelector('app-shell').closeToast(); }, 'Close', null, 10000);
             }
+
+            this.set('submitSpin', false);
           });
         });
       }
+
+
     } else {
+      this.submitSpin = false;
       document.querySelector('app-shell').showMessage('Please put a proper repository.', () => {
         document.querySelector('app-shell').closeToast();
       }, 'Close', null, 10000);
@@ -95,7 +134,11 @@ class CodelabBlock extends User(Polymer.Element) {
   }
 
   isSubmit (page) {
+
     page = page || 'page-01';
+    if (page === 'submit' && this.user) {
+      this._checkGithubData(this.user.providerData);
+    }
     return page === 'submit';
   }
 

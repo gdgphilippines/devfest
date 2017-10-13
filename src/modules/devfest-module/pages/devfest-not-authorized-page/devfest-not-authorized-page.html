@@ -1,6 +1,20 @@
 <dom-module id="devfest-not-authorized-page">
   <template>
     <link rel="stylesheet" href="./devfest-not-authorized-page.scss">
-    Unauthorized :)
+
+    <template is="dom-if" if="[[!unauthorized]]">
+      <section class="section">
+        <paper-spinner class="spinner" active></paper-spinner>
+      </section>
+    </template>
+
+    <template is="dom-if" if="[[unauthorized]]">
+      <section class="section">
+        <h1>Not Authorized</h1>
+        <p>
+          Sorry, but you are unauthorized to view this page. Please <a href="/">click here</a> to go back.
+        </p>
+      </section>
+    </template>
   </template>
 </dom-module>

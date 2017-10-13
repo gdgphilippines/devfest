@@ -38,6 +38,8 @@
 }
 
 .header {
+  @apply --layout-horizontal;
+  @apply --layout-center;
   padding: 20px;
 }
 
@@ -64,4 +66,10 @@
 
 .anchor {
 
+}
+
+.score {
+  @apply --layout-flex;
+  text-align: right;
+  color: white;
 }

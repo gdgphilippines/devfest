@@ -178,10 +178,6 @@ class DevfestCodelabsPage extends contentLoaderMixin(Polymer.Element) {
     }
   }
 
-  _getPage (page) {
-    return page || 'page-01';
-  }
-
   reload () {}
 }
 

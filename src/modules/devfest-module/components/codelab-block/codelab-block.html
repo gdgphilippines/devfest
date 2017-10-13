@@ -36,15 +36,29 @@
           <template is="dom-if" if="[[isSubmit(pageId)]]">
             <h1>Submit your Project</h1>
             <p>
-              To get points, make sure you have connected your Github account and submit your Github repo by typing the repo name here:
+              To get points, make sure you have connected <a href="/profile">your Github account</a> and submit your Github repo by typing the repo name here:
               (If your repo is in https://github.com/[account-name]/my-repo, then you'll need to put "my-repo" without the double-quotations).
             </p>
-            <div class="form-repo">
-              <paper-input label="Github repository name" value="{{repo}}"></paper-input>
-              <devfest-button-only on-tap="submit">
-                Submit
-              </devfest-button-only>
-            </div>
+            <template is="dom-if" if="[[isGithub]]">
+              <div class="form-repo">
+                <paper-input label="Github repository name" value="{{repo}}"></paper-input>
+                <template is="dom-if" if="[[!submitSpin]]">
+                  <devfest-button-only on-tap="submit">
+                    Submit
+                  </devfest-button-only>
+                </template>
+                <template is="dom-if" if="[[submitSpin]]">
+                  <paper-spinner class="spinner" active></paper-spinner>
+                </template>
+              </div>
+            </template>
+            <template is="dom-if" if="[[!isGithub]]">
+              <a href="/profile">
+                <devfest-button-only>
+                  Connect your Github here.
+                </devfest-button-only>
+              </a>
+            </template>
           </template>
         </div>
 
