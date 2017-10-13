@@ -27,8 +27,7 @@ class CodelabBlock extends User(Polymer.Element) {
         type: Array
       },
       pageId: {
-        type: String,
-        observer: '_pageIdChanged'
+        type: String
       },
       codelabId: {
         type: String
@@ -37,13 +36,6 @@ class CodelabBlock extends User(Polymer.Element) {
         type: String
       }
     };
-  }
-
-  _pageIdChanged (pageId) {
-    console.log(pageId)
-    if (!pageId) {
-      this.pageId = 'page-01';
-    }
   }
 
   _pageChanged (page) {
@@ -103,7 +95,6 @@ class CodelabBlock extends User(Polymer.Element) {
   }
 
   isSubmit (page) {
-    console.log(page)
     page = page || 'page-01';
     return page === 'submit';
   }
